@@ -1,0 +1,31 @@
+{
+	"name": "tree-sitter-lsl-ossl",
+	"version": "0.1.0",
+	"description": "Tree-Sitter grammar for LSL/OSSL",
+	"keywords": [
+		"lsl",
+		"ossl",
+		"linden",
+		"scripting",
+		"language",
+		"opensim",
+		"OpenSimulator",
+		"SecondLife",
+		"tree-sitter"
+	],
+	"homepage": "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl#readme",
+	"bugs": {
+		"url": "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl/issues"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/GuduleLapointe/tree-sitter-lsl-ossl.git"
+	},
+	"license": "AGPL-3.0-or-later",
+	"author": "Gudule Lapointe",
+	"type": "commonjs",
+	"main": "grammar.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	}
+}
