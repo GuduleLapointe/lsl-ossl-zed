@@ -15,6 +15,7 @@ module.exports = grammar({
 			choice(
 				$.function_definition,
 				$.state_definition,
+				$.event_handler,
 				$.variable_declaration,
 				$.if_statement,
 				$.for_statement,
@@ -27,7 +28,8 @@ module.exports = grammar({
 		// -----------------
 		// States
 		// -----------------
-		state_definition: ($) => seq("state", $.identifier, $.block),
+		state_definition: ($) =>
+			seq(choice("default", "state"), optional($.identifier), $.block),
 
 		// -----------------
 		// Control flow
@@ -107,6 +109,7 @@ module.exports = grammar({
 
 		binary_expression: ($) =>
 			prec.left(
+				1,
 				seq(
 					$.expression,
 					choice(
@@ -154,7 +157,46 @@ module.exports = grammar({
 				"list",
 			),
 
-		constant: ($) => choice("TRUE", "FALSE", "NULL_KEY"),
+		constant: ($) =>
+			choice(
+				"TRUE",
+				"FALSE",
+				"NULL_KEY",
+				"ZERO_VECTOR",
+				"ZERO_ROTATION",
+				"PI",
+				"TWO_PI",
+				"PI_BY_TWO",
+			),
+
+		event_handler: ($) =>
+			seq($.event_name, "(", optional($.parameter_list), ")", $.block),
+
+		event_name: ($) =>
+			choice(
+				"state_entry",
+				"state_exit",
+				"touch_start",
+				"touch",
+				"touch_end",
+				"collision_start",
+				"collision",
+				"collision_end",
+				"listen",
+				"timer",
+				"changed",
+				"on_rez",
+				"attach",
+				"dataserver",
+				"run_time_permissions",
+				"sensor",
+				"no_sensor",
+				"control",
+				"money",
+				"email",
+				"http_response",
+				"path_update",
+			),
 
 		identifier: ($) => {
 			const keywords = [

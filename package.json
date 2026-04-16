@@ -27,5 +27,8 @@
 	"main": "grammar.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"tree-sitter": "^0.20.6"
 	}
 }
