@@ -5,3 +5,7 @@ schema_version = 1
 authors = ["Gudule Lapoite <gudule@speculoos.world>"]
 description = "LSL/OSSL Language for Zed IDE"
 repository = "https://github.com/GuduleLapointe/lsl-ossl-zed"
+
+[grammars.lsl]
+repository = "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl"
+commit = "a9c447e8f0c2bff6510eddd80fc4760f2985252b"
