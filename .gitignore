@@ -10,3 +10,4 @@ lsp/Cargo.lock
 extension.wasm
 grammars/
 .claude/
+tmp/
