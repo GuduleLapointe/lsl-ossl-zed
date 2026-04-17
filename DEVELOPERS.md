@@ -33,10 +33,12 @@ When the grammar changes:
 
 To clone this repo with its submodule:
 ```bash
-git clone --recurse-submodules git@github.com:GuduleLapointe/lsl-ossl-zed.git
+git clone --recurse-submodules https://github.com/GuduleLapointe/lsl-ossl-zed.git
 # or, if already cloned:
 git submodule update --init
 ```
+
+Note: avoid `git submodule sync` as it might overwrites any local URL override (e.g. git ssh URL).
 
 ## Grammar Details
 
