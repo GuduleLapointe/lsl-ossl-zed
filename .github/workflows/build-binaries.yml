@@ -1,16 +1,19 @@
-name: Release
+name: Build LSP binaries
 
 on:
   push:
-    tags:
-      - 'v*'
+    paths:
+      - 'lsp/src/**'
+      - 'lsp/Cargo.toml'
+      - 'lsp/build.rs'
+      - 'grammar/src/parser.c'
 
 permissions:
   contents: write
 
 jobs:
-  build-lsp:
-    name: Build lsl-lsp (${{ matrix.target }})
+  build:
+    name: Build (${{ matrix.asset_name }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -38,8 +41,7 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Install Rust
-        uses: dtolnay/rust-toolchain@stable
+      - uses: dtolnay/rust-toolchain@stable
         with:
           targets: ${{ matrix.target }}
 
@@ -48,28 +50,25 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y gcc-aarch64-linux-gnu
-
-      - name: Configure cross-compilation (Linux aarch64)
-        if: matrix.cross
-        run: |
           echo '[target.aarch64-unknown-linux-gnu]' >> ~/.cargo/config.toml
           echo 'linker = "aarch64-linux-gnu-gcc"' >> ~/.cargo/config.toml
 
-      - name: Build lsl-lsp
+      - name: Build
         working-directory: lsp
         run: cargo build --release --target ${{ matrix.target }}
 
-      - name: Rename binary (Unix)
+      - name: Copy binary (Unix)
         if: runner.os != 'Windows'
-        run: |
-          cp lsp/target/${{ matrix.target }}/release/lsl-lsp ${{ matrix.asset_name }}
+        run: cp lsp/target/${{ matrix.target }}/release/lsl-lsp lsp/prebuilt/${{ matrix.asset_name }}
 
-      - name: Rename binary (Windows)
+      - name: Copy binary (Windows)
         if: runner.os == 'Windows'
-        run: |
-          Copy-Item lsp\target\${{ matrix.target }}\release\lsl-lsp.exe ${{ matrix.asset_name }}
+        run: Copy-Item lsp\target\${{ matrix.target }}\release\lsl-lsp.exe lsp\prebuilt\${{ matrix.asset_name }}
 
-      - name: Upload binary to release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: ${{ matrix.asset_name }}
+      - name: Commit binary
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add lsp/prebuilt/${{ matrix.asset_name }}
+          git diff --cached --quiet || git commit -m "Build lsl-lsp binary: ${{ matrix.asset_name }}"
+          git push

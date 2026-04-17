@@ -4,6 +4,8 @@
 
 This is a **Zed IDE extension** providing language support for **LSL (Linden Scripting Language)** and **OSSL (OpenSimulator Scripting Language)**. The extension uses tree-sitter for parsing and provides syntax highlighting, structural analysis, and language intelligence for Second Life/OpenSimulator scripting.
 
+While this might be motivated by personal needs, it's a public project, it has to be installable by anyone and it cannot not depend of the current development platform or rely on local scripts or paths.
+
 ## Project Structure
 
 ```
