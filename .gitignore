@@ -6,3 +6,4 @@ package-lock.json
 target/
 Cargo.lock
 extension.wasm
+grammars/
