@@ -12,4 +12,4 @@ commit = "dcbfb90dbe1faa83ccd0b905d08723b58437e97b"
 
 [language_servers.lsl-lsp]
 name = "LSL Language Server"
-languages = ["LSL/OSSL"]
+languages = ["LSL"]

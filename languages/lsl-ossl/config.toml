@@ -1,6 +1,7 @@
-name = "LSL/OSSL"
+name = "LSL"
 grammar = "lsl"
 path_suffixes = ["lsl", "ossl"]
 line_comments = ["//"]
 tab_size = 4
 hard_tabs = true
+format_on_save = "language_server"
