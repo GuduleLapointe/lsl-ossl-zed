@@ -1,0 +1,7 @@
+// Test OSSL script
+default {
+    state_entry() {
+        osTeleportAgent(agent, dsturl, <128.0,128.0,23.0>, <1.0,1.0,0.0> );
+        llSay(0, "OSSL test");
+    }
+}

@@ -198,26 +198,7 @@ module.exports = grammar({
 				"path_update",
 			),
 
-		identifier: ($) => {
-			const keywords = [
-				"default",
-				"state",
-				"if",
-				"else",
-				"for",
-				"while",
-				"return",
-				"jump",
-			];
-			return token(
-				prec(
-					-1,
-					new RegExp(
-						`(?!${keywords.join("|")})[a-zA-Z_][a-zA-Z0-9_]*`,
-					),
-				),
-			);
-		},
+		identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
 		number: ($) => /\d+(\.\d+)?/,
 

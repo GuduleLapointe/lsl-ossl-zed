@@ -1,0 +1,6 @@
+name = "LSL/OSSL"
+grammar = "lsl-ossl"
+path_suffixes = ["lsl", "ossl"]
+line_comments = ["//"]
+tab_size = 4
+hard_tabs = true

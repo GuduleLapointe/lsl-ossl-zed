@@ -4,12 +4,6 @@ A Tree-sitter grammar for **LSL (Linden Scripting Language)** and **OSSL (OpenSi
 
 This project enables syntax highlighting and basic structural parsing for LSL/OSSL in Tree-sitter compatible editors such as Zed and Neovim.
 
----
-
-## ✨ Purpose
-
-Provide:
-
 - Syntax highlighting for LSL/OSSL
 - Recognition of native `ll*` functions
 - Recognition of OSSL `os*` functions
@@ -17,15 +11,11 @@ Provide:
 - Native constants and types support
 - A Tree-sitter compatible grammar foundation
 
----
-
-## 📦 Features
-
-### ✔ Supported languages
+## Supported languages
 - LSL (Second Life / OpenSim)
 - OSSL (OpenSimulator extensions)
 
-### ✔ Language coverage
+### Language coverage
 - Variables
 - User-defined functions
 - States (`default`, `state`)
@@ -34,17 +24,16 @@ Provide:
 - Expressions and function calls
 - Type casting `(integer)`, `(string)`, etc.
 
-### ✔ Automatic recognition
+### Automatic recognition
 - LSL native functions: `llSay`, `llSetText`, etc.
 - OSSL functions: `osTeleportAgent`, etc.
 - Constants: `TRUE`, `FALSE`, `PI`, `NULL_KEY`, etc.
 
----
+### Supported File Extensions
 
-## 🧰 Installation
+- `.lsl` - Linden Scripting Language files
+- `.ossl` - OpenSimulator Scripting Language files
 
-### 1. Install Tree-sitter CLI
+## License
 
-```bash
-npm install -g tree-sitter-cli
-```
+See the [LICENSE](LICENSE) file for details.
