@@ -1,15 +1,14 @@
-# Tree-sitter LSL / OSSL
+# LSL / OSSL for Zed IDE
 
-A Tree-sitter grammar for **LSL (Linden Scripting Language)** and **OSSL (OpenSimulator Scripting Language)**.
+Support for **LSL (Linden Scripting Language)** and **OSSL (OpenSimulator Scripting Language)**.
 
-This project enables syntax highlighting and basic structural parsing for LSL/OSSL in Tree-sitter compatible editors such as Zed and Neovim.
+This project enables syntax highlighting and structural parsing for LSL/OSSL.
 
 - Syntax highlighting for LSL/OSSL
 - Recognition of native `ll*` functions
 - Recognition of OSSL `os*` functions
 - Support for LSL events
 - Native constants and types support
-- A Tree-sitter compatible grammar foundation
 
 ## Supported languages
 - LSL (Second Life / OpenSim)
