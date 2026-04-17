@@ -14,40 +14,36 @@
 ] @keyword
 
 ; -------------------------
-; CONSTANTS (grammar nodes)
+; CONSTANTS (grammar nodes: TRUE, FALSE, PI, etc.)
 ; -------------------------
 (constant) @constant
 
 ; -------------------------
+; CONSTANTS (UPPER_CASE identifiers: CHANGED_OWNER, ATTACH_HEAD, etc.)
+; -------------------------
+((identifier) @constant
+  (#match? @constant "^[A-Z][A-Z0-9_]+$"))
+
+; -------------------------
 ; EVENTS
-; event_name is a distinct grammar node, not an identifier
 ; -------------------------
 (event_name) @function.special
 
 ; -------------------------
-; BUILTIN OSSL FUNCTIONS
-; Add functions here as they are documented and verified
-; Reference: http://opensimulator.org/wiki/Category:OSSL_Functions
-; -------------------------
-(call_expression
-  function: (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "osTeleportAgent"
-  ))
-
-; -------------------------
 ; BUILTIN LSL FUNCTIONS
-; Add functions here as they are documented and verified
 ; Reference: https://wiki.secondlife.com/wiki/Category:LSL_Functions
 ; -------------------------
 (call_expression
   function: (identifier) @function.builtin
-  (#any-of? @function.builtin
-    "llDetectedKey"
-    "llRegionSayTo"
-    "llResetScript"
-    "llWhisper"
-  ))
+  (#match? @function.builtin "^ll(DetectedKey|RegionSayTo|ResetScript|Whisper)$"))
+
+; -------------------------
+; BUILTIN OSSL FUNCTIONS
+; Reference: http://opensimulator.org/wiki/Category:OSSL_Functions
+; -------------------------
+(call_expression
+  function: (identifier) @function.builtin
+  (#match? @function.builtin "^os(TeleportAgent)$"))
 
 ; -------------------------
 ; FUNCTION CALLS (user-defined)
@@ -74,5 +70,7 @@
  "+" "-" "*" "/" "%"
  "==" "!=" "<" ">" "<=" ">="
  "&&" "||"
+ "&" "|" "^" "~"
+ "<<" ">>"
  "="
 ] @operator
