@@ -41,9 +41,15 @@ The grammar and the Zed extension are in separate repos:
 - **Build extension**: `cargo build --target wasm32-wasip2`
 - **Regenerate parser** (after grammar changes): `cd grammar && tree-sitter generate`
 
+### Grammar deploy
+- Full deploy (generate + commit + push + update hash): `./deploy-grammar.sh ["message"]`
+- Default message: last grammar commit summary, e.g. `"deploy grammar abc1234 Fix something"`
+
 ### Zed development
 - Install dev extension: Zed → Extensions → Install Dev Extension → point to this folder
 - After changes: use "Rebuild Extension" in Zed's extension panel
+- Open test files: `zed tests/test.lsl tests/test.ossl`
+- No CLI command for Rebuild — must be done from Zed UI
 
 ## Language Support Files
 

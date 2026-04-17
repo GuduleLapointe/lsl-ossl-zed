@@ -28,15 +28,9 @@ The tree-sitter grammar lives in a separate repo ([tree-sitter-lsl-ossl](https:/
 When the grammar changes:
 
 1. Edit `grammar/grammar.js`
-2. Regenerate the C parser: `cd grammar && tree-sitter generate`
-3. Commit and push in the grammar repo: `cd grammar && git add -A && git commit -m "..." && git push`
-4. Update the commit hash in `extension.toml`:
-   ```toml
-   [grammars.lsl]
-   repository = "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl"
-   commit = "<new-hash>"   # ← update this after each grammar push
-   ```
-5. Commit the submodule pointer and `extension.toml` in the extension repo
+2. Run `./deploy-grammar.sh ["message"]` — handles generate, commit, push, and hash update in one step
+
+The script skips steps that are already up to date. Default commit message is derived from the last grammar commit. The commit hash in `extension.toml` must always match the deployed grammar commit — `deploy-grammar.sh` handles this automatically.
 
 To clone this repo with its submodule:
 ```bash
