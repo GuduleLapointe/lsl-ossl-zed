@@ -1,0 +1,243 @@
+{
+  "default state": {
+    "prefix": "default",
+    "body": [
+      "default",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Default state block"
+  },
+  "state": {
+    "prefix": "state",
+    "body": [
+      "state ${1:name}",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Custom state block"
+  },
+
+  "state_entry": {
+    "prefix": "state_entry",
+    "body": [
+      "state_entry()",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the script enters a state"
+  },
+  "state_exit": {
+    "prefix": "state_exit",
+    "body": [
+      "state_exit()",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the script exits a state"
+  },
+  "touch_start": {
+    "prefix": "touch_start",
+    "body": [
+      "touch_start(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when an avatar starts touching the object"
+  },
+  "touch": {
+    "prefix": "touch",
+    "body": [
+      "touch(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called repeatedly while an avatar is touching the object"
+  },
+  "touch_end": {
+    "prefix": "touch_end",
+    "body": [
+      "touch_end(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when an avatar stops touching the object"
+  },
+  "on_rez": {
+    "prefix": "on_rez",
+    "body": [
+      "on_rez(integer start_param)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the object is rezzed"
+  },
+  "changed": {
+    "prefix": "changed",
+    "body": [
+      "changed(integer change)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the object changes (owner, region, inventory, etc.)"
+  },
+  "timer": {
+    "prefix": "timer",
+    "body": [
+      "timer()",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called each time the timer fires"
+  },
+  "listen": {
+    "prefix": "listen",
+    "body": [
+      "listen(integer channel, string name, key id, string message)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the object hears a chat message on a listened channel"
+  },
+  "attach": {
+    "prefix": "attach",
+    "body": [
+      "attach(key attached)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the object is attached or detached"
+  },
+  "dataserver": {
+    "prefix": "dataserver",
+    "body": [
+      "dataserver(key queryid, string data)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when data is received from a dataserver request"
+  },
+  "run_time_permissions": {
+    "prefix": "run_time_permissions",
+    "body": [
+      "run_time_permissions(integer perm)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the agent responds to a permission request"
+  },
+  "sensor": {
+    "prefix": "sensor",
+    "body": [
+      "sensor(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the sensor detects objects/agents"
+  },
+  "no_sensor": {
+    "prefix": "no_sensor",
+    "body": [
+      "no_sensor()",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the sensor detects nothing"
+  },
+  "collision_start": {
+    "prefix": "collision_start",
+    "body": [
+      "collision_start(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when another object starts colliding with this object"
+  },
+  "collision": {
+    "prefix": "collision",
+    "body": [
+      "collision(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called repeatedly while another object is colliding with this object"
+  },
+  "collision_end": {
+    "prefix": "collision_end",
+    "body": [
+      "collision_end(integer num_detected)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when a collision ends"
+  },
+  "control": {
+    "prefix": "control",
+    "body": [
+      "control(key id, integer level, integer edge)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when an agent sends control inputs"
+  },
+  "money": {
+    "prefix": "money",
+    "body": [
+      "money(key id, integer amount)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the object receives L$"
+  },
+  "email": {
+    "prefix": "email",
+    "body": [
+      "email(string time, string address, string subj, string message, integer num_left)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when the object receives an email"
+  },
+  "http_response": {
+    "prefix": "http_response",
+    "body": [
+      "http_response(key request_id, integer status, list metadata, string body)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when an HTTP response is received"
+  },
+  "path_update": {
+    "prefix": "path_update",
+    "body": [
+      "path_update(integer type, list reserved)",
+      "{",
+      "\t$0",
+      "}"
+    ],
+    "description": "Called when pathfinding status changes"
+  }
+}
