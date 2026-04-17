@@ -8,4 +8,4 @@ repository = "https://github.com/GuduleLapointe/lsl-ossl-zed"
 
 [grammars.lsl]
 repository = "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl"
-commit = "a9c447e8f0c2bff6510eddd80fc4760f2985252b"
+commit = "d7429b4a04ab10f476c8c059b820a0abaebbc527"
