@@ -14,6 +14,13 @@ Install rust with rustup:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+## TODO
+
+- **Complete function/event lists**: add all documented LSL functions and OSSL functions to `highlights.scm`, and all LSL events to `grammar/grammar.js`
+- **Snippets**: add event handler snippets (`state_entry`, `touch_start`, etc.) in `snippets/` for autocomplete
+- **Formatter**: investigate prettier or a custom formatter for LSL code formatting on save
+- **LSP**: implement language server for diagnostics, signature help, go-to-definition
+
 ## Grammar workflow
 
 The tree-sitter grammar lives in a separate repo ([tree-sitter-lsl-ossl](https://github.com/GuduleLapointe/tree-sitter-lsl-ossl)), included here as a git submodule at `grammar/`.
