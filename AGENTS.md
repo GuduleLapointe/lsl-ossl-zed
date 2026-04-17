@@ -7,32 +7,54 @@ This is a **Zed IDE extension** providing language support for **LSL (Linden Scr
 ## Project Structure
 
 ```
-lsl-ossl-for-zed-ide/
+lsl-ossl-zed/
 ├── Cargo.toml                    # Rust project configuration (Zed extension API)
-├── extension.toml               # Zed extension metadata
-├── languages/lsl-ossl/          # Tree-sitter language implementation
-│   ├── config.toml             # Language configuration
-│   ├── grammar.js              # Tree-sitter grammar definition
-│   └── highlights.scm          # Syntax highlighting rules
-├── tests/                      # Test files for both LSL and OSSL
-│   ├── test.lsl               # LSL example script
-│   └── test.ossl              # OSSL example script
-├── snippets/                   # Code snippets (currently empty)
-├── themes/                     # Custom themes (currently empty)
-└── queries/                   # Tree-sitter query files (currently empty)
+├── extension.toml                # Zed extension metadata + grammar reference
+├── src/
+│   └── lib.rs                    # Rust extension entry point (zed_extension_api)
+├── grammar/                      # Git submodule → tree-sitter-lsl-ossl
+│   ├── grammar.js                # Tree-sitter grammar definition
+│   └── src/parser.c              # Generated C parser (committed)
+├── languages/lsl-ossl/
+│   ├── config.toml               # Language config (grammar = "lsl")
+│   └── highlights.scm            # Syntax highlighting queries
+├── tests/
+│   ├── test.lsl
+│   └── test.ossl
+├── snippets/                     # (future)
+└── themes/                       # (future)
 ```
+
+## Two-repo Architecture
+
+The grammar and the Zed extension are in separate repos:
+
+- **[tree-sitter-lsl-ossl](https://github.com/GuduleLapointe/tree-sitter-lsl-ossl)** — pure tree-sitter grammar (grammar.js + generated src/parser.c)
+- **[lsl-ossl-zed](https://github.com/GuduleLapointe/lsl-ossl-zed)** — this repo: Zed extension (Rust + language config + highlighting)
+
+`grammar/` is a git submodule pointing to tree-sitter-lsl-ossl. `extension.toml` references the grammar by GitHub URL + commit hash — **the hash must be updated every time the grammar repo is updated** (see DEVELOPERS.md for the full workflow).
 
 ## Essential Commands
 
 ### Building
-- **Build extension**: `cargo build` (requires Rust toolchain)
-- **Development build**: Use Zed's extension development workflow
-- **Testing**: Manual testing via test files in `tests/` directory
+- **Check Rust**: `cargo check`
+- **Build extension**: `cargo build --target wasm32-wasip2`
+- **Regenerate parser** (after grammar changes): `cd grammar && tree-sitter generate`
 
-### Language Support Files
-- **Grammar**: `languages/lsl-ossl/grammar.js` - Tree-sitter grammar for parsing
-- **Highlighting**: `languages/lsl-ossl/highlights.scm` - Syntax highlighting rules
-- **Config**: `languages/lsl-ossl/config.toml` - Language configuration
+### Zed development
+- Install dev extension: Zed → Extensions → Install Dev Extension → point to this folder
+- After changes: use "Rebuild Extension" in Zed's extension panel
+
+## Language Support Files
+
+| File | Purpose |
+|------|---------|
+| `grammar/grammar.js` | Tree-sitter grammar (edit this to change parsing) |
+| `grammar/src/parser.c` | Generated — do not edit manually, run `tree-sitter generate` |
+| `languages/lsl-ossl/highlights.scm` | Syntax highlighting queries |
+| `languages/lsl-ossl/config.toml` | File extensions, tab size, comment style |
+| `extension.toml` | Grammar repo URL + commit hash |
+| `src/lib.rs` | Zed extension registration; future LSP client code goes here |
 
 ## Language Architecture
 
@@ -41,90 +63,47 @@ lsl-ossl-for-zed-ide/
 - **OSSL (.ossl)**: OpenSimulator Scripting Language extensions
 
 ### Key Language Features
-- **States**: `default` and custom state definitions
-- **Events**: LSL events like `state_entry`, `touch_start`, `timer`, etc.
-- **Control Flow**: `if`, `for`, `while` statements
-- **Functions**: User-defined functions and built-in function calls
-- **Variables**: Type declarations with LSL types (integer, float, string, key, vector, rotation, list)
-- **Expressions**: Binary operations, assignments, type casting
-- **Constants**: TRUE, FALSE, PI, NULL_KEY, ZERO_VECTOR, ZERO_ROTATION
-
-### Function Recognition
-- **LSL Built-ins**: Functions starting with `ll*` prefix (e.g., `llSay`, `llSetText`)
-- **OSSL Functions**: Functions starting with `os*` prefix (e.g., `osTeleportAgent`)
-- **User Functions**: Custom function definitions and calls
-
-## Code Patterns and Conventions
-
-### File Extensions
-- `.lsl` - Linden Scripting Language files
-- `.ossl` - OpenSimulator Scripting Language files
-
-### Language Configuration
-- **Line comments**: `//` (single-line only in current grammar)
-- **Tab size**: 4 spaces
-- **Hard tabs**: Enabled (true)
-
-### Grammar Structure
-The tree-sitter grammar follows these patterns:
-- Statement-based parsing with `_statement` rule as the main entry point
-- Expression precedence handling for binary operations
-- Event handlers as special function definitions
-- State definitions with optional identifiers
-- Block-based code organization
+- States: `default` and custom state definitions
+- Events: `state_entry`, `touch_start`, `timer`, etc.
+- Control flow: `if`, `for`, `while`, `return`, `jump`
+- Functions: user-defined and built-in (`ll*` prefix for LSL, `os*` for OSSL)
+- Types: `integer`, `float`, `string`, `key`, `vector`, `rotation`, `list`
+- Constants: `TRUE`, `FALSE`, `PI`, `NULL_KEY`, `ZERO_VECTOR`, `ZERO_ROTATION`, etc.
+- Comments: `//` single-line and `/* */` block comments
 
 ## Development Workflow
 
-### Adding New Language Features
-1. **Grammar updates**: Modify `languages/lsl-ossl/grammar.js`
-2. **Highlighting**: Update `languages/lsl-ossl/highlights.scm`
-3. **Testing**: Add test cases in `tests/` directory
-4. **Configuration**: Update `languages/lsl-ossl/config.toml` if needed
+### Grammar changes
+1. Edit `grammar/grammar.js`
+2. `cd grammar && tree-sitter generate`
+3. Commit + push in grammar submodule
+4. Update `commit` hash in `extension.toml`
+5. Commit extension repo
 
-### Testing Approach
-- Manual testing via provided test files
-- Test files cover both LSL and OSSL syntax
-- Real-world examples included for validation
+### Highlighting changes
+Edit `languages/lsl-ossl/highlights.scm` — no parser regeneration needed.
 
-## Important Gotchas
+### Rust/LSP changes
+Edit `src/lib.rs` — Zed will recompile on next "Rebuild Extension".
 
-### Grammar Limitations
-1. **Comments**: Only single-line comments (`//`) are currently supported
-2. **String literals**: Basic string support with escape sequences
-3. **No multi-line comments**: `/* */` syntax not implemented in current grammar
-4. **Limited expression precedence**: Some complex expressions may need parentheses
+## Important Notes
 
-### Language Specifics
-1. **Type system**: Limited to LSL primitive types (no custom types)
-2. **Event handlers**: Must follow LSL event naming conventions
-3. **State jumps**: `jump` and `state` statements are supported
-4. **Function calls**: Both built-in and user-defined functions supported
+- `grammar = "lsl"` in config.toml must match `name:` in grammar.js (`name: "lsl"`)
+- `[grammars.lsl]` key in extension.toml must also match
+- The commit hash in extension.toml must be updated after every grammar push
+- `wasm32-wasip2` target must be installed: `rustup target add wasm32-wasip2`
+- Zed must be restarted after installing Rust (GUI app doesn't inherit shell PATH)
 
-### Zed Extension Development
-1. **Zed API**: Uses `zed_extension_api` crate v0.7.0
-2. **Extension type**: Library extension (`cdylib` crate type)
-
-## Resources and References
+## Resources
 
 ### Official Documentation
 - [Zed Extensions Guide](https://zed.dev/docs/extensions/developing-extensions)
 - [Zed Languages](https://zed.dev/docs/extensions/languages)
 - [Zed Extension API Crate](https://crates.io/crates/zed_extension_api)
-
-### Tree-sitter Resources
 - [Tree-sitter Grammar Guide](https://tree-sitter.github.io/tree-sitter/creating-parsers)
-- [Tree-sitter Query Language](https://tree-sitter.github.io/tree-sitter/using-parsers#query-syntax)
 
 ### Language References
 - [LSL Wiki](https://wiki.secondlife.com/wiki/LSL)
-	- [LSL Functions](https://wiki.secondlife.com/wiki/Category:LSL_Functions)
+  - [LSL Functions](https://wiki.secondlife.com/wiki/Category:LSL_Functions)
 - [OpenSimulator OSSL](https://opensimulator.org/wiki/Category:OSSL)
-	- [OSSL Functions](http://opensimulator.org/wiki/Category:OSSL_Functions)
-
-## Contributing
-
-1. Fork the repository
-2. Follow the development workflow above
-3. Test changes with provided test files
-4. Submit pull requests to the main repository
-5. Follow the existing code patterns and conventions
+  - [OSSL Functions](http://opensimulator.org/wiki/Category:OSSL_Functions)
