@@ -5,6 +5,8 @@ node_modules/
 package-lock.json
 target/
 Cargo.lock
+lsp/target/
+lsp/Cargo.lock
 extension.wasm
 grammars/
 .claude/
