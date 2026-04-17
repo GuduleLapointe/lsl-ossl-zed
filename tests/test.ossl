@@ -18,10 +18,11 @@ vector LookAt = <0.0, 1.0, 0.0>; // which way they look at when arriving
 
 default
 {
-  on_rez(integer start_param)
-  {
-    llResetScript();
-  }
+	on_rez(integer start_param)
+	{
+    	llResetScript();
+llOwnerSay("Script was reset");
+	}
 
   changed(integer change) // something changed, take action
   {

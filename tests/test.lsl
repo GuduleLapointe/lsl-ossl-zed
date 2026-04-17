@@ -10,6 +10,7 @@ default
 	on_rez(integer start_param)
 	{
 		llResetScript();
+	llOwnerSay("Script was reset");
 	}
 
   changed(integer change) // something changed, take action
