@@ -7,6 +7,13 @@ Follow Zed documentation
 
 This extension provides the language and the language support for LSL and OSSL scripting languages.
 
+## Environment setup
+
+Install rust with rustup:
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
 ## Grammar Details
 
 ### Supported Constructs

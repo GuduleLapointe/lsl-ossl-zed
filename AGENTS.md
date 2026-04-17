@@ -117,7 +117,9 @@ The tree-sitter grammar follows these patterns:
 
 ### Language References
 - [LSL Wiki](https://wiki.secondlife.com/wiki/LSL)
+	- [LSL Functions](https://wiki.secondlife.com/wiki/Category:LSL_Functions)
 - [OpenSimulator OSSL](https://opensimulator.org/wiki/Category:OSSL)
+	- [OSSL Functions](http://opensimulator.org/wiki/Category:OSSL_Functions)
 
 ## Contributing
 
