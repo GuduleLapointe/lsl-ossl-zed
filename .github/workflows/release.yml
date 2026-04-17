@@ -1,0 +1,75 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build-lsp:
+    name: Build lsl-lsp (${{ matrix.target }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            asset_name: lsl-lsp-macos-aarch64
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            asset_name: lsl-lsp-macos-x86_64
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            asset_name: lsl-lsp-linux-aarch64
+            cross: true
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            asset_name: lsl-lsp-linux-x86_64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            asset_name: lsl-lsp-windows-x86_64.exe
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+
+      - name: Install cross-compilation tools (Linux aarch64)
+        if: matrix.cross
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+
+      - name: Configure cross-compilation (Linux aarch64)
+        if: matrix.cross
+        run: |
+          echo '[target.aarch64-unknown-linux-gnu]' >> ~/.cargo/config.toml
+          echo 'linker = "aarch64-linux-gnu-gcc"' >> ~/.cargo/config.toml
+
+      - name: Build lsl-lsp
+        working-directory: lsp
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Rename binary (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          cp lsp/target/${{ matrix.target }}/release/lsl-lsp ${{ matrix.asset_name }}
+
+      - name: Rename binary (Windows)
+        if: runner.os == 'Windows'
+        run: |
+          Copy-Item lsp\target\${{ matrix.target }}\release\lsl-lsp.exe ${{ matrix.asset_name }}
+
+      - name: Upload binary to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ matrix.asset_name }}
