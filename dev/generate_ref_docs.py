@@ -28,17 +28,29 @@ import os
 import re
 import sys
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
+
+
+def _parse_xml(xml_path):
+    """Return (root, namespace) for a MediaWiki XML export."""
+    tree = ET.parse(xml_path)
+    root = tree.getroot()
+    ns_match = re.match(r"\{([^}]+)\}", root.tag)
+    ns = ns_match.group(1) if ns_match else "http://www.mediawiki.org/xml/export-0.11/"
+    return root, ns
+
+
+def get_base_url(xml_path):
+    """Return the wiki base URL from <siteinfo><base>, e.g. https://wiki.secondlife.com/wiki/Main_Page."""
+    root, ns = _parse_xml(xml_path)
+    base_el = root.find(f".//{{{ns}}}base")
+    return base_el.text if base_el is not None else ""
 
 
 def get_pages(xml_path):
     """Yield (title, text) for each page in a MediaWiki XML export."""
-    tree = ET.parse(xml_path)
-    root = tree.getroot()
-    # Detect namespace from root tag (OpenSimulator uses export-0.6, SL uses export-0.11)
-    ns_match = re.match(r"\{([^}]+)\}", root.tag)
-    ns = ns_match.group(1) if ns_match else "http://www.mediawiki.org/xml/export-0.11/"
+    root, ns = _parse_xml(xml_path)
     for page in root.findall(f".//{{{ns}}}page"):
         title_el = page.find(f"{{{ns}}}title")
         text_el = page.find(f".//{{{ns}}}text")
@@ -268,14 +280,20 @@ def parse_ossl_constants(xml_path):
 # ---------------------------------------------------------------------------
 
 
-def _header(title, fetch_date):
-    date_str = f" — fetched {fetch_date}" if fetch_date else ""
-    return f"# {title}\n\nSource: MediaWiki export{date_str}\n\n"
+def _header(title, source_url="", fetch_ts=""):
+    lines = [f"# {title}", ""]
+    if source_url:
+        lines.append(f"Source: {source_url}")
+    if fetch_ts:
+        lines.append(f"Fetched: {fetch_ts}")
+    lines.append("")
+    lines.append("")
+    return "\n".join(lines)
 
 
-def write_functions_md(path, title, functions, fetch_date="", is_ossl=False):
+def write_functions_md(path, title, functions, source_url="", fetch_ts="", is_ossl=False):
     with open(path, "w", encoding="utf-8") as f:
-        f.write(_header(title, fetch_date))
+        f.write(_header(title, source_url, fetch_ts))
         for name in sorted(functions.keys(), key=str.lower):
             entry = functions[name]
             f.write(f"### {name}\n\n")
@@ -289,9 +307,9 @@ def write_functions_md(path, title, functions, fetch_date="", is_ossl=False):
                 f.write(f"{entry['desc']}\n\n")
 
 
-def write_events_md(path, title, events, fetch_date=""):
+def write_events_md(path, title, events, source_url="", fetch_ts=""):
     with open(path, "w", encoding="utf-8") as f:
-        f.write(_header(title, fetch_date))
+        f.write(_header(title, source_url, fetch_ts))
         for name in sorted(events.keys()):
             entry = events[name]
             f.write(f"### {name}\n\n")
@@ -300,9 +318,9 @@ def write_events_md(path, title, events, fetch_date=""):
                 f.write(f"{entry['desc']}\n\n")
 
 
-def write_constants_md(path, title, constants, fetch_date=""):
+def write_constants_md(path, title, constants, source_url="", fetch_ts=""):
     with open(path, "w", encoding="utf-8") as f:
-        f.write(_header(title, fetch_date))
+        f.write(_header(title, source_url, fetch_ts))
         for name in sorted(constants.keys()):
             entry = constants[name]
             ctype = entry.get("type", "")
@@ -324,31 +342,11 @@ def write_constants_md(path, title, constants, fetch_date=""):
 # ---------------------------------------------------------------------------
 
 TYPES = {
-    "lsl_functions": (
-        parse_lsl_functions,
-        "LSL Functions",
-        lambda p, t, d, date: write_functions_md(p, t, d, fetch_date=date, is_ossl=False),
-    ),
-    "lsl_events": (
-        parse_lsl_events,
-        "LSL Events",
-        lambda p, t, d, date: write_events_md(p, t, d, fetch_date=date),
-    ),
-    "lsl_constants": (
-        parse_lsl_constants,
-        "LSL Constants",
-        lambda p, t, d, date: write_constants_md(p, t, d, fetch_date=date),
-    ),
-    "ossl_functions": (
-        parse_ossl_functions,
-        "OSSL Functions",
-        lambda p, t, d, date: write_functions_md(p, t, d, fetch_date=date, is_ossl=True),
-    ),
-    "ossl_constants": (
-        parse_ossl_constants,
-        "OSSL Constants",
-        lambda p, t, d, date: write_constants_md(p, t, d, fetch_date=date),
-    ),
+    "lsl_functions":  (parse_lsl_functions,  "LSL Functions",  lambda p, t, d, u, ts: write_functions_md(p, t, d, u, ts, is_ossl=False)),
+    "lsl_events":     (parse_lsl_events,     "LSL Events",     lambda p, t, d, u, ts: write_events_md(p, t, d, u, ts)),
+    "lsl_constants":  (parse_lsl_constants,  "LSL Constants",  lambda p, t, d, u, ts: write_constants_md(p, t, d, u, ts)),
+    "ossl_functions": (parse_ossl_functions, "OSSL Functions", lambda p, t, d, u, ts: write_functions_md(p, t, d, u, ts, is_ossl=True)),
+    "ossl_constants": (parse_ossl_constants, "OSSL Constants", lambda p, t, d, u, ts: write_constants_md(p, t, d, u, ts)),
 }
 
 
@@ -380,11 +378,12 @@ def _run(xml_path, out_path):
         print(f"❌ Cannot detect type from filename: {xml_path.name}")
         return False
     parser, title, writer = TYPES[doc_type]
-    fetch_date = datetime.fromtimestamp(os.path.getmtime(xml_path)).strftime("%Y-%m-%d")
+    source_url = get_base_url(xml_path)
+    fetch_ts = datetime.fromtimestamp(os.path.getmtime(xml_path), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     out_path.parent.mkdir(parents=True, exist_ok=True)
     data = parser(xml_path)
-    writer(out_path, title, data, fetch_date)
-    print(f"✅ {len(data):4d}  {title:20s} → {out_path}  (fetched {fetch_date})")
+    writer(out_path, title, data, source_url, fetch_ts)
+    print(f"✅ {len(data):4d}  {title:20s} → {out_path}  (fetched {fetch_ts})")
     return True
 
 

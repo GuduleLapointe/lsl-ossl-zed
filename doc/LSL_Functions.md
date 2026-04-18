@@ -1,6 +1,7 @@
 # LSL Functions
 
-Source: MediaWiki export — fetched 2026-04-17
+Source: https://wiki.secondlife.com/wiki/Main_Page
+Fetched: 2026-04-17T18:41:43Z
 
 ### llAbs
 

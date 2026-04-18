@@ -1,6 +1,7 @@
 # LSL Events
 
-Source: MediaWiki export — fetched 2026-04-18
+Source: https://wiki.secondlife.com/wiki/Main_Page
+Fetched: 2026-04-18T16:05:35Z
 
 ### at_rot_target
 

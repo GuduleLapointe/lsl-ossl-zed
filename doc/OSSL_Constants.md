@@ -1,6 +1,7 @@
 # OSSL Constants
 
-Source: MediaWiki export — fetched 2026-04-18
+Source: http://opensimulator.org/wiki/Main_Page
+Fetched: 2026-04-18T16:08:00Z
 
 ### CAMERA_FOCUS_OFFSET_X
 
