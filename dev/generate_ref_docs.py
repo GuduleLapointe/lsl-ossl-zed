@@ -388,28 +388,6 @@ def _run(xml_path, out_path):
     return True
 
 
-def _batch():
-    """Process all XML files from tmp/ to doc/ (batch shortcut when called with no args)."""
-    tmp_dir = Path("tmp")
-    out_dir = Path("doc")
-    if not tmp_dir.exists():
-        print(f"❌ {tmp_dir}/ not found")
-        sys.exit(1)
-    out_dir.mkdir(exist_ok=True)
-    patterns = [
-        ("SecondLife-LSL_Functions-*.xml",     "LSL_Functions.md"),
-        ("SecondLife-LSL_Events-*.xml",        "LSL_Events.md"),
-        ("SecondLife-LSL_Constants-*.xml",     "LSL_Constants.md"),
-        ("OpenSimulator-OSSL_Functions-*.xml", "OSSL_Functions.md"),
-        ("OpenSimulator-OSSL_Constants-*.xml", "OSSL_Constants.md"),
-    ]
-    for glob_pat, out_name in patterns:
-        matches = sorted(tmp_dir.glob(glob_pat))
-        if not matches:
-            print(f"⚠️  No file matching {glob_pat}")
-            continue
-        _run(matches[-1], out_dir / out_name)
-
 
 if __name__ == "__main__":
     if len(sys.argv) == 3:
