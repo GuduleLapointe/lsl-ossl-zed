@@ -24,10 +24,19 @@ import sys
 from pathlib import Path
 
 
-def extract_names(md_path):
-    """Return all ### Name entries from a Markdown reference file."""
+def extract_names(md_path, sig_pattern=None):
+    """Return all function names from a Markdown reference file.
+
+    Includes both ### Name headers and function names found in signature
+    bullet lines (e.g. overloads documented under a parent function's header).
+    sig_pattern: regex to match function names in signature lines (optional).
+    """
     text = md_path.read_text(encoding="utf-8")
-    return re.findall(r"^### (\w+)", text, re.MULTILINE)
+    names = set(re.findall(r"^### (\w+)", text, re.MULTILINE))
+    if sig_pattern:
+        for m in re.finditer(sig_pattern, text):
+            names.add(m.group(1))
+    return sorted(names, key=str.lower)
 
 
 def make_choice(names, depth=3):
@@ -70,8 +79,21 @@ def main():
             print(f"❌ Not found: {p}")
         sys.exit(1)
 
-    lsl_funcs  = extract_names(doc_dir / "LSL_Functions.md")
-    ossl_funcs = extract_names(doc_dir / "OSSL_Functions.md")
+    lsl_names  = set(extract_names(doc_dir / "LSL_Functions.md",
+                                   sig_pattern=r"\b(ll[A-Za-z]\w+)\s*\("))
+    ossl_names = set(extract_names(doc_dir / "OSSL_Functions.md",
+                                   sig_pattern=r"\b(os[A-Za-z]\w+)\s*\("))
+
+    # Merge supplemental files (manually curated, not overwritten by generate_ref_docs.py)
+    lsl_supp = doc_dir / "LSL_supplement.md"
+    ossl_supp = doc_dir / "OSSL_supplement.md"
+    if lsl_supp.exists():
+        lsl_names.update(extract_names(lsl_supp, sig_pattern=r"\b(ll[A-Za-z]\w+)\s*\("))
+    if ossl_supp.exists():
+        ossl_names.update(extract_names(ossl_supp, sig_pattern=r"\b(os[A-Za-z]\w+)\s*\("))
+
+    lsl_funcs  = sorted(lsl_names,  key=str.lower)
+    ossl_funcs = sorted(ossl_names, key=str.lower)
     constants  = sorted(
         set(extract_names(doc_dir / "LSL_Constants.md") +
             extract_names(doc_dir / "OSSL_Constants.md")),
