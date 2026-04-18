@@ -119,7 +119,7 @@ def parse_fields(text):
     # Use \n}} as end-of-template marker so inner {{foo|bar}} don't terminate early.
     pattern = re.compile(
         # Stop at: next |field= (same or next line), |field (no value, new line), or \n}}
-        r"\|([a-zA-Z_][a-zA-Z_0-9]*)\s*=\s*(.*?)(?=\|[a-zA-Z_][a-zA-Z_0-9]*\s*=|\n\|[a-zA-Z_]|\n\}\})",
+        r"\|([a-zA-Z_][a-zA-Z_0-9]*)\s*=\s*(.*?)(?=\|[a-zA-Z_][a-zA-Z_0-9]*\s*=|\n\|[a-zA-Z_]|\n\}\}|\Z)",
         re.DOTALL,
     )
     for m in pattern.finditer(text):
@@ -160,30 +160,81 @@ def build_param_list(fields):
 # ---------------------------------------------------------------------------
 
 
+def _extract_lsl_entry(text, func_name):
+    """Return {signature, desc} for a named ll* function from a wiki template body."""
+    fields = parse_fields(text)
+    return_type = fields.get("return_type", "void").strip() or "void"
+    params = build_param_list(fields)
+    signature = f"{return_type} {func_name}({', '.join(params)})"
+    desc = clean_wiki(fields.get("func_desc", "") or fields.get("func_footnote", ""))
+    return {"signature": signature, "desc": desc}
+
+
 def parse_lsl_functions(xml_path):
     """Return dict name → {signature, desc} for LSL functions."""
+    # Build a title → text map so redirect pages can look up their target.
+    pages = {}
+    for title, text in get_pages(xml_path):
+        if ":" not in title and "/" not in title:
+            pages[title] = text
+
     functions = {}
-    for _title, text in get_pages(xml_path):
+
+    for title, text in pages.items():
         if not re.search(r"\{\{LSL[_ ]?Function", text, re.IGNORECASE):
+            # Check for redirect: {{:TargetPage|default=llFunctionName}}
+            m = re.search(r"\{\{:(\w+)\|default=(ll\w+)\}\}", text)
+            if not m:
+                continue
+            target_title, func_name = m.group(1), m.group(2)
+            # Capitalize first letter to match title convention
+            target_key = target_title[0].upper() + target_title[1:]
+            target_text = pages.get(target_key, "")
+            if not target_text:
+                continue
+            # Find the {{LSL Function/Head}} block for this specific function
+            head_m = re.search(
+                r"\{\{LSL[_ ]Function/Head\s*\n(.*?)\n\}\}",
+                target_text,
+                re.DOTALL | re.IGNORECASE,
+            )
+            # Scan all Head blocks to find the right one
+            for head_m in re.finditer(
+                r"\{\{LSL[_ ]Function/Head\s*\n(.*?)\n\}\}",
+                target_text,
+                re.DOTALL | re.IGNORECASE,
+            ):
+                block = head_m.group(1)
+                if re.search(rf"\|func\s*=\s*{re.escape(func_name)}\b", block):
+                    functions[func_name] = _extract_lsl_entry(block, func_name)
+                    break
             continue
 
-        # Use the FIRST |func=ll* occurrence — some pages document multiple
-        # related functions (e.g. llAdjustSoundVolume + llLinkAdjustSoundVolume)
-        # and parse_fields() would return the last one.
-        m = re.search(r"\|func=(ll[A-Z]\w+)", text)
-        if not m:
-            continue
-        func_name = m.group(1)
+        # Pages using {{LSL Function/Head}} blocks: params live per-block, not on the
+        # outer template. Split on each Head block start so each chunk has exactly
+        # one function's params (Head blocks close inline with }}, not \n}}).
+        head_split = re.split(r"\{\{LSL[_ ]Function/Head\s*\n", text, flags=re.IGNORECASE)
 
-        fields = parse_fields(text)
-        return_type = fields.get("return_type", "void").strip() or "void"
-        params = build_param_list(fields)
-        signature = f"{return_type} {func_name}({', '.join(params)})"
-
-        desc = clean_wiki(
-            fields.get("func_desc", "") or fields.get("func_footnote", "")
-        )
-        functions[func_name] = {"signature": signature, "desc": desc}
+        if len(head_split) > 1:
+            for chunk in head_split[1:]:  # skip text before first Head block
+                fn_m = re.search(r"\|func\s*=\s*(ll[A-Za-z]\w+)", chunk)
+                if fn_m:
+                    name = fn_m.group(1)
+                    if name not in functions:
+                        functions[name] = _extract_lsl_entry(chunk, name)
+        else:
+            # Use the FIRST |func=ll* occurrence — allow spaces around = and newline
+            # after = (wiki typo on some pages), and lowercase second letter (llsRGB2Linear).
+            m = re.search(r"\|func\s*=\s*\n?\s*(ll[A-Za-z]\w+)", text)
+            if not m:
+                # Fallback: derive from page title (e.g. "LlJsonGetValue" → "llJsonGetValue")
+                if title.startswith("Ll"):
+                    func_name = "ll" + title[2:]
+                else:
+                    continue
+            else:
+                func_name = m.group(1)
+            functions[func_name] = _extract_lsl_entry(text, func_name)
 
     return functions
 

@@ -35,7 +35,7 @@ The llAdjustDamage modifies the amount of damage that will be applied by the cur
 
 ### llAdjustSoundVolume
 
-- `void llAdjustSoundVolume(integer link, float volume)`
+- `void llAdjustSoundVolume(float volume)`
 
 ### llAgentInExperience
 
@@ -82,6 +82,12 @@ Similar to the (y/x) except it utilizes the signs of x & y to determine the quad
 - `void llAttachToAvatar(integer attach_point)`
 
 Attaches the object to the avatar who has granted permission to the script. The object is taken into the users inventory and attached to attach_point.
+
+### llAttachToAvatarTemp
+
+- `void llAttachToAvatarTemp(integer attach_point)`
+
+Follows the same convention as llAttachToAvatar, with the exception that the object will not create new inventory for the user, and will disappear on detach or disconnect. Also, this function can be used on avatars other than the owner (if granted permission) in which case the ownership is changed to the new wearer.
 
 ### llAvatarOnLinkSitTarget
 
@@ -227,7 +233,7 @@ Attempt to link the script's object with target.
 
 - `list llCSV2List(string src)`
 
-DESCRIPTION
+This function takes a string of values separated by commas, and turns it into a list.
 
 ### llDamage
 
@@ -621,6 +627,12 @@ id must specify a valid avatar key, present in or otherwise known to the sim in 
 
 - `float llGetEnergy()`
 
+### llGetEnv
+
+- `string llGetEnv(string name)`
+
+Note that the value returned is a string, you may need to cast it to an integer for use in calculations.
+
 ### llGetEnvironment
 
 - `list llGetEnvironment(vector pos, list params)`
@@ -721,7 +733,7 @@ If name does not exist, INVENTORY_NONE is returned (no errors or messages are ge
 
 ### llGetLinkKey
 
-- `key llGetLinkKey(key object_id, integer link)`
+- `key llGetLinkKey(integer link)`
 
 ### llGetLinkMedia
 
@@ -746,6 +758,12 @@ Get the media params for a particular face on a linked prim, given the desired l
 - `integer llGetLinkNumberOfSides(integer link)`
 
 See for more information about faces and the conditions that control the number of faces a prim will have.
+
+### llGetLinkPrimitiveParams
+
+- `list llGetLinkPrimitiveParams(integer link, list params)`
+
+Identical to llGetPrimitiveParams except that it acts on the prim specified by the link number given.
 
 ### llGetLinkSitFlags
 
@@ -864,6 +882,10 @@ To get the ''object's'' description (not the current prim's), use PRIM_DESC or O
 An empty list if id is not found.
 {{LSL Const|OBJECT_UNKNOWN_DETAIL|integer|-1
 
+### llGetObjectLinkKey
+
+- `key llGetObjectLinkKey(key object_id, integer link)`
+
 ### llGetObjectMass
 
 - `float llGetObjectMass(key id)`
@@ -948,9 +970,9 @@ Used to get the physical characteristics of an object.
 
 ### llGetPrimitiveParams
 
-- `list llGetPrimitiveParams(integer link, list params)`
+- `list llGetPrimitiveParams(list params)`
 
-Identical to llGetPrimitiveParams except that it acts on the prim specified by the link number given.
+If you are planning to use PRIM_LINK_TARGET consider using llGetLinkPrimitiveParams instead.
 
 ### llGetPrimMediaParams
 
@@ -1295,6 +1317,12 @@ Sends an Instant Message specified in the string message to the user specified b
 
 This function takes a string representing [http://json.org JSON], and returns a list of the top level.
 
+### llJsonGetValue
+
+- `string llJsonGetValue(string json, list specifiers)`
+
+Gets the value indicated by specifiers from the [http://json.org json] string.
+
 ### llJsonSetValue
 
 - `string llJsonSetValue(string json, list specifiers, string value)`
@@ -1331,6 +1359,16 @@ Start an asynchronous transaction to request a number of keys from the script's 
 
 - `vector llLinear2sRGB(vector color)`
 
+### llLinkAdjustSoundVolume
+
+- `void llLinkAdjustSoundVolume(integer link, float volume)`
+
+### llLinkParticleSystem
+
+- `void llLinkParticleSystem(integer link, list rules)`
+
+A particle system defined by a list of rules is set for the prim(s) link.
+
 ### llLinkPlaySound
 
 - `void llLinkPlaySound(integer link, string sound, float volume, integer flags)`
@@ -1357,9 +1395,9 @@ The llLinksetDataCountKeys returns the number of unique keys that have been stor
 
 ### llLinksetDataDelete
 
-- `integer llLinksetDataDelete(string name, string pass)`
+- `integer llLinksetDataDelete(string name)`
 
-The llLinksetDataDeleteProtected function erases a protected name:value pair from the linkset's datastore.
+Removes an unprotected name:value pair from the linkset's datastore. If the pair was created
 
 ### llLinksetDataDeleteFound
 
@@ -1367,6 +1405,12 @@ The llLinksetDataDeleteProtected function erases a protected name:value pair fro
 
 The llLinksetDataDeleteFound function finds and attempts to delete all keys in the data store that match pattern. This function will delete protected key-value pairs only if the matching pass phrase is passed in the pass parameter. The function returns a list, the first entry in the list is the number of keys deleted, the second entry in the list is the number of keys that could not be deleted due to a non-matching pass phrase. 
 If this function successfully deletes any keys from the datastore it will trigger a linkset_data event with the type of LINKSET_DATA_MULTIDELETE, the key name will consist of a comma separated list of the key names removed from the datastore.
+
+### llLinksetDataDeleteProtected
+
+- `integer llLinksetDataDeleteProtected(string name, string pass)`
+
+The llLinksetDataDeleteProtected function erases a protected name:value pair from the linkset's datastore.
 
 ### llLinksetDataFindKeys
 
@@ -1382,7 +1426,13 @@ The llLinksetDataListKeys function returns a list of up to count keys in the dat
 
 ### llLinksetDataRead
 
-- `string llLinksetDataRead(string name, string pass)`
+- `string llLinksetDataRead(string name)`
+
+Reads an unprotected name:value pair from the linkset's datastore.
+
+### llLinksetDataReadProtected
+
+- `string llLinksetDataReadProtected(string name, string pass)`
 
 Reads a protected name:value pair from the datastore.
 
@@ -1394,15 +1444,33 @@ The llLinksetDataReset function erases all name:value pairs stored in the linkse
 
 ### llLinksetDataWrite
 
-- `integer llLinksetDataWrite(string name, string value, string pass)`
+- `integer llLinksetDataWrite(string name, string value)`
+
+Creates or updates an unprotected name:value pair from the linkset's datastore.
+
+### llLinksetDataWriteProtected
+
+- `integer llLinksetDataWriteProtected(string name, string value, string pass)`
 
 Creates or updates a protected name:value pair from the linkset's datastore. Further attempts to read, write or update the name:value pair must use the protected versions of those functions and must supply the same string that was used in pass.
+
+### llLinkSetSoundQueueing
+
+- `void llLinkSetSoundQueueing(integer link, integer queue)`
+
+### llLinkSetSoundRadius
+
+- `void llLinkSetSoundRadius(integer link, float radius)`
 
 ### llLinkSitTarget
 
 - `void llLinkSitTarget(integer link|, vector offset, rotation rot)`
 
 Set the sit location for the linked prim(s). The sit location is relative to the prim's position and rotation.
+
+### llLinkStopSound
+
+- `void llLinkStopSound(integer link)`
 
 ### llList2CSV
 
@@ -1670,10 +1738,6 @@ Critically damp to target in tau seconds (if the script is physical)
 
 - `key llName2Key(string name)`
 
-指定した名前のエージェントがリージョンにいない場合、この関数は NULL_KEY を返します。
-名前は常に "First[ Last]" または "first[.last]" という形式で提供されます。（ファーストネームとオプションのラストネーム（姓））
-ラストネームが省略されている場合、ラストネームとして "Resident" が使用されます。エージェント名では、大文字小文字は考慮されません。
-
 ### llNavigateTo
 
 - `void llNavigateTo(vector pos, list options)`
@@ -1739,9 +1803,9 @@ When dealing with vector and rotation data, consider using llCSV2List instead, s
 
 ### llParticleSystem
 
-- `void llParticleSystem(integer link, list rules)`
+- `void llParticleSystem(list rules)`
 
-A particle system defined by a list of rules is set for the prim(s) link.
+Defines a particle system for the containing prim based on a list of rules.
 
 ### llPassCollisions
 
@@ -1964,9 +2028,9 @@ Requests one HTTP:// for use by this script. The http_request event is triggered
 
 - `key llRequestUserKey(string username)`
 
-名前に一致するエージェントのエージェント ID を dataserver に要求します。指定する名前は、現在の名前または過去に使用された名前のいずれも使用することが出来ます。指定された名前のエージェントが見つからない場合は、この関数は NULL_KEY 値を返します。 
-dataserver イベントが発生した際にリクエストを識別するために使用出来るハンドル（キー）を返します。
-この関数で検索するエージェントは、セカンドライフにログインしている必要はありません。
+Requests the Agent ID for the agent identified by name from the dataserver. The name given may be either the current name of an avatar or a historical name that has been used in the past. If no agent can be found with the supplied name this function returns the value NULL_KEY. 
+Returns a handle (a key) that can be used to identify the request when the dataserver event is raised. 
+The agent being searched for with this function does not need to be signed on to Second Life.
 
 ### llRequestUsername
 
@@ -2330,6 +2394,18 @@ Sets or removes individual overrides applied to a PBR texture on a face
 
 Set the media params for a particular face on the linked prim(s) without a delay.
 
+### llSetLinkPrimitiveParams
+
+- `void llSetLinkPrimitiveParams(integer link, list rules)`
+
+Sets the prims parameters according to rules.
+
+### llSetLinkPrimitiveParamsFast
+
+- `void llSetLinkPrimitiveParamsFast(integer link, list rules)`
+
+Sets the prims parameters according to rules.
+
 ### llSetLinkRenderMaterial
 
 - `void llSetLinkRenderMaterial(integer link, string material, integer face)`
@@ -2421,9 +2497,9 @@ Moves the object or primitive towards pos without using physics.
 
 ### llSetPrimitiveParams
 
-- `void llSetPrimitiveParams(integer link, list rules)`
+- `void llSetPrimitiveParams(list rules)`
 
-Sets the prims parameters according to rules.
+Sets the prim's parameters according to rules.
 
 ### llSetPrimMediaParams
 
@@ -2487,11 +2563,11 @@ Displays text rather than the default "Sit Here" in the right-click menu.
 
 ### llSetSoundQueueing
 
-- `void llSetSoundQueueing(integer link, integer queue)`
+- `void llSetSoundQueueing(integer queue)`
 
 ### llSetSoundRadius
 
-- `void llSetSoundRadius(integer link, float radius)`
+- `void llSetSoundRadius(float radius)`
 
 ### llSetStatus
 
@@ -2633,6 +2709,10 @@ Preloads sound on viewers within range.
 
 For imaginary results (val < 0.0), a Math Error is triggered under LSO , or 'NaN' (Not A Number) is returned under Mono
 
+### llsRGB2Linear
+
+- `vector llsRGB2Linear(vector srgb)`
+
 ### llStartAnimation
 
 - `void llStartAnimation(string anim)`
@@ -2683,7 +2763,7 @@ Stop agent that owns object pointing
 
 ### llStopSound
 
-- `void llStopSound(integer link)`
+- `void llStopSound()`
 
 ### llStringLength
 

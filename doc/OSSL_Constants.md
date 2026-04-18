@@ -151,139 +151,139 @@ get parcel dwell
 
 - `STATS_ACTIVE_PRIMS = 7`
 
-Active Objects ||
+Active Objects |
 
 ### STATS_ACTIVE_SCRIPTS
 
 - `STATS_ACTIVE_SCRIPTS = 19`
 
-Active Scripts ||
+Active Scripts |
 
 ### STATS_AGENT_MS
 
 - `STATS_AGENT_MS = 16`
 
-Agent Time ||
+Agent Time |
 
 ### STATS_AGENT_UPDATES
 
 - `STATS_AGENT_UPDATES = 3`
 
-Agent Updates/Sec ||
+Agent Updates/Sec |
 
 ### STATS_CHILD_AGENTS
 
 - `STATS_CHILD_AGENTS = 5`
 
-Child Agents ||
+Child Agents |
 
 ### STATS_FRAME_MS
 
 - `STATS_FRAME_MS = 8`
 
-Total Frame Time ||
+Total Frame Time |
 
 ### STATS_IMAGE_MS
 
 - `STATS_IMAGE_MS = 11`
 
-Images Time ||
+Images Time |
 
 ### STATS_IN_PACKETS_PER_SECOND
 
 - `STATS_IN_PACKETS_PER_SECOND = 13`
 
-Packets In ||
+Packets In |
 
 ### STATS_NET_MS
 
 - `STATS_NET_MS = 9`
 
-Net Time ||
+Net Time |
 
 ### STATS_OTHER_MS
 
 - `STATS_OTHER_MS = 12`
 
-(Other Time) ||
+(Other Time) |
 
 ### STATS_OUT_PACKETS_PER_SECOND
 
 - `STATS_OUT_PACKETS_PER_SECOND = 14`
 
-Packets Out ||
+Packets Out |
 
 ### STATS_PENDING_DOWNLOADS
 
 - `STATS_PENDING_DOWNLOADS = 17`
 
-Pending Downloads ||
+Pending Downloads |
 
 ### STATS_PENDING_UPLOADS
 
 - `STATS_PENDING_UPLOADS = 18`
 
-Pending Uploads ||
+Pending Uploads |
 
 ### STATS_PHYSICS_FPS
 
 - `STATS_PHYSICS_FPS = 2`
 
-Physics FPS (Frame Per Second) ||
+Physics FPS (Frame Per Second) |
 
 ### STATS_PHYSICS_MS
 
 - `STATS_PHYSICS_MS = 10`
 
-Physics Time ||
+Physics Time |
 
 ### STATS_ROOT_AGENTS
 
 - `STATS_ROOT_AGENTS = 4`
 
-Main Agents ||
+Main Agents |
 
 ### STATS_SCRIPT_EPS
 
 - `STATS_SCRIPT_EPS = 28`
 
-Script EPS ||
+Script EPS |
 
 ### STATS_SCRIPT_LPS
 
 - `STATS_SCRIPT_LPS = 38`
 
-(Script Line Per Second) ||
+(Script Line Per Second) |
 
 ### STATS_SCRIPT_NPCS
 
 - `STATS_SCRIPT_NPCS = 47`
 
-Script NPCS ||
+Script NPCS |
 
 ### STATS_SCRIPT_TIME
 
 - `STATS_SCRIPT_TIME = 37`
 
-Script Time ||
+Script Time |
 
 ### STATS_SIM_FPS
 
 - `STATS_SIM_FPS = 1`
 
-Sim FPS (Frame Per Second) ||
+Sim FPS (Frame Per Second) |
 
 ### STATS_SIM_SLEEP
 
 - `STATS_SIM_SLEEP = 20`
 
-Sim Sleep ||
+Sim Sleep |
 
 ### STATS_TIME_DILATION
 
 - `STATS_TIME_DILATION = 0`
 
-Time Dilation ||
+Time Dilation |
 
 ### STATS_TOTAL_PRIMS
 
@@ -295,7 +295,7 @@ Objects || Reports worn prims also
 
 - `STATS_UNACKED_BYTES = 15`
 
-Total Unacked Bytes ||
+Total Unacked Bytes |
 
 ### VEHICLE_FLAG_LOCK_HOVER_HEIGHT
 
