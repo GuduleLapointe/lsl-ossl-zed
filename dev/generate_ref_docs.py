@@ -129,13 +129,20 @@ def parse_fields(text):
     return fields
 
 
+def _clean_token(value):
+    """Strip template/markup leftovers from a type or parameter name."""
+    # Remove anything from }} onward (nested template closing leaked in)
+    value = re.sub(r"\}\}.*", "", value)
+    return value.strip()
+
+
 def build_param_list(fields):
     """Build (type, name) pairs from p1_type/p1_name fields."""
     params = []
     i = 1
     while True:
-        ptype = fields.get(f"p{i}_type", "").strip()
-        pname = fields.get(f"p{i}_name", "").strip()
+        ptype = _clean_token(fields.get(f"p{i}_type", ""))
+        pname = _clean_token(fields.get(f"p{i}_name", ""))
         if not ptype and not pname:
             break
         if ptype and pname:
@@ -160,11 +167,15 @@ def parse_lsl_functions(xml_path):
         if not re.search(r"\{\{LSL[_ ]?Function", text, re.IGNORECASE):
             continue
 
-        fields = parse_fields(text)
-        func_name = fields.get("func", "").strip()
-        if not func_name or not re.match(r"ll[A-Z]", func_name):
+        # Use the FIRST |func=ll* occurrence — some pages document multiple
+        # related functions (e.g. llAdjustSoundVolume + llLinkAdjustSoundVolume)
+        # and parse_fields() would return the last one.
+        m = re.search(r"\|func=(ll[A-Z]\w+)", text)
+        if not m:
             continue
+        func_name = m.group(1)
 
+        fields = parse_fields(text)
         return_type = fields.get("return_type", "void").strip() or "void"
         params = build_param_list(fields)
         signature = f"{return_type} {func_name}({', '.join(params)})"
@@ -195,13 +206,12 @@ def parse_ossl_functions(xml_path):
         if not signatures:
             continue
 
-        # Real name from first signature
-        m = re.match(r"([a-zA-Z_][a-zA-Z_0-9]*)\s*\(", signatures[0])
+        # Extract os* name — syntax may include a return type prefix
+        # e.g. "string osDrawText(string drawList, string text)"
+        m = re.search(r"\b(os[A-Z]\w+)\s*\(", signatures[0])
         if not m:
             continue
         func_name = m.group(1)
-        if not re.match(r"os[A-Z]", func_name):
-            continue
 
         desc = clean_wiki(fields.get("description", ""))
         functions[func_name] = {"signatures": signatures, "desc": desc}

@@ -33,6 +33,10 @@ Add avatar to the land pass list for hours, or indefinitely if hours is zero.
 
 The llAdjustDamage modifies the amount of damage that will be applied by the current on_damage event after it has completed processing.
 
+### llAdjustSoundVolume
+
+- `void llAdjustSoundVolume(integer link, float volume)`
+
 ### llAgentInExperience
 
 - `integer llAgentInExperience(key agent)`
@@ -78,12 +82,6 @@ Similar to the (y/x) except it utilizes the signs of x & y to determine the quad
 - `void llAttachToAvatar(integer attach_point)`
 
 Attaches the object to the avatar who has granted permission to the script. The object is taken into the users inventory and attached to attach_point.
-
-### llAttachToAvatarTemp
-
-- `void llAttachToAvatarTemp(integer attach_point)`
-
-Follows the same convention as llAttachToAvatar, with the exception that the object will not create new inventory for the user, and will disappear on detach or disconnect. Also, this function can be used on avatars other than the owner (if granted permission) in which case the ownership is changed to the new wearer.
 
 ### llAvatarOnLinkSitTarget
 
@@ -442,7 +440,7 @@ To clarify, numbers and ASCII7 alphabetical characters are NOT escaped. If a cha
 
 - `void llEvade(key target, list options)`
 
-Characters will (roughly) try to hide from their pursuers if there is a good hiding spot along their fleeing path. Hiding means no direct line of sight from the head of the character (center of the top of its physics bounding box) to the head of its pursuer and no direct path between the two on the navmesh.|
+Characters will (roughly) try to hide from their pursuers if there is a good hiding spot along their fleeing path. Hiding means no direct line of sight from the head of the character (center of the top of its physics bounding box) to the head of its pursuer and no direct path between the two on the navmesh.
 
 ### llExecCharacterCmd
 
@@ -623,12 +621,6 @@ id must specify a valid avatar key, present in or otherwise known to the sim in 
 
 - `float llGetEnergy()`
 
-### llGetEnv
-
-- `string llGetEnv(string name)`
-
-Note that the value returned is a string, you may need to cast it to an integer for use in calculations.
-
 ### llGetEnvironment
 
 - `list llGetEnvironment(vector pos, list params)`
@@ -727,6 +719,10 @@ If name does not exist, INVENTORY_NONE is returned (no errors or messages are ge
 
 - `key llGetLandOwnerAt(vector pos)`
 
+### llGetLinkKey
+
+- `key llGetLinkKey(key object_id, integer link)`
+
 ### llGetLinkMedia
 
 - `list llGetLinkMedia(integer link|p1_desc, integer face|p2_desc, list params)`
@@ -750,12 +746,6 @@ Get the media params for a particular face on a linked prim, given the desired l
 - `integer llGetLinkNumberOfSides(integer link)`
 
 See for more information about faces and the conditions that control the number of faces a prim will have.
-
-### llGetLinkPrimitiveParams
-
-- `list llGetLinkPrimitiveParams(integer link, list params)`
-
-Identical to llGetPrimitiveParams except that it acts on the prim specified by the link number given.
 
 ### llGetLinkSitFlags
 
@@ -874,10 +864,6 @@ To get the ''object's'' description (not the current prim's), use PRIM_DESC or O
 An empty list if id is not found.
 {{LSL Const|OBJECT_UNKNOWN_DETAIL|integer|-1
 
-### llGetObjectLinkKey
-
-- `key llGetObjectLinkKey(key object_id, integer link)`
-
 ### llGetObjectMass
 
 - `float llGetObjectMass(key id)`
@@ -959,6 +945,12 @@ Used to get the physical characteristics of an object.
 ### llGetPos
 
 - `vector llGetPos()`
+
+### llGetPrimitiveParams
+
+- `list llGetPrimitiveParams(integer link, list params)`
+
+Identical to llGetPrimitiveParams except that it acts on the prim specified by the link number given.
 
 ### llGetPrimMediaParams
 
@@ -1339,16 +1331,6 @@ Start an asynchronous transaction to request a number of keys from the script's 
 
 - `vector llLinear2sRGB(vector color)`
 
-### llLinkAdjustSoundVolume
-
-- `void llLinkAdjustSoundVolume(integer link, float volume}})`
-
-### llLinkParticleSystem
-
-- `void llLinkParticleSystem(integer link, list rules)`
-
-A particle system defined by a list of rules is set for the prim(s) link.
-
 ### llLinkPlaySound
 
 - `void llLinkPlaySound(integer link, string sound, float volume, integer flags)`
@@ -1373,18 +1355,18 @@ The llLinksetDataCountFound function returns the number of keys in the linkset d
 
 The llLinksetDataCountKeys returns the number of unique keys that have been stored in the linkset's datastore.
 
+### llLinksetDataDelete
+
+- `integer llLinksetDataDelete(string name, string pass)`
+
+The llLinksetDataDeleteProtected function erases a protected name:value pair from the linkset's datastore.
+
 ### llLinksetDataDeleteFound
 
 - `list llLinksetDataDeleteFound(string pattern, string pass)`
 
 The llLinksetDataDeleteFound function finds and attempts to delete all keys in the data store that match pattern. This function will delete protected key-value pairs only if the matching pass phrase is passed in the pass parameter. The function returns a list, the first entry in the list is the number of keys deleted, the second entry in the list is the number of keys that could not be deleted due to a non-matching pass phrase. 
 If this function successfully deletes any keys from the datastore it will trigger a linkset_data event with the type of LINKSET_DATA_MULTIDELETE, the key name will consist of a comma separated list of the key names removed from the datastore.
-
-### llLinksetDataDeleteProtected
-
-- `integer llLinksetDataDeleteProtected(string name, string pass)`
-
-The llLinksetDataDeleteProtected function erases a protected name:value pair from the linkset's datastore.
 
 ### llLinksetDataFindKeys
 
@@ -1398,9 +1380,9 @@ The llLinksetDataFindKeys function returns a list of up to count keys from the d
 
 The llLinksetDataListKeys function returns a list of up to count keys in the datastore, starting at the one indicated by start. If count is less than 1, then all keys between start and the end are returned. If count minus start exceeds the total number of keys, the returned list will be shorter than count, down to a zero-length list if start equals or exceeds the total number of keys.
 
-### llLinksetDataReadProtected
+### llLinksetDataRead
 
-- `string llLinksetDataReadProtected(string name, string pass)`
+- `string llLinksetDataRead(string name, string pass)`
 
 Reads a protected name:value pair from the datastore.
 
@@ -1410,29 +1392,17 @@ Reads a protected name:value pair from the datastore.
 
 The llLinksetDataReset function erases all name:value pairs stored in the linkset's datastore. When this function is called the linkset_data event is triggered in all scripts running in the linkset with an action of LINKSETDATA_RESET.
 
-### llLinksetDataWriteProtected
+### llLinksetDataWrite
 
-- `integer llLinksetDataWriteProtected(string name, string value, string pass)`
+- `integer llLinksetDataWrite(string name, string value, string pass)`
 
 Creates or updates a protected name:value pair from the linkset's datastore. Further attempts to read, write or update the name:value pair must use the protected versions of those functions and must supply the same string that was used in pass.
-
-### llLinkSetSoundQueueing
-
-- `void llLinkSetSoundQueueing(integer link, integer queue)`
-
-### llLinkSetSoundRadius
-
-- `void llLinkSetSoundRadius(integer link, float radius)`
 
 ### llLinkSitTarget
 
 - `void llLinkSitTarget(integer link|, vector offset, rotation rot)`
 
 Set the sit location for the linked prim(s). The sit location is relative to the prim's position and rotation.
-
-### llLinkStopSound
-
-- `void llLinkStopSound(integer link)`
 
 ### llList2CSV
 
@@ -1767,6 +1737,12 @@ When dealing with vector and rotation data, consider using llCSV2List instead, s
 
 - `list llParseStringKeepNulls(string src, list separators, list spacers)`
 
+### llParticleSystem
+
+- `void llParticleSystem(integer link, list rules)`
+
+A particle system defined by a list of rules is set for the prim(s) link.
+
 ### llPassCollisions
 
 - `void llPassCollisions(integer pass)`
@@ -1863,9 +1839,9 @@ This function is recognized by the compiler, but was never implemented in Second
 
 Stop taking inputs (that were taken with llTakeControls), dequeues any remaining control events. If PERMISSION_TAKE_CONTROLS was previously granted, it will be revoked.
 
-### llReleaseURL|return_type
+### llReleaseURL
 
-- `void llReleaseURL|return_type(string url)`
+- `void llReleaseURL(string url)`
 
 Releases the specified URL, it will no longer be usable.
 
@@ -2354,12 +2330,6 @@ Sets or removes individual overrides applied to a PBR texture on a face
 
 Set the media params for a particular face on the linked prim(s) without a delay.
 
-### llSetLinkPrimitiveParamsFast
-
-- `void llSetLinkPrimitiveParamsFast(integer link, list rules)`
-
-Sets the prims parameters according to rules.
-
 ### llSetLinkRenderMaterial
 
 - `void llSetLinkRenderMaterial(integer link, string material, integer face)`
@@ -2439,7 +2409,7 @@ Suggest default amounts for the pay text field and pay buttons of the appearing 
 
 ### llSetPhysicsMaterial
 
-- `void llSetPhysicsMaterial(integer {{#var:material_mask}}, float gravity_multiplier, float restitution, float friction, float density)`
+- `void llSetPhysicsMaterial(integer {{#var:material_mask, float gravity_multiplier, float restitution, float friction, float density)`
 
 Used to set the physical characteristics of an object.
 
@@ -2448,6 +2418,12 @@ Used to set the physical characteristics of an object.
 - `void llSetPos(vector pos)`
 
 Moves the object or primitive towards pos without using physics.
+
+### llSetPrimitiveParams
+
+- `void llSetPrimitiveParams(integer link, list rules)`
+
+Sets the prims parameters according to rules.
 
 ### llSetPrimMediaParams
 
@@ -2508,6 +2484,14 @@ Set the running state of the script name.
 - `void llSetSitText(string text)`
 
 Displays text rather than the default "Sit Here" in the right-click menu.
+
+### llSetSoundQueueing
+
+- `void llSetSoundQueueing(integer link, integer queue)`
+
+### llSetSoundRadius
+
+- `void llSetSoundRadius(integer link, float radius)`
 
 ### llSetStatus
 
@@ -2696,6 +2680,10 @@ Stop an animation for the current object.
 - `void llStopPointAt()`
 
 Stop agent that owns object pointing
+
+### llStopSound
+
+- `void llStopSound(integer link)`
 
 ### llStringLength
 
