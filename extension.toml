@@ -8,7 +8,7 @@ repository = "https://github.com/GuduleLapointe/lsl-ossl-zed"
 
 [grammars.lsl]
 repository = "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl"
-commit = "dcbfb90dbe1faa83ccd0b905d08723b58437e97b"
+commit = "57699cda2a29dc6df7f6c4e3ba3f3dba62fe74f2"
 
 [language_servers.lsl-lsp]
 name = "LSL Language Server"
