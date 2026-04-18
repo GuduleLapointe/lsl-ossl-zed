@@ -1,7 +1,6 @@
 # OSSL Functions
 
-Source: http://opensimulator.org/wiki/Special:Export
-Fetched: 
+Source: MediaWiki export — fetched 2026-04-17
 
 ### osAddAgentToGroup
 
@@ -180,8 +179,6 @@ This function was added in 0.9.3.0
 ### osLinkParticleSystem
 
 - `osLinkParticleSystem(LSL_Integer linknumber, LSL_List rules)`
-- `|Test`
-- `*`
 
 ### osListSortInPlace
 
@@ -354,8 +351,6 @@ This function was added in 0.7
 ### osParticleSystem
 
 - `osParticleSystem(list rules)`
-- `|Test`
-- `*`
 
 ### osPlaySound
 
@@ -596,3 +591,4 @@ Since version 0.9.2.0, llDetectedLinkNumber will return the DETECTOR prim link n
 At current time, this is not persistent (so the on_rez on example) 
 This is also lost on child prims if physics state changes or on link/unlink. Script must set it again after such changes 
 Note that like with llVolumeDetect, the name Volume is misleading. Detection will only be by volume on some basic shapes like pure spheres or pure boxes. On other shapes it will only be by surface collisions. What prims will do by volume or surface, depends on the physics engine The name of function llDetectedLinkNumber is also misleading, it returns the detector prim link number, not the detected.
+

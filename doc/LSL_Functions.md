@@ -1,7 +1,6 @@
 # LSL Functions
 
-Source: https://wiki.secondlife.com/wiki/Special:Export
-Fetched:
+Source: MediaWiki export — fetched 2026-04-17
 
 ### llAbs
 
@@ -15,44 +14,35 @@ The returned value is in the range {{Interval
 
 ### llAddToLandBanList
 
-- `void llAddToLandBanList(key avatar, float hours
-|func_footnote)`
+- `void llAddToLandBanList(key avatar, float hours)`
 
 Add avatar to the parcel ban list for the specified number of hours.
 A value of 0 for hours will add the agent indefinitely. The smallest value that hours will accept is 0.01; anything smaller will be seen as 0.
 Residents teleporting to a parcel where they are banned will be redirected to a neighboring parcel.
-|return_text
-|spec
 
 ### llAddToLandPassList
 
 - `void llAddToLandPassList(key avatar, float hours)`
 
 Add avatar to the land pass list for hours, or indefinitely if hours is zero.
-|return_text
-|spec
 
 ### llAdjustDamage
 
 - `void llAdjustDamage(integer number, float new_damage)`
 
-The llAdjustDamage modifies the amount of damage that will be applied by the current on_damage event after it has completed processing. 
-|return_text
+The llAdjustDamage modifies the amount of damage that will be applied by the current on_damage event after it has completed processing.
 
 ### llAgentInExperience
 
 - `integer llAgentInExperience(key agent)`
 
 Determines whether or not the specified agent is in the script's experience.
-|func_footnote
 
 ### llAllowInventoryDrop
 
 - `void llAllowInventoryDrop(integer add)`
 
 Allows for all users without modify permissions to add inventory items to a prim.
-|return_text
-|spec
 
 ### llAngleBetween
 
@@ -63,16 +53,12 @@ Allows for all users without modify permissions to add inventory items to a prim
 - `void llApplyImpulse(vector momentum, integer local)`
 
 Applies impulse to object
-|return_text|spec
 
 ### llApplyRotationalImpulse
 
 - `void llApplyRotationalImpulse(vector force, integer local)`
 
 Applies rotational impulse to object.
-|func_footnote
-|return_text
-|spec
 
 ### llAsin
 
@@ -125,8 +111,6 @@ angle need to be between the value 0<angle<PI (higher values than PI lead to 2*P
 , because a rotation is not really a rotation (it is more of a rigid motion/mirroring) 
 ,the final destination is the rotation. 
 (in other words: it doesn't matter wether you rotate left by 90 degrees or right by 270 degrees it will return the same rotation)
-|spec
-|caveats
 
 ### llBase64ToInteger
 
@@ -141,22 +125,12 @@ angle need to be between the value 0<angle<PI (higher values than PI lead to 2*P
 - `void llBreakAllLinks()`
 
 Delinks all prims in the link set.
-|func_footnote
-|return_text
-|spec
 
 ### llBreakLink
-|inject-2={{Issues/SVC-3510}}
-{{LSL_Function/link|link
 
-- `void llBreakLink
-|inject-2={{Issues/SVC-3510}}
-{{LSL_Function/link|link(integer link)`
+- `void llBreakLink(integer link)`
 
 Delinks the prim with the given link number in a linked object set
-|func_footnote
-|return_text
-|spec
 
 ### llCastRay
 
@@ -179,10 +153,6 @@ Construct a single character string from the supplied Unicode value.
 - `void llClearCameraParams()`
 
 Resets all camera parameters to default values and turns off scripted camera control.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llClearLinkMedia
 
@@ -213,16 +183,12 @@ Returned values are in the range {{Interval
 - `void llCollisionFilter(string name, key id, integer accept)`
 
 Sets the collision filter, exclusively or inclusively.
-|return_text
-|spec
 
 ### llCollisionSound
 
 - `void llCollisionSound(string impact_sound, float impact_volume)`
 
 Suppress default collision sounds, replace default impact sounds with impact_sound at the volume impact_volume
-|return_text
-|spec
 
 ### llCollisionSprite
 
@@ -235,7 +201,6 @@ Suppress default collision sprites, replace default impact sprite with impact_sp
 - `string llComputeHash(string message, string algorithm)`
 
 Supported values of algorithm are md5, md5_sha1, sha1, sha224, sha256, sha384, sha512.
-|func_desc
 
 ### llCos
 
@@ -270,7 +235,6 @@ DESCRIPTION
 - `void llDamage(key target, float damage, integer damage_type)`
 
 This function delivers damage to tasks and agent in the same region.
-|return_text
 
 ### llDataSizeKeyValue
 
@@ -302,7 +266,6 @@ The opposite function would be llListInsertList.
 - `string llDeleteSubString(string src, integer start, integer end)`
 
 Characters at positions start and end are removed.
-|func_desc
 
 ### llDerezObject
 
@@ -315,8 +278,6 @@ Derezzes an object previously rezzed from within the object containing the scrip
 - `void llDetachFromAvatar()`
 
 Detach object from avatar.
-|return_text
-|spec
 
 ### llDetectedDamage
 
@@ -325,12 +286,10 @@ Detach object from avatar.
 Returns an empty list if number does not relate to a valid damage source or if called from a handler other than on_damage
 The list has the following format:
 [float damage, integer damage_type, float original_damage]
-|func_desc
 
 ### llDetectedGrab
 
-- `vector llDetectedGrab(integer number
-|func_desc)`
+- `vector llDetectedGrab(integer number)`
 
 Returns if number is out of range or if called from an event other than the touch event.
 
@@ -339,24 +298,18 @@ Returns if number is out of range or if called from an event other than the touc
 - `integer llDetectedGroup(integer number)`
 
 Returns FALSE if number is out of range.
-|func_desc
 
 ### llDetectedKey
 
 - `key llDetectedKey(integer number)`
 
 Returns an empty key if number does not correspond to a valid sensed object or avatar.
-|func_desc
 
 ### llDetectedLinkNumber
 
 - `integer llDetectedLinkNumber(integer number)`
 
 For touch and collision categories of events only.
-|func_desc
-|spec
-|caveats
-|constants
 
 ### llDetectedName
 
@@ -364,96 +317,78 @@ For touch and collision categories of events only.
 
 Returns NULL KEY if item is not valid. 
 If the item detected is an avatar then the legacy name is returned.
-|func_desc
 
 ### llDetectedOwner
 
 - `key llDetectedOwner(integer number)`
 
 Returns an empty key if number does not relate to a valid sensed object
-|func_desc
 
 ### llDetectedPos
 
 - `vector llDetectedPos(integer number)`
 
 Returns if number is not valid sensed object.
-|func_desc
 
 ### llDetectedRezzer
 
 - `key llDetectedRezzer(integer number)`
 
 Returns an empty key if number does not correspond to a valid sensed object or avatar.
-|func_desc
 
 ### llDetectedRot
 
 - `rotation llDetectedRot(integer number)`
 
 Returns if number is not valid sensed object.
-|func_desc
 
 ### llDetectedTouchBinormal
 
 - `vector llDetectedTouchBinormal(integer index)`
 
 For the touch category of events only. The prim that was touched may not be the prim receiving the event, use llDetectedLinkNumber to check for this; likewise you can use llDetectedTouchFace to determine which face was touched.To find the third tangent vector, cross this vector with the normal.
-|func_desc
-|spec
 
 ### llDetectedTouchFace
 
 - `integer llDetectedTouchFace(integer index)`
 
 For the touch category of events only. The prim that was touched may not be the prim receiving the event, use llDetectedLinkNumber to check for this; likewise you can use llDetectedTouchFace to determine which face was touched.
-|func_desc
-|spec
 
 ### llDetectedTouchNormal
 
 - `vector llDetectedTouchNormal(integer index)`
 
 For the touch category of events only. The prim that was touched may not be the prim receiving the event, use llDetectedLinkNumber to check for this; likewise you can use llDetectedTouchFace to determine which face was touched.To find the third tangent vector, cross the binormal with this vector.
-|func_desc
-|spec
 
 ### llDetectedTouchPos
 
 - `vector llDetectedTouchPos(integer index)`
 
 For the touch category of events only. The prim that was touched may not be the prim receiving the event, use llDetectedLinkNumber to check for this; likewise you can use llDetectedTouchFace to determine which face was touched.
-|func_desc
-|spec
 
 ### llDetectedTouchST
 
 - `vector llDetectedTouchST(integer index)`
 
 For the touch category of events only. The prim that was touched may not be the prim receiving the event, use llDetectedLinkNumber to check for this; likewise, you can use llDetectedTouchFace to determine which face was touched.
-|func_desc
-|spec
 
 ### llDetectedTouchUV
 
 - `vector llDetectedTouchUV(integer index)`
 
 For the touch category of events only. The prim that was touched may not be the prim receiving the event, use llDetectedLinkNumber to check for this; likewise you can use llDetectedTouchFace to determine which face was touched.
-|func_desc
 
 ### llDetectedType
 
 - `integer llDetectedType(integer number)`
 
 Returns zero if number is not valid sensed object or avatar.
-|func_desc
 
 ### llDetectedVel
 
 - `vector llDetectedVel(integer number)`
 
 Returns if number is not valid sensed object or avatar.
-|func_desc
 
 ### llDialog
 
@@ -466,8 +401,6 @@ Shows a dialog box in the lower right corner of the avatar's screen (upper right
 - `void llDie()`
 
 Deletes the object. The object does not go to the owner's Inventory 🗑 Trash.
-|return_text
-|spec
 
 ### llDumpList2String
 
@@ -475,7 +408,6 @@ Deletes the object. The object does not go to the owner's Inventory 🗑 Trash.
 
 Use llParseString2List or llParseStringKeepNulls to undo the process.
 Unlike llList2CSV, which dumps a list to a comma-separated formatted string with no choice over the separator, llDumpList2String gives you more control. This can be useful if you don't trust commas as a separator because you might be working with data supplied to the script by a user who uses, say, commas as part of a street address.
-|func_desc
 
 ### llEdgeOfWorld
 
@@ -488,23 +420,18 @@ Checks to see whether the border hit by dir from pos is the edge of the world (h
 - `void llEjectFromLand(key avatar)`
 
 Ejects avatar from the parcel.
-|func_footnote
-|caveats
-|constants
 
 ### llEmail
 
 - `void llEmail(string address, string subject, string message)`
 
 Sends an email to address with subject and message.
-|return_text
 
 ### llEscapeURL
 
 - `string llEscapeURL(string url)`
 
 To clarify, numbers and ASCII7 alphabetical characters are NOT escaped. If a character requires more then one byte in form then it returns multiple "%xx" sequences chained together.
-|func_desc
 
 ### llEuler2Rot
 
@@ -544,12 +471,9 @@ Directs a character to keep a specific distance from a specific position in the 
 
 ### llForceMouselook
 
-- `void llForceMouselook(integer mouselook
-|p1_desc)`
+- `void llForceMouselook(integer mouselook)`
 
 Sets if a sitting avatar should be forced into mouselook when they sit on this prim.
-|return_text
-|spec
 
 ### llFrand
 
@@ -563,15 +487,11 @@ Generates a key using [http://en.wikipedia.org/wiki/UUID#Version_5_.28SHA-1_hash
 
 ### llGetAccel
 
-- `vector
-|func_footnote
-|func_desc llGetAccel()`
+- `vector llGetAccel()`
 
 ### llGetAgentInfo
 
-- `integer llGetAgentInfo(key id
-|func_footnote
-|func_desc)`
+- `integer llGetAgentInfo(key id)`
 
 ### llGetAgentLanguage
 
@@ -588,7 +508,6 @@ Requests a list of agents currently in the region, limited by the scope paramete
 - `vector llGetAgentSize(key avatar)`
 
 is returned if avatar is not in the region or if it is not an avatar.
-|func_desc
 
 ### llGetAlpha
 
@@ -605,13 +524,10 @@ Otherwise the return is in the range {{Interval
 - `string llGetAnimation(key id)`
 
 llGetAgentInfo provides information on some animation states not covered by this function (typing, away, busy). llGetAnimationList provides more detailed information about the running animations, but may not reflect avatar state as accurately as llGetAnimation.
-|func_desc
 
 ### llGetAnimationList
 
-- `list llGetAnimationList(key avatar
-|func_footnote
-|func_desc)`
+- `list llGetAnimationList(key avatar)`
 
 ### llGetAnimationOverride
 
@@ -622,57 +538,45 @@ llGetAgentInfo provides information on some animation states not covered by this
 - `integer llGetAttached()`
 
 ### llGetAttachedList
-|func_desc
 
-- `list llGetAttachedList
-|func_desc(key avatar|p1_desc)`
+- `list llGetAttachedList(key avatar|p1_desc)`
 
 By design HUD attachment keys are not reported by this function. 
 If avatar is a child agent, ["NOT ON REGION"] is returned. 
 If avatar is not a main agent and not a child agent or not an agent at all, ["NOT FOUND"] is returned.
-|spec
 
 ### llGetAttachedListFiltered
-|func_desc
 
-- `list llGetAttachedListFiltered
-|func_desc(key avatar|p1_desc, list options|p2_desc)`
+- `list llGetAttachedListFiltered(key avatar|p1_desc, list options|p2_desc)`
 
 If avatar is a child agent, ["NOT ON REGION"] is returned. 
 If avatar is not a main agent and not a child agent or not an agent at all, ["NOT FOUND"] is returned.
-|spec
 
 ### llGetBoundingBox
 
 - `list llGetBoundingBox(key object)`
 
 The bounding box is for the entire link set, not just the requested prim. Returns an empty list ( [] ) if object is not found.
-|func_desc
 
 ### llGetCameraAspect
 
-- `float
-|func_desc llGetCameraAspect()`
+- `float llGetCameraAspect()`
 
 ### llGetCameraFOV
 
-- `float
-|func_desc llGetCameraFOV()`
+- `float llGetCameraFOV()`
 
 ### llGetCameraPos
 
-- `vector
-|func_desc llGetCameraPos()`
+- `vector llGetCameraPos()`
 
 ### llGetCameraRot
 
-- `rotation
-|func_desc llGetCameraRot()`
+- `rotation llGetCameraRot()`
 
 ### llGetCenterOfMass
 
-- `vector
-|func_desc llGetCenterOfMass()`
+- `vector llGetCenterOfMass()`
 
 If called from a child prim, the child's center of mass is returned instead (but still in region coordinates).
 
@@ -694,8 +598,7 @@ Used to get a point on the navmesh that is the closest point to point.
 
 - `string llGetDate()`
 
-If you wish to know the time as well use: llGetTimestamp which uses the format 
-|func_desc
+If you wish to know the time as well use: llGetTimestamp which uses the format
 
 ### llGetDayLength
 
@@ -714,20 +617,16 @@ Return the number of seconds added to the current time before calculating the cu
 - `string llGetDisplayName(key id)`
 
 id must specify a valid avatar key, present in or otherwise known to the sim in which the script is running, otherwise an empty string is returned. This function will still return a valid display name if the avatar is a child agent of the sim (i.e., in an adjacent sim, but presently able to see into the one the script is in), or for a short period after the avatar leaves the sim (specifically, when the client completely disconnects from the sim, either as a main or child agent).
-|func_desc
 
 ### llGetEnergy
 
-- `float
-|func_footnote
-|func_desc llGetEnergy()`
+- `float llGetEnergy()`
 
 ### llGetEnv
 
 - `string llGetEnv(string name)`
 
 Note that the value returned is a string, you may need to cast it to an integer for use in calculations.
-|func_desc
 
 ### llGetEnvironment
 
@@ -749,47 +648,37 @@ Returns a text description of a particular Experience LSL error constant.
 
 ### llGetForce
 
-- `vector
-|func_footnote
-|func_desc llGetForce()`
+- `vector llGetForce()`
 
 ### llGetFreeMemory
 
-- `integer
-|func_desc llGetFreeMemory()`
+- `integer llGetFreeMemory()`
 
 ### llGetFreeURLs
 
-- `integer
-|func_footnote
-|func_desc llGetFreeURLs()`
+- `integer llGetFreeURLs()`
 
 ### llGetGeometricCenter
 
-- `vector
-|func_footnote
-|func_desc llGetGeometricCenter()`
+- `vector llGetGeometricCenter()`
 
 ### llGetGMTclock
 
 - `float llGetGMTclock()`
 
 For SL time, which is the same as California time, use llGetWallclock
-|func_desc
 
 ### llGetHealth
 
 - `float llGetHealth(key id)`
 
 Returns the current health of an avatar or object in the region.
-|return_text
 
 ### llGetHTTPHeader
 
 - `string llGetHTTPHeader(key request_id, string header)`
 
 Returns an empty string if the header is not found, if the request_id is not a valid key received through the http_request event, or if the headers can no longer be accessed. Headers can only be accessed before llHTTPResponse is called and with-in the first 30&nbsp;seconds after the http_request event is queued.
-|func_desc
 
 ### llGetInventoryAcquireTime
 
@@ -814,7 +703,6 @@ If name is not copy, mod, trans then the return is {{LSL Const|NULL_KEY|key|&quo
 - `string llGetInventoryName(integer type, integer number)`
 
 Inventory items are sorted in alphabetical order (not chronological order).
-|func_desc
 
 ### llGetInventoryNumber
 
@@ -855,17 +743,12 @@ Get the media params for a particular face on a linked prim, given the desired l
 - `integer llGetLinkNumber()`
 
 0 means the prim is not linked, 1 the prim is the root, 2 the prim is the first child, etc. Links are numbered in the reverse order in which they were linked -- if you select a box, a sphere and a cylinder in that order, then link them, the cylinder is 1, the sphere is 2 and the box is 3. The last selected prim has the lowest link number.
-|func_desc
 
 ### llGetLinkNumberOfSides
 
-- `integer llGetLinkNumberOfSides(integer link
-|func_desc)`
+- `integer llGetLinkNumberOfSides(integer link)`
 
-See for more information about faces and the conditions that control the number of faces a prim will have. 
-|spec
-|caveats
-|constants
+See for more information about faces and the conditions that control the number of faces a prim will have.
 
 ### llGetLinkPrimitiveParams
 
@@ -878,7 +761,6 @@ Identical to llGetPrimitiveParams except that it acts on the prim specified by t
 - `integer llGetLinkSitFlags(integer link)`
 
 Returns the current flags on the link's sittarget.
-|return_text
 
 ### llGetListEntryType
 
@@ -888,45 +770,35 @@ Returns the current flags on the link's sittarget.
 
 ### llGetListLength
 
-- `integer llGetListLength(list src
-|func_footnote
-|func_desc)`
+- `integer llGetListLength(list src)`
 
 ### llGetLocalPos
 
 - `vector llGetLocalPos()`
 
 If called from the root prim it returns the position in the region unless it is attached to which it returns the position relative to the attach point.
-|func_desc
 
 ### llGetLocalRot
 
 - `rotation llGetLocalRot()`
 
 If called from the root prim, it returns the objects rotation.
-|func_desc
 
 ### llGetMass
 
-- `float
-|func_footnote
-|func_desc llGetMass()`
+- `float llGetMass()`
 
 |spec
 
 ### llGetMassMKS
 
-- `float
-|func_footnote
-|func_desc llGetMassMKS()`
+- `float llGetMassMKS()`
 
 MKS as used in the name of this function is likely a reference to the [https://en.wikipedia.org/wiki/MKS_system_of_units MKS system of units] (Meter, Kilogram, Second), which form the base of SI units (with some minor differences).
-|constants
 
 ### llGetMaxScaleFactor
 
-- `float
-|func_desc llGetMaxScaleFactor()`
+- `float llGetMaxScaleFactor()`
 
 ### llGetMemoryLimit
 
@@ -936,8 +808,7 @@ Get the maximum memory a script can use.
 
 ### llGetMinScaleFactor
 
-- `float
-|func_desc llGetMinScaleFactor()`
+- `float llGetMinScaleFactor()`
 
 ### llGetMoonDirection
 
@@ -956,7 +827,6 @@ Return the rotation applied to the moon for the parcel at the location of the ob
 - `void llGetNextEmail(string address, string subject)`
 
 Get the next queued email that comes from address, with specified subject.
-|return_text
 
 ### llGetNotecardLine
 
@@ -972,35 +842,29 @@ Gets the line of the notecard name from the region's notecard cache immediately 
 
 ### llGetNumberOfNotecardLines
 
-- `key llGetNumberOfNotecardLines(string name
-|func_footnote)`
+- `key llGetNumberOfNotecardLines(string name)`
 
 Requests the number of lines in notecard name via the dataserver event (cast dataserver value to integer)
 
 ### llGetNumberOfPrims
 
-- `integer
-|func_footnote
-|func_desc llGetNumberOfPrims()`
+- `integer llGetNumberOfPrims()`
 
 ### llGetNumberOfSides
 
 - `integer llGetNumberOfSides()`
 
-See for more information about faces and the conditions that control the number of faces a prim will have. 
-|func_desc
+See for more information about faces and the conditions that control the number of faces a prim will have.
 
 ### llGetObjectAnimationNames
 
-- `list
-|func_desc llGetObjectAnimationNames()`
+- `list llGetObjectAnimationNames()`
 
 ### llGetObjectDesc
 
 - `string llGetObjectDesc()`
 
 To get the ''object's'' description (not the current prim's), use PRIM_DESC or OBJECT_DESC.
-|func_desc
 
 ### llGetObjectDetails
 
@@ -1015,15 +879,11 @@ An empty list if id is not found.
 
 ### llGetObjectMass
 
-- `float llGetObjectMass(key id
-|func_footnote
-|func_desc)`
+- `float llGetObjectMass(key id)`
 
 ### llGetObjectName
 
 - `string llGetObjectName()`
-
-|func_desc
 
 ### llGetObjectPermMask
 
@@ -1037,21 +897,15 @@ Avatars sitting on the object are not counted. Zero is returned if prim: (A) is 
 
 ### llGetOmega
 
-- `vector
-|func_footnote
-|func_desc llGetOmega()`
+- `vector llGetOmega()`
 
 ### llGetOwner
 
-- `key
-|func_footnote
-|func_desc llGetOwner()`
+- `key llGetOwner()`
 
 ### llGetOwnerKey
 
-- `key llGetOwnerKey(key id
-|func_footnote
-|func_desc)`
+- `key llGetOwnerKey(key id)`
 
 ### llGetParcelDetails
 
@@ -1067,35 +921,27 @@ Both x and y components of pos are clamped to the range {{Interval
 
 ### llGetParcelMaxPrims
 
-- `integer llGetParcelMaxPrims(vector pos, integer sim_wide
-|func_footnote
-|func_desc)`
+- `integer llGetParcelMaxPrims(vector pos, integer sim_wide)`
 
 ### llGetParcelMusicURL
 
 - `string llGetParcelMusicURL()`
 
 The object owner must also be the land owner. If the land is deeded to a group the object will need to be deeded to the same group for this function to work.
-|func_desc|spec|caveats
 
 ### llGetParcelPrimCount
 
-- `integer llGetParcelPrimCount(vector pos|p1_desc, integer category, integer sim_wide|p3_desc
-|func_footnote
-|func_desc)`
+- `integer llGetParcelPrimCount(vector pos|p1_desc, integer category, integer sim_wide|p3_desc)`
 
 ### llGetParcelPrimOwners
 
-- `list llGetParcelPrimOwners(vector pos
-|func_desc)`
+- `list llGetParcelPrimOwners(vector pos)`
 
 Requires owner-like permissions for the parcel.
 
 ### llGetPermissions
 
-- `integer
-|func_footnote
-|func_desc llGetPermissions()`
+- `integer llGetPermissions()`
 
 ### llGetPermissionsKey
 
@@ -1111,9 +957,7 @@ Used to get the physical characteristics of an object.
 
 ### llGetPos
 
-- `vector
-|func_footnote
-|func_desc llGetPos()`
+- `vector llGetPos()`
 
 ### llGetPrimMediaParams
 
@@ -1126,10 +970,8 @@ Get the media params for a particular face on an object, given the desired list 
 - `integer llGetRegionAgentCount()`
 
 ### llGetRegionCorner
-|func_desc
 
-- `vector llGetRegionCorner
-|func_desc()`
+- `vector llGetRegionCorner()`
 
 Divide the returned value by 256 to get the region offset.
 
@@ -1147,12 +989,9 @@ Return the number of seconds added to the current time before calculating the cu
 
 ### llGetRegionFlags
 
-- `integer
-|func_desc llGetRegionFlags()`
+- `integer llGetRegionFlags()`
 
 Only a small number of flags are actually used; the rest (shown below in strike-through) are always zero. In particular, it is not possible to detect the status of "Allow Land Resell", "Allow Land Join/Divide", or "Block Land Show in Search"; nor, obviously, it is possible for a script to detect that "Disable Scripts" has been set.
-|spec
-|caveats
 
 ### llGetRegionFPS
 
@@ -1172,9 +1011,7 @@ Return the rotation applied to the moon for the region at the location of the ob
 
 ### llGetRegionName
 
-- `string
-|func_footnote
-|func_desc llGetRegionName()`
+- `string llGetRegionName()`
 
 ### llGetRegionSunDirection
 
@@ -1190,8 +1027,7 @@ Return the rotation applied to the sun for the region at the location of the obj
 
 ### llGetRegionTimeDilation
 
-- `float
-|func_desc llGetRegionTimeDilation()`
+- `float llGetRegionTimeDilation()`
 
 It is used as the ratio between the change of script time to that of real world time.
 
@@ -1200,26 +1036,20 @@ It is used as the ratio between the change of script time to that of real world 
 - `float llGetRegionTimeOfDay()`
 
 By default (without custom environment settings), Second Life day cycles are 4 hours long (3 hours of light, 1 hour of dark). The sunrise and sunset time varies slowly.
-|func_desc
 
 ### llGetRenderMaterial
 
 - `string llGetRenderMaterial(integer face)`
 
 If the Material is in the prim's inventory, the return value is the inventory name, otherwise the returned value is the Material UUID.
-|spec
 
 ### llGetRootPosition
 
-- `vector
-|func_footnote
-|func_desc llGetRootPosition()`
+- `vector llGetRootPosition()`
 
 ### llGetRootRotation
 
-- `rotation
-|func_footnote
-|func_desc llGetRootRotation()`
+- `rotation llGetRootRotation()`
 
 ### llGetRot
 
@@ -1227,23 +1057,15 @@ If the Material is in the prim's inventory, the return value is the inventory na
 
 ### llGetScale
 
-- `vector
-|func_footnote
-|func_desc llGetScale()`
+- `vector llGetScale()`
 
 ### llGetScriptName
-|func_footnote
-|func_desc
 
-- `string llGetScriptName
-|func_footnote
-|func_desc()`
+- `string llGetScriptName()`
 
 ### llGetScriptState
 
-- `integer llGetScriptState(string script
-|func_footnote
-|func_desc)`
+- `integer llGetScriptState(string script)`
 
 ### llGetSimStats
 
@@ -1251,14 +1073,11 @@ If the Material is in the prim's inventory, the return value is the inventory na
 
 ### llGetSimulatorHostname
 
-- `string
-|func_footnote
-|func_desc llGetSimulatorHostname()`
+- `string llGetSimulatorHostname()`
 
 ### llGetSPMaxMemory
 
-- `integer
-|func_desc llGetSPMaxMemory()`
+- `integer llGetSPMaxMemory()`
 
 ### llGetStartParameter
 
@@ -1267,7 +1086,6 @@ If the Material is in the prim's inventory, the return value is the inventory na
 *If the script was loaded with llRemoteLoadScriptPin then that start parameter is returned.
 *If the containing object was rezzed by llRezObjectWithParams or llRezObject or llRezAtRoot then the return is the on_rez parameter.
 *If the containing object was manually rezzed, by dragging from inventory, the start parameter is 0.
-|func_desc
 
 ### llGetStartString
 
@@ -1276,13 +1094,10 @@ If the Material is in the prim's inventory, the return value is the inventory na
 *If the containing object was manually rezzed, by dragging from inventory, the start string is blank.
 *This function reads the start string of the object's root prim.
 *Child prims of objects rezzed via llRezObjectWithParams() have an empty start string.
-|func_desc
 
 ### llGetStaticPath
-|func_desc
 
-- `list llGetStaticPath
-|func_desc(vector start, vector end, float radius, list params)`
+- `list llGetStaticPath(vector start, vector end, float radius, list params)`
 
 The list also always contains an integer in the last element, which is a status code indicating the outcome of the path query:
 * If llGetStaticPath() finds a path, it will return waypoint vectors and will return a status code of 0, for success
@@ -1294,9 +1109,7 @@ The list also always contains an integer in the last element, which is a status 
 
 ### llGetSubString
 
-- `string llGetSubString(string src, integer start, integer end
-|func_footnote
-|func_desc)`
+- `string llGetSubString(string src, integer start, integer end)`
 
 ### llGetSunDirection
 
@@ -1315,25 +1128,18 @@ Return the rotation applied to the sun for the parcel at the location of the obj
 - `string llGetTexture(integer face)`
 
 If the texture is in the prim's inventory, the return value is the inventory name, otherwise the returned value is the texture UUID.
-|spec
 
 ### llGetTextureOffset
 
-- `vector llGetTextureOffset(integer face
-|func_footnote
-|func_desc)`
+- `vector llGetTextureOffset(integer face)`
 
 ### llGetTextureRot
 
-- `float llGetTextureRot(integer face
-|func_footnote
-|func_desc)`
+- `float llGetTextureRot(integer face)`
 
 ### llGetTextureScale
 
-- `vector llGetTextureScale(integer face
-|func_footnote
-|func_desc)`
+- `vector llGetTextureScale(integer face)`
 
 ### llGetTime
 
@@ -1344,38 +1150,30 @@ If the texture is in the prim's inventory, the return value is the inventory nam
 - `float llGetTimeOfDay()`
 
 By default (without custom environment settings), Second Life day cycles are 4 hours long (3 hours of light, 1 hour of dark). The sunrise and sunset time varies slowly.
-|func_desc
 
 ### llGetTimestamp
 
 - `string llGetTimestamp()`
 
 Appears to be accurate to milliseconds.
-|func_desc
 
 ### llGetTorque
 
-- `vector
-|func_footnote
-|func_desc llGetTorque()`
+- `vector llGetTorque()`
 
 ### llGetUnixTime
 
-- `integer
-|func_footnote
-|func_desc llGetUnixTime()`
+- `integer llGetUnixTime()`
 
 ### llGetUsedMemory
 
-- `integer
-|func_desc llGetUsedMemory()`
+- `integer llGetUsedMemory()`
 
 ### llGetUsername
 
 - `string llGetUsername(key id)`
 
 id must specify a valid avatar key, present in or otherwise known to the sim in which the script is running, otherwise an empty string is returned. This function will still return a valid username if the avatar is a child agent of the sim (i.e., in an adjacent sim, but presently able to see into the one the script is in), or for a short period after the avatar leaves the sim (specifically, when the client completely disconnects from the sim, either as a main or child agent).
-|func_desc
 
 ### llGetVel
 
@@ -1384,7 +1182,6 @@ id must specify a valid avatar key, present in or otherwise known to the sim in 
 Speed is the magnitude of the velocity. Speed is measured in meter per second. 
 Velocity reported is relative to the global coordinate frame (the object rotation has no affect on this functions output). 
 For physic objects , velocity is the velocity of its center of mass llGetCenterOfMass . ( When the object has some torque and has not force , position of the object moves ( it turns ) , but its center of mass is unchanged , so the velocity is null )
-|func_desc
 
 ### llGetVisualParams
 
@@ -1398,7 +1195,6 @@ An empty string, "", is returned in the place of any invalid or unknown visual p
 - `float llGetWallclock()`
 
 For GMT use llGetGMTclock
-|func_desc
 
 ### llGiveAgentInventory
 
@@ -1411,14 +1207,10 @@ Gives inventory items to agent, creating a new folder to put them in.
 - `void llGiveInventory(key destination|p1_desc, string inventory)`
 
 Give inventory to destination.
-|return_text
-|spec
 
 ### llGiveInventoryList
 
-- `void llGiveInventoryList(key target|p1_desc, string folder, list inventory
-|func_footnote
-|return_text)`
+- `void llGiveInventoryList(key target|p1_desc, string folder, list inventory)`
 
 Gives inventory items to target, creating a new folder to put them in.
 
@@ -1427,8 +1219,6 @@ Gives inventory items to target, creating a new folder to put them in.
 - `integer llGiveMoney(key destination, integer amount)`
 
 Transfer amount of L$ money from script owner to destination avatar.
-|func_footer
-|spec
 
 ### llGodLikeRezObject
 
@@ -1438,33 +1228,25 @@ Rez directly off of UUID if owner has god-bit set.
 
 ### llGround
 
-- `float llGround(vector offset
-|func_desc)`
+- `float llGround(vector offset)`
 
 ### llGroundContour
 
-- `vector llGroundContour(vector offset
-|func_desc
-|func_footnote)`
+- `vector llGroundContour(vector offset)`
 
 ### llGroundNormal
 
-- `vector llGroundNormal(vector offset
-|func_footnote
-|func_desc)`
+- `vector llGroundNormal(vector offset)`
 
 ### llGroundRepel
 
 - `void llGroundRepel(float height, integer water, float tau)`
 
-Critically damps to height if within height * 0.5 of ground or water level (which ever is higher). 
-|return_text
+Critically damps to height if within height * 0.5 of ground or water level (which ever is higher).
 
 ### llGroundSlope
 
-- `vector llGroundSlope(vector offset
-|func_footnote
-|func_desc)`
+- `vector llGroundSlope(vector offset)`
 
 ### llHash
 
@@ -1477,7 +1259,6 @@ Returns a 32bit hash for the provided string. Returns 0 if the input string is e
 - `string llHMAC(string private_key, string msg, string algorithm)`
 
 This function supports md5, sha1, sha224, sha256, sha384, sha512 for algorithm.
-|func_desc
 
 ### llHTTPRequest
 
@@ -1490,15 +1271,12 @@ Sends an HTTP request to the specified URL with the body of the request and para
 - `void llHTTPResponse(key request_id, integer status, string body)`
 
 Responds to request_id with status and body.
-|return_text
-|spec
 
 ### llInsertString
 
 - `string llInsertString(string dst, integer pos, string src)`
 
 i.e. unlike other somewhat similar string functions such as llGetSubString and llDeleteSubString, you cannot use -1 for the counting with this function. You may use instead the function provided a bit further below.
-|func_desc
 
 ### llInstantMessage
 
@@ -1508,9 +1286,7 @@ Sends an Instant Message specified in the string message to the user specified b
 
 ### llIntegerToBase64
 
-- `string llIntegerToBase64(integer number
-|func_footnote
-|func_desc)`
+- `string llIntegerToBase64(integer number)`
 
 ### llIsFriend
 
@@ -1545,14 +1321,12 @@ If value is JSON_TRUE, JSON_FALSE or JSON_NULL, the Value set will be the bare w
 
 id must specify a valid rezzed prim or avatar key, present in or otherwise known to the sim in which the script is running, otherwise an empty string is returned. In the case of an avatar, this function will still return a valid name if the avatar is a child agent of the sim (i.e., in an adjacent sim, but presently able to see into the one the script is in), or for a short period after the avatar leaves the sim (specifically, when the client completely disconnects from the sim, either as a main or child agent). 
 Keys of inventory items will not work; in the case of these, use llGetInventoryName instead.
-|func_desc
 
 ### llKeyCountKeyValue
 
 - `key llKeyCountKeyValue()`
 
 Start an asynchronous transaction to request the number of keys with the script's .
-|func_footnote
 
 ### llKeysKeyValue
 
@@ -1566,54 +1340,37 @@ Start an asynchronous transaction to request a number of keys from the script's 
 
 ### llLinkAdjustSoundVolume
 
-- `void llLinkAdjustSoundVolume(integer link, float volume}}
-
-|func_footnote
-|func_desc
-|return_text
-|spec)`
+- `void llLinkAdjustSoundVolume(integer link, float volume}})`
 
 ### llLinkParticleSystem
 
 - `void llLinkParticleSystem(integer link, list rules)`
 
 A particle system defined by a list of rules is set for the prim(s) link.
-|return_text
 
 ### llLinkPlaySound
 
 - `void llLinkPlaySound(integer link, string sound, float volume, integer flags)`
 
 Plays attached sound once at volume
-|return_text
-|spec
 
 ### llLinksetDataAvailable
 
 - `integer llLinksetDataAvailable()`
 
 The llLinksetDataAvailable returns the number of bytes available in the linkset's datastore.
-|func_footnote
-|spec
-|caveats
-|helpers
 
 ### llLinksetDataCountFound
 
 - `integer llLinksetDataCountFound(string pattern)`
 
 The llLinksetDataCountFound function returns the number of keys in the linkset datastore that match the pattern supplied in the pattern.
-|func_footnote
 
 ### llLinksetDataCountKeys
 
 - `integer llLinksetDataCountKeys()`
 
 The llLinksetDataCountKeys returns the number of unique keys that have been stored in the linkset's datastore.
-|func_footnote
-|spec
-|caveats
-|helpers
 
 ### llLinksetDataDeleteFound
 
@@ -1621,55 +1378,42 @@ The llLinksetDataCountKeys returns the number of unique keys that have been stor
 
 The llLinksetDataDeleteFound function finds and attempts to delete all keys in the data store that match pattern. This function will delete protected key-value pairs only if the matching pass phrase is passed in the pass parameter. The function returns a list, the first entry in the list is the number of keys deleted, the second entry in the list is the number of keys that could not be deleted due to a non-matching pass phrase. 
 If this function successfully deletes any keys from the datastore it will trigger a linkset_data event with the type of LINKSET_DATA_MULTIDELETE, the key name will consist of a comma separated list of the key names removed from the datastore.
-|func_footnote
 
 ### llLinksetDataDeleteProtected
-|func_footnote
 
-- `integer llLinksetDataDeleteProtected
-|func_footnote(string name, string pass)`
+- `integer llLinksetDataDeleteProtected(string name, string pass)`
 
-The llLinksetDataDeleteProtected function erases a protected name:value pair from the linkset's datastore. 
-|func_footnote
+The llLinksetDataDeleteProtected function erases a protected name:value pair from the linkset's datastore.
 
 ### llLinksetDataFindKeys
 
 - `list llLinksetDataFindKeys(string pattern, integer start, integer count)`
 
 The llLinksetDataFindKeys function returns a list of up to count keys from the datastore that match pattern, starting at the one indicated by start. If count is less than 1, then all keys between start and the end which match pattern are returned. If count minus start exceeds the number of matching keys, the returned list will be shorter than count, down to a zero-length list if start equals or exceeds the number of matching keys. The list is ordered alphabetically.
-|func_footnote
 
 ### llLinksetDataListKeys
 
 - `list llLinksetDataListKeys(integer start, integer count)`
 
 The llLinksetDataListKeys function returns a list of up to count keys in the datastore, starting at the one indicated by start. If count is less than 1, then all keys between start and the end are returned. If count minus start exceeds the total number of keys, the returned list will be shorter than count, down to a zero-length list if start equals or exceeds the total number of keys.
-|func_footnote
-|spec
 
 ### llLinksetDataReadProtected
 
 - `string llLinksetDataReadProtected(string name, string pass)`
 
 Reads a protected name:value pair from the datastore.
-|func_footnote
 
 ### llLinksetDataReset
-|func_footnote
 
-- `void llLinksetDataReset
-|func_footnote()`
+- `void llLinksetDataReset()`
 
 The llLinksetDataReset function erases all name:value pairs stored in the linkset's datastore. When this function is called the linkset_data event is triggered in all scripts running in the linkset with an action of LINKSETDATA_RESET.
-|func_footnote
-|spec
 
 ### llLinksetDataWriteProtected
 
 - `integer llLinksetDataWriteProtected(string name, string value, string pass)`
 
 Creates or updates a protected name:value pair from the linkset's datastore. Further attempts to read, write or update the name:value pair must use the protected versions of those functions and must supply the same string that was used in pass.
-|func_footnote
 
 ### llLinkSetSoundQueueing
 
@@ -1677,17 +1421,13 @@ Creates or updates a protected name:value pair from the linkset's datastore. Fur
 
 ### llLinkSetSoundRadius
 
-- `void llLinkSetSoundRadius(integer link, float radius
-|func_footnote
-|func_desc
-|return_text)`
+- `void llLinkSetSoundRadius(integer link, float radius)`
 
 ### llLinkSitTarget
 
 - `void llLinkSitTarget(integer link|, vector offset, rotation rot)`
 
 Set the sit location for the linked prim(s). The sit location is relative to the prim's position and rotation.
-|return_text
 
 ### llLinkStopSound
 
@@ -1701,19 +1441,14 @@ More precisely the values are separated with a comma and a space (", ").
 This function's functionality is equivalent to llDumpList2String(src, ", "); 
 The result of this function is more or less the format, but it does not conform in all its details. 
 To reverse the process use llCSV2List. But see the Caveat.
-|func_desc
 
 ### llList2Float
 
 - `float llList2Float(list src, integer index)`
 
-|func_desc
-
 ### llList2Integer
 
 - `integer llList2Integer(list src, integer index)`
-
-|func_desc
 
 ### llList2Json
 
@@ -1725,13 +1460,9 @@ This function takes a list and returns a [http://json.org JSON] string of that l
 
 - `key llList2Key(list src, integer index)`
 
-|func_desc
-
 ### llList2List
 
-- `list llList2List(list src, integer start, integer end
-|func_footnote
-|func_desc)`
+- `list llList2List(list src, integer start, integer end)`
 
 ### llList2ListSlice
 
@@ -1741,32 +1472,23 @@ The index of the first entry in the list is 0
 The index of the first entry in a slice is 0 
 If start, end, or slice_index are negative they are indexed from end of list. -1 is last element in the list. -list_length is the 1st element of the list. 
 If slice_index is negative it is counted from the end of its stride regardless of whether or not the stride exceeds the end of the list. e.g: -1 is the last element in a stride. 
-If start > end the range from start to end is treated as an exclusion range. 
-|func_desc
+If start > end the range from start to end is treated as an exclusion range.
 
 ### llList2ListStrided
 
-- `list llList2ListStrided(list src, integer start, integer end, integer stride
-|func_footnote
-|func_desc)`
+- `list llList2ListStrided(list src, integer start, integer end, integer stride)`
 
 ### llList2Rot
 
 - `rotation llList2Rot(list src, integer index)`
 
-|func_desc
-
 ### llList2String
 
-- `string llList2String(list src, integer index
-|func_footnote
-|func_desc)`
+- `string llList2String(list src, integer index)`
 
 ### llList2Vector
 
-- `vector llList2Vector(list src, integer index
-|func_footnote
-|func_desc)`
+- `vector llList2Vector(list src, integer index)`
 
 ### llListen
 
@@ -1776,21 +1498,15 @@ Sets a [http://foldoc.org/index.cgi?query=handle handle] for msg on channel from
 
 ### llListenControl
 
-- `void llListenControl(integer handle, integer active
-|func_footnote)`
+- `void llListenControl(integer handle, integer active)`
 
 Makes listen event callback handle active or inactive
-|return_text
-|spec
 
 ### llListenRemove
 
-- `void llListenRemove(integer handle
-|func_footnote)`
+- `void llListenRemove(integer handle)`
 
 Removes listen event callback handle
-|return_text
-|spec
 
 ### llListFindList
 
@@ -1799,8 +1515,6 @@ Removes listen event callback handle
 If test is not found in src, -1 (in LSL) or nil (in SLua) is returned. 
 The index of the first entry in the list is 0 
 If test is found at the last index in src the positive index is returned (5th entry of 5 returns 4).
-|func_desc
-|spec
 
 ### llListFindListNext
 
@@ -1816,8 +1530,6 @@ Selecting the 4th or greater instance will not be found and will return -1.
 Reverse indexing is also supported. Using an instance of -1, -2, -3, -4 would respectively return 6, 4, 2, 0
 And -5 and lower would again return -1 
 If test is found at the last index in src the positive index is returned (5th entry of 5 returns 4).
-|func_desc
-|spec
 
 ### llListFindStrided
 
@@ -1827,15 +1539,11 @@ If test matching range and stride conditions is not found in src, -1 (in LSL) or
 The length of test may be equal to or less than stride in order to generate a match. 
 The index of the first entry in the list is 0 
 If test is found at the last index in src the positive index is returned (5th entry of 5 returns 4). 
-If start or end is negative, it is counted from the end list. The last element in the list is -1, the first is -list_length 
-|func_desc
-|spec
+If start or end is negative, it is counted from the end list. The last element in the list is -1, the first is -list_length
 
 ### llListInsertList
 
-- `list llListInsertList(list dest, list src, integer start
-|func_footnote
-|func_desc)`
+- `list llListInsertList(list dest, list src, integer start)`
 
 ### llListRandomize
 
@@ -1843,9 +1551,7 @@ If start or end is negative, it is counted from the end list. The last element i
 
 ### llListReplaceList
 
-- `list llListReplaceList(list dest, list src, integer start, integer end
-|func_footnote
-|func_desc)`
+- `list llListReplaceList(list dest, list src, integer start, integer end)`
 
 ### llListSort
 
@@ -1861,23 +1567,19 @@ llListSortStrided is llListSort with the added parameter of stride_index, adding
 
 - `float llListStatistics(integer operation, list src)`
 
-If a list entry type is not a float or an integer it is silently ignored. 
-|func_desc
+If a list entry type is not a float or an integer it is silently ignored.
 
 ### llLoadURL
 
 - `void llLoadURL(key avatar, string message, string url)`
 
 Shows dialog to avatar offering to load web page at url with message. If user clicks yes, launches the page in their web browser, starting the browser if required.
-|return_text
-|spec
 
 ### llLog
 
 - `float llLog(float val)`
 
 To get the base 10 logarithm use .
-|func_desc
 
 ### llLog10
 
@@ -1891,101 +1593,48 @@ To get the {{Wikipedia|natural logarithm
 
 Cause object to point its up axis (positive z) towards target, while keeping its forward axis (positive x) below the horizon.
 Continues to track target until llStopLookAt is called.
-|return_text
 
 ### llLoopSound
 
-- `void llLoopSound(string sound, float volume
-|func_footnote)`
+- `void llLoopSound(string sound, float volume)`
 
 Plays attached sound looping indefinitely at volume
-|return_text
-|spec
 
 ### llLoopSoundMaster
 
-- `void llLoopSoundMaster(string sound, float volume
-|func_footnote)`
+- `void llLoopSoundMaster(string sound, float volume)`
 
 Plays attached sound looping at volume, declares it a sync master.
-|return_text
-|spec
 
 ### llLoopSoundSlave
 
-- `void llLoopSoundSlave(string sound, float volume
-|func_footnote)`
+- `void llLoopSoundSlave(string sound, float volume)`
 
 Plays attached sound looping at volume, synced to most audible sync master declared by llLoopSoundMaster.
-|return_text
-|spec
 
 ### llMakeExplosion
 
 - `void llMakeExplosion(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset)`
 
 Make a round explosion of particles
-|func_footnote
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_events
-|also_tests
-|also_articles
 
 ### llMakeFire
 
-- `void llMakeFire(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset
-|func_footnote)`
+- `void llMakeFire(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset)`
 
 Make fire like particles
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_events
-|also_tests
-|also_articles
 
 ### llMakeFountain
 
-- `void llMakeFountain(integer particles, float scale, float vel, float lifetime, float arc, integer bounce, string texture, vector offset, float bounce_offset
-|func_footnote)`
+- `void llMakeFountain(integer particles, float scale, float vel, float lifetime, float arc, integer bounce, string texture, vector offset, float bounce_offset)`
 
 Make a fountain of particles
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_events
-|also_tests
-|also_articles
 
 ### llMakeSmoke
 
-- `void llMakeSmoke(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset
-|func_footnote)`
+- `void llMakeSmoke(integer particles, float scale, float vel, float lifetime, float arc, string texture, vector offset)`
 
 Make smoke like particles
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_events
-|also_tests
-|also_articles
 
 ### llManageEstateAccess
 
@@ -1998,15 +1647,12 @@ Use to add or remove agents from the estate's agent access or ban lists or group
 - `void llMapBeacon(string region_name, vector pos, list options)`
 
 Asks the viewer to create a beacon for the user and optionally opens the world map centered on the location.
-|return_text
 
 ### llMapDestination
 
 - `void llMapDestination(string simname, vector pos, vector look_at)`
 
 Opens world map centered on simname with pos highlighted. Only works for scripts attached to avatar, or during touch events.
-|return_text
-|spec
 
 ### llMatchGroup
 
@@ -2018,9 +1664,7 @@ Furthermore, this function will only check against an agent's current active gro
 
 ### llMD5String
 
-- `string llMD5String(string src, integer nonce
-|func_footnote
-|func_desc)`
+- `string llMD5String(string src, integer nonce)`
 
 ### llMessageLinked
 
@@ -2034,30 +1678,22 @@ The purpose of this function is to allow scripts in the same object to communica
 
 Set the minimum time between events being handled.
 Defaults and minimums vary by the event type, see LSL Delay.
-|return_text
-|spec
 
 ### llModifyLand
 
 - `void llModifyLand(integer action, integer brush)`
 
 Modify land with action on brush
-|return_text
-|spec
 
 ### llModPow
 
-- `integer llModPow(integer a, integer b, integer c
-|func_footnote
-|func_desc)`
+- `integer llModPow(integer a, integer b, integer c)`
 
 ### llMoveToTarget
 
 - `void llMoveToTarget(vector target, float tau)`
 
 Critically damp to target in tau seconds (if the script is physical)
-|return_text
-|spec
 
 ### llName2Key
 
@@ -2066,7 +1702,6 @@ Critically damp to target in tau seconds (if the script is physical)
 指定した名前のエージェントがリージョンにいない場合、この関数は NULL_KEY を返します。
 名前は常に "First[ Last]" または "first[.last]" という形式で提供されます。（ファーストネームとオプションのラストネーム（姓））
 ラストネームが省略されている場合、ラストネームとして "Resident" が使用されます。エージェント名では、大文字小文字は考慮されません。
-|spec
 
 ### llNavigateTo
 
@@ -2079,28 +1714,18 @@ Directs an object to travel to a defined position in the region or adjacent regi
 - `void llOffsetTexture(float u, float v, integer face)`
 
 Sets the texture u & v offsets for the chosen face.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llOpenFloater
-|func_desc
 
-- `integer llOpenFloater
-|func_desc(string floater_name, string url, list params)`
+- `integer llOpenFloater(string floater_name, string url, list params)`
 
 This function may be called only from a Linden owned experience.
 
 ### llOpenRemoteDataChannel
-|func_footnote
 
-- `void llOpenRemoteDataChannel
-|func_footnote()`
+- `void llOpenRemoteDataChannel()`
 
 Creates a channel to listen for XML-RPC calls. Will trigger a event with channel id once it is available.
-|return_text
-|spec
 
 ### llOrd
 
@@ -2113,30 +1738,22 @@ Calculate the ordinal value for a character in a string.
 - `integer llOverMyLand(key id)`
 
 On group deeded land the object containing the script must be deeded to the same group. (It is not enough to set the script to the group.)
-|func_desc
 
 ### llOwnerSay
 
 - `void llOwnerSay(string msg)`
 
 Says msg to the object's owner only, if the owner is currently in the same region.
-|return_text
-|spec
 
 ### llParcelMediaCommandList
 
 - `void llParcelMediaCommandList(list commandList)`
 
 Controls the playback of movies and other multimedia resources on a parcel or for an agent.
-|func_footnote
-|return_type
-|return_text
 
 ### llParcelMediaQuery
 
-- `list llParcelMediaQuery(list query
-|func_footnote
-|func_desc)`
+- `list llParcelMediaQuery(list query)`
 
 ### llParseString2List
 
@@ -2144,7 +1761,6 @@ Controls the playback of movies and other multimedia resources on a parcel or fo
 
 In most situations llParseStringKeepNulls should be used instead. Discarding null values is rarely desired.
 When dealing with vector and rotation data, consider using llCSV2List instead, since it can correctly parse them.
-|func_desc
 
 ### llParseStringKeepNulls
 
@@ -2152,28 +1768,15 @@ When dealing with vector and rotation data, consider using llCSV2List instead, s
 
 ### llPassCollisions
 
-- `void llPassCollisions(integer pass
-|func_footnote)`
+- `void llPassCollisions(integer pass)`
 
 Sets the pass-collisions prim attribute.
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
 
 ### llPassTouches
 
-- `void llPassTouches(integer pass
-|func_footnote)`
+- `void llPassTouches(integer pass)`
 
 Sets whether touches detected on this prim are passed to the root prim.
-|return_text
-|spec
-|caveats
-|constants
-|helpers
 
 ### llPatrolPoints
 
@@ -2183,34 +1786,21 @@ Sets the object patrolling between the points specified in patrolPoints.
 
 ### llPlaySound
 
-- `void llPlaySound(string sound, float volume
-|func_footnote)`
+- `void llPlaySound(string sound, float volume)`
 
 Plays attached sound once at volume
-|return_text
-|spec
 
 ### llPlaySoundSlave
 
-- `void llPlaySoundSlave(string sound, float volume
-|func_footnote)`
+- `void llPlaySoundSlave(string sound, float volume)`
 
 Plays attached sound once at volume, synced to next loop of most audible sync master declared by llLoopSoundMaster.
-|return_text
-|spec
 
 ### llPointAt
 
-- `void llPointAt(vector pos
-|func_footnote)`
+- `void llPointAt(vector pos)`
 
 Make agent that owns object point at pos
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
 
 ### llPow
 
@@ -2220,14 +1810,9 @@ Returns when base is negative and exponent is not an integer (an imaginary resul
 
 ### llPreloadSound
 
-- `void llPreloadSound(string sound
-|func_footnote)`
+- `void llPreloadSound(string sound)`
 
 Preloads sound on viewers within range
-|return_text
-|spec
-|caveats
-|constants
 
 ### llPursue
 
@@ -2240,8 +1825,6 @@ Causes the object to pursue target.
 - `void llPushObject(key target|p1_desc, vector impulse, vector ang_impulse, integer local)`
 
 Applies impulse and ang_impulse to object target
-|return_text
-|spec
 
 ### llReadKeyValue
 
@@ -2266,55 +1849,30 @@ Says the string msg on channel number channel that can be heard anywhere in the 
 - `void llRegionSayTo(key target, integer channel, string msg)`
 
 Says the text supplied in string msg on channel supplied in integer channel to the object or avatar specified by target
-|return_text
-|spec
 
 ### llReleaseCamera
 
-- `void llReleaseCamera(key avatar
-|func_footnote)`
+- `void llReleaseCamera(key avatar)`
 
 This function is recognized by the compiler, but was never implemented in Second Life.
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_events
-|also_tests
-|also_articles
-|notes
-|permission
-|negative_index
 
 ### llReleaseControls
-|func_footnote
 
-- `void llReleaseControls
-|func_footnote()`
+- `void llReleaseControls()`
 
 Stop taking inputs (that were taken with llTakeControls), dequeues any remaining control events. If PERMISSION_TAKE_CONTROLS was previously granted, it will be revoked.
-|return_text
-|spec
 
 ### llReleaseURL|return_type
 
 - `void llReleaseURL|return_type(string url)`
 
 Releases the specified URL, it will no longer be usable.
-|return_text
-|spec
 
 ### llRemoteDataReply
 
-- `void llRemoteDataReply(key channel, key message_id, string sdata, integer idata
-|func_footnote)`
+- `void llRemoteDataReply(key channel, key message_id, string sdata, integer idata)`
 
 Send an XML-RPC reply on channel to message_id with payload of string sdata and integer idata
-|return_text
-|spec
 
 ### llRemoteDataSetRegion
 
@@ -2324,12 +1882,9 @@ Used with XML-RPC. If an object using remote data channels changes regions, you 
 
 ### llRemoteLoadScript
 
-- `void llRemoteLoadScript(key target, string name, integer running, integer start_param
-|func_footnote)`
+- `void llRemoteLoadScript(key target, string name, integer running, integer start_param)`
 
 Deprecated
-|return_text
-|spec
 
 ### llRemoteLoadScriptPin
 
@@ -2339,42 +1894,27 @@ Copy script name into target and set to running with a start_param only if targe
 
 ### llRemoveFromLandBanList
 
-- `void llRemoveFromLandBanList(key avatar
-|func_footnote)`
+- `void llRemoveFromLandBanList(key avatar)`
 
 Remove avatar from the land ban list
-|return_text
-|spec
-|caveats
-|constants
 
 ### llRemoveFromLandPassList
 
-- `void llRemoveFromLandPassList(key avatar
-|constants
-|spec
-|caveats)`
+- `void llRemoveFromLandPassList(key avatar)`
 
 Remove avatar from the land pass list.
-|func_footnote
 
 ### llRemoveInventory
 
-- `void llRemoveInventory(string item
-|func_footnote)`
+- `void llRemoveInventory(string item)`
 
 Remove the named inventory item
-|return_text
-|spec
 
 ### llRemoveVehicleFlags
 
 - `void llRemoveVehicleFlags(integer flags)`
 
 Disable the specified vehicle flags
-|return_text
-|spec
-|caveats
 
 ### llReplaceAgentEnvironment
 
@@ -2394,7 +1934,6 @@ In most cases errors are reported as a return value from the function (see table
 - `string llReplaceSubString(string src, string pattern, string replacement_pattern, integer count)`
 
 If count = 0, all matching substrings are replaced. If count > 0, substrings are replaced starting from the left/beginning of src. If count < 0, substrings are replaced starting from the right/end of src.
-|func_desc
 
 ### llRequestAgentData
 
@@ -2404,8 +1943,7 @@ Requests data about agent id. When data is available the dataserver event will b
 
 ### llRequestDisplayName
 
-- `key llRequestDisplayName(key id
-|func_footnote)`
+- `key llRequestDisplayName(key id)`
 
 Requests the Display Name of the agent identified by id. When the Display Name is available the dataserver event will be raised. The agent identified by id does not need to be in the same region or online at the time of the request.
 
@@ -2417,8 +1955,7 @@ Asks the agent for permission to participate in the script's .
 
 ### llRequestInventoryData
 
-- `key llRequestInventoryData(string name|p1_desc
-|func_footnote)`
+- `key llRequestInventoryData(string name|p1_desc)`
 
 Requests data about the item name in the prim's inventory. When data is available the dataserver event will be raised.
 
@@ -2453,7 +1990,6 @@ Requests one HTTP:// for use by this script. The http_request event is triggered
 名前に一致するエージェントのエージェント ID を dataserver に要求します。指定する名前は、現在の名前または過去に使用された名前のいずれも使用することが出来ます。指定された名前のエージェントが見つからない場合は、この関数は NULL_KEY 値を返します。 
 dataserver イベントが発生した際にリクエストを識別するために使用出来るハンドル（キー）を返します。
 この関数で検索するエージェントは、セカンドライフにログインしている必要はありません。
-|spec
 
 ### llRequestUsername
 
@@ -2466,32 +2002,18 @@ Requests the Username of the agent identified by id. When the Username is availa
 - `void llResetAnimationOverride(string anim_state)`
 
 Resets the animation override of the specified animation state (anim_state) to the corresponding default value.
-|spec
-|caveats
 
 ### llResetLandBanList
 
 - `void llResetLandBanList()`
 
 Removes all residents from the land ban list.
-|func_footnote
-|return_type
-|return_text
-|constants
-|spec
-|caveats
 
 ### llResetLandPassList
 
 - `void llResetLandPassList()`
 
 Removes all residents from the land access/pass list.
-|func_footnote
-|return_type
-|return_text
-|constants
-|spec
-|caveats
 
 ### llResetOtherScript
 
@@ -2504,18 +2026,12 @@ Resets script name.
 - `void llResetScript()`
 
 Resets the script.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llResetTime
 
 - `void llResetTime()`
 
 Resets the script-time timer to zero.
-|return_text
-|spec
 
 ### llReturnObjectsByID
 
@@ -2540,8 +2056,6 @@ Instantiate inventory object rotated to rot with its root at position, moving at
 - `void llRezObject(string inventory, vector pos, vector vel, rotation rot, integer param)`
 
 Instantiate inventory object at pos with velocity vel and rotation rot with start parameter param
-|return_text
-|spec
 
 ### llRezObjectWithParams
 
@@ -2555,14 +2069,12 @@ pos will default to the position of the object containing the script, unless REZ
 - `float llRot2Angle(rotation rot)`
 
 Use in conjunction with llRot2Axis. To undo use llAxisAngle2Rot.
-|func_desc
 
 ### llRot2Axis
 
 - `vector llRot2Axis(rotation rot)`
 
 Use in conjunction with . To undo use or .
-|func_desc
 
 ### llRot2Euler
 
@@ -2588,20 +2100,13 @@ Computes the orientation of the local z-axis relative to the parent (i.e. the ro
 
 ### llRotateTexture
 
-- `void llRotateTexture(float angle, integer face
-|func_footnote)`
+- `void llRotateTexture(float angle, integer face)`
 
 Sets the rotation of a texture on the chosen face to angle.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llRotBetween
 
-- `rotation llRotBetween(vector start, vector end
-|func_footnote
-|func_desc)`
+- `rotation llRotBetween(vector start, vector end)`
 
 ### llRotLookAt
 
@@ -2609,8 +2114,6 @@ Sets the rotation of a texture on the chosen face to angle.
 
 Causes an object to smoothly rotate to target_direction with strength resistance at damping force.
 Maintains rotation target_direction until stopped with llStopLookAt.
-|return_text
-|spec
 
 ### llRotTarget
 
@@ -2620,14 +2123,9 @@ This function is to have the script know when it has reached a rotation. It regi
 
 ### llRotTargetRemove
 
-- `void llRotTargetRemove(integer handle
-|func_footnote)`
+- `void llRotTargetRemove(integer handle)`
 
 Removes rotational target handle registered with llRotTarget
-|return_text
-|spec
-|caveats
-|constants
 
 ### llRound
 
@@ -2637,8 +2135,7 @@ If the absolute value of the tenths position is 4 or less, val is rounded off; o
 
 ### llSameGroup
 
-- `integer llSameGroup(key uuid
-|func_desc)`
+- `integer llSameGroup(key uuid)`
 
 This function compares the of the prim containing the script to that of the of what uuid describes.
 It answers these two questions:
@@ -2650,9 +2147,6 @@ It answers these two questions:
 - `void llSay(integer channel, string msg)`
 
 Says the text supplied in string msg on channel supplied in integer channel. The message can be heard 20m away, usually (see caveats)
-|return_text
-|spec
-|constants
 
 ### llScaleByFactor
 
@@ -2663,33 +2157,25 @@ Resizing is subject to prim scale limits and linkability limits. This function c
 
 ### llScaleTexture
 
-- `void llScaleTexture(float u, float v, integer face
-|func_footnote)`
+- `void llScaleTexture(float u, float v, integer face)`
 
 Sets the texture u & v scales for the chosen face.
-|return_text
 
 ### llScriptDanger
 
 - `integer llScriptDanger(vector pos)`
 
 The usefulness of this function is limited as it does not give the reason why the script would be in danger. llGetParcelFlags on the other hand can be used in much the same way and gives more detailed information.
-|func_desc
 
 ### llScriptProfiler
-|return_type
 
-- `void llScriptProfiler
-|return_type(integer flags)`
+- `void llScriptProfiler(integer flags)`
 
 Enables or disables the scripts profiling state.
-|Return_text
-|func_footer
 
 ### llSendRemoteData
 
-- `key llSendRemoteData(key channel, string dest, integer idata, string sdata
-|func_footnote)`
+- `key llSendRemoteData(key channel, string dest, integer idata, string sdata)`
 
 Send an XML-RPC request to dest through channel with payload of channel (in a string), integer idata and string sdata.
 
@@ -2712,8 +2198,6 @@ Removes the sensor setup by llSensorRepeat.
 
 Performs a scan for name and id with type within range meters and arc radians of forward vector and repeats every rate seconds. The first scan is not performed until rate seconds have passed.
 Script execution continues immediately. Whenever a scan is completed, a sensor or no_sensor event is put in the event queue.
-|return_text
-|spec
 
 ### llSetAgentEnvironment
 
@@ -2726,16 +2210,12 @@ This function sets environment values for an individual agent in an experience. 
 - `void llSetAgentRot(rotation rot, integer flags)`
 
 Sets the rotation the avatar to rot.
-|return_text
 
 ### llSetAlpha
 
-- `void llSetAlpha(float alpha, integer face
-|func_footnote)`
+- `void llSetAlpha(float alpha, integer face)`
 
 Sets the Blinn-Phong alpha on face
-|return_text
-|spec
 
 ### llSetAngularVelocity
 
@@ -2743,18 +2223,12 @@ Sets the Blinn-Phong alpha on face
 
 Applies rotational velocity to object. 
 It does the same job as llApplyRotationalImpulse but doesn't depend of the mass of object .
-|func_footnote
-|return_text
-|spec
-|caveats
-|constants
 
 ### llSetAnimationOverride
 
 - `void llSetAnimationOverride(string anim_state, string anim)`
 
-Set the animation (anim) that will play for the given animation state (anim_state). 
-|spec
+Set the animation (anim) that will play for the given animation state (anim_state).
 
 ### llSetBuoyancy
 
@@ -2779,8 +2253,6 @@ Sets the camera eye offset for avatars that sit on the object.
 - `void llSetCameraParams(list rules)`
 
 Sets multiple camera parameters at once.
-|return_text
-|spec
 
 ### llSetClickAction
 
@@ -2790,29 +2262,21 @@ Sets the action performed when a prim is clicked upon (aka click action).
 
 ### llSetColor
 
-- `void llSetColor(vector color, integer face
-|func_footnote)`
+- `void llSetColor(vector color, integer face)`
 
 Sets the Blinn-Phong color on face of the prim.
-|return_text
-|spec
 
 ### llSetContentType
 
 - `void llSetContentType(key request_id, integer content_type)`
 
 Sets the header of any subsequent LSL HTTP server response via llHTTPResponse.
-|sort
-|func_footnote
-|return_type
-|return_text
 
 ### llSetDamage
 
 - `void llSetDamage(float damage)`
 
 Sets the amount of damage that will be done when this object hits an avatar.
-|return_text
 
 ### llSetEnvironment
 
@@ -2827,76 +2291,55 @@ Note that the list of valid parameters differs from those available for llGetEnv
 - `void llSetForce(vector force, integer local)`
 
 Applies force to the object (if the object is physical)
-|spec
 
 ### llSetForceAndTorque
 
 - `void llSetForceAndTorque(vector force, vector torque, integer local)`
 
 Sets the force and torque of object (if the script is physical)
-|spec
 
 ### llSetGroundTexture
 
 - `integer llSetGroundTexture(list changes)`
 
 Changes the textures used to paint the terrain of a region. The owner of the script must be able to manage the estate.
-|return_text
-|spec
 
 ### llSetHoverHeight
 
 - `void llSetHoverHeight(float height, integer water, float tau)`
 
 Critically damps to a height above the ground (or water) in tau seconds.
-|return_text
-|spec
 
 ### llSetInventoryPermMask
 
 - `void llSetInventoryPermMask(string item, integer category, integer value)`
 
 Sets the given permission category to the new value on the inventory item.
-|return_text
-|spec
-|caveats
 
 ### llSetKeyframedMotion
 
 - `void llSetKeyframedMotion(list keyframes, list options)`
 
 Specify a list of positions, orientations, and timings to be followed by an object. The object will be smoothly moved between those keyframes by the simulator.
-Collisions with other nonphysical or keyframed objects will be ignored (no script events will fire and collision processing will not occur). Collisions with physical objects will be computed and reported, but the keyframed object will be unaffected by those collisions. (The physical object will be affected, however.) 
-|func_sleep
-|func_energy
-|func_footnote
+Collisions with other nonphysical or keyframed objects will be ignored (no script events will fire and collision processing will not occur). Collisions with physical objects will be computed and reported, but the keyframed object will be unaffected by those collisions. (The physical object will be affected, however.)
 
 ### llSetLinkAlpha
 
-- `void llSetLinkAlpha(integer link, float alpha, integer face
-|func_footnote)`
+- `void llSetLinkAlpha(integer link, float alpha, integer face)`
 
 If a prim exists in the link set at link, set the Blinn-Phong alpha on face of that prim.
-|return_text
-|spec
 
 ### llSetLinkCamera
 
 - `void llSetLinkCamera(integer link, vector eye|p2_desc, vector at|p3_desc)`
 
 Sets the camera eye offset, and the offset that camera is looking at, for avatars that sit on the linked prim.
-|func_footnote
-|return_text
-|spec
 
 ### llSetLinkColor
 
-- `void llSetLinkColor(integer link, vector color, integer face
-|func_footnote)`
+- `void llSetLinkColor(integer link, vector color, integer face)`
 
 If a prim exists in the link set at link, set the Blinn-Phong color on face of that prim.
-|return_text
-|spec
 
 ### llSetLinkGLTFOverrides
 
@@ -2918,45 +2361,33 @@ Sets the prims parameters according to rules.
 
 ### llSetLinkRenderMaterial
 
-- `void llSetLinkRenderMaterial(integer link, string material, integer face
-|func_footnote)`
+- `void llSetLinkRenderMaterial(integer link, string material, integer face)`
 
 If a prim exists in the link set at link, set material on face of that prim. This function will clear most PRIM_GLTF_* properties on the face, with the exceptions of repeats, offsets, and rotation_in_radians
-|return_text
-|spec
 
 ### llSetLinkSitFlags
 
 - `void llSetLinkSitFlags(integer link, integer flags)`
 
 Sets flags on the link's sittarget.
-|return_text
 
 ### llSetLinkTexture
 
-- `void llSetLinkTexture(integer link, string texture, integer face
-|func_footnote)`
+- `void llSetLinkTexture(integer link, string texture, integer face)`
 
 If a prim exists in the link set at link, set Blinn-Phong diffuse texture on face of that prim.
-|return_text
-|spec
 
 ### llSetLinkTextureAnim
 
 - `void llSetLinkTextureAnim(integer link, integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate)`
 
 Animate the texture on the specified face/faces of the specified prim/prims by setting the texture scale and offset. Identical to llSetTextureAnim except able to modify any prim in the link set.
-|return_text
 
 ### llSetLocalRot
 
 - `void llSetLocalRot(rotation rot|p1_desc)`
 
 Sets the rotation of a child prim relative to the root prim
-|return_text
-|spec
-|caveats
-|constants
 
 ### llSetMemoryLimit
 
@@ -2966,12 +2397,9 @@ Request limit bytes to be reserved for this script.
 
 ### llSetObjectDesc
 
-- `void llSetObjectDesc(string description
-|func_footnote)`
+- `void llSetObjectDesc(string description)`
 
 Sets the prims description
-|return_text
-|spec
 
 ### llSetObjectName
 
@@ -2984,9 +2412,6 @@ Sets the prim's name according to the name parameter.
 - `void llSetObjectPermMask(integer mask, integer value)`
 
 Sets the given permission mask to the new value on the root object the task is attached to.
-|return_text
-|spec
-|caveats
 
 ### llSetParcelForSale
 
@@ -3004,10 +2429,6 @@ This function requires that the script be owned by the parcel owner and that the
 - `void llSetParcelMusicURL(string url)`
 
 Sets the streaming audio URL for the parcel object is on
-|return_text
-|spec
-|caveats
-|constants
 
 ### llSetPayPrice
 
@@ -3035,20 +2456,9 @@ Set the media params for a particular face.
 
 ### llSetPrimURL
 
-- `void llSetPrimURL(string url
-|func_footnote)`
+- `void llSetPrimURL(string url)`
 
 Updates the URL for the web page shown on the sides of the object.
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_tests
-|also_events
-|also_articles
 
 ### llSetRegionPos
 
@@ -3061,24 +2471,18 @@ Tries to move the entire object so that the root prim is within 0.1m of position
 - `void llSetRemoteScriptAccessPin(integer pin)`
 
 Allows a prim to have scripts remotely loaded via llRemoteLoadScriptPin when it is passed the correct pin and the prim is set mod.
-|func_footnote
-|spec
 
 ### llSetRenderMaterial
 
-- `void llSetRenderMaterial(string material, integer face
-|func_footnote)`
+- `void llSetRenderMaterial(string material, integer face)`
 
 Sets the material of this prim's face. This function will clear most PRIM_GLTF_* properties on the face, with the exceptions of repeats, offsets, and rotation_in_radians.|return_text.
-|spec
-|constants
 
 ### llSetRot
 
 - `void llSetRot(rotation rot)`
 
 Sets the rotation of the prim to rot.
-|return_text
 
 ### llSetScale
 
@@ -3088,12 +2492,9 @@ Sets the size of the prim according to size
 
 ### llSetScriptState
 
-- `void llSetScriptState(string name, integer running
-|func_footnote)`
+- `void llSetScriptState(string name, integer running)`
 
 Set the running state of the script name.
-|return_text
-|spec
 
 ### llSetSculptAnim
 
@@ -3103,149 +2504,107 @@ Set the running state of the script name.
 
 ### llSetSitText
 
-- `void llSetSitText(string text
-|func_footnote)`
+- `void llSetSitText(string text)`
 
 Displays text rather than the default "Sit Here" in the right-click menu.
-|return_text
 
 ### llSetStatus
 
-- `void llSetStatus(integer status, integer value
-|func_footnote)`
+- `void llSetStatus(integer status, integer value)`
 
 Sets the object status attributes indicated in the status} mask to value
-|return_text
-|spec
 
 ### llSetText
 
 - `void llSetText(string text, vector color, float alpha)`
 
 Displays text that hovers over the prim with specific color and translucency (specified with alpha).
-|return_text
 
 ### llSetTexture
 
-- `void llSetTexture(string texture, integer face
-|func_footnote)`
+- `void llSetTexture(string texture, integer face)`
 
 Sets the Blinn-Phong diffuse texture of this prim's face.
-|return_text
-|spec
 
 ### llSetTextureAnim
 
 - `void llSetTextureAnim(integer mode, integer face, integer sizex, integer sizey, float start, float length, float rate)`
 
 Animate the texture on the specified face/faces by setting the texture scale and offset.
-|return_text
 
 ### llSetTimerEvent
 
 - `void llSetTimerEvent(float sec)`
 
 Cause the timer event to be triggered a maximum of once every sec seconds. Passing in 0.0 stops further timer events.
-|func_footnote
-|return_text
-|spec
 
 ### llSetTorque
 
 - `void llSetTorque(vector torque, integer local)`
 
 Sets the torque of object (if the script is physical)
-|spec
-|caveats
-|constants
 
 ### llSetTouchText
 
 - `void llSetTouchText(string text)`
 
 Displays text rather than the default "Touch" in the right-click menu
-|return_text
-|spec
 
 ### llSetVehicleFlags
 
 - `void llSetVehicleFlags(integer flags)`
 
 Enabled the specified vehicle flags
-|return_text
-|spec
 
 ### llSetVehicleFloatParam
 
-- `void llSetVehicleFloatParam(integer param, float value
-|func_footnote)`
+- `void llSetVehicleFloatParam(integer param, float value)`
 
 Sets the vehicle float parameter param to value.
-|return_text
-|spec
-|caveats
 
 ### llSetVehicleRotationParam
 
-- `void llSetVehicleRotationParam(integer param, rotation rot
-|func_footnote)`
+- `void llSetVehicleRotationParam(integer param, rotation rot)`
 
 Sets the vehicle rotation parameter param to rot.
-|return_text
-|spec
-|caveats
 
 ### llSetVehicleType
 
-- `void llSetVehicleType(integer type
-|func_footnote)`
+- `void llSetVehicleType(integer type)`
 
 Sets the vehicle type to one of the default types.
-|return_text
-|spec
 
 ### llSetVehicleVectorParam
 
 - `void llSetVehicleVectorParam(integer param, vector vec)`
 
 Sets the vehicle vector parameter param to vec.
-|return_text
-|spec
-|caveats
 
 ### llSetVelocity
 
 - `void llSetVelocity(vector velocity, integer local)`
 
 Applies velocity to object
-|return_text|spec
 
 ### llSHA1String
 
-- `string llSHA1String(string src
-|func_footnote
-|func_desc)`
+- `string llSHA1String(string src)`
 
 ### llSHA256String
 
-- `string llSHA256String(string src
-|func_footnote
-|func_desc)`
+- `string llSHA256String(string src)`
 
 ### llShout
 
 - `void llShout(integer channel, string msg)`
 
 Shouts the text supplied in string msg on channel supplied in integer channel.
-|spec
-|constants
 
 ### llSignRSA
 
 - `string llSignRSA(string private_key, string msg, string algorithm)`
 
 This function supports sha1, sha224, sha256, sha384, sha512 for algorithm.
-|func_desc
 
 ### llSin
 
@@ -3262,7 +2621,6 @@ The avatar specified by agent_id is forced to sit on the sit target of the prim 
 - `void llSitTarget(vector offset, rotation rot)`
 
 Set the sit location for the prim. The sit location is relative to the prim's position and rotation.
-|return_text
 
 ### llSleep
 
@@ -3271,40 +2629,18 @@ Set the sit location for the prim. The sit location is relative to the prim's po
 Puts the script to sleep for sec seconds. The script will not do anything during this time.
 The script will sleep at least until the next server-frame, which happen every (1/45 = ~0.02222) seconds under normal conditions.
 If sec is zero or less, the script will not sleep at all.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llSound
 
 - `void llSound(string sound, float volume, integer queue, integer loop)`
 
 Plays sound at volume and whether it should loop or not.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llSoundPreload
 
-- `void llSoundPreload(string sound
-|func_footnote)`
+- `void llSoundPreload(string sound)`
 
 Preloads sound on viewers within range.
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_events
-|also_tests
-|also_articles
-|notes
-|permission
-|negative_index
 
 ### llSqrt
 
@@ -3317,98 +2653,58 @@ For imaginary results (val < 0.0), a Math Error is triggered under LSO , or 'NaN
 - `void llStartAnimation(string anim)`
 
 Start animation anim for agent that granted PERMISSION_TRIGGER_ANIMATION if the permission has not been revoked.
-|return_text
-|spec
 
 ### llStartObjectAnimation
 
 - `void llStartObjectAnimation(string anim)`
 
 Start animation for the current object.
-|return_text
-|spec
 
 ### llStopAnimation
 
 - `void llStopAnimation(string anim)`
 
 Stop animation anim for agent that granted PERMISSION_TRIGGER_ANIMATION if the permission has not been revoked.
-|return_text
-|spec
 
 ### llStopHover
-|func_footnote
 
-- `void llStopHover
-|func_footnote()`
+- `void llStopHover()`
 
 Stop hovering to a height
-|return_text
-|spec
-|caveats
-|constants
 
 ### llStopLookAt
 
 - `void llStopLookAt()`
 
 Stop causing object to point at a target
-|return_text
-|spec
-|caveats
-|constants
 
 ### llStopMoveToTarget
 
 - `void llStopMoveToTarget()`
 
 Stops critically damped motion
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
-|also_functions
-|also_tests
-|also_events
-|also_articles
-|notes
 
 ### llStopObjectAnimation
 
 - `void llStopObjectAnimation(string anim)`
 
 Stop an animation for the current object.
-|return_text
-|spec
 
 ### llStopPointAt
-|func_footnote
 
-- `void llStopPointAt
-|func_footnote()`
+- `void llStopPointAt()`
 
 Stop agent that owns object pointing
-|return_text
-|spec
-|caveats
-|constants
-|examples
-|helpers
 
 ### llStringLength
 
-- `integer llStringLength(string str
-|func_footnote
-|func_desc)`
+- `integer llStringLength(string str)`
 
 ### llStringToBase64
 
 - `string llStringToBase64(string str)`
 
 If extra bits are needed to complete the last base64 symbol, those extra bits will be zero. To go in the other direction, use llBase64ToString.
-|func_desc
 
 ### llStringTrim
 
@@ -3420,23 +2716,18 @@ If extra bits are needed to complete the last base64 symbol, those extra bits wi
 
 If pattern is not found in source, -1 (in LSL) or nil (in SLua) is returned. 
 The index of the first character in the string is 0
-|func_desc
 
 ### llTakeCamera
 
-- `void llTakeCamera(key avatar
-|func_footnote)`
+- `void llTakeCamera(key avatar)`
 
 This function is recognized by the compiler, but was never implemented in Second Life.
-|return_text
 
 ### llTakeControls
 
 - `void llTakeControls(integer controls, integer accept, integer pass_on)`
 
 Allows for intercepting of keyboard and mouse clicks, specifically those specified by controls, from the agent the script has permissions for.
-|return_text
-|spec
 
 ### llTan
 
@@ -3453,7 +2744,6 @@ This function is to have the script know when it has reached a position. It regi
 - `void llTargetedEmail(integer target, string subject, string message)`
 
 Sends an email to the owner (selected by target) of an object with subject and message.
-|return_text
 
 ### llTargetOmega
 
@@ -3463,14 +2753,9 @@ Rotates the object/prim around axis at a rate of spinrate * llVecMag(axis) in ra
 
 ### llTargetRemove
 
-- `void llTargetRemove(integer handle
-|func_footnote)`
+- `void llTargetRemove(integer handle)`
 
 Removes positional target handle registered with llTarget
-|return_text
-|spec
-|caveats
-|constants
 
 ### llTeleportAgent
 
@@ -3479,7 +2764,6 @@ Removes positional target handle registered with llTarget
 Teleports an agent to a landmark stored in the object's inventory.
 If landmark is an empty string, the avatar is teleported to the location position in the current region.
 If the destination is in the current region, the avatar will land facing look_at as a position within that region. Otherwise, look_at is treated as a unit direction.
-|func_footnote
 
 ### llTeleportAgentGlobalCoords
 
@@ -3494,33 +2778,24 @@ If the destination is in the current region, the avatar will land facing look_at
 - `void llTeleportAgentHome(key avatar)`
 
 Teleports avatar on owner's land to their home location without any warning, similar to a God Summons or dying.
-|func_footnote
-|spec
-|caveats
-|constants
 
 ### llTextBox
 
-- `void llTextBox(key avatar, string message, integer channel
-|return_type
-|return_text)`
+- `void llTextBox(key avatar, string message, integer channel)`
 
 Shows a dialog box on avatar's screen with the text message. It contains a text box for input, any text that is entered is said by avatar on channel when the "Submit" button is clicked.
-|func_footnote
 
 ### llToLower
 
 - `string llToLower(string src)`
 
 The opposite is llToUpper.
-|func_desc
 
 ### llToUpper
 
 - `string llToUpper(string src)`
 
 The opposite is llToLower.
-|func_desc
 
 ### llTransferLindenDollars
 
@@ -3539,16 +2814,12 @@ Transfer ownership of the object containing this script to agent_id.
 - `void llTriggerSound(string sound, float volume)`
 
 Plays sound at volume, centered at but not attached to object.
-|return_text
-|spec
 
 ### llTriggerSoundLimited
 
 - `void llTriggerSoundLimited(string sound|p1_desc, float volume|p2_desc, vector top_north_east, vector bottom_south_west)`
 
 Plays sound at volume, centered at but not attached to the object, limited to the box defined by vectors top_north_east and bottom_south_west
-|return_text
-|spec
 
 ### llUnescapeURL
 
@@ -3558,16 +2829,11 @@ Plays sound at volume, centered at but not attached to the object, limited to th
 
 ### llUnSit
 
-- `void llUnSit(key id
-|func_footnote)`
+- `void llUnSit(key id)`
 
 The agent identified by id is forced to stand up if any of the following apply:
 # The agent is sitting on the scripted object
 # The agent is over land owned by the scripted object's owner and/or a group the owner has land rights for.
-|return_text
-|spec
-|caveats
-|constants
 
 ### llUpdateCharacter
 
@@ -3594,22 +2860,18 @@ Start an asynchronous transaction to update a key-value pair associated with the
 - `vector llVecNorm(vector vec)`
 
 If vec is a ZERO_VECTOR, than the value returned is a ZERO_VECTOR.
-|spec
-|caveats
 
 ### llVerifyRSA
 
 - `integer llVerifyRSA(string public_key, string msg, string signature, string algorithm)`
 
 This function supports sha1, sha224, sha256, sha384, sha512 for algorithm.
-|func_desc
 
 ### llVolumeDetect
 
 - `void llVolumeDetect(integer detect)`
 
 If detect is TRUE, VolumeDetect is enabled, physical object and avatars can pass through the object.
-|return_text
 
 ### llWanderWithin
 
@@ -3622,26 +2884,20 @@ Sets a character to wander about a central spot within a specified radius.
 - `float llWater(vector offset)`
 
 Water height is constant across each entire sim and is typically 20 meters but not always.
-|func_desc
 
 ### llWhisper
 
 - `void llWhisper(integer channel, string msg)`
 
 Whispers the text supplied in string msg on channel supplied in integer channel.
-|return_text
-|spec
-|constants
 
 ### llWind
 
-- `vector llWind(vector offset
-|func_footnote)`
+- `vector llWind(vector offset)`
 
 ### llWorldPosToHUD
 
-- `vector llWorldPosToHUD(vector world_pos
-|func_desc)`
+- `vector llWorldPosToHUD(vector world_pos)`
 
 ### llXorBase64
 
@@ -3660,3 +2916,4 @@ s2 repeats if it is shorter than s1. Retained for backwards compatibility.
 - `string llXorBase64StringsCorrect(string str1, string str2)`
 
 Correctly performs an exclusive or on two Base 64 strings.
+

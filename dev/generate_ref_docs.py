@@ -1,14 +1,34 @@
 #!/usr/bin/env python3
 """
-Generate Markdown reference docs for LSL/OSSL from MediaWiki XML exports.
+Generate Markdown reference docs for LSL/OSSL from a MediaWiki XML export.
 
 Usage:
     ./dev/generate_ref_docs.py <source_xml> <destination_md>
+
+The source type (LSL functions, OSSL constants, etc.) is detected from the
+filename. If no arguments are given, instructions for downloading the XML
+files are printed.
+
+Download the XML exports from:
+  LSL functions:  https://wiki.secondlife.com/wiki/Special:Export
+                  Category: LSL Functions
+  LSL events:     https://wiki.secondlife.com/wiki/Special:Export
+                  Category: LSL Events
+  LSL constants:  https://wiki.secondlife.com/wiki/Special:Export
+                  Category: LSL Constants
+  OSSL functions: https://opensimulator.org/wiki/Special:Export
+                  Category: OSSL Functions
+  OSSL constants: https://opensimulator.org/wiki/Special:Export
+                  Page: OSSL Constants
+
+Note: opensimulator.org has SSL issues; export via browser and save the file.
 """
 
+import os
 import re
 import sys
 import xml.etree.ElementTree as ET
+from datetime import datetime
 from pathlib import Path
 
 
@@ -84,7 +104,8 @@ def parse_fields(text):
     # The outer }} is always on its own line in MediaWiki templates.
     # Use \n}} as end-of-template marker so inner {{foo|bar}} don't terminate early.
     pattern = re.compile(
-        r"\|([a-zA-Z_][a-zA-Z_0-9]*)\s*=\s*(.*?)(?=\|[a-zA-Z_][a-zA-Z_0-9]*\s*=|\n\}\})",
+        # Stop at: next |field= (same or next line), |field (no value, new line), or \n}}
+        r"\|([a-zA-Z_][a-zA-Z_0-9]*)\s*=\s*(.*?)(?=\|[a-zA-Z_][a-zA-Z_0-9]*\s*=|\n\|[a-zA-Z_]|\n\}\})",
         re.DOTALL,
     )
     for m in pattern.finditer(text):
@@ -247,9 +268,14 @@ def parse_ossl_constants(xml_path):
 # ---------------------------------------------------------------------------
 
 
-def write_functions_md(path, title, functions, is_ossl=False):
+def _header(title, fetch_date):
+    date_str = f" — fetched {fetch_date}" if fetch_date else ""
+    return f"# {title}\n\nSource: MediaWiki export{date_str}\n\n"
+
+
+def write_functions_md(path, title, functions, fetch_date="", is_ossl=False):
     with open(path, "w", encoding="utf-8") as f:
-        f.write(f"# {title}\n\nSource: MediaWiki export\n\n")
+        f.write(_header(title, fetch_date))
         for name in sorted(functions.keys(), key=str.lower):
             entry = functions[name]
             f.write(f"### {name}\n\n")
@@ -263,9 +289,9 @@ def write_functions_md(path, title, functions, is_ossl=False):
                 f.write(f"{entry['desc']}\n\n")
 
 
-def write_events_md(path, title, events):
+def write_events_md(path, title, events, fetch_date=""):
     with open(path, "w", encoding="utf-8") as f:
-        f.write(f"# {title}\n\nSource: MediaWiki export\n\n")
+        f.write(_header(title, fetch_date))
         for name in sorted(events.keys()):
             entry = events[name]
             f.write(f"### {name}\n\n")
@@ -274,9 +300,9 @@ def write_events_md(path, title, events):
                 f.write(f"{entry['desc']}\n\n")
 
 
-def write_constants_md(path, title, constants):
+def write_constants_md(path, title, constants, fetch_date=""):
     with open(path, "w", encoding="utf-8") as f:
-        f.write(f"# {title}\n\nSource: MediaWiki export\n\n")
+        f.write(_header(title, fetch_date))
         for name in sorted(constants.keys()):
             entry = constants[name]
             ctype = entry.get("type", "")
@@ -288,9 +314,58 @@ def write_constants_md(path, title, constants):
                 type_val = f"{name} = {value}"
             else:
                 type_val = name
-            f.write(f"### {name}\n\n* `{type_val}`\n\n")
+            f.write(f"### {name}\n\n- `{type_val}`\n\n")
             if desc:
                 f.write(f"{desc}\n\n")
+
+
+# ---------------------------------------------------------------------------
+# Type detection & dispatch
+# ---------------------------------------------------------------------------
+
+TYPES = {
+    "lsl_functions": (
+        parse_lsl_functions,
+        "LSL Functions",
+        lambda p, t, d, date: write_functions_md(p, t, d, fetch_date=date, is_ossl=False),
+    ),
+    "lsl_events": (
+        parse_lsl_events,
+        "LSL Events",
+        lambda p, t, d, date: write_events_md(p, t, d, fetch_date=date),
+    ),
+    "lsl_constants": (
+        parse_lsl_constants,
+        "LSL Constants",
+        lambda p, t, d, date: write_constants_md(p, t, d, fetch_date=date),
+    ),
+    "ossl_functions": (
+        parse_ossl_functions,
+        "OSSL Functions",
+        lambda p, t, d, date: write_functions_md(p, t, d, fetch_date=date, is_ossl=True),
+    ),
+    "ossl_constants": (
+        parse_ossl_constants,
+        "OSSL Constants",
+        lambda p, t, d, date: write_constants_md(p, t, d, fetch_date=date),
+    ),
+}
+
+
+def detect_type(xml_path):
+    """Guess the content type from the filename."""
+    name = xml_path.name.lower()
+    if "ossl" in name and "function" in name:
+        return "ossl_functions"
+    if "ossl" in name and "constant" in name:
+        return "ossl_constants"
+    if "lsl" in name and "function" in name:
+        return "lsl_functions"
+    if "lsl" in name and "event" in name:
+        return "lsl_events"
+    if "lsl" in name and "constant" in name:
+        return "lsl_constants"
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -298,76 +373,55 @@ def write_constants_md(path, title, constants):
 # ---------------------------------------------------------------------------
 
 
-def find_xml(tmp_dir, pattern):
-    matches = sorted(tmp_dir.glob(pattern))
-    if not matches:
-        raise FileNotFoundError(f"No file matching {pattern} in {tmp_dir}")
-    return matches[-1]
+def _run(xml_path, out_path):
+    """Process a single XML → MD conversion."""
+    doc_type = detect_type(xml_path)
+    if doc_type is None:
+        print(f"❌ Cannot detect type from filename: {xml_path.name}")
+        return False
+    parser, title, writer = TYPES[doc_type]
+    fetch_date = datetime.fromtimestamp(os.path.getmtime(xml_path)).strftime("%Y-%m-%d")
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    data = parser(xml_path)
+    writer(out_path, title, data, fetch_date)
+    print(f"✅ {len(data):4d}  {title:20s} → {out_path}  (fetched {fetch_date})")
+    return True
 
 
-def main():
+def _batch():
+    """Process all XML files from tmp/ to doc/ (batch shortcut when called with no args)."""
     tmp_dir = Path("tmp")
-    out_dir = Path("dev")
-
-    for arg in sys.argv[1:]:
-        if arg.startswith("--tmp-dir="):
-            tmp_dir = Path(arg.split("=", 1)[1])
-        elif arg.startswith("--out-dir="):
-            out_dir = Path(arg.split("=", 1)[1])
-
+    out_dir = Path("doc")
     if not tmp_dir.exists():
-        print(f"❌ tmp/ directory not found: {tmp_dir}")
+        print(f"❌ {tmp_dir}/ not found")
         sys.exit(1)
-
     out_dir.mkdir(exist_ok=True)
-
-    tasks = [
-        (
-            "SecondLife-LSL_Functions-*.xml",
-            "lsl_functions.md",
-            "LSL Functions",
-            parse_lsl_functions,
-            lambda p, t, d: write_functions_md(p, t, d, is_ossl=False),
-        ),
-        (
-            "SecondLife-LSL_Events-*.xml",
-            "lsl_events.md",
-            "LSL Events",
-            parse_lsl_events,
-            write_events_md,
-        ),
-        (
-            "SecondLife-LSL_Constants-*.xml",
-            "lsl_constants.md",
-            "LSL Constants",
-            parse_lsl_constants,
-            write_constants_md,
-        ),
-        (
-            "OpenSimulator-OSSL_Functions-*.xml",
-            "ossl_functions.md",
-            "OSSL Functions",
-            parse_ossl_functions,
-            lambda p, t, d: write_functions_md(p, t, d, is_ossl=True),
-        ),
-        (
-            "OpenSimulator-OSSL_Constants-*.xml",
-            "ossl_constants.md",
-            "OSSL Constants",
-            parse_ossl_constants,
-            write_constants_md,
-        ),
+    patterns = [
+        ("SecondLife-LSL_Functions-*.xml",     "LSL_Functions.md"),
+        ("SecondLife-LSL_Events-*.xml",        "LSL_Events.md"),
+        ("SecondLife-LSL_Constants-*.xml",     "LSL_Constants.md"),
+        ("OpenSimulator-OSSL_Functions-*.xml", "OSSL_Functions.md"),
+        ("OpenSimulator-OSSL_Constants-*.xml", "OSSL_Constants.md"),
     ]
-
-    for glob_pat, out_name, title, parser, writer in tasks:
-        try:
-            xml_path = find_xml(tmp_dir, glob_pat)
-            data = parser(xml_path)
-            writer(out_dir / out_name, title, data)
-            print(f"✅ {len(data):4d}  {title:20s} → {out_dir}/{out_name}")
-        except Exception as e:
-            print(f"❌ {title}: {e}")
+    for glob_pat, out_name in patterns:
+        matches = sorted(tmp_dir.glob(glob_pat))
+        if not matches:
+            print(f"⚠️  No file matching {glob_pat}")
+            continue
+        _run(matches[-1], out_dir / out_name)
 
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) == 1:
+        if Path("tmp").exists():
+            _batch()
+        else:
+            print(__doc__)
+    elif len(sys.argv) == 3:
+        if not _run(Path(sys.argv[1]), Path(sys.argv[2])):
+            sys.exit(1)
+    else:
+        print("Usage: generate_ref_docs.py <source_xml> <destination_md>")
+        sys.exit(1)
+
+

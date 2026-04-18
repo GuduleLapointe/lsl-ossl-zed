@@ -1,7 +1,6 @@
 # OSSL Constants
 
-Source: http://opensimulator.org/wiki/Special:Export
-Fetched: 
+Source: MediaWiki export — fetched 2026-04-18
 
 ### CAMERA_FOCUS_OFFSET_X
 
@@ -344,3 +343,4 @@ Total Unacked Bytes ||
 - `VEHICLE_ROLL_FRAME = 46`
 
 |}
+
