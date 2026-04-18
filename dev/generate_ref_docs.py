@@ -95,6 +95,8 @@ def clean_wiki(text):
     # Bold/italic wiki markup
     text = re.sub(r"'''([^']+)'''", r"\1", text)
     text = re.sub(r"''([^']+)''", r"\1", text)
+    # Strip trailing wiki field markers (| leftover from parse boundary)
+    text = re.sub(r"\s*\|\s*$", "", text)
     # Collapse whitespace
     text = re.sub(r"\n\s*\n+", "\n", text)
     text = re.sub(r"[ \t]+", " ", text)
@@ -201,9 +203,7 @@ def parse_ossl_functions(xml_path):
         if not re.match(r"os[A-Z]", func_name):
             continue
 
-        desc = clean_wiki(
-            fields.get("additional_info", "") or fields.get("func_desc", "")
-        )
+        desc = clean_wiki(fields.get("description", ""))
         functions[func_name] = {"signatures": signatures, "desc": desc}
 
     return functions
