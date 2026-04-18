@@ -1,149 +1,113 @@
 # LSL Constants
 
-Source: https://wiki.secondlife.com/wiki/Main_Page
-Fetched: 2026-04-18T16:02:23Z
+Source: tmp/opensim-git/OpenSim/Region/ScriptEngine/Shared/Api/Runtime/LSL_Constants.cs
+Generated: 2026-04-18T20:33:12Z
 
 ### ACTIVE
 
-- `integer ACTIVE = 0x2`
+- `integer ACTIVE = 2`
 
-If it is contained in the result of llDetectedType(), it means it is physical tasks. (Physical objects & agents) 
-If it is used as an filter of llSensor() or llSensorRepeat(), it will search for physical objects that are moving or objects containing an active script. Thus, it is using SL server resources now.
+Objects running a script or physically moving
 
 ### AGENT
 
-- `integer AGENT = 0x1`
-
-If it is contained in the result of llDetectedType, it means it is avatar. If it is used as an filter of llSensor or llSensorRepeat, it will search for avatars by legacy name. Use of this constant in this context is not recommended as is more informative.
+- `integer AGENT = 1`
 
 ### AGENT_ALWAYS_RUN
 
 - `integer AGENT_ALWAYS_RUN = 0x1000`
 
-Used with llGetAgentInfo to determine if the queried avatar has 'always running' set.
-
 ### AGENT_ATTACHMENTS
 
-- `integer AGENT_ATTACHMENTS = 0x0002`
+- `integer AGENT_ATTACHMENTS = 0x2`
 
-### AGENT_AUTOMATED
-
-- `integer AGENT_AUTOMATED = 0x4000`
-
-Identifies an avatar as having been registered with Linden Lab as an automated/scripted agent, i.e. a 'bot.
-Registration is (currently) done via the user's control panel on the [https://secondlife.com/my/account/sisa.php Scripted Agent Status] tab.
-'Bots are not illegal in Second Life per se, but, according to the new scripted agent privacy policy, failing to register a 'bot as such is indeed forbidden.
-Also note that from the perspective of the grid, it matters not how the 'bot is implemented; do not assume any technology behind it, just because an avatar has been flagged as an 'automated agent'. The flag essentially reflects the user's (voluntary) self-identification as a 'bot, without the requirement of giving any explanation, and there are a handful of different ways to "automate" an agent.
-Linden Lab, at their discretion, and based on abuse reports or direct observation, may also flag an avatar as being an automated agent, which will set the AGENT_AUTOMATED bit as well. False positives can happen; feel free to file a ticket with Linden Lab's support if your avatar was erroneously flagged as an automated agent and you cannot change it from the SL control panel.
+The agent has attachments
 
 ### AGENT_AUTOPILOT
 
 - `integer AGENT_AUTOPILOT = 0x2000`
 
-This value is set when the user selects "Go Here" on the ground, or uses the optional Double-Click Auto-Pilot feature.
-Under Viewer 2.0 and later, it is also set when:
-* the user selects "Sit Here" on the ground.
-* an object is selected or edited, and that selection can trigger a control (CONTROL_ROT_RIGHT and CONTROL_ROT_LEFT can be activated when selecting an object near the far right or left edge of the screen).
-
 ### AGENT_AWAY
 
-- `integer AGENT_AWAY = 0x0040`
-
-Indicates that the agent has either toggled away or has been inactive for too long.
+- `integer AGENT_AWAY = 0x40`
 
 ### AGENT_BUSY
 
-- `integer AGENT_BUSY = 0x0800`
+- `integer AGENT_BUSY = 0x800`
 
 ### AGENT_BY_LEGACY_NAME
 
-- `integer AGENT_BY_LEGACY_NAME = 0x1`
-
-If it is contained in the result of llDetectedType, it means it is avatar. If it is used as an filter of llSensor or llSensorRepeat, it will search for avatars by legacy name.
+- `integer AGENT_BY_LEGACY_NAME = 1`
 
 ### AGENT_BY_USERNAME
 
 - `integer AGENT_BY_USERNAME = 0x10`
 
-See Avatar Names
-
 ### AGENT_CROUCHING
 
-- `integer AGENT_CROUCHING = 0x0400`
-
-### AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT
-
-- `integer AGENT_FLOATING_VIA_SCRIPTED_ATTACHMENT = 0x8000`
-
-Indicates that the agent is floating because of a scripted attachment using either llSetHoverHeight or llGroundRepel.
+- `integer AGENT_CROUCHING = 0x400`
 
 ### AGENT_FLYING
 
-- `integer AGENT_FLYING = 0x0001`
-
-Used with llGetAgentInfo to determine if the queried avatar is flying.
+- `integer AGENT_FLYING = 0x1`
 
 ### AGENT_IN_AIR
 
-- `integer AGENT_IN_AIR = 0x0100`
+- `integer AGENT_IN_AIR = 0x100`
+
+### AGENT_LIST_EXCLUDENPC
+
+- `integer AGENT_LIST_EXCLUDENPC = 0x4000000`
 
 ### AGENT_LIST_PARCEL
 
-- `integer AGENT_LIST_PARCEL = 1`
-
-Agents on the same parcel where the script is running.
+- `integer AGENT_LIST_PARCEL = 0x1`
 
 ### AGENT_LIST_PARCEL_OWNER
 
 - `integer AGENT_LIST_PARCEL_OWNER = 2`
 
-Agents on any parcel in the region where the parcel owner is the same as the owner of the parcel under the scripted object.
-
 ### AGENT_LIST_REGION
 
 - `integer AGENT_LIST_REGION = 4`
 
-Returns any/all agents in the region.
+### AGENT_MALE
+
+- `integer AGENT_MALE = 0x40000000`
 
 ### AGENT_MOUSELOOK
 
-- `integer AGENT_MOUSELOOK = 0x0008`
+- `integer AGENT_MOUSELOOK = 0x8`
 
 ### AGENT_ON_OBJECT
 
-- `integer AGENT_ON_OBJECT = 0x0020`
+- `integer AGENT_ON_OBJECT = 0x20`
 
 ### AGENT_SCRIPTED
 
-- `integer AGENT_SCRIPTED = 0x0004`
+- `integer AGENT_SCRIPTED = 0x4`
 
-Carrying scripted objects
+The agent has scripted attachments
 
 ### AGENT_SITTING
 
-- `integer AGENT_SITTING = 0x0010`
+- `integer AGENT_SITTING = 0x10`
 
 ### AGENT_TYPING
 
-- `integer AGENT_TYPING = 0x0200`
+- `integer AGENT_TYPING = 0x200`
 
 ### AGENT_WALKING
 
-- `integer AGENT_WALKING = 0x0080`
-
-Used with llGetAgentInfo to determine if the queried avatar is walking.
+- `integer AGENT_WALKING = 0x80`
 
 ### ALL_SIDES
 
 - `integer ALL_SIDES = -1`
 
-Selects all sides of an object in an applicable function.
-
 ### ANIM_ON
 
-- `integer ANIM_ON = 0x01`
-
-Enables a texture animation.
+- `integer ANIM_ON = 1`
 
 ### ATTACH_AVATAR_CENTER
 
@@ -164,8 +128,6 @@ Enables a texture animation.
 ### ATTACH_CHIN
 
 - `integer ATTACH_CHIN = 12`
-
-This constant is returned when the attachment point is the chin.
 
 ### ATTACH_FACE_JAW
 
@@ -243,8 +205,6 @@ This constant is returned when the attachment point is the chin.
 
 - `integer ATTACH_LEAR = 13`
 
-Left ear
-
 ### ATTACH_LEFT_PEC
 
 - `integer ATTACH_LEFT_PEC = 29`
@@ -269,19 +229,17 @@ Left ear
 
 - `integer ATTACH_LHIP = 25`
 
-Left Hip
-
 ### ATTACH_LLARM
 
 - `integer ATTACH_LLARM = 21`
-
-Lower Left Arm
 
 ### ATTACH_LLLEG
 
 - `integer ATTACH_LLLEG = 27`
 
-Left lower leg
+### ATTACH_LPEC
+
+- `integer ATTACH_LPEC = 30`
 
 ### ATTACH_LSHOULDER
 
@@ -291,13 +249,9 @@ Left lower leg
 
 - `integer ATTACH_LUARM = 20`
 
-Left Upper Arm
-
 ### ATTACH_LULEG
 
 - `integer ATTACH_LULEG = 26`
-
-Left Upper Leg
 
 ### ATTACH_LWING
 
@@ -323,8 +277,6 @@ Left Upper Leg
 
 - `integer ATTACH_REAR = 14`
 
-Right ear
-
 ### ATTACH_REYE
 
 - `integer ATTACH_REYE = 16`
@@ -336,8 +288,6 @@ Right ear
 ### ATTACH_RHAND
 
 - `integer ATTACH_RHAND = 6`
-
-Indicates the right hand attach point, which just so happens to be the default attach point.
 
 ### ATTACH_RHAND_RING1
 
@@ -355,11 +305,13 @@ Indicates the right hand attach point, which just so happens to be the default a
 
 - `integer ATTACH_RLARM = 19`
 
-Right lower arm
-
 ### ATTACH_RLLEG
 
 - `integer ATTACH_RLLEG = 24`
+
+### ATTACH_RPEC
+
+- `integer ATTACH_RPEC = 29`
 
 ### ATTACH_RSHOULDER
 
@@ -369,13 +321,9 @@ Right lower arm
 
 - `integer ATTACH_RUARM = 18`
 
-Right upper arm
-
 ### ATTACH_RULEG
 
 - `integer ATTACH_RULEG = 23`
-
-Right upper leg
 
 ### ATTACH_RWING
 
@@ -388,6 +336,18 @@ Right upper leg
 ### ATTACH_TAIL_TIP
 
 - `integer ATTACH_TAIL_TIP = 44`
+
+### BEACON_FOCUS_MAP
+
+- `integer BEACON_FOCUS_MAP = 0x2`
+
+### BEACON_MAP
+
+- `integer BEACON_MAP = 0x1`
+
+### BEACON_SHOW_MAP
+
+- `integer BEACON_SHOW_MAP = 0x1`
 
 ### CAMERA_ACTIVE
 
@@ -421,9 +381,33 @@ Right upper leg
 
 - `integer CAMERA_FOCUS_OFFSET = 1`
 
+### CAMERA_FOCUS_OFFSET_X
+
+- `integer CAMERA_FOCUS_OFFSET_X = 2`
+
+### CAMERA_FOCUS_OFFSET_Y
+
+- `integer CAMERA_FOCUS_OFFSET_Y = 3`
+
+### CAMERA_FOCUS_OFFSET_Z
+
+- `integer CAMERA_FOCUS_OFFSET_Z = 4`
+
 ### CAMERA_FOCUS_THRESHOLD
 
 - `integer CAMERA_FOCUS_THRESHOLD = 11`
+
+### CAMERA_FOCUS_X
+
+- `integer CAMERA_FOCUS_X = 18`
+
+### CAMERA_FOCUS_Y
+
+- `integer CAMERA_FOCUS_Y = 19`
+
+### CAMERA_FOCUS_Z
+
+- `integer CAMERA_FOCUS_Z = 20`
 
 ### CAMERA_PITCH
 
@@ -445,211 +429,85 @@ Right upper leg
 
 - `integer CAMERA_POSITION_THRESHOLD = 10`
 
+### CAMERA_POSITION_X
+
+- `integer CAMERA_POSITION_X = 14`
+
+### CAMERA_POSITION_Y
+
+- `integer CAMERA_POSITION_Y = 15`
+
+### CAMERA_POSITION_Z
+
+- `integer CAMERA_POSITION_Z = 16`
+
 ### CHANGED_ALLOWED_DROP
 
-- `integer CHANGED_ALLOWED_DROP = 0x40`
+- `integer CHANGED_ALLOWED_DROP = 64`
 
-A user other then the owner (or the owner if the object is no-mod) has added inventory to the prim. This is only possible if enabled with llAllowInventoryDrop.
+### CHANGED_ANIMATION
+
+- `integer CHANGED_ANIMATION = 16384`
+
+opensim specific
 
 ### CHANGED_COLOR
 
-- `integer CHANGED_COLOR = 0x2`
-
-Prim Blinn-Phong color or alpha parameters have changed
+- `integer CHANGED_COLOR = 2`
 
 ### CHANGED_INVENTORY
 
-- `integer CHANGED_INVENTORY = 0x1`
-
-Prim inventory has changed by someone who has modification rights to a prim.
-Inventory changes that cause this event are:
-*Inventory item is added or deleted
-*Inventory item name is changed
-*Inventory item permissions are changed
-*A different script in inventory is recompiled
-*A notecard in inventory is saved
-This event does not occur when:
-*A no-copy inventory item is moved to user inventory
-*A script in inventory is reset
-*A user without modification rights drops an object into a prim's inventory due to llAllowInventoryDrop.
-**In this situation the CHANGED_ALLOWED_DROP flag is set instead of CHANGED_INVENTORY.
-*An object that was rezzed from inventory is saved back to object contents
-Important : This event is triggered in the root prim by a change in any child prim, unless the child prim has a handler for it. It is not triggered in any other linked prim.
+- `integer CHANGED_INVENTORY = 1`
 
 ### CHANGED_LINK
 
-- `integer CHANGED_LINK = 0x20`
-
-The number of prims making up the object or avatars seated on the object have changed. This event also occurs when duplicating a linked object or when a prim in an object changes type or shape. This event does not occur when: an object is attached or detached, in an attachment when the avatar sits or unsits, in an attachment when another object is attached or detached, or when a single prim is duplicated.
+- `integer CHANGED_LINK = 32`
 
 ### CHANGED_MEDIA
 
-- `integer CHANGED_MEDIA = 0x800`
-
-on the prim has changed.
+- `integer CHANGED_MEDIA = 2048`
 
 ### CHANGED_OWNER
 
-- `integer CHANGED_OWNER = 0x80`
+- `integer CHANGED_OWNER = 128`
 
-The object has changed owners. This event occurs in the original object when a user takes it or takes a copy of it or when the owner deeds it to a group. The event occurs in the new object when it is first rezzed. 
-Counter-intuitively, this event also occurs in the original object when it is purchased or a copy of it is purchased (although the original object does not in fact change owner). The event does not occur in the original object when its contents are purchased.
+### CHANGED_POSITION
+
+- `integer CHANGED_POSITION = 32768`
+
+opensim specific
 
 ### CHANGED_REGION
 
-- `integer CHANGED_REGION = 0x100`
+- `integer CHANGED_REGION = 256`
 
-The object has changed region by crossing a region boundary (or by teleporting, if attached). This event only occurs in the root prim of a linkset. This event does not occur in child prims of objects when they cross a region boundary.
+### CHANGED_REGION_RESTART
+
+- `integer CHANGED_REGION_RESTART = 1024`
 
 ### CHANGED_REGION_START
 
-- `integer CHANGED_REGION_START = 0x400`
-
-The region containing the object has just come online.
+- `integer CHANGED_REGION_START = 1024`
 
 ### CHANGED_RENDER_MATERIAL
 
 - `integer CHANGED_RENDER_MATERIAL = 0x1000`
 
-Prim material ID or material overrides have changed on one or more faces.
-
 ### CHANGED_SCALE
 
-- `integer CHANGED_SCALE = 0x8`
-
-The prim scale of at least one prim in the linked object has changed. Only the root prim will receive this event.
+- `integer CHANGED_SCALE = 8`
 
 ### CHANGED_SHAPE
 
-- `integer CHANGED_SHAPE = 0x4`
-
-PRIM_TYPE (box, prism, torus, taper, twist, cut &hellip;) has changed.
+- `integer CHANGED_SHAPE = 4`
 
 ### CHANGED_TELEPORT
 
-- `integer CHANGED_TELEPORT = 0x200`
-
-The avatar this object is attached to has teleported. This event only occurs in the root prim of an attachment when the user has teleported. This event does not occur in child prims of attachments, nor does it occur due to a "sit teleport". If the user teleports into a parcel where their scripts are disabled then the CHANGED_TELEPORT event is queued and occurs after the user moves to a script-enabled parcel.
+- `integer CHANGED_TELEPORT = 512`
 
 ### CHANGED_TEXTURE
 
-- `integer CHANGED_TEXTURE = 0x10`
-
-Prim texture parameters (shine/bump setting, repeats, flip, rotation, or offset) have changed. 
-Transparency or color changes trigger a CHANGED_COLOR event not a CHANGED_TEXTURE event.
-
-### CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES
-
-- `integer CHARACTER_ACCOUNT_FOR_SKIPPED_FRAMES = |desc`
-
-### CHARACTER_AVOIDANCE_MODE
-
-- `integer CHARACTER_AVOIDANCE_MODE = 5`
-
-Used in the functions of pathfinding . Is combined with a mask bit flags. The default is AVOID_CHARACTERS with AVOID_DYNAMIC_OBSTACLES.
-Allows you to specify that a character should not try to avoid other characters, should not try to avoid dynamic obstacles (relatively fast moving objects and avatars), or both.
-
-### CHARACTER_DESIRED_SPEED
-
-- `integer CHARACTER_DESIRED_SPEED = 1`
-
-Constant used to indicate that the following argument is the desired speed for a Pathfinding character.
-
-### CHARACTER_DESIRED_TURN_SPEED
-
-- `integer CHARACTER_DESIRED_TURN_SPEED = 12`
-
-Used in the functions of pathfinding . Is combined with a float. The default 6 meters/second
-Specifies the character's maximum speed while turning
-
-### CHARACTER_LENGTH
-
-- `integer CHARACTER_LENGTH = 3`
-
-Constant used to indicate that the following argument is the length of the capsule for a Pathfinding character. This is used to help denote the size of the character.
-
-### CHARACTER_MAX_ACCEL
-
-- `integer CHARACTER_MAX_ACCEL = 8`
-
-Used in the functions of pathfinding . Is combined with a float. The default 20 meters/s(-2).
-Specifies the character's maximum acceleration rate.
-
-### CHARACTER_MAX_DECEL
-
-- `integer CHARACTER_MAX_DECEL = 9`
-
-Used in the functions of pathfinding . Is combined with a float. The default 30 meters/s(-2).
-Specifies the character's maximum deceleration rate.
-
-### CHARACTER_MAX_SPEED
-
-- `integer CHARACTER_MAX_SPEED = 13`
-
-Used in the functions of pathfinding . Is combined with a float. The default is 20 meters/second
-Specifies the character's maximum speed .
-Can t be inferior to 0.2 meters/second and can't be superior to 50 meters/second
-
-### CHARACTER_MAX_TURN_RADIUS
-
-- `integer CHARACTER_MAX_TURN_RADIUS = 10`
-
-Used in the functions of pathfinding . Is combined with a float. The default 1.25 meter.
-Specifies the character's radius when the characters turns at the speed CHARACTER_DESIRED_TURN_SPEED
-
-### CHARACTER_ORIENTATION
-
-- `integer CHARACTER_ORIENTATION = 4`
-
-Constant used to indicate that the following argument is the orientation of the capsule for a Pathfinding character. This is used to help denote how to interpret the size of a character.
-
-### CHARACTER_RADIUS
-
-- `integer CHARACTER_RADIUS = 2`
-
-Constant used to indicate that the following argument is the radius of the capsule for a Pathfinding character. This is used to help denote the size of the character.
-
-### CHARACTER_STAY_WITHIN_PARCEL
-
-- `integer CHARACTER_STAY_WITHIN_PARCEL = 15`
-
-Default setting is FALSE, leading to traditional pathfinding behavior. If a parcel allows scripts and objects and the character does not have the CHARACTER_STAY_WITHIN_PARCEL option enabled, it can freely cross the parcel boundary in both directions. Characters which have CHARACTER_STAY_WITHIN_PARCEL set to TRUE treat the parcel boundaries as one-way obstacles. Pathfinding wander, flee, evade, and pursue behaviors will only choose goal points within their starting parcel. If a character somehow manages to escape its original parcel (e.g. it was 'pushed' out), it will be able to return to the original parcel, but will be unable to leave the original parcel afterwards.
-
-### CHARACTER_TYPE
-
-- `integer CHARACTER_TYPE = 6`
-
-Used in combination with one of the character type flags. The default is CHARACTER_TYPE_NONE, other options are CHARACTER_TYPE_A, CHARACTER_TYPE_B, CHARACTER_TYPE_C and CHARACTER_TYPE_D. Note that the character type is not used to describe the behavior of the Pathfinding object but is used to describe the kind of surface and terrain that it prefers to travel. For example, a cow designed for a field should use character type B, but sheep designed to be herded along a road should use character type C.
-
-### CHARACTER_TYPE_A
-
-- `integer CHARACTER_TYPE_A = 0`
-
-Used for character types that you prefer move in a way consistent with humanoids.
-
-### CHARACTER_TYPE_B
-
-- `integer CHARACTER_TYPE_B = 1`
-
-Used for character types that you prefer move in a way consistent with wild animals or off road vehicles.
-
-### CHARACTER_TYPE_C
-
-- `integer CHARACTER_TYPE_C = 2`
-
-Used for mechanical character types or road going vehicles.
-
-### CHARACTER_TYPE_D
-
-- `integer CHARACTER_TYPE_D = 3`
-
-Used for character types that are not consistent with the A, B, or C type.
-
-### CHARACTER_TYPE_NONE
-
-- `integer CHARACTER_TYPE_NONE = 4`
-
-Used to set no specific character type.
+- `integer CHANGED_TEXTURE = 16`
 
 ### CLICK_ACTION_BUY
 
@@ -695,349 +553,197 @@ Used to set no specific character type.
 
 - `integer CLICK_ACTION_ZOOM = 7`
 
+### CONTENT_TYPE_ATOM
+
+- `integer CONTENT_TYPE_ATOM = 4`
+
+### CONTENT_TYPE_FORM
+
+- `integer CONTENT_TYPE_FORM = 7`
+
+### CONTENT_TYPE_HTML
+
+- `integer CONTENT_TYPE_HTML = 1`
+
+### CONTENT_TYPE_JSON
+
+- `integer CONTENT_TYPE_JSON = 5`
+
+### CONTENT_TYPE_LLSD
+
+- `integer CONTENT_TYPE_LLSD = 6`
+
+### CONTENT_TYPE_RSS
+
+- `integer CONTENT_TYPE_RSS = 8`
+
+### CONTENT_TYPE_TEXT
+
+- `integer CONTENT_TYPE_TEXT = 0`
+
+### CONTENT_TYPE_XHTML
+
+- `integer CONTENT_TYPE_XHTML = 3`
+
+### CONTENT_TYPE_XML
+
+- `integer CONTENT_TYPE_XML = 2`
+
 ### CONTROL_BACK
 
-- `integer CONTROL_BACK = 0x2`
+- `integer CONTROL_BACK = 2`
 
 ### CONTROL_DOWN
 
-- `integer CONTROL_DOWN = 0x20`
+- `integer CONTROL_DOWN = 32`
 
 ### CONTROL_FWD
 
-- `integer CONTROL_FWD = 0x1`
+- `integer CONTROL_FWD = 1`
 
 ### CONTROL_LBUTTON
 
-- `integer CONTROL_LBUTTON = 0x10000000`
+- `integer CONTROL_LBUTTON = 268435456`
 
 ### CONTROL_LEFT
 
-- `integer CONTROL_LEFT = 0x4`
+- `integer CONTROL_LEFT = 4`
 
 ### CONTROL_ML_LBUTTON
 
-- `integer CONTROL_ML_LBUTTON = 0x40000000`
+- `integer CONTROL_ML_LBUTTON = 1073741824`
 
 ### CONTROL_RIGHT
 
-- `integer CONTROL_RIGHT = 0x8`
+- `integer CONTROL_RIGHT = 8`
 
 ### CONTROL_ROT_LEFT
 
-- `integer CONTROL_ROT_LEFT = 0x100`
+- `integer CONTROL_ROT_LEFT = 256`
 
 ### CONTROL_ROT_RIGHT
 
-- `integer CONTROL_ROT_RIGHT = 0x200`
+- `integer CONTROL_ROT_RIGHT = 512`
 
 ### CONTROL_UP
 
-- `integer CONTROL_UP = 0x10`
-
-### DAMAGEABLE
-
-- `integer DAMAGEABLE = 0x20`
-
-If it is contained in the result of llDetectedType, it means what was detected is either an agent that can take damage, or is an object containing a script with either on_damage or final_damage events (able to process damage).
-If it is used as a filter of llSensor or llSensorRepeat, it will search for agents or objects which match the same criteria mentioned above.
+- `integer CONTROL_UP = 16`
 
 ### DATA_BORN
 
 - `integer DATA_BORN = 3`
 
-Used with llRequestAgentData to return a string that contains the date the user joined SL, it is the format of "YYYY-MM-DD". It is based on Pacific Time, not UTC.
-
 ### DATA_NAME
 
 - `integer DATA_NAME = 2`
-
-Used with llRequestAgentData to return a string containing the avatars legacy name.
-* For legacy accounts (those with a first and last name). The format is "FirstName LastName".
-* For modern accounts (those with only a first name). The format is "FirstName Resident".
 
 ### DATA_ONLINE
 
 - `integer DATA_ONLINE = 1`
 
-Used with llRequestAgentData to return a string that contains the integer boolean for if the user is online (or not). TRUE if online, FALSE if offline.
-
 ### DATA_PAYINFO
 
 - `integer DATA_PAYINFO = 8`
-
-Used with llRequestAgentData to return a string that contains the integer mask that can contain either of these two constants: PAYMENT_INFO_ON_FILE, PAYMENT_INFO_USED
-It is important to know that it is possible to have PAYMENT_INFO_USED but currently not have PAYMENT_INFO_ON_FILE (payment info can be removed after being used).
 
 ### DATA_RATING
 
 - `integer DATA_RATING = 4`
 
-Used with llRequestAgentData to return the string "0, 0, 0, 0, 0, 0". 
-The CSV list returned used to contain the positive and negative ratings the user has acquired before ratings were removed from SL.
-
 ### DATA_SIM_POS
 
 - `integer DATA_SIM_POS = 5`
-
-returns vector in global coordinates
 
 ### DATA_SIM_RATING
 
 - `integer DATA_SIM_RATING = 7`
 
-returns string simulator rating "PG", "MATURE", "ADULT" or "UNKNOWN"
+### DATA_SIM_RELEASE
+
+- `integer DATA_SIM_RELEASE = 128`
 
 ### DATA_SIM_STATUS
 
 - `integer DATA_SIM_STATUS = 6`
 
-Returns one of these strings.
-* "up": simulator currently up and running
-* "down": simulator currently down
-* "starting": simulator currently starting
-* "stopping": simulator currently stopping
-* "crashed": simulator has crashed
-* "unknown": simulator status unknown or unknown simulator
+### DEBUG_CHANNEL
+
+- `integer DEBUG_CHANNEL = 0x7FFFFFFF`
 
 ### DEG_TO_RAD
 
-- `float DEG_TO_RAD = 0.017453292519943295769236907684886f`
+- `float DEG_TO_RAD = 0.01745329238f`
 
-When multiplied by, converts a value in degrees to radians. Precise value is PI/180.
+### DENSITY
+
+- `integer DENSITY = 1`
 
 ### EOF
 
-- `EOF`
-
-EOF is a value returned by the dataserver event, as a result of a call to llGetNotecardLine, specifically when the requested line is past the end of the notecard. The value returned equals "\n\n\n", which is to say, three newline characters (0x0a).
-Essentially, it is used to let you know when you have finished reading information (usually user configurable parameters) from a notecard, and are ready to move onto the next stage or state of the script.
+- `string EOF = "\n\n\n"`
 
 ### ERR_GENERIC
 
 - `integer ERR_GENERIC = -1`
 
-{ 
-- 
-! Function
-! Indicates...
--
- llReturnObjectsByIDllReturnObjectsByOwner
- A nebulous and inexplicable error, nothing is known about it.
-}
-
 ### ERR_MALFORMED_PARAMS
 
 - `integer ERR_MALFORMED_PARAMS = -3`
-
-Return Value for llReturnObject* functions. Indicates function Parameters are malformed.
 
 ### ERR_PARCEL_PERMISSIONS
 
 - `integer ERR_PARCEL_PERMISSIONS = -2`
 
-Return Value for llReturnObject* functions. Indicates Permission lacked to perform task on specified parcel.
-
 ### ERR_RUNTIME_PERMISSIONS
 
 - `integer ERR_RUNTIME_PERMISSIONS = -4`
-
-Return Value for llReturnObject* functions. Indicates Script lacks the runtime permission to perform the requested task.
 
 ### ERR_THROTTLED
 
 - `integer ERR_THROTTLED = -5`
 
-Return Value for llReturnObject* functions. Indicates Task has been throttled. Try again later.
-
 ### ESTATE_ACCESS_ALLOWED_AGENT_ADD
 
-- `integer ESTATE_ACCESS_ALLOWED_AGENT_ADD = 4`
-
-Used in input parameters of llManageEstateAccess . Add an agent to this estate's Allowed Residents list
+- `integer ESTATE_ACCESS_ALLOWED_AGENT_ADD = 0`
 
 ### ESTATE_ACCESS_ALLOWED_AGENT_REMOVE
 
-- `integer ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 8`
-
-Used in input parameters of llManageEstateAccess . Remove an agent to this estate's Allowed Residents list
+- `integer ESTATE_ACCESS_ALLOWED_AGENT_REMOVE = 1`
 
 ### ESTATE_ACCESS_ALLOWED_GROUP_ADD
 
-- `integer ESTATE_ACCESS_ALLOWED_GROUP_ADD = 16`
-
-Used in input parameters of llManageEstateAccess .Add a group to this estate's Allowed groups list.
+- `integer ESTATE_ACCESS_ALLOWED_GROUP_ADD = 2`
 
 ### ESTATE_ACCESS_ALLOWED_GROUP_REMOVE
 
-- `integer ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 32`
-
-Used in input parameters of llManageEstateAccess . Remove the group from this estate's Allowed groups list.
+- `integer ESTATE_ACCESS_ALLOWED_GROUP_REMOVE = 3`
 
 ### ESTATE_ACCESS_BANNED_AGENT_ADD
 
-- `integer ESTATE_ACCESS_BANNED_AGENT_ADD = 64`
-
-Used in input parameters of llManageEstateAccess. Add the agent to this estate's Banned residents list.
+- `integer ESTATE_ACCESS_BANNED_AGENT_ADD = 4`
 
 ### ESTATE_ACCESS_BANNED_AGENT_REMOVE
 
-- `integer ESTATE_ACCESS_BANNED_AGENT_REMOVE = 128`
-
-Used in input parameters of llManageEstateAccess . Remove the agent from this estate's Banned residents list.
+- `integer ESTATE_ACCESS_BANNED_AGENT_REMOVE = 5`
 
 ### FALSE
 
 - `integer FALSE = 0`
 
-Constant used to define the FALSE value in conditional structures or variables/constants in general. Usually it's used because it is more readable, indicating a boolean value instead a integer value (0).
+### FRICTION
 
-### FORCE_DIRECT_PATH
+- `integer FRICTION = 2`
 
-- `integer FORCE_DIRECT_PATH = 1`
+### GRAVITY_MULTIPLIER
 
-### GAME_CONTROL_AXIS_LEFTX
-
-- `integer GAME_CONTROL_AXIS_LEFTX = 0x0`
-
-### GAME_CONTROL_AXIS_LEFTY
-
-- `integer GAME_CONTROL_AXIS_LEFTY = 0x1`
-
-### GAME_CONTROL_AXIS_RIGHTX
-
-- `integer GAME_CONTROL_AXIS_RIGHTX = 0x2`
-
-### GAME_CONTROL_AXIS_RIGHTY
-
-- `integer GAME_CONTROL_AXIS_RIGHTY = 0x3`
-
-### GAME_CONTROL_AXIS_TRIGGERLEFT
-
-- `integer GAME_CONTROL_AXIS_TRIGGERLEFT = 0x4`
-
-### GAME_CONTROL_AXIS_TRIGGERRIGHT
-
-- `integer GAME_CONTROL_AXIS_TRIGGERRIGHT = 0x5`
-
-### GAME_CONTROL_BUTTON_A
-
-- `integer GAME_CONTROL_BUTTON_A = 0x1`
-
-### GAME_CONTROL_BUTTON_B
-
-- `integer GAME_CONTROL_BUTTON_B = 0x2`
-
-### GAME_CONTROL_BUTTON_BACK
-
-- `integer GAME_CONTROL_BUTTON_BACK = 0x10`
-
-### GAME_CONTROL_BUTTON_DPAD_DOWN
-
-- `integer GAME_CONTROL_BUTTON_DPAD_DOWN = 0x1000`
-
-### GAME_CONTROL_BUTTON_DPAD_LEFT
-
-- `integer GAME_CONTROL_BUTTON_DPAD_LEFT = 0x2000`
-
-### GAME_CONTROL_BUTTON_DPAD_RIGHT
-
-- `integer GAME_CONTROL_BUTTON_DPAD_RIGHT = 0x4000`
-
-### GAME_CONTROL_BUTTON_DPAD_UP
-
-- `integer GAME_CONTROL_BUTTON_DPAD_UP = 0x800`
-
-### GAME_CONTROL_BUTTON_GUIDE
-
-- `integer GAME_CONTROL_BUTTON_GUIDE = 0x20`
-
-### GAME_CONTROL_BUTTON_LEFTSHOULDER
-
-- `integer GAME_CONTROL_BUTTON_LEFTSHOULDER = 0x200`
-
-### GAME_CONTROL_BUTTON_LEFTSTICK
-
-- `integer GAME_CONTROL_BUTTON_LEFTSTICK = 0x80`
-
-### GAME_CONTROL_BUTTON_MISC1
-
-- `integer GAME_CONTROL_BUTTON_MISC1 = 0x8000`
-
-### GAME_CONTROL_BUTTON_PADDLE1
-
-- `integer GAME_CONTROL_BUTTON_PADDLE1 = 0x10000`
-
-### GAME_CONTROL_BUTTON_PADDLE2
-
-- `integer GAME_CONTROL_BUTTON_PADDLE2 = 0x20000`
-
-### GAME_CONTROL_BUTTON_PADDLE3
-
-- `integer GAME_CONTROL_BUTTON_PADDLE3 = 0x40000`
-
-### GAME_CONTROL_BUTTON_PADDLE4
-
-- `integer GAME_CONTROL_BUTTON_PADDLE4 = 0x80000`
-
-### GAME_CONTROL_BUTTON_RIGHTSHOULDER
-
-- `integer GAME_CONTROL_BUTTON_RIGHTSHOULDER = 0x400`
-
-### GAME_CONTROL_BUTTON_RIGHTSTICK
-
-- `integer GAME_CONTROL_BUTTON_RIGHTSTICK = 0x100`
-
-### GAME_CONTROL_BUTTON_START
-
-- `integer GAME_CONTROL_BUTTON_START = 0x40`
-
-### GAME_CONTROL_BUTTON_TOUCHPAD
-
-- `integer GAME_CONTROL_BUTTON_TOUCHPAD = 0x100000`
-
-### GAME_CONTROL_BUTTON_X
-
-- `integer GAME_CONTROL_BUTTON_X = 0x4`
-
-### GAME_CONTROL_BUTTON_Y
-
-- `integer GAME_CONTROL_BUTTON_Y = 0x8`
-
-### HORIZONTAL
-
-- `integer HORIZONTAL = 1`
-
-Constant to indicate that the orientation of the capsule for a Pathfinding character is horizontal.
-
-### HTTP_ACCEPT
-
-- `integer HTTP_ACCEPT = 8`
+- `integer GRAVITY_MULTIPLIER = 8`
 
 ### HTTP_BODY_MAXLENGTH
 
 - `integer HTTP_BODY_MAXLENGTH = 2`
 
-Used with llHTTPRequest to set the maximum size the script will accept* for an HTTP body. The largest value this can be set to depends upon the VM that is being used.
-* See caveats
-===Mono===
-*Maximum: 16KiB
-===LSO===
-*Maximum: 4KiB
-
-### HTTP_BODY_TRUNCATED
-
-- `integer HTTP_BODY_TRUNCATED = 0`
-
-Truncation point in bytes
-
 ### HTTP_CUSTOM_HEADER
 
 - `integer HTTP_CUSTOM_HEADER = 5`
-
-### HTTP_EXTENDED_ERROR
-
-- `integer HTTP_EXTENDED_ERROR = 9`
 
 ### HTTP_METHOD
 
@@ -1051,10 +757,6 @@ Truncation point in bytes
 
 - `integer HTTP_PRAGMA_NO_CACHE = 6`
 
-### HTTP_USER_AGENT
-
-- `integer HTTP_USER_AGENT = 7`
-
 ### HTTP_VERBOSE_THROTTLE
 
 - `integer HTTP_VERBOSE_THROTTLE = 4`
@@ -1063,229 +765,197 @@ Truncation point in bytes
 
 - `integer HTTP_VERIFY_CERT = 3`
 
+### IMG_USE_BAKED_AUX1
+
+- `string IMG_USE_BAKED_AUX1 = "9742065b-19b5-297c-858a-29711d539043"`
+
+### IMG_USE_BAKED_AUX2
+
+- `string IMG_USE_BAKED_AUX2 = "03642e83-2bd1-4eb9-34b4-4c47ed586d2d"`
+
+### IMG_USE_BAKED_AUX3
+
+- `string IMG_USE_BAKED_AUX3 = "edd51b77-fc10-ce7a-4b3d-011dfc349e4f"`
+
+### IMG_USE_BAKED_EYES
+
+- `string IMG_USE_BAKED_EYES = "52cc6bb6-2ee5-e632-d3ad-50197b1dcb8a"`
+
+### IMG_USE_BAKED_HAIR
+
+- `string IMG_USE_BAKED_HAIR = "09aac1fb-6bce-0bee-7d44-caac6dbb6c63"`
+
+### IMG_USE_BAKED_HEAD
+
+- `string IMG_USE_BAKED_HEAD = "5a9f4a74-30f2-821c-b88d-70499d3e7183"`
+
+### IMG_USE_BAKED_LEFTARM
+
+- `string IMG_USE_BAKED_LEFTARM = "ff62763f-d60a-9855-890b-0c96f8f8cd98"`
+
+### IMG_USE_BAKED_LEFTLEG
+
+- `string IMG_USE_BAKED_LEFTLEG = "8e915e25-31d1-cc95-ae08-d58a47488251"`
+
+### IMG_USE_BAKED_LOWER
+
+- `string IMG_USE_BAKED_LOWER = "24daea5f-0539-cfcf-047f-fbc40b2786ba"`
+
+### IMG_USE_BAKED_SKIRT
+
+- `string IMG_USE_BAKED_SKIRT = "43529ce8-7faa-ad92-165a-bc4078371687"`
+
+### IMG_USE_BAKED_UPPER
+
+- `string IMG_USE_BAKED_UPPER = "ae2de45c-d252-50b8-5c6e-19f39ce79317"`
+
 ### INVENTORY_ALL
 
 - `integer INVENTORY_ALL = -1`
-
-Used with Inventory functions and specifies ALL TYPES of inventory items will be retrieved by the function.
 
 ### INVENTORY_ANIMATION
 
 - `integer INVENTORY_ANIMATION = 20`
 
-Used with Inventory functions and specifies inventory items of ANIMATION type will be retrieved by the function.
-
 ### INVENTORY_BODYPART
 
 - `integer INVENTORY_BODYPART = 13`
-
-Used with Inventory functions and specifies inventory items of BODYPART type will be retrieved by the function.
 
 ### INVENTORY_CLOTHING
 
 - `integer INVENTORY_CLOTHING = 5`
 
-Used with Inventory functions and specifies inventory items of CLOTHING type will be retrieved by the function.
-
 ### INVENTORY_GESTURE
 
 - `integer INVENTORY_GESTURE = 21`
-
-Used with Inventory functions and specifies inventory items of GESTURE type will be retrieved by the function.
 
 ### INVENTORY_LANDMARK
 
 - `integer INVENTORY_LANDMARK = 3`
 
-Used with Inventory functions and specifies inventory items of LANDMARK type will be retrieved by the function.
-
 ### INVENTORY_MATERIAL
 
 - `integer INVENTORY_MATERIAL = 57`
-
-Used with Inventory functions and specifies inventory items of MATERIAL type will be retrieved by the function.
 
 ### INVENTORY_NONE
 
 - `integer INVENTORY_NONE = -1`
 
-Value returned by Inventory functions, to indicate that the inventory item doesn't exist.
-
 ### INVENTORY_NOTECARD
 
 - `integer INVENTORY_NOTECARD = 7`
-
-Used with Inventory functions and specifies inventory items of NOTECARD type will be retrieved by the function.
 
 ### INVENTORY_OBJECT
 
 - `integer INVENTORY_OBJECT = 6`
 
-Used with Inventory functions and specifies inventory items of OBJECT type will be retrieved by the function.
-
 ### INVENTORY_SCRIPT
 
 - `integer INVENTORY_SCRIPT = 10`
-
-Used with Inventory functions and specifies inventory items of SCRIPT type will be retrieved by the function.
 
 ### INVENTORY_SETTING
 
 - `integer INVENTORY_SETTING = 56`
 
-Used with Inventory functions and specifies inventory items of SETTING type will be retrieved by the function.
-
 ### INVENTORY_SOUND
 
 - `integer INVENTORY_SOUND = 1`
-
-Used with Inventory functions and specifies inventory items of SOUND type will be retrieved by the function.
 
 ### INVENTORY_TEXTURE
 
 - `integer INVENTORY_TEXTURE = 0`
 
-Used with Inventory functions and specifies inventory items of TEXTURE type will be retrieved by the function.
-
 ### JSON_APPEND
 
-- `integer JSON_APPEND = -1`
-
-A special specifier for llJsonSetValue which indicates the given value should be appended to the array at the specified level. Care should be taken, as if the value at that level is not an array, the existing data will be overwritten and replaced with the array meant for appending.
+- `string JSON_APPEND = "-1"`
 
 ### JSON_ARRAY
 
-- `string JSON_ARRAY = "﷒"`
-
-Used with the llList2Json function to indicate that the provided list (which may be empty) is to be used to encode and return a string serialization of a Json array.
-Also a possible return value for the llJsonValueType function that indicates the Json data type of at the specifier location within a given Json text is, in fact, a Json array.
+- `string JSON_ARRAY = "\uFDD2"`
 
 ### JSON_DELETE
 
-- `string JSON_DELETE = "�"`
-
-A constant used to delete a value within a [http://www.json.org/ JSON] text string.
+- `string JSON_DELETE = "\uFDD8"`
 
 ### JSON_FALSE
 
-- `string JSON_FALSE = "�"`
-
-Return value for llJsonValueType function indicating the data type of a given address specifier in a given string-serialized JSON object.
-Also used to set the bare word 'false' as a Value within a Json text using llJsonSetValue and llList2Json.
+- `string JSON_FALSE = "\uFDD7"`
 
 ### JSON_INVALID
 
-- `string JSON_INVALID = "﷐"`
-
-A return value that indicates an invalid 'type' was specified to the llList2Json function. Also a return value for llJsonValueType function indicating the data type of a given address specifier in a given string-serialized JSON object.
- Also a return value for llJsonGetValue to signify a specifier list attempting to access a nonexistent location within a Json text (see Examples).
+- `string JSON_INVALID = "\uFDD0"`
 
 ### JSON_NULL
 
-- `string JSON_NULL = "�"`
-
-Return value for llJsonValueType function indicating the Json data type of a given address specifier in a given string-serialized JSON text.
-Also the return string value for llJsonGetValue function when the bare word 'null' is at the given address specifier in a given string-serialized JSON text.
-Also used to encode the bare word 'null' within a Json text to signify an empty, valueless placeholder Value at that location (the empty LSL String, "", can be used as well for that).
+- `string JSON_NULL = "\uFDD5"`
 
 ### JSON_NUMBER
 
-- `string JSON_NUMBER = "�"`
-
-Return value for llJsonValueType function indicating the data type of a given address specifier in a given string-serialized JSON object.
+- `string JSON_NUMBER = "\uFDD3"`
 
 ### JSON_OBJECT
 
-- `string JSON_OBJECT = "﷑"`
-
-Used with the llList2Json function to indicate that the list provided is a strided list of "Key", Value pairs (which may be empty), and that a string representing a Json object will be returned.
-Also a possible return value for the llJsonValueType function that indicates the Json data type of at the specifier location within a given Json text is, in fact, a JSON_OBJECT.
+- `string JSON_OBJECT = "\uFDD1"`
 
 ### JSON_STRING
 
-- `string JSON_STRING = "�"`
-
-Return value for llJsonValueType function indicating the data type of a given address specifier in a given string-serialized JSON object.
+- `string JSON_STRING = "\uFDD4"`
 
 ### JSON_TRUE
 
-- `string JSON_TRUE = "�"`
-
-Return value for llJsonValueType function indicating the data type of a given address specifier in a given string-serialized JSON object.
-Also used to set the bare word 'true' as a Value within a JSON text using llJsonSetValue and llList2Json.
+- `string JSON_TRUE = "\uFDD6"`
 
 ### KFM_CMD_PAUSE
 
 - `integer KFM_CMD_PAUSE = 2`
 
-Command used in the options parameter llSetKeyframedMotion .Stops the animation but doesn t reset it at the start of motion.
-
 ### KFM_CMD_PLAY
 
 - `integer KFM_CMD_PLAY = 0`
-
-Command used in the options parameter llSetKeyframedMotion .Resumes the animation previously stopped by KFM_CMD_STOP or KFM_CMD_PAUSE
 
 ### KFM_CMD_STOP
 
 - `integer KFM_CMD_STOP = 1`
 
-Command used in the options parameter llSetKeyframedMotion .Stops the animation and resets it at the start of motion.
-
 ### KFM_COMMAND
 
 - `integer KFM_COMMAND = 0`
-
-Command used in the options parameter of llSetKeyframedMotion .followed by one of: KFM_CMD_STOP, KFM_CMD_PLAY, KFM_CMD_PAUSE to play , stop or pause the motion .
 
 ### KFM_DATA
 
 - `integer KFM_DATA = 2`
 
-Flag used in the options parameter llSetKeyframedMotion : is a flag followed by a bitwise combination of: KFM_TRANSLATION and KFM_ROTATION. If absent, both rotations and translations must be provided in the first parameter of llSetKeyframedMotion .
-
 ### KFM_FORWARD
 
 - `integer KFM_FORWARD = 0`
-
-specify the playback mode used in llSetKeyframedMotion . It s the default playback mode . It plays the frames in this order frame1, frame2 .. frame N And stops after
 
 ### KFM_LOOP
 
 - `integer KFM_LOOP = 1`
 
-specify the playback mode used in llSetKeyframedMotion : will play the frames in the order number 1 , number 2 ... number N , returns to
-the intitial position , plays number 1 , nummber 2 ..
-
 ### KFM_MODE
 
 - `integer KFM_MODE = 1`
-
-used in llSetKeyframedMotion . followed by one of: KFM_LOOP, KFM_REVERSE, KFM_FORWARD, or KFM_PING_PONG will specify the playback mode. Defaults to KFM_FORWARD. Must be specified when the keyframe list is provided.
 
 ### KFM_PING_PONG
 
 - `integer KFM_PING_PONG = 2`
 
-specify the playback mode used in llSetKeyframedMotion
-
 ### KFM_REVERSE
 
 - `integer KFM_REVERSE = 3`
 
-specify the playback mode used in llSetKeyframedMotion . It plays the frames in this order frameN, frameN-1 .. frame 2 , frame 1 . And stops after
-
 ### KFM_ROTATION
 
-- `integer KFM_ROTATION = 0x1`
-
-Specifies the type of data in the list of moves for llSetKeyframedMotion
+- `integer KFM_ROTATION = 1`
 
 ### KFM_TRANSLATION
 
-- `integer KFM_TRANSLATION = 0x2`
+- `integer KFM_TRANSLATION = 2`
 
-specifies the type of data in the list of moves for the function llSetKeyframedMotion
+### LAND_LARGE_BRUSH
+
+- `integer LAND_LARGE_BRUSH = 3`
 
 ### LAND_LEVEL
 
@@ -1295,11 +965,13 @@ specifies the type of data in the list of moves for the function llSetKeyframedM
 
 - `integer LAND_LOWER = 2`
 
+### LAND_MEDIUM_BRUSH
+
+- `integer LAND_MEDIUM_BRUSH = 2`
+
 ### LAND_NOISE
 
 - `integer LAND_NOISE = 4`
-
-Randomize the land - makes it rough
 
 ### LAND_RAISE
 
@@ -1309,128 +981,153 @@ Randomize the land - makes it rough
 
 - `integer LAND_REVERT = 5`
 
+### LAND_SMALL_BRUSH
+
+- `integer LAND_SMALL_BRUSH = 1`
+
 ### LAND_SMOOTH
 
 - `integer LAND_SMOOTH = 3`
+
+### LINKSETDATA_DELETE
+
+- `integer LINKSETDATA_DELETE = 2`
+
+### LINKSETDATA_EMEMORY
+
+- `integer LINKSETDATA_EMEMORY = 1`
+
+### LINKSETDATA_ENOKEY
+
+- `integer LINKSETDATA_ENOKEY = 2`
+
+### LINKSETDATA_EPROTECTED
+
+- `integer LINKSETDATA_EPROTECTED = 3`
+
+### LINKSETDATA_MULTIDELETE
+
+- `integer LINKSETDATA_MULTIDELETE = 3`
+
+### LINKSETDATA_NOTFOUND
+
+- `integer LINKSETDATA_NOTFOUND = 4`
+
+### LINKSETDATA_NOUPDATE
+
+- `integer LINKSETDATA_NOUPDATE = 5`
+
+### LINKSETDATA_OK
+
+- `integer LINKSETDATA_OK = 0`
+
+### LINKSETDATA_RESET
+
+- `integer LINKSETDATA_RESET = 0`
+
+### LINKSETDATA_UPDATE
+
+- `integer LINKSETDATA_UPDATE = 1`
 
 ### LINK_ALL_CHILDREN
 
 - `integer LINK_ALL_CHILDREN = -3`
 
-Targets all the prims in the linkset, except the root.
-
 ### LINK_ALL_OTHERS
 
 - `integer LINK_ALL_OTHERS = -2`
-
-Targets all the other prims in the linkset, except the one the script resides in.
-The opposite of LINK_THIS.
 
 ### LINK_ROOT
 
 - `integer LINK_ROOT = 1`
 
-Targets the root prim in the linkset.
-
 ### LINK_SET
 
 - `integer LINK_SET = -1`
-
-Targets all the prims in the linkset.
 
 ### LINK_THIS
 
 - `integer LINK_THIS = -4`
 
-Targets the prim the script resides in. 
-The opposite flag of this is LINK_ALL_OTHERS.
-
 ### LIST_STAT_GEOMETRIC_MEAN
 
 - `integer LIST_STAT_GEOMETRIC_MEAN = 9`
 
-Returns the geometric mean of a list of numbers.
-float geometric_mean = llListStatistics( LIST_STAT_GEOMETRIC_MEAN, numList );
-For two numbers, a and b, the geometric mean is llSqrt(a*b). For a list of n numbers, the geometric mean is the n-th root of their product. It indicates the central tendency or typical value to expect. It only works for positive numbers.
-In comparison, the arithmetic mean (known as the average) is the sum of the numbers divided by how many numbers there are.
+### LIST_STAT_HARMONIC_MEAN
+
+- `integer LIST_STAT_HARMONIC_MEAN = 100`
 
 ### LIST_STAT_MAX
 
 - `integer LIST_STAT_MAX = 2`
 
-Retrieves the largest number in the list.
-
 ### LIST_STAT_MEAN
 
 - `integer LIST_STAT_MEAN = 3`
-
-Calculates the mean (average) of the numbers in the list.
 
 ### LIST_STAT_MEDIAN
 
 - `integer LIST_STAT_MEDIAN = 4`
 
-Calculates the median number in the list.
-float median = llListStatistics( LIST_STAT_MEDIAN, numList );
-The median is the number for which half the values are less and half are greater. For example, the median of [1,1,1,2,1000,1000,1000] is 2, while the mean is 429.3.
-
 ### LIST_STAT_MIN
 
 - `integer LIST_STAT_MIN = 1`
-
-Retrieves the smallest number in the list.
 
 ### LIST_STAT_NUM_COUNT
 
 - `integer LIST_STAT_NUM_COUNT = 8`
 
-Retrieves the number of float and integer elements.
-
 ### LIST_STAT_RANGE
 
 - `integer LIST_STAT_RANGE = 0`
-
-Calculates the range of the list. (max - min)
 
 ### LIST_STAT_STD_DEV
 
 - `integer LIST_STAT_STD_DEV = 5`
 
-Calculates the sample standard deviation of a list of numbers.
-float sample_standard_deviation = llListStatistics( LIST_STAT_STD_DEV, numList );
-Standard deviation is a measure of how spread out the values are, and is defined as the square root of the average of the squares of the numbers:
-integer count = (integer)llListStatistics( LIST_STAT_NUM_COUNT, numList );
-float standard_deviation = llSqrt( llListStatistics( LIST_STAT_SUM_SQUARES , numList ) ) / count;
-The sample standard deviation is used when the list doesn't (or can't) include the entire set of numbers, like the mass of every prim in SL. The true standard deviation is therefore estimated by using the sample standard deviation, which is defined by,
-integer count = (integer)llListStatistics( LIST_STAT_NUM_COUNT, numList );
-float sample_standard_deviation = llSqrt( llListStatistics( LIST_STAT_SUM_SQUARES , numList ) ) / (count - 1);
-Another way to calculate the sample standard deviation is 
- list numList = [1,1,1,2,1000,1000,1000];
- integer count = llGetListLength( numList );
- float sum = 0;
- float mean = llListStatistics( LIST_STAT_MEAN, numList );
- integer i = 0;
- for (; i
-
 ### LIST_STAT_SUM
 
 - `integer LIST_STAT_SUM = 6`
-
-Calculates the sum of the numbers in a list.
 
 ### LIST_STAT_SUM_SQUARES
 
 - `integer LIST_STAT_SUM_SQUARES = 7`
 
-Calculates the sum of the squares of the numbers in a list.
-float sum_of_squares = llListStatistics( LIST_STAT_SUM_SQUARES, numList );
-That is, for each number N_i in a list of k elements, it calculates N_1*N_1 + N_2*N_2 + ... + N_k * N_k.
-
 ### LOOP
 
-- `integer LOOP = 0x02`
+- `integer LOOP = 2`
 
-Causes a texture animation to loop.
+### LSL_STATUS_BOUNDS_ERROR
+
+- `integer LSL_STATUS_BOUNDS_ERROR = 1002`
+
+### LSL_STATUS_INTERNAL_ERROR
+
+- `integer LSL_STATUS_INTERNAL_ERROR = 1999`
+
+### LSL_STATUS_MALFORMED_PARAMS
+
+- `integer LSL_STATUS_MALFORMED_PARAMS = 1000`
+
+### LSL_STATUS_NOT_FOUND
+
+- `integer LSL_STATUS_NOT_FOUND = 1003`
+
+### LSL_STATUS_NOT_SUPPORTED
+
+- `integer LSL_STATUS_NOT_SUPPORTED = 1004`
+
+### LSL_STATUS_OK
+
+- `integer LSL_STATUS_OK = 0`
+
+### LSL_STATUS_TYPE_MISMATCH
+
+- `integer LSL_STATUS_TYPE_MISMATCH = 1001`
+
+### LSL_STATUS_WHITELIST_FAILED
+
+- `integer LSL_STATUS_WHITELIST_FAILED = 2001`
 
 ### MASK_BASE
 
@@ -1454,330 +1151,679 @@ Causes a texture animation to loop.
 
 ### NAK
 
-- `NAK`
+- `string NAK = "\n\u0015\n"`
 
-NAK is a value returned by the llGetNotecardLineSync function when the requested notecard data is not available due to the notecard not being in the region notecard cache. The value returned equals the characters with codes "10, 21, 10", which is to say the ASCII "NAK" character surrounded by two newline characters.
-If the NAK response is encountered, the card can be fetched into the region notecard cache by using the llGetNotecardLine or llGetNumberOfNotecardLines functions. If the notecard doesn't exist at all, further llGetNotecardLineSync calls will continue returning NAK.
+### NPC
+
+- `integer NPC = 0x20`
+
+### NPCLOOKAT_CLEAR
+
+- `integer NPCLOOKAT_CLEAR = 10`
+
+### NPCLOOKAT_CONVERSATION
+
+- `integer NPCLOOKAT_CONVERSATION = 6`
+
+### NPCLOOKAT_FOCUS
+
+- `integer NPCLOOKAT_FOCUS = 8`
+
+### NPCLOOKAT_FREELOOK
+
+- `integer NPCLOOKAT_FREELOOK = 3`
+
+### NPCLOOKAT_HOVER
+
+- `integer NPCLOOKAT_HOVER = 5`
+
+### NPCLOOKAT_IDLE
+
+- `integer NPCLOOKAT_IDLE = 1`
+
+### NPCLOOKAT_LISTEN
+
+- `integer NPCLOOKAT_LISTEN = 2`
+
+### NPCLOOKAT_MOUSELOOK
+
+- `integer NPCLOOKAT_MOUSELOOK = 9`
+
+### NPCLOOKAT_NONE
+
+- `integer NPCLOOKAT_NONE = 0`
+
+### NPCLOOKAT_RESPOND
+
+- `integer NPCLOOKAT_RESPOND = 4`
+
+### NPCLOOKAT_SELECT
+
+- `integer NPCLOOKAT_SELECT = 7`
 
 ### NULL_KEY
 
 - `string NULL_KEY = "00000000-0000-0000-0000-000000000000"`
 
-NULL_KEY is a string. However it is only really useful as a key.
-For tests, NULL_KEY evaluates to TRUE like other strings.
-For list search (like llListFindList), NULL_KEY won't match null keys whose type is key without typecasting.
+### OBJECT_ACCOUNT_LEVEL
+
+- `integer OBJECT_ACCOUNT_LEVEL = 41`
+
+### OBJECT_ANIMATED_COUNT
+
+- `integer OBJECT_ANIMATED_COUNT = 39`
+
+### OBJECT_ANIMATED_SLOTS_AVAILABLE
+
+- `integer OBJECT_ANIMATED_SLOTS_AVAILABLE = 40`
 
 ### OBJECT_ATTACHED_POINT
 
 - `integer OBJECT_ATTACHED_POINT = 19`
 
-Used with llGetObjectDetails, returns the value llGetAttached would return.
-
 ### OBJECT_ATTACHED_SLOTS_AVAILABLE
 
 - `integer OBJECT_ATTACHED_SLOTS_AVAILABLE = 35`
 
-This is a flag used with llGetObjectDetails to gets the avatar's available attachment slot count.
-If id is not an avatar, 0.0 is returned.
+### OBJECT_BODY_SHAPE_TYPE
 
-### OBJECT_DAMAGE
+- `integer OBJECT_BODY_SHAPE_TYPE = 26`
 
-- `integer OBJECT_DAMAGE = 51`
+### OBJECT_CHARACTER_TIME
 
-Gets the damage amount delivered by a prim on collision.
+- `integer OBJECT_CHARACTER_TIME = 17`
 
-### OBJECT_DAMAGE_TYPE
+### OBJECT_CLICK_ACTION
 
-- `integer OBJECT_DAMAGE_TYPE = 52`
+- `integer OBJECT_CLICK_ACTION = 28`
 
-Gets the damage type that is applied when this prim collides with another object. Can match one of the DAMAGE_TYPE_* constants, be a custom damage type or be a repurposed damage field.
+### OBJECT_CREATION_TIME
 
-### OBJECT_HEALTH
+- `integer OBJECT_CREATION_TIME = 36`
 
-- `integer OBJECT_HEALTH = 50`
+### OBJECT_CREATOR
 
-Gets the health of the object.
-This property can only be changed by a call to llSetPrimitiveParams or llSetLinkPrimitiveParams with PRIM_HEALTH. Damaging an object (with llDamage or collision by damage-enabled object) will not directly affect its health.
+- `integer OBJECT_CREATOR = 8`
+
+### OBJECT_DESC
+
+- `integer OBJECT_DESC = 2`
+
+### OBJECT_GROUP
+
+- `integer OBJECT_GROUP = 7`
+
+### OBJECT_GROUP_TAG
+
+- `integer OBJECT_GROUP_TAG = 33`
 
 ### OBJECT_HOVER_HEIGHT
 
 - `integer OBJECT_HOVER_HEIGHT = 25`
 
-This is a flag used with llGetObjectDetails to get the hover height of the avatar.
-If id is not an avatar, 0.0 is returned. Normal values are in the range {{Interval
+### OBJECT_LAST_OWNER_ID
+
+- `integer OBJECT_LAST_OWNER_ID = 27`
+
+### OBJECT_LINK_NUMBER
+
+- `integer OBJECT_LINK_NUMBER = 46`
+
+### OBJECT_MASS
+
+- `integer OBJECT_MASS = 43`
+
+### OBJECT_MATERIAL
+
+- `integer OBJECT_MATERIAL = 42`
+
+### OBJECT_NAME
+
+- `integer OBJECT_NAME = 1`
 
 ### OBJECT_OMEGA
 
 - `integer OBJECT_OMEGA = 29`
 
-Used with llGetObjectDetails to get the objects rotational velocity.
+### OBJECT_OWNER
+
+- `integer OBJECT_OWNER = 6`
 
 ### OBJECT_PATHFINDING_TYPE
 
-- `integer OBJECT_PATHFINDING_TYPE = |desc`
+- `integer OBJECT_PATHFINDING_TYPE = 20`
 
 ### OBJECT_PHANTOM
 
 - `integer OBJECT_PHANTOM = 22`
 
-This is a flag used with llGetObjectDetails to get the object's phantom attribute.
-If the object being queried is an avatar or attachment, 0 is returned.
-
 ### OBJECT_PHYSICS
 
 - `integer OBJECT_PHYSICS = 21`
 
-This is a flag used with llGetObjectDetails to get the object's physics attribute.
-If the object being queried is an avatar or attachment, 0 is returned.
+### OBJECT_PHYSICS_COST
+
+- `integer OBJECT_PHYSICS_COST = 16`
 
 ### OBJECT_POS
 
 - `integer OBJECT_POS = 3`
 
-This is a flag used with llGetObjectDetails to get the object position.
+### OBJECT_PRIM_COUNT
+
+- `integer OBJECT_PRIM_COUNT = 30`
+
+### OBJECT_PRIM_EQUIVALENCE
+
+- `integer OBJECT_PRIM_EQUIVALENCE = 13`
 
 ### OBJECT_RENDER_WEIGHT
 
 - `integer OBJECT_RENDER_WEIGHT = 24`
 
-This is a flag used with llGetObjectDetails to get the Avatar_Rendering_Cost of an avatar, based on values reported by nearby viewers. If no data is available, -1 is returned. The maximum render weight stored by the simulator is 500000. When called against an object, 0 is returned.
+### OBJECT_REZZER_KEY
 
-### OBJECT_RETURN_PARCEL
+- `integer OBJECT_REZZER_KEY = 32`
 
-- `integer OBJECT_RETURN_PARCEL = 1`
+### OBJECT_REZ_TIME
 
-For llReturnObjectsByOwner, sets the scope to return all objects on the same parcel as the script which are owned by 'owner'. The script must be owned by an estate manager or over a parcel owned by the owner of the script.
-
-### OBJECT_RETURN_PARCEL_OWNER
-
-- `integer OBJECT_RETURN_PARCEL_OWNER = 2`
-
-For llReturnObjectsByOwner, sets the scope to return all objects owned by 'owner' which are over parcels owned by the owner of the script.
-
-### OBJECT_RETURN_REGION
-
-- `integer OBJECT_RETURN_REGION = 4`
-
-For llReturnObjectsByOwner, sets the scope to return all objects in the region owned by 'owner' - only works when the script is owned by the estate owner or an estate manager.
+- `integer OBJECT_REZ_TIME = 45`
 
 ### OBJECT_ROOT
 
-- `integer OBJECT_ROOT = |desc`
+- `integer OBJECT_ROOT = 18`
+
+### OBJECT_ROT
+
+- `integer OBJECT_ROT = 4`
+
+### OBJECT_RUNNING_SCRIPT_COUNT
+
+- `integer OBJECT_RUNNING_SCRIPT_COUNT = 9`
+
+### OBJECT_SCALE
+
+- `integer OBJECT_SCALE = 47`
+
+### OBJECT_SCRIPT_MEMORY
+
+- `integer OBJECT_SCRIPT_MEMORY = 11`
+
+### OBJECT_SCRIPT_TIME
+
+- `integer OBJECT_SCRIPT_TIME = 12`
+
+### OBJECT_SELECT_COUNT
+
+- `integer OBJECT_SELECT_COUNT = 37`
+
+### OBJECT_SERVER_COST
+
+- `integer OBJECT_SERVER_COST = 14`
+
+### OBJECT_SIT_COUNT
+
+- `integer OBJECT_SIT_COUNT = 38`
+
+### OBJECT_STREAMING_COST
+
+- `integer OBJECT_STREAMING_COST = 15`
+
+### OBJECT_TEMP_ATTACHED
+
+- `integer OBJECT_TEMP_ATTACHED = 34`
 
 ### OBJECT_TEMP_ON_REZ
 
 - `integer OBJECT_TEMP_ON_REZ = 23`
 
-This is a flag used with llGetObjectDetails to get the object's temporary attribute.
+### OBJECT_TEXT
+
+- `integer OBJECT_TEXT = 44`
+
+### OBJECT_TEXT_ALPHA
+
+- `integer OBJECT_TEXT_ALPHA = 49`
+
+### OBJECT_TEXT_COLOR
+
+- `integer OBJECT_TEXT_COLOR = 48`
+
+### OBJECT_TOTAL_INVENTORY_COUNT
+
+- `integer OBJECT_TOTAL_INVENTORY_COUNT = 31`
+
+### OBJECT_TOTAL_SCRIPT_COUNT
+
+- `integer OBJECT_TOTAL_SCRIPT_COUNT = 10`
+
+### OBJECT_UNKNOWN_DETAIL
+
+- `integer OBJECT_UNKNOWN_DETAIL = -1`
+
+### OBJECT_VELOCITY
+
+- `integer OBJECT_VELOCITY = 5`
 
 ### OPT_AVATAR
 
-- `integer OPT_AVATAR = |desc`
+- `integer OPT_AVATAR = 1`
+
+not supported
 
 ### OPT_CHARACTER
 
-- `integer OPT_CHARACTER = |desc`
+- `integer OPT_CHARACTER = 2`
+
+not supported
 
 ### OPT_EXCLUSION_VOLUME
 
 - `integer OPT_EXCLUSION_VOLUME = 6`
 
+not supported
+
 ### OPT_LEGACY_LINKSET
 
-- `integer OPT_LEGACY_LINKSET = |desc`
+- `integer OPT_LEGACY_LINKSET = 0`
+
+not supported
 
 ### OPT_MATERIAL_VOLUME
 
 - `integer OPT_MATERIAL_VOLUME = 5`
 
+not supported
+
 ### OPT_OTHER
 
-- `integer OPT_OTHER = |desc`
+- `integer OPT_OTHER = -1`
+
+not supported
 
 ### OPT_STATIC_OBSTACLE
 
-- `integer OPT_STATIC_OBSTACLE = |desc`
+- `integer OPT_STATIC_OBSTACLE = 4`
+
+not supported
 
 ### OPT_WALKABLE
 
-- `integer OPT_WALKABLE = |desc`
+- `integer OPT_WALKABLE = 3`
+
+not supported
+
+### OSTPOBJ_NONE
+
+- `integer OSTPOBJ_NONE = 0x0`
+
+osTeleportObject no flags
+
+### OSTPOBJ_SETROT
+
+- `integer OSTPOBJ_SETROT = 0x4`
+
+osTeleportObject flag: the rotation is the final rotation, otherwise is a added rotation
+
+### OSTPOBJ_STOPATTARGET
+
+- `integer OSTPOBJ_STOPATTARGET = 0x1`
+
+osTeleportObject flag: stop at destination
+
+### OSTPOBJ_STOPONFAIL
+
+- `integer OSTPOBJ_STOPONFAIL = 0x2`
+
+osTeleportObject flag: stop at jump point if tp fails
+
+### OS_APIVERSION
+
+- `integer OS_APIVERSION = 24`
+
+### OS_ATTACH_MSG_ALL
+
+- `integer OS_ATTACH_MSG_ALL = -65535`
+
+### OS_ATTACH_MSG_INVERT_POINTS
+
+- `integer OS_ATTACH_MSG_INVERT_POINTS = 1`
+
+### OS_ATTACH_MSG_OBJECT_CREATOR
+
+- `integer OS_ATTACH_MSG_OBJECT_CREATOR = 2`
+
+### OS_ATTACH_MSG_SCRIPT_CREATOR
+
+- `integer OS_ATTACH_MSG_SCRIPT_CREATOR = 4`
+
+### OS_LISTEN_REGEX_MESSAGE
+
+- `integer OS_LISTEN_REGEX_MESSAGE = 0x2`
+
+### OS_LISTEN_REGEX_NAME
+
+- `integer OS_LISTEN_REGEX_NAME = 0x1`
+
+### OS_LTPAG_ALGNLV
+
+- `integer OS_LTPAG_ALGNLV = 0x4`
+
+osLocalTeleportAgent align lookat to velocity
+
+### OS_LTPAG_FORCEFLY
+
+- `integer OS_LTPAG_FORCEFLY = 0x8`
+
+osLocalTeleportAgent force fly
+
+### OS_LTPAG_FORCENOFLY
+
+- `integer OS_LTPAG_FORCENOFLY = 0x16`
+
+osLocalTeleportAgent force no fly
+
+### OS_LTPAG_NONE
+
+- `integer OS_LTPAG_NONE = 0x0`
+
+osLocalTeleportAgent no flags
+
+### OS_LTPAG_USELOOKAT
+
+- `integer OS_LTPAG_USELOOKAT = 0x2`
+
+osLocalTeleportAgent use lookat
+
+### OS_LTPAG_USEVEL
+
+- `integer OS_LTPAG_USEVEL = 0x1`
+
+osLocalTeleportAgent use velocity
+
+### OS_NPC_CREATOR_OWNED
+
+- `integer OS_NPC_CREATOR_OWNED = 0x1`
+
+### OS_NPC_FLY
+
+- `integer OS_NPC_FLY = 0`
+
+### OS_NPC_LAND_AT_TARGET
+
+- `integer OS_NPC_LAND_AT_TARGET = 2`
+
+### OS_NPC_NOT_OWNED
+
+- `integer OS_NPC_NOT_OWNED = 0x2`
+
+### OS_NPC_NO_FLY
+
+- `integer OS_NPC_NO_FLY = 1`
+
+### OS_NPC_OBJECT_GROUP
+
+- `integer OS_NPC_OBJECT_GROUP = 0x08`
+
+### OS_NPC_RUNNING
+
+- `integer OS_NPC_RUNNING = 4`
+
+### OS_NPC_SENSE_AS_AGENT
+
+- `integer OS_NPC_SENSE_AS_AGENT = 0x4`
+
+### OS_NPC_SIT_NOW
+
+- `integer OS_NPC_SIT_NOW = 0`
+
+### PARCEL_COUNT_GROUP
+
+- `integer PARCEL_COUNT_GROUP = 2`
+
+### PARCEL_COUNT_OTHER
+
+- `integer PARCEL_COUNT_OTHER = 3`
+
+### PARCEL_COUNT_OWNER
+
+- `integer PARCEL_COUNT_OWNER = 1`
+
+### PARCEL_COUNT_SELECTED
+
+- `integer PARCEL_COUNT_SELECTED = 4`
+
+### PARCEL_COUNT_TEMP
+
+- `integer PARCEL_COUNT_TEMP = 5`
+
+### PARCEL_COUNT_TOTAL
+
+- `integer PARCEL_COUNT_TOTAL = 0`
+
+### PARCEL_DETAILS_ANY_AVATAR_SOUNDS
+
+- `integer PARCEL_DETAILS_ANY_AVATAR_SOUNDS = 7`
+
+### PARCEL_DETAILS_AREA
+
+- `integer PARCEL_DETAILS_AREA = 4`
+
+### PARCEL_DETAILS_CLAIMDATE
+
+- `integer PARCEL_DETAILS_CLAIMDATE = 10`
+
+### PARCEL_DETAILS_DESC
+
+- `integer PARCEL_DETAILS_DESC = 1`
+
+### PARCEL_DETAILS_DWELL
+
+- `integer PARCEL_DETAILS_DWELL = 64`
+
+### PARCEL_DETAILS_FLAGS
+
+- `integer PARCEL_DETAILS_FLAGS = 12`
+
+### PARCEL_DETAILS_GEOMETRICCENTER
+
+- `integer PARCEL_DETAILS_GEOMETRICCENTER = 66`
+
+### PARCEL_DETAILS_GETCLAIMDATE
+
+- `integer PARCEL_DETAILS_GETCLAIMDATE = 65`
+
+### PARCEL_DETAILS_GROUP
+
+- `integer PARCEL_DETAILS_GROUP = 3`
+
+### PARCEL_DETAILS_GROUP_SOUNDS
+
+- `integer PARCEL_DETAILS_GROUP_SOUNDS = 8`
+
+### PARCEL_DETAILS_ID
+
+- `integer PARCEL_DETAILS_ID = 5`
+
+### PARCEL_DETAILS_LANDING_LOOKAT
+
+- `integer PARCEL_DETAILS_LANDING_LOOKAT = 10`
+
+### PARCEL_DETAILS_LANDING_POINT
+
+- `integer PARCEL_DETAILS_LANDING_POINT = 9`
+
+### PARCEL_DETAILS_NAME
+
+- `integer PARCEL_DETAILS_NAME = 0`
+
+### PARCEL_DETAILS_OWNER
+
+- `integer PARCEL_DETAILS_OWNER = 2`
+
+### PARCEL_DETAILS_PRIM_CAPACITY
+
+- `integer PARCEL_DETAILS_PRIM_CAPACITY = 7`
+
+### PARCEL_DETAILS_PRIM_USED
+
+- `integer PARCEL_DETAILS_PRIM_USED = 8`
+
+### PARCEL_DETAILS_SCRIPT_DANGER
+
+- `integer PARCEL_DETAILS_SCRIPT_DANGER = 13`
+
+### PARCEL_DETAILS_SEE_AVATARS
+
+- `integer PARCEL_DETAILS_SEE_AVATARS = 6`
+
+### PARCEL_DETAILS_TP_ROUTING
+
+- `integer PARCEL_DETAILS_TP_ROUTING = 11`
+
+### PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY
+
+- `integer PARCEL_FLAG_ALLOW_ALL_OBJECT_ENTRY = 0x8000000`
+
+### PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS
+
+- `integer PARCEL_FLAG_ALLOW_CREATE_GROUP_OBJECTS = 0x4000000`
 
 ### PARCEL_FLAG_ALLOW_CREATE_OBJECTS
 
-- `PARCEL_FLAG_ALLOW_CREATE_OBJECTS`
-
-This is a flag used with llGetParcelFlags to check if anyone can create objects on the parcel.
+- `integer PARCEL_FLAG_ALLOW_CREATE_OBJECTS = 0x40`
 
 ### PARCEL_FLAG_ALLOW_DAMAGE
 
-- `PARCEL_FLAG_ALLOW_DAMAGE`
-
-This is a flag used with llGetParcelFlags to check if damage is enabled on the parcel.
+- `integer PARCEL_FLAG_ALLOW_DAMAGE = 0x20`
 
 ### PARCEL_FLAG_ALLOW_FLY
 
-- `PARCEL_FLAG_ALLOW_FLY`
+- `integer PARCEL_FLAG_ALLOW_FLY = 0x1`
 
-This is a flag used with llGetParcelFlags to check if flying is allowed on the parcel.
+### PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY
+
+- `integer PARCEL_FLAG_ALLOW_GROUP_OBJECT_ENTRY = 0x10000000`
+
+### PARCEL_FLAG_ALLOW_GROUP_SCRIPTS
+
+- `integer PARCEL_FLAG_ALLOW_GROUP_SCRIPTS = 0x2000000`
+
+### PARCEL_FLAG_ALLOW_LANDMARK
+
+- `integer PARCEL_FLAG_ALLOW_LANDMARK = 0x8`
 
 ### PARCEL_FLAG_ALLOW_SCRIPTS
 
-- `PARCEL_FLAG_ALLOW_SCRIPTS`
-
-This is a flag used with llGetParcelFlags to check if scripts are allowed to run on the parcel.
+- `integer PARCEL_FLAG_ALLOW_SCRIPTS = 0x2`
 
 ### PARCEL_FLAG_ALLOW_TERRAFORM
 
-- `PARCEL_FLAG_ALLOW_TERRAFORM`
+- `integer PARCEL_FLAG_ALLOW_TERRAFORM = 0x10`
 
-This is a flag used with llGetParcelFlags to check if anyone is allowed to terraform the parcel.
+### PARCEL_FLAG_LOCAL_SOUND_ONLY
+
+- `integer PARCEL_FLAG_LOCAL_SOUND_ONLY = 0x8000`
+
+### PARCEL_FLAG_RESTRICT_PUSHOBJECT
+
+- `integer PARCEL_FLAG_RESTRICT_PUSHOBJECT = 0x200000`
+
+### PARCEL_FLAG_USE_ACCESS_GROUP
+
+- `integer PARCEL_FLAG_USE_ACCESS_GROUP = 0x100`
+
+### PARCEL_FLAG_USE_ACCESS_LIST
+
+- `integer PARCEL_FLAG_USE_ACCESS_LIST = 0x200`
+
+### PARCEL_FLAG_USE_BAN_LIST
+
+- `integer PARCEL_FLAG_USE_BAN_LIST = 0x400`
+
+### PARCEL_FLAG_USE_LAND_PASS_LIST
+
+- `integer PARCEL_FLAG_USE_LAND_PASS_LIST = 0x800`
 
 ### PARCEL_MEDIA_COMMAND_AGENT
 
 - `integer PARCEL_MEDIA_COMMAND_AGENT = 7`
 
-Applies the media command to the specified agent only.
-
 ### PARCEL_MEDIA_COMMAND_AUTO_ALIGN
 
 - `integer PARCEL_MEDIA_COMMAND_AUTO_ALIGN = 9`
-
-Sets the parcel option 'Auto scale content'.
 
 ### PARCEL_MEDIA_COMMAND_DESC
 
 - `integer PARCEL_MEDIA_COMMAND_DESC = 12`
 
-Use this to get or set the parcel media description.
-
 ### PARCEL_MEDIA_COMMAND_LOOP
 
 - `integer PARCEL_MEDIA_COMMAND_LOOP = 3`
-
-Start the media stream playing from the current frame. When the end is reached, loop to the beginning and continue.
-
-### PARCEL_MEDIA_COMMAND_LOOP_SET
-
-- `integer PARCEL_MEDIA_COMMAND_LOOP_SET = 13`
-
-Use this to get or set the parcel's media loop duration. It may not be functional. See for detail.
 
 ### PARCEL_MEDIA_COMMAND_PAUSE
 
 - `integer PARCEL_MEDIA_COMMAND_PAUSE = 1`
 
-Pause the media stream (stop playing but stay on current frame).
-
 ### PARCEL_MEDIA_COMMAND_PLAY
 
 - `integer PARCEL_MEDIA_COMMAND_PLAY = 2`
-
-Start the media stream playing from the current frame and stop when the end is reached.
 
 ### PARCEL_MEDIA_COMMAND_SIZE
 
 - `integer PARCEL_MEDIA_COMMAND_SIZE = 11`
 
-Use this to get or set the parcel media pixel resolution.
-
 ### PARCEL_MEDIA_COMMAND_STOP
 
 - `integer PARCEL_MEDIA_COMMAND_STOP = 0`
-
-Stop the media stream and go back to the first frame.
 
 ### PARCEL_MEDIA_COMMAND_TEXTURE
 
 - `integer PARCEL_MEDIA_COMMAND_TEXTURE = 4`
 
-Use this to get or set the parcel's media texture.
-
 ### PARCEL_MEDIA_COMMAND_TIME
 
 - `integer PARCEL_MEDIA_COMMAND_TIME = 6`
-
-Move a media stream to a specific time in (floating point) seconds.
 
 ### PARCEL_MEDIA_COMMAND_TYPE
 
 - `integer PARCEL_MEDIA_COMMAND_TYPE = 10`
 
-Use this to get or set the parcel media MIME type (e.g. "text/html").
-
 ### PARCEL_MEDIA_COMMAND_UNLOAD
 
 - `integer PARCEL_MEDIA_COMMAND_UNLOAD = 8`
-
-Completely unloads the movie and restores the original texture.
 
 ### PARCEL_MEDIA_COMMAND_URL
 
 - `integer PARCEL_MEDIA_COMMAND_URL = 5`
 
-Used to get or set the parcel's media url.
-
 ### PASSIVE
 
-- `integer PASSIVE = 0x4`
-
-If it is contained in the result of llDetectedType(), it means it is non-physical objects. 
-If it is used as an filter of llSensor() or llSensorRepeat(), it will search for non-scripted or script is inactive and non-physical or, if physical, not moving. Thus, it is not using SL server resources now.
-
-### PASS_ALWAYS
-
-- `integer PASS_ALWAYS = 1`
-
-The applicable event group will always be triggered in the the root prim. Whether or not is handled in the child prim is irrelevant.
-
-### PASS_IF_NOT_HANDLED
-
-- `integer PASS_IF_NOT_HANDLED = 0`
-
-The applicable event group will be triggered in the the root prim if it is not handled in this child prim.
-
-### PASS_NEVER
-
-- `integer PASS_NEVER = 2`
-
-The applicable event group will never be triggered in the the root prim. Whether or not is handled in the child prim is irrelevant.
-
-### PATROL_PAUSE_AT_WAYPOINTS
-
-- `integer PATROL_PAUSE_AT_WAYPOINTS = 0`
-
-Option parameter for llPatrolPoints function. Can be set TRUE or FALSE (the default). When set TRUE, characters will slow down and momentarily pause at each waypoint. When set FALSE, characters will continue to move to the next waypoint at full speed, with no pause.
-
-### PAYMENT_INFO_ON_FILE
-
-- `integer PAYMENT_INFO_ON_FILE = 0x1`
-
-If payment info is on file.
-
-### PAYMENT_INFO_USED
-
-- `integer PAYMENT_INFO_USED = 0x2`
-
-If payment info has been used.
+- `integer PASSIVE = 4`
 
 ### PAY_DEFAULT
 
 - `integer PAY_DEFAULT = -2`
 
-Uses the default value for a pay button.
-
 ### PAY_HIDE
 
 - `integer PAY_HIDE = -1`
-
-Hides a pay button completely.
 
 ### PERMISSION_ATTACH
 
 - `integer PERMISSION_ATTACH = 0x20`
 
+### PERMISSION_CHANGE_JOINTS
+
+- `integer PERMISSION_CHANGE_JOINTS = 0x100`
+
 ### PERMISSION_CHANGE_LINKS
 
 - `integer PERMISSION_CHANGE_LINKS = 0x80`
+
+### PERMISSION_CHANGE_PERMISSIONS
+
+- `integer PERMISSION_CHANGE_PERMISSIONS = 0x200`
 
 ### PERMISSION_CONTROL_CAMERA
 
@@ -1785,39 +1831,35 @@ Hides a pay button completely.
 
 ### PERMISSION_DEBIT
 
-- `PERMISSION_DEBIT`
+- `integer PERMISSION_DEBIT = 0x02`
 
 ### PERMISSION_OVERRIDE_ANIMATIONS
 
 - `integer PERMISSION_OVERRIDE_ANIMATIONS = 0x8000`
 
-### PERMISSION_PRIVILEGED_LAND_ACCESS
+### PERMISSION_RELEASE_OWNERSHIP
 
-- `integer PERMISSION_PRIVILEGED_LAND_ACCESS = 524288`
+- `integer PERMISSION_RELEASE_OWNERSHIP = 0x40`
 
-Required Permission to use the llSetParcelForSale() function.
+### PERMISSION_REMAP_CONTROLS
+
+- `integer PERMISSION_REMAP_CONTROLS = 0x08`
 
 ### PERMISSION_RETURN_OBJECTS
 
-- `integer PERMISSION_RETURN_OBJECTS = 65536`
-
-Required Permission to use the llReturnObject* functions.
+- `integer PERMISSION_RETURN_OBJECTS = 0x10000`
 
 ### PERMISSION_SILENT_ESTATE_MANAGEMENT
 
 - `integer PERMISSION_SILENT_ESTATE_MANAGEMENT = 0x4000`
 
-A script with this permission does not notify the object owner when it modifies estate access rules via llManageEstateAccess.
-
 ### PERMISSION_TAKE_CONTROLS
 
-- `PERMISSION_TAKE_CONTROLS`
+- `integer PERMISSION_TAKE_CONTROLS = 0x04`
 
 ### PERMISSION_TELEPORT
 
 - `integer PERMISSION_TELEPORT = 0x1000`
-
-Permission required to use llTeleportAgent.
 
 ### PERMISSION_TRACK_CAMERA
 
@@ -1825,91 +1867,65 @@ Permission required to use llTeleportAgent.
 
 ### PERMISSION_TRIGGER_ANIMATION
 
-- `integer PERMISSION_TRIGGER_ANIMATION = 0x10`
+- `integer PERMISSION_TRIGGER_ANIMATION = 0x010`
 
 ### PERM_ALL
 
-- `integer PERM_ALL = 0x7FFFFFFF`
+- `integer PERM_ALL = 0x7fffffff`
 
 ### PERM_COPY
 
-- `integer PERM_COPY = 0x00008000`
+- `integer PERM_COPY = 0x8000`
 
 ### PERM_MODIFY
 
-- `integer PERM_MODIFY = 0x00004000`
+- `integer PERM_MODIFY = 0x4000`
 
 ### PERM_MOVE
 
-- `integer PERM_MOVE = 0x00080000`
+- `integer PERM_MOVE = 0x80000`
 
 ### PERM_TRANSFER
 
-- `integer PERM_TRANSFER = 0x00002000`
+- `integer PERM_TRANSFER = 0x2000`
 
 ### PI
 
-- `float PI = 3.1415926535897932384626433832795f`
-
-. The number of radians in a half circle.
+- `float PI = 3.14159274f`
 
 ### PING_PONG
 
-- `integer PING_PONG = 0x08`
-
-Causes a texture animation to play forward first, then in reverse.
+- `integer PING_PONG = 8`
 
 ### PI_BY_TWO
 
-- `float PI_BY_TWO = 1.5707963267948966192313216916398f`
-
-PI/2. The number of radians in a quarter circle.
+- `float PI_BY_TWO = 1.57079637f`
 
 ### PRIM_ALLOW_UNSIT
 
 - `integer PRIM_ALLOW_UNSIT = 39`
 
-When set on a prim that is running a script as part of an experience an avatar that is seated on the sit target and has agreed to participate in the experience will be unable to stand or select another prim to sit on. The restriction remains in place until one of the following conditions is met:
-* PRIM_ALLOW_UNSIT is changed to TRUE
-* llUnSit( ) is called forcing the avatar to stand.
-* llSitOnLink( ) is called moving this avatar to a new sit target. 
-* The avatar teleports or is teleported by the experience.
-* The agent signs off.
-* The agent disables the experience.
-* The prim the avatar is seated on is destroyed.
-* The agent is unseated for any reason.
-This flag has no effect on agents who had seated manually (i.e. not via llSitOnLink using experience permissions).
-If the linkset moves to a region that has not enabled the experience this value will be ignored and standing will behave as normal, without restriction. If the linkset moves to a parcel that the avatar does not have access to, the avatar will be forced to stand and the unsit restriction will be removed.
+not supported
 
 ### PRIM_ALPHA_MODE
 
 - `integer PRIM_ALPHA_MODE = 38`
 
-Used to specify how the alpha channel of the diffuse texture should affect rendering of a prim’s face.
-
 ### PRIM_ALPHA_MODE_BLEND
 
 - `integer PRIM_ALPHA_MODE_BLEND = 1`
-
-Used with PRIM_ALPHA_MODE. Prims faces set to this type use alpha blending for diffuse texture rendering (assuming the alpha channel exists).
 
 ### PRIM_ALPHA_MODE_EMISSIVE
 
 - `integer PRIM_ALPHA_MODE_EMISSIVE = 3`
 
-Used with PRIM_ALPHA_MODE. Prims faces set to this type render with an emissivity corresponding to the opacity of each pixel of the diffuse texture. The more opaque a pixel is, the brighter it renders under all lighting conditions. A fully-opaque pixel will effectively render as 'full bright'.
-
 ### PRIM_ALPHA_MODE_MASK
 
 - `integer PRIM_ALPHA_MODE_MASK = 2`
 
-Used with PRIM_ALPHA_MODE. Prims faces set to this type render as either completely opaque or completely transparent on a per-pixel basis. Pixels which are less opaque than the specified mask_cutoff are rendered as completely transparent, and the rest are rendered as fully opaque.
-
 ### PRIM_ALPHA_MODE_NONE
 
 - `integer PRIM_ALPHA_MODE_NONE = 0`
-
-Used with PRIM_ALPHA_MODE. Prims faces set to this type ignore the alpha channel of the diffuse texture, and render as completely opaque.
 
 ### PRIM_BUMP_BARK
 
@@ -1959,9 +1975,6 @@ Used with PRIM_ALPHA_MODE. Prims faces set to this type ignore the alpha channel
 
 - `integer PRIM_BUMP_SHINY = 19`
 
-Used to get or set the Bump Mapping and shiny settings of the prim's face.
-{{LSL_Constants/PrimitiveParams/bumpshiny
-
 ### PRIM_BUMP_SIDING
 
 - `integer PRIM_BUMP_SIDING = 13`
@@ -1990,168 +2003,71 @@ Used to get or set the Bump Mapping and shiny settings of the prim's face.
 
 - `integer PRIM_BUMP_WOOD = 3`
 
-### PRIM_CLICK_ACTION
+### PRIM_CAST_SHADOWS
 
-- `integer PRIM_CLICK_ACTION = 43`
+- `integer PRIM_CAST_SHADOWS = 24`
 
-Which action will be taken when left-clicking the prim. Followed by one of these flags:
+not supported
 
 ### PRIM_COLOR
 
 - `integer PRIM_COLOR = 18`
 
-Used to get or set the Blinn-Phong color and alpha of a prim's face.
-
-### PRIM_DAMAGE
-
-- `integer PRIM_DAMAGE = 51`
-
-Sets the damage amount and damage type delivered by a prim on collision.
-
 ### PRIM_DESC
 
 - `integer PRIM_DESC = 28`
-
-Used to get or set the prim's description.
 
 ### PRIM_FLEXIBLE
 
 - `integer PRIM_FLEXIBLE = 21`
 
-Used to get or set the prim's flexible configuration.
-
 ### PRIM_FULLBRIGHT
 
 - `integer PRIM_FULLBRIGHT = 20`
-
-Used to get or set the full-bright setting of a prim's face.
 
 ### PRIM_GLOW
 
 - `integer PRIM_GLOW = 25`
 
-PRIM_GLOW is used to get or set the glow status of the face. Use the integer number 25 if the compiler rejects the named constant.
-
-### PRIM_GLTF_ALPHA_MODE_BLEND
-
-- `integer PRIM_GLTF_ALPHA_MODE_BLEND = 1`
-
-Alpha blending rendering mode for GLTF materials, used with PRIM_GLTF_BASE_COLOR. Transparency from the texture is applied and multiplied by the material's opacity multiplier, in linear color space.
-
-### PRIM_GLTF_ALPHA_MODE_MASK
-
-- `integer PRIM_GLTF_ALPHA_MODE_MASK = 2`
-
-Alpha masked rendering mode for GLTF materials, used with PRIM_GLTF_BASE_COLOR. Transparency from the texture is compared to the material's alpha cutoff, with pixels above the cutoff fully opaque and pixels below it fully transparent.
-
-### PRIM_GLTF_ALPHA_MODE_OPAQUE
-
-- `integer PRIM_GLTF_ALPHA_MODE_OPAQUE = 0`
-
-Opaque rendering mode for GLTF materials, used with PRIM_GLTF_BASE_COLOR. No transparency.
-
 ### PRIM_GLTF_BASE_COLOR
 
-- `texture PRIM_GLTF_BASE_COLOR = 48`
-
-Used to get or set the GLTF base color override of an object's face.
+- `integer PRIM_GLTF_BASE_COLOR = 48`
 
 ### PRIM_GLTF_EMISSIVE
 
-- `texture PRIM_GLTF_EMISSIVE = 46`
-
-Used to get or set the GLTF emission override of an object's face.
+- `integer PRIM_GLTF_EMISSIVE = 46`
 
 ### PRIM_GLTF_METALLIC_ROUGHNESS
 
-- `texture PRIM_GLTF_METALLIC_ROUGHNESS = 47`
-
-Used to get or set the GLTF occlusion/metallic/roughness override of an object's face.
+- `integer PRIM_GLTF_METALLIC_ROUGHNESS = 47`
 
 ### PRIM_GLTF_NORMAL
 
-- `texture PRIM_GLTF_NORMAL = 45`
-
-Used to get or set the GLTF normal map override of an object's face.
-
-### PRIM_HEALTH
-
-- `integer PRIM_HEALTH = 52`
-
-Used to get or set the health of the object. Objects start with 0 health by default.
-This property can only be changed by a call to llSetPrimitiveParams or llSetLinkPrimitiveParams. Damaging an object (with llDamage or collision by damage-enabled object) will not directly affect its health.
+- `integer PRIM_GLTF_NORMAL = 45`
 
 ### PRIM_HOLE_CIRCLE
 
-- `integer PRIM_HOLE_CIRCLE = 0x10`
-
-Used with certain PRIM_TYPE_* flags to make a circular hole, via the hole_shape parameter.
+- `integer PRIM_HOLE_CIRCLE = 16`
 
 ### PRIM_HOLE_DEFAULT
 
-- `integer PRIM_HOLE_DEFAULT = 0x00`
-
-Used with certain PRIM_TYPE_* flags to make a hole the same shape as the outer shape, via the hole_shape parameter.
+- `integer PRIM_HOLE_DEFAULT = 0`
 
 ### PRIM_HOLE_SQUARE
 
-- `integer PRIM_HOLE_SQUARE = 0x20`
-
-Used with certain PRIM_TYPE_* flags to make a squarish hole, via the hole_shape parameter.
+- `integer PRIM_HOLE_SQUARE = 32`
 
 ### PRIM_HOLE_TRIANGLE
 
-- `integer PRIM_HOLE_TRIANGLE = 0x30`
-
-Used with certain PRIM_TYPE_* flags to make a triangular hole, via the hole_shape parameter.
+- `integer PRIM_HOLE_TRIANGLE = 48`
 
 ### PRIM_LINK_TARGET
 
 - `integer PRIM_LINK_TARGET = 34`
 
-Used to get or set multiple links with a single PrimParameters call.
-
 ### PRIM_MATERIAL
 
 - `integer PRIM_MATERIAL = 2`
-
-Sets the prim material. Material does not affect mass, but does affect friction, bounce (elasticity), and collision sound. On a wood incline of 33 degrees, the example script below gave the following results:
-{ class="sortable" 
-+ Table detailing maximum velocity and distance traveled down the incline. 
-- 
-!Type
-!Velocity (m/s) 
-!Distance (m) 
--
-Stone
-0.453181
-0.361655
--
-Metal
-5.475444
-10.211180
--
-Glass
-6.483150
-11.678304
--
-Wood
-2.154549
-9.433724
--
-Flesh
-0.351543
-0.188043
--
-Plastic
-4.502428
-9.590952
--
-Rubber
-0.374964
-0.187106
--
-}
 
 ### PRIM_MATERIAL_FLESH
 
@@ -2161,13 +2077,9 @@ Rubber
 
 - `integer PRIM_MATERIAL_GLASS = 2`
 
-Very low friction
-
 ### PRIM_MATERIAL_LIGHT
 
 - `integer PRIM_MATERIAL_LIGHT = 7`
-
-This constant and it's underlying functionality is deprecated. Light is no longer a prim property, it is now a face property. The same functionality is reproduced with [ PRIM_FULLBRIGHT, ALL_SIDES, TRUE ]
 
 ### PRIM_MATERIAL_METAL
 
@@ -2209,6 +2121,18 @@ This constant and it's underlying functionality is deprecated. Light is no longe
 
 - `integer PRIM_MEDIA_AUTO_ZOOM = 7`
 
+### PRIM_MEDIA_CONTROLS
+
+- `integer PRIM_MEDIA_CONTROLS = 1`
+
+### PRIM_MEDIA_CONTROLS_MINI
+
+- `integer PRIM_MEDIA_CONTROLS_MINI = 1`
+
+### PRIM_MEDIA_CONTROLS_STANDARD
+
+- `integer PRIM_MEDIA_CONTROLS_STANDARD = 0`
+
 ### PRIM_MEDIA_CURRENT_URL
 
 - `integer PRIM_MEDIA_CURRENT_URL = 2`
@@ -2235,19 +2159,19 @@ This constant and it's underlying functionality is deprecated. Light is no longe
 
 ### PRIM_MEDIA_PERM_ANYONE
 
-- `integer PRIM_MEDIA_PERM_ANYONE = 0x4`
+- `integer PRIM_MEDIA_PERM_ANYONE = 4`
 
 ### PRIM_MEDIA_PERM_GROUP
 
-- `integer PRIM_MEDIA_PERM_GROUP = 0x2`
+- `integer PRIM_MEDIA_PERM_GROUP = 2`
 
 ### PRIM_MEDIA_PERM_NONE
 
-- `integer PRIM_MEDIA_PERM_NONE = 0x0`
+- `integer PRIM_MEDIA_PERM_NONE = 0`
 
 ### PRIM_MEDIA_PERM_OWNER
 
-- `integer PRIM_MEDIA_PERM_OWNER = 0x1`
+- `integer PRIM_MEDIA_PERM_OWNER = 1`
 
 ### PRIM_MEDIA_WHITELIST
 
@@ -2265,357 +2189,437 @@ This constant and it's underlying functionality is deprecated. Light is no longe
 
 - `integer PRIM_NAME = 27`
 
-Used to get or set the prim's name.
-
 ### PRIM_NORMAL
 
-- `texture PRIM_NORMAL = 37`
-
-Used to get or set the Blinn-Phong normal map texture settings of a prim's face.
+- `integer PRIM_NORMAL = 37`
 
 ### PRIM_OMEGA
 
 - `integer PRIM_OMEGA = 32`
 
-Used to make the object spin at the specified axis and rate, or retrieve spin settings. See llTargetOmega for specification.
-
 ### PRIM_PHANTOM
 
 - `integer PRIM_PHANTOM = 5`
-
-Used to get or set the object's phantom status.
 
 ### PRIM_PHYSICS
 
 - `integer PRIM_PHYSICS = 3`
 
-Used to get or set the object's physics status. When enabled the object responds to SL physics.
+### PRIM_PHYSICS_MATERIAL
+
+- `integer PRIM_PHYSICS_MATERIAL = 31`
 
 ### PRIM_PHYSICS_SHAPE_CONVEX
 
 - `integer PRIM_PHYSICS_SHAPE_CONVEX = 2`
 
-Used with PRIM_PHYSICS_SHAPE_TYPE. Prims of this type use the convex hull of the prim shape for physics (this is the default for mesh objects)
-
 ### PRIM_PHYSICS_SHAPE_NONE
 
 - `integer PRIM_PHYSICS_SHAPE_NONE = 1`
-
-Used with PRIM_PHYSICS_SHAPE_TYPE. Prims of this type are ignored by the physics engine. Read more details on PRIM_PHYSICS_SHAPE_TYPE
 
 ### PRIM_PHYSICS_SHAPE_PRIM
 
 - `integer PRIM_PHYSICS_SHAPE_PRIM = 0`
 
-Used with PRIM_PHYSICS_SHAPE_TYPE. Prims of this type use the normal prim shape for physics (this is the default for all non-mesh objects)
-
 ### PRIM_PHYSICS_SHAPE_TYPE
 
 - `integer PRIM_PHYSICS_SHAPE_TYPE = 30`
-
-Used to set the type of shape the physics engine should use for the prim. This is primarily used to do Physics Optimization.
 
 ### PRIM_POINT_LIGHT
 
 - `integer PRIM_POINT_LIGHT = 23`
 
-PRIM_POINT_LIGHT is used to configure the point light configuration of the prim
-
 ### PRIM_POSITION
 
 - `integer PRIM_POSITION = 6`
-
-PRIM_POSITION is used to get or set the prim's position.
 
 ### PRIM_POS_LOCAL
 
 - `integer PRIM_POS_LOCAL = 33`
 
-PRIM_POS_LOCAL is used to get or set the prim's local position.
-
 ### PRIM_PROJECTOR
 
 - `integer PRIM_PROJECTOR = 42`
-
-The light projection settings for this prim. If the prim is not a projector the texture key will be NULL_KEY.
 
 ### PRIM_REFLECTION_PROBE
 
 - `integer PRIM_REFLECTION_PROBE = 44`
 
-PRIM_REFLECTION_PROBE is used to change the reflection probe configuration of the prim.
-A reflection probe is a volume used for image-based lighting (IBL). It takes an image of its surroundings and uses it as the basis for reflection effects (shiny surfaces) and ambiance effects (light bouncing).
-Typically, the viewer automatically places reflection probes. Prim-based probes enable artists to provide hints to the render engine to improve the quality of image based lighting. Only objects in the probe's influence volume are affected.
-Lighting is most accurate when the edges of a probe volume are near the geometry that appears in reflections. For example, objects inside a room with a box shaped reflection probe that hugs the walls, floor, and ceiling would show accurate reflections and ambient lighting from the walls of the room.
-
 ### PRIM_REFLECTION_PROBE_BOX
 
 - `integer PRIM_REFLECTION_PROBE_BOX = 1`
-
-Used with PRIM_REFLECTION_PROBE. A reflection probe is a sphere by default, otherwise a box if this flag is set on the corresponding prim.
 
 ### PRIM_REFLECTION_PROBE_DYNAMIC
 
 - `integer PRIM_REFLECTION_PROBE_DYNAMIC = 2`
 
-Used with PRIM_REFLECTION_PROBE. A reflection probe does not image avatars by default, otherwise it images avatars if this flag is set on the corresponding prim. Imaging avatars in reflection probes has a performance cost.
-
 ### PRIM_REFLECTION_PROBE_MIRROR
 
 - `integer PRIM_REFLECTION_PROBE_MIRROR = 4`
 
-Used with PRIM_REFLECTION_PROBE. When enabled, objects with low-roughness PBR materials objects act as a mirror. Note that mirrors do not reflect avatars unless PRIM_REFLECTION_PROBE_DYNAMIC is also set. Rendering mirrors has a performance cost.
-
 ### PRIM_RENDER_MATERIAL
 
-- `material PRIM_RENDER_MATERIAL = 49`
-
-Used to get or set the material settings of a prim's face.
+- `integer PRIM_RENDER_MATERIAL = 49`
 
 ### PRIM_ROTATION
 
 - `integer PRIM_ROTATION = 8`
 
-PRIM_ROTATION is used to get or set the prim's rotation.
-
 ### PRIM_ROT_LOCAL
 
 - `integer PRIM_ROT_LOCAL = 29`
-
-PRIM_ROT_LOCAL is used to get or set the prim's local rotation.
 
 ### PRIM_SCRIPTED_SIT_ONLY
 
 - `integer PRIM_SCRIPTED_SIT_ONLY = 40`
 
-Agents may only be seated on this prim using llSitOnLink. Attempts to do a manual sit will fail. This flag applies even outside of an experience enabled region.
-If any prim in a linkset has PRIM_SCRIPTED_SIT_ONLY set and no other prim in the linkset has a sit target then an avatar cannot manually sit on the object.
-If some other prim in the linkset does have a sit target (that is not filled or marked PRIM_SCRIPTED_SIT_ONLY), the agent can sit on that prim.
+not supported
 
 ### PRIM_SCULPT_FLAG_ANIMESH
 
 - `integer PRIM_SCULPT_FLAG_ANIMESH = 0x20`
 
-PRIM_SCULPT_FLAG_ANIMESH is a read-only flag set when the object is an Animated mesh 
-Sculpted Prims: FAQ
-{{LSL_Constants/PrimitiveParams/sculpt_types
-
 ### PRIM_SCULPT_FLAG_INVERT
 
 - `integer PRIM_SCULPT_FLAG_INVERT = 0x40`
-
-PRIM_SCULPT_FLAG_INVERT will cause the sculpted prim to render inside out. It works by inverting the Normal of each polygon that makes up the sculpted prim. 
-Sculpted Prims: FAQ
-{{LSL_Constants/PrimitiveParams/sculpt_types
 
 ### PRIM_SCULPT_FLAG_MIRROR
 
 - `integer PRIM_SCULPT_FLAG_MIRROR = 0x80`
 
-PRIM_SCULPT_FLAG_MIRROR will cause a mirror of the sculpted prim to rendered. The sculpted prim is mirrored over the X axis. 
-Sculpted Prims: FAQ
-{{LSL_Constants/PrimitiveParams/sculpt_types
-
 ### PRIM_SCULPT_TYPE_CYLINDER
 
 - `integer PRIM_SCULPT_TYPE_CYLINDER = 4`
 
-When used in conjunction with a cylinder type sculpty is produced. It does this by stitching the left side to right.
-{{LSL_Constants/PrimitiveParams/sculpt_types
-
 ### PRIM_SCULPT_TYPE_MASK
 
-- `integer PRIM_SCULPT_TYPE_MASK = 7`
+- `integer PRIM_SCULPT_TYPE_MASK = 0x07`
 
-PRIM_SCULPT_TYPE_MASK can be used when parsing the output of llGetPrimitiveParams when dealing with sculpted prims (PRIM_TYPE_SCULPT) to separate the sculpted type from the flags (PRIM_SCULPT_FLAG_INVERT and PRIM_SCULPT_FLAG_MIRROR) that can modify it. 
-Sculpted Prims: FAQ
-{{LSL_Constants/PrimitiveParams/sculpt_types
+Auxiliar to clear flags keeping scultp type
 
 ### PRIM_SCULPT_TYPE_MESH
 
 - `integer PRIM_SCULPT_TYPE_MESH = 5`
 
-When used in conjunction with a Mesh object produced.
-{{LSL_Constants/PrimitiveParams/sculpt_types
-
 ### PRIM_SCULPT_TYPE_PLANE
 
 - `integer PRIM_SCULPT_TYPE_PLANE = 3`
-
-When used in conjunction with a plane type sculpty is produced. No stitching or converging is performed.
-{{LSL_Constants/PrimitiveParams/sculpt_types
 
 ### PRIM_SCULPT_TYPE_SPHERE
 
 - `integer PRIM_SCULPT_TYPE_SPHERE = 1`
 
-When used in conjunction with a sphere type sculpty is produced. It does this by stitching the left side to right then separately converging the top & bottom.
-{{LSL_Constants/PrimitiveParams/sculpt_types
-
 ### PRIM_SCULPT_TYPE_TORUS
 
 - `integer PRIM_SCULPT_TYPE_TORUS = 2`
-
-When used in conjunction with a torus type sculpty is produced. It does this by stitching the top to bottom and the left side to right.
-{{LSL_Constants/PrimitiveParams/sculpt_types
 
 ### PRIM_SHINY_HIGH
 
 - `integer PRIM_SHINY_HIGH = 3`
 
-Sets the highest intensity legacy shininess.
-
 ### PRIM_SHINY_LOW
 
 - `integer PRIM_SHINY_LOW = 1`
-
-Sets the lowest intensity legacy shininess.
 
 ### PRIM_SHINY_MEDIUM
 
 - `integer PRIM_SHINY_MEDIUM = 2`
 
-Sets a medium intensity legacy shininess.
-
 ### PRIM_SHINY_NONE
 
 - `integer PRIM_SHINY_NONE = 0`
-
-Disables legacy shininess.
 
 ### PRIM_SIT_TARGET
 
 - `integer PRIM_SIT_TARGET = 41`
 
-The sit target, if any defined for this prim. If the active value is 0 the sit target is deactivated. If it is nonzero the prim's sit target is set to the indicated offset and rotation. As with llLinkSitTarget(), these values are relative to the prim. However, unlike llLinkSitTarget() an offset of may be explicitly set.
-
 ### PRIM_SIZE
 
 - `integer PRIM_SIZE = 7`
-
-Returns or sets the prim's size.
 
 ### PRIM_SLICE
 
 - `integer PRIM_SLICE = 35`
 
-Used to get or set the prim's slice values (a shape attribute, equivalent to ).
-
 ### PRIM_SPECULAR
 
-- `texture PRIM_SPECULAR = 36`
-
-Used to get or set the Blinn-Phong specular map texture settings of a prim's face.
+- `integer PRIM_SPECULAR = 36`
 
 ### PRIM_TEMP_ON_REZ
 
 - `integer PRIM_TEMP_ON_REZ = 4`
 
-Used to get or set the object's temporary status. It lives until the next garbage collection cycle (about 1 minute). Does not count against normal prim limits. There are limits to the number of temporary objects that can exist in a region and the garbage collector may run sooner than expected.
-
 ### PRIM_TEXGEN
 
 - `integer PRIM_TEXGEN = 22`
-
-PRIM_TEXGEN is used to get and set the configure the texture mapping mode of the face.
-{{LSL_Constants/PrimitiveParams/texgen
 
 ### PRIM_TEXGEN_DEFAULT
 
 - `integer PRIM_TEXGEN_DEFAULT = 0`
 
-Used with PRIM_TEXGEN to set the texture mapping mode, specifically that the texture repeats units are in texture repeats per face.
-
 ### PRIM_TEXGEN_PLANAR
 
 - `integer PRIM_TEXGEN_PLANAR = 1`
-
-Used with PRIM_TEXGEN to set the texture mapping mode, specifically that the texture repeats units are in texture repeats per half meter. This is in contrast to the in-world editing tool, in which the planar texture scaling units are repeats per meter.
 
 ### PRIM_TEXT
 
 - `integer PRIM_TEXT = 26`
 
-Used to get or set the object's floating text.
-
 ### PRIM_TEXTURE
 
-- `texture PRIM_TEXTURE = 17`
-
-Used to get or set the Blinn-Phong diffuse texture settings of a prim's face.
+- `integer PRIM_TEXTURE = 17`
 
 ### PRIM_TYPE
 
 - `integer PRIM_TYPE = 9`
 
-Gets or sets the of the prim and associated type .
-
 ### PRIM_TYPE_BOX
 
 - `integer PRIM_TYPE_BOX = 0`
-
-PRIM_TYPE_BOX is a parameter of PRIM_TYPE used to make prim into a box and to change specific properties that define the shape of that box.
 
 ### PRIM_TYPE_CYLINDER
 
 - `integer PRIM_TYPE_CYLINDER = 1`
 
-PRIM_TYPE_CYLINDER is a parameter of PRIM_TYPE used to make prim into a cylinder and to change specific properties that define the shape of that cylinder.
-
 ### PRIM_TYPE_PRISM
 
 - `integer PRIM_TYPE_PRISM = 2`
-
-PRIM_TYPE_PRISM is a parameter of PRIM_TYPE used to make prim into a prism and to change specific properties that define the shape of that prism.
 
 ### PRIM_TYPE_RING
 
 - `integer PRIM_TYPE_RING = 6`
 
-PRIM_TYPE_RING is a parameter of PRIM_TYPE used to make prim into a ring and to change specific properties that define the shape of that ring.
-
 ### PRIM_TYPE_SCULPT
 
 - `integer PRIM_TYPE_SCULPT = 7`
-
-PRIM_TYPE_SCULPT is a parameter of PRIM_TYPE used to make a prim into a sculpty of specific shape and type. 
-Sculpted Prims: FAQ
 
 ### PRIM_TYPE_SPHERE
 
 - `integer PRIM_TYPE_SPHERE = 3`
 
-PRIM_TYPE_SPHERE is a parameter of PRIM_TYPE used to make prim into a sphere and to change specific properties that define the shape of that sphere.
-
 ### PRIM_TYPE_TORUS
 
 - `integer PRIM_TYPE_TORUS = 4`
-
-PRIM_TYPE_TORUS is a parameter of PRIM_TYPE used to make prim into a torus and to change specific properties that define the shape of that torus.
 
 ### PRIM_TYPE_TUBE
 
 - `integer PRIM_TYPE_TUBE = 5`
 
-PRIM_TYPE_TUBE is a parameter of PRIM_TYPE used to make prim into a tube and to change specific properties that define the shape of that tube.
-
 ### PROFILE_NONE
 
 - `integer PROFILE_NONE = 0`
-
-Disables script profiling.
 
 ### PROFILE_SCRIPT_MEMORY
 
 - `integer PROFILE_SCRIPT_MEMORY = 1`
 
-Enables script memory profiling, tracking the maximum amount of memory consumed while it is active.
+### PSYS_PART_BF_DEST_COLOR
+
+- `integer PSYS_PART_BF_DEST_COLOR = 2`
+
+### PSYS_PART_BF_ONE
+
+- `integer PSYS_PART_BF_ONE = 0`
+
+### PSYS_PART_BF_ONE_MINUS_DEST_COLOR
+
+- `integer PSYS_PART_BF_ONE_MINUS_DEST_COLOR = 4`
+
+### PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA
+
+- `integer PSYS_PART_BF_ONE_MINUS_SOURCE_ALPHA = 9`
+
+### PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR
+
+- `integer PSYS_PART_BF_ONE_MINUS_SOURCE_COLOR = 5`
+
+### PSYS_PART_BF_SOURCE_ALPHA
+
+- `integer PSYS_PART_BF_SOURCE_ALPHA = 7`
+
+### PSYS_PART_BF_SOURCE_COLOR
+
+- `integer PSYS_PART_BF_SOURCE_COLOR = 3`
+
+### PSYS_PART_BF_ZERO
+
+- `integer PSYS_PART_BF_ZERO = 1`
+
+### PSYS_PART_BLEND_FUNC_DEST
+
+- `integer PSYS_PART_BLEND_FUNC_DEST = 25`
+
+### PSYS_PART_BLEND_FUNC_SOURCE
+
+- `integer PSYS_PART_BLEND_FUNC_SOURCE = 24`
+
+### PSYS_PART_BOUNCE_MASK
+
+- `integer PSYS_PART_BOUNCE_MASK = 4`
+
+### PSYS_PART_EMISSIVE_MASK
+
+- `integer PSYS_PART_EMISSIVE_MASK = 256`
+
+### PSYS_PART_END_ALPHA
+
+- `integer PSYS_PART_END_ALPHA = 4`
+
+### PSYS_PART_END_COLOR
+
+- `integer PSYS_PART_END_COLOR = 3`
+
+### PSYS_PART_END_GLOW
+
+- `integer PSYS_PART_END_GLOW = 27`
+
+### PSYS_PART_END_SCALE
+
+- `integer PSYS_PART_END_SCALE = 6`
+
+### PSYS_PART_FLAGS
+
+- `integer PSYS_PART_FLAGS = 0`
+
+### PSYS_PART_FOLLOW_SRC_MASK
+
+- `integer PSYS_PART_FOLLOW_SRC_MASK = 16`
+
+### PSYS_PART_FOLLOW_VELOCITY_MASK
+
+- `integer PSYS_PART_FOLLOW_VELOCITY_MASK = 32`
+
+### PSYS_PART_INTERP_COLOR_MASK
+
+- `integer PSYS_PART_INTERP_COLOR_MASK = 1`
+
+### PSYS_PART_INTERP_SCALE_MASK
+
+- `integer PSYS_PART_INTERP_SCALE_MASK = 2`
+
+### PSYS_PART_MAX_AGE
+
+- `integer PSYS_PART_MAX_AGE = 7`
+
+### PSYS_PART_RIBBON_MASK
+
+- `integer PSYS_PART_RIBBON_MASK = 1024`
+
+### PSYS_PART_START_ALPHA
+
+- `integer PSYS_PART_START_ALPHA = 2`
+
+### PSYS_PART_START_COLOR
+
+- `integer PSYS_PART_START_COLOR = 1`
+
+### PSYS_PART_START_GLOW
+
+- `integer PSYS_PART_START_GLOW = 26`
+
+### PSYS_PART_START_SCALE
+
+- `integer PSYS_PART_START_SCALE = 5`
+
+### PSYS_PART_TARGET_LINEAR_MASK
+
+- `integer PSYS_PART_TARGET_LINEAR_MASK = 128`
+
+### PSYS_PART_TARGET_POS_MASK
+
+- `integer PSYS_PART_TARGET_POS_MASK = 64`
+
+### PSYS_PART_WIND_MASK
+
+- `integer PSYS_PART_WIND_MASK = 8`
+
+### PSYS_SRC_ACCEL
+
+- `integer PSYS_SRC_ACCEL = 8`
+
+### PSYS_SRC_ANGLE_BEGIN
+
+- `integer PSYS_SRC_ANGLE_BEGIN = 22`
+
+### PSYS_SRC_ANGLE_END
+
+- `integer PSYS_SRC_ANGLE_END = 23`
+
+### PSYS_SRC_BURST_PART_COUNT
+
+- `integer PSYS_SRC_BURST_PART_COUNT = 15`
+
+### PSYS_SRC_BURST_RADIUS
+
+- `integer PSYS_SRC_BURST_RADIUS = 16`
+
+### PSYS_SRC_BURST_RATE
+
+- `integer PSYS_SRC_BURST_RATE = 13`
+
+### PSYS_SRC_BURST_SPEED_MAX
+
+- `integer PSYS_SRC_BURST_SPEED_MAX = 18`
+
+### PSYS_SRC_BURST_SPEED_MIN
+
+- `integer PSYS_SRC_BURST_SPEED_MIN = 17`
+
+### PSYS_SRC_INNERANGLE
+
+- `integer PSYS_SRC_INNERANGLE = 10`
+
+### PSYS_SRC_MAX_AGE
+
+- `integer PSYS_SRC_MAX_AGE = 19`
+
+### PSYS_SRC_OMEGA
+
+- `integer PSYS_SRC_OMEGA = 21`
+
+### PSYS_SRC_OUTERANGLE
+
+- `integer PSYS_SRC_OUTERANGLE = 11`
+
+### PSYS_SRC_PATTERN
+
+- `integer PSYS_SRC_PATTERN = 9`
+
+### PSYS_SRC_PATTERN_ANGLE
+
+- `integer PSYS_SRC_PATTERN_ANGLE = 4`
+
+### PSYS_SRC_PATTERN_ANGLE_CONE
+
+- `integer PSYS_SRC_PATTERN_ANGLE_CONE = 8`
+
+### PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY
+
+- `integer PSYS_SRC_PATTERN_ANGLE_CONE_EMPTY = 16`
+
+### PSYS_SRC_PATTERN_DROP
+
+- `integer PSYS_SRC_PATTERN_DROP = 1`
+
+### PSYS_SRC_PATTERN_EXPLODE
+
+- `integer PSYS_SRC_PATTERN_EXPLODE = 2`
+
+### PSYS_SRC_TARGET_KEY
+
+- `integer PSYS_SRC_TARGET_KEY = 20`
+
+### PSYS_SRC_TEXTURE
+
+- `integer PSYS_SRC_TEXTURE = 12`
+
+### PUBLIC_CHANNEL
+
+- `integer PUBLIC_CHANNEL = 0x00000000`
 
 ### RAD_TO_DEG
 
-- `float RAD_TO_DEG = 57.295779513082320876798154814105f`
-
-When multiplied by, converts a value in radians to degrees. Precise value is 180/PI.
+- `float RAD_TO_DEG = 57.29578f`
 
 ### RCERR_CAST_TIME_EXCEEDED
 
@@ -2657,6 +2661,14 @@ When multiplied by, converts a value in radians to degrees. Precise value is 180
 
 - `integer RC_REJECT_AGENTS = 1`
 
+### RC_REJECT_HOST
+
+- `integer RC_REJECT_HOST = 0x20000000`
+
+### RC_REJECT_HOSTGROUP
+
+- `integer RC_REJECT_HOSTGROUP = 0x40000000`
+
 ### RC_REJECT_LAND
 
 - `integer RC_REJECT_LAND = 8`
@@ -2675,57 +2687,39 @@ When multiplied by, converts a value in radians to degrees. Precise value is 180
 
 ### REGION_FLAG_ALLOW_DAMAGE
 
-- `REGION_FLAG_ALLOW_DAMAGE`
-
-This is a flag used with llGetRegionFlags to check if the region is entirely damage enabled.
+- `integer REGION_FLAG_ALLOW_DAMAGE = 0x1`
 
 ### REGION_FLAG_ALLOW_DIRECT_TELEPORT
 
-- `REGION_FLAG_ALLOW_DIRECT_TELEPORT`
-
-This is a flag used with llGetRegionFlags to check if direct teleportation is allowed in the region.
+- `integer REGION_FLAG_ALLOW_DIRECT_TELEPORT = 0x100000`
 
 ### REGION_FLAG_BLOCK_FLY
 
-- `REGION_FLAG_BLOCK_FLY`
-
-This is a flag used with llGetRegionFlags to check if flying is disabled in the region.
+- `integer REGION_FLAG_BLOCK_FLY = 0x80000`
 
 ### REGION_FLAG_BLOCK_TERRAFORM
 
-- `REGION_FLAG_BLOCK_TERRAFORM`
-
-This is a flag used with llGetRegionFlags to check if terraforming is disabled in the region.
+- `integer REGION_FLAG_BLOCK_TERRAFORM = 0x40`
 
 ### REGION_FLAG_DISABLE_COLLISIONS
 
-- `REGION_FLAG_DISABLE_COLLISIONS`
-
-This is a flag used with llGetRegionFlags to check if collisions have been disabled in the region.
+- `integer REGION_FLAG_DISABLE_COLLISIONS = 0x1000`
 
 ### REGION_FLAG_DISABLE_PHYSICS
 
-- `REGION_FLAG_DISABLE_PHYSICS`
-
-This is a flag used with llGetRegionFlags to check if physics has been disabled in the region.
+- `integer REGION_FLAG_DISABLE_PHYSICS = 0x4000`
 
 ### REGION_FLAG_FIXED_SUN
 
-- `REGION_FLAG_FIXED_SUN`
-
-This is a flag used with llGetRegionFlags to check if the sun's position has been fixed in the region.
+- `integer REGION_FLAG_FIXED_SUN = 0x10`
 
 ### REGION_FLAG_RESTRICT_PUSHOBJECT
 
-- `REGION_FLAG_RESTRICT_PUSHOBJECT`
-
-This is a flag used with llGetRegionFlags to check if llPushObject is restricted in the region.
+- `integer REGION_FLAG_RESTRICT_PUSHOBJECT = 0x400000`
 
 ### REGION_FLAG_SANDBOX
 
-- `REGION_FLAG_SANDBOX`
-
-This is a flag used with llGetRegionFlags to check if the region is a sandbox.
+- `integer REGION_FLAG_SANDBOX = 0x100`
 
 ### REMOTE_DATA_CHANNEL
 
@@ -2739,41 +2733,109 @@ This is a flag used with llGetRegionFlags to check if the region is a sandbox.
 
 - `integer REMOTE_DATA_REQUEST = 2`
 
+### RESTITUTION
+
+- `integer RESTITUTION = 4`
+
 ### REVERSE
 
-- `integer REVERSE = 0x04`
+- `integer REVERSE = 4`
 
-Reverses the direction of a texture animation, playing it from end to start.
+### REZ_ACCEL
+
+- `integer REZ_ACCEL = 5`
 
 ### REZ_DAMAGE
 
 - `integer REZ_DAMAGE = 8`
 
-Sets the damage amount delivered by a prim on collision when the object is rezzed.
-
 ### REZ_DAMAGE_TYPE
 
 - `integer REZ_DAMAGE_TYPE = 12`
 
-Sets the damage type when rezzed to apply  when this prim collides with another object. Can match one of the DAMAGE_TYPE_* constants, be a custom damage type or be a repurposed damage field.
+### REZ_FLAGS
+
+- `integer REZ_FLAGS = 1`
+
+### REZ_FLAG_BLOCK_GRAB_OBJECT
+
+- `integer REZ_FLAG_BLOCK_GRAB_OBJECT = 0x0080`
+
+### REZ_FLAG_DIE_ON_COLLIDE
+
+- `integer REZ_FLAG_DIE_ON_COLLIDE = 0x0008`
+
+### REZ_FLAG_DIE_ON_NOENTRY
+
+- `integer REZ_FLAG_DIE_ON_NOENTRY = 0x0010`
+
+### REZ_FLAG_NO_COLLIDE_FAMILY
+
+- `integer REZ_FLAG_NO_COLLIDE_FAMILY = 0x0040`
+
+### REZ_FLAG_NO_COLLIDE_OWNER
+
+- `integer REZ_FLAG_NO_COLLIDE_OWNER = 0x0020`
+
+### REZ_FLAG_PHANTOM
+
+- `integer REZ_FLAG_PHANTOM = 0x0004`
+
+### REZ_FLAG_PHYSICAL
+
+- `integer REZ_FLAG_PHYSICAL = 0x0002`
+
+### REZ_FLAG_TEMP
+
+- `integer REZ_FLAG_TEMP = 0x0001`
+
+### REZ_LOCK_AXES
+
+- `integer REZ_LOCK_AXES = 11`
+
+### REZ_OMEGA
+
+- `integer REZ_OMEGA = 7`
+
+### REZ_PARAM
+
+- `integer REZ_PARAM = 0`
+
+### REZ_PARAM_STRING
+
+- `integer REZ_PARAM_STRING = 13`
+
+### REZ_POS
+
+- `integer REZ_POS = 2`
+
+### REZ_ROT
+
+- `integer REZ_ROT = 3`
+
+### REZ_SOUND
+
+- `integer REZ_SOUND = 9`
+
+### REZ_SOUND_COLLIDE
+
+- `integer REZ_SOUND_COLLIDE = 10`
+
+### REZ_VEL
+
+- `integer REZ_VEL = 4`
 
 ### ROTATE
 
-- `integer ROTATE = 0x20`
-
-Causes a texture animation to change the texture's rotation. Cannot be combined with SCALE.
+- `integer ROTATE = 32`
 
 ### SCALE
 
-- `integer SCALE = 0x40`
-
-Causes a texture animation to change the texture's scale. Cannot be combined with ROTATE.
+- `integer SCALE = 64`
 
 ### SCRIPTED
 
-- `integer SCRIPTED = 0x8`
-
-If it is contained in the result of llDetectedType(), it means what was detected has at least one active script. If it is used as a filter of llSensor() or llSensorRepeat(), it will search for objects that has any script, which is doing anything in simulator just now.
+- `integer SCRIPTED = 8`
 
 ### SIM_STAT_ACTIVE_SCRIPT_COUNT
 
@@ -2883,516 +2945,639 @@ If it is contained in the result of llDetectedType(), it means what was detected
 
 - `integer SIM_STAT_UNACKED_BYTES = 17`
 
+### SIT_FLAG_ALLOW_UNSIT
+
+- `integer SIT_FLAG_ALLOW_UNSIT = 0x02`
+
+### SIT_FLAG_NO_COLLIDE
+
+- `integer SIT_FLAG_NO_COLLIDE = 0x10`
+
+### SIT_FLAG_NO_DAMAGE
+
+- `integer SIT_FLAG_NO_DAMAGE = 0x20`
+
+### SIT_FLAG_OPENSIMFORCED
+
+- `integer SIT_FLAG_OPENSIMFORCED = SIT_FLAG_ALLOW_UNSIT | SIT_FLAG_NO_COLLIDE | SIT_FLAG_NO_DAMAGE`
+
+### SIT_FLAG_SCRIPTED_ONLY
+
+- `integer SIT_FLAG_SCRIPTED_ONLY = 0x04`
+
+### SIT_FLAG_SIT_TARGET
+
+- `integer SIT_FLAG_SIT_TARGET = 0x01`
+
 ### SMOOTH
 
-- `integer SMOOTH = 0x010`
+- `integer SMOOTH = 16`
 
-Causes a texture animation to move smoothly between frames, instead of instant changes.
+### SOUND_LOOP
+
+- `integer SOUND_LOOP = 1`
+
+### SOUND_PLAY
+
+- `integer SOUND_PLAY = 0`
+
+### SOUND_SYNC
+
+- `integer SOUND_SYNC = 4`
+
+### SOUND_TRIGGER
+
+- `integer SOUND_TRIGGER = 2`
 
 ### SQRT2
 
-- `float SQRT2 = 1.4142135623730950488016887242097f`
+- `float SQRT2 = 1.414213538f`
 
-The square root of two.
+### STATS_ACTIVE_PRIMS
 
-### STATUS_BOUNDS_ERROR
+- `integer STATS_ACTIVE_PRIMS = 7`
 
-- `integer STATUS_BOUNDS_ERROR = 1002`
+### STATS_ACTIVE_SCRIPTS
 
-### STATUS_INTERNAL_ERROR
+- `integer STATS_ACTIVE_SCRIPTS = 19`
 
-- `integer STATUS_INTERNAL_ERROR = 1999`
+### STATS_AGENT_MS
 
-### STATUS_MALFORMED_PARAMS
+- `integer STATS_AGENT_MS = 16`
 
-- `integer STATUS_MALFORMED_PARAMS = 1000`
+### STATS_AGENT_UPDATES
 
-### STATUS_NOT_FOUND
+- `integer STATS_AGENT_UPDATES = 3`
 
-- `integer STATUS_NOT_FOUND = 1003`
+### STATS_CHILD_AGENTS
 
-### STATUS_NOT_SUPPORTED
+- `integer STATS_CHILD_AGENTS = 5`
 
-- `integer STATUS_NOT_SUPPORTED = 1004`
+### STATS_FRAME_MS
 
-### STATUS_OK
+- `integer STATS_FRAME_MS = 8`
 
-- `integer STATUS_OK = 0`
+### STATS_IMAGE_MS
+
+- `integer STATS_IMAGE_MS = 11`
+
+### STATS_IN_PACKETS_PER_SECOND
+
+- `integer STATS_IN_PACKETS_PER_SECOND = 13`
+
+### STATS_NET_MS
+
+- `integer STATS_NET_MS = 9`
+
+### STATS_OTHER_MS
+
+- `integer STATS_OTHER_MS = 12`
+
+### STATS_OUT_PACKETS_PER_SECOND
+
+- `integer STATS_OUT_PACKETS_PER_SECOND = 14`
+
+### STATS_PENDING_DOWNLOADS
+
+- `integer STATS_PENDING_DOWNLOADS = 17`
+
+### STATS_PENDING_UPLOADS
+
+- `integer STATS_PENDING_UPLOADS = 18`
+
+### STATS_PHYSICS_FPS
+
+- `integer STATS_PHYSICS_FPS = 2`
+
+### STATS_PHYSICS_MS
+
+- `integer STATS_PHYSICS_MS = 10`
+
+### STATS_ROOT_AGENTS
+
+- `integer STATS_ROOT_AGENTS = 4`
+
+### STATS_SCRIPT_EPS
+
+- `integer STATS_SCRIPT_EPS = 28`
+
+### STATS_SCRIPT_LPS
+
+- `integer STATS_SCRIPT_LPS = 38`
+
+### STATS_SCRIPT_NPCS
+
+- `integer STATS_SCRIPT_NPCS = 47`
+
+### STATS_SCRIPT_TIME
+
+- `integer STATS_SCRIPT_TIME = 37`
+
+### STATS_SIM_FPS
+
+- `integer STATS_SIM_FPS = 1`
+
+### STATS_SIM_SLEEP
+
+- `integer STATS_SIM_SLEEP = 20`
+
+### STATS_TIME_DILATION
+
+- `integer STATS_TIME_DILATION = 0`
+
+### STATS_TOTAL_PRIMS
+
+- `integer STATS_TOTAL_PRIMS = 6`
+
+### STATS_UNACKED_BYTES
+
+- `integer STATS_UNACKED_BYTES = 15`
+
+### STATUS_BLOCK_GRAB
+
+- `integer STATUS_BLOCK_GRAB = 64`
+
+### STATUS_BLOCK_GRAB_OBJECT
+
+- `integer STATUS_BLOCK_GRAB_OBJECT = 1024`
+
+### STATUS_CAST_SHADOWS
+
+- `integer STATUS_CAST_SHADOWS = 512`
+
+### STATUS_DIE_AT_EDGE
+
+- `integer STATUS_DIE_AT_EDGE = 128`
 
 ### STATUS_PHANTOM
 
-- `integer STATUS_PHANTOM = 0x10`
-
-This property (set FALSE by default) when set TRUE turns the object un-solid (objects and avatars can pass through it).
+- `integer STATUS_PHANTOM = 16`
 
 ### STATUS_PHYSICS
 
-- `integer STATUS_PHYSICS = 0x1`
+- `integer STATUS_PHYSICS = 1`
 
-This property (set FALSE by default) if set TRUE allows that the object is subject to and can offer physical interactions and forces.
+### STATUS_RETURN_AT_EDGE
+
+- `integer STATUS_RETURN_AT_EDGE = 256`
 
 ### STATUS_ROTATE_X
 
-- `integer STATUS_ROTATE_X = 0x2`
-
-This property (set TRUE by default), if set FALSE, attempts to stop physical rotation on the objects local X axis.
+- `integer STATUS_ROTATE_X = 2`
 
 ### STATUS_ROTATE_Y
 
-- `integer STATUS_ROTATE_Y = 0x4`
-
-This property (set TRUE by default), if set FALSE, attempts to stop physical rotation on the objects local Y axis.
+- `integer STATUS_ROTATE_Y = 4`
 
 ### STATUS_ROTATE_Z
 
-- `integer STATUS_ROTATE_Z = 0x8`
+- `integer STATUS_ROTATE_Z = 8`
 
-This property (set TRUE by default), if set FALSE, attempts to stop physical rotation on the objects local Z axis.
+### STATUS_SANDBOX
 
-### STATUS_TYPE_MISMATCH
-
-- `integer STATUS_TYPE_MISMATCH = 1001`
-
-### STATUS_WHITELIST_FAILED
-
-- `integer STATUS_WHITELIST_FAILED = 2001`
+- `integer STATUS_SANDBOX = 32`
 
 ### STRING_TRIM
 
-- `integer STRING_TRIM = 0x03`
-
-Trim spaces off the beginning and the end. Equal to STRING_TRIM_HEAD | STRING_TRIM_TAIL
+- `integer STRING_TRIM = 3`
 
 ### STRING_TRIM_HEAD
 
-- `integer STRING_TRIM_HEAD = 0x01`
-
-Trim spaces off the beginning
+- `integer STRING_TRIM_HEAD = 1`
 
 ### STRING_TRIM_TAIL
 
-- `integer STRING_TRIM_TAIL = 0x02`
-
-Trim spaces off the end
+- `integer STRING_TRIM_TAIL = 2`
 
 ### TARGETED_EMAIL_OBJECT_OWNER
 
 - `integer TARGETED_EMAIL_OBJECT_OWNER = 2`
 
-Causes the message to be sent to the owner of the calling object
+### TARGETED_EMAIL_ROOT_CREATOR
+
+- `integer TARGETED_EMAIL_ROOT_CREATOR = 1`
 
 ### TEXTURE_BLANK
 
 - `string TEXTURE_BLANK = "5748decc-f629-461c-9a36-a35a221fe21f"`
 
-UUID for the "Blank" texture
+### TEXTURE_DEFAULT
+
+- `string TEXTURE_DEFAULT = "89556747-24cb-43ed-920b-47caed15465f"`
 
 ### TEXTURE_MEDIA
 
 - `string TEXTURE_MEDIA = "8b5fec65-8d8d-9dc5-cda8-8fdf2716e361"`
 
-UUID for the "Default Media" texture
-
 ### TEXTURE_PLYWOOD
 
 - `string TEXTURE_PLYWOOD = "89556747-24cb-43ed-920b-47caed15465f"`
-
-UUID for the default "Plywood" texture
 
 ### TEXTURE_TRANSPARENT
 
 - `string TEXTURE_TRANSPARENT = "8dcd4a48-2d37-4909-9f78-f7a9eb4ef903"`
 
-UUID for "*Default Transparent Texture" in the library, also included with viewers.
-
 ### TOUCH_INVALID_FACE
 
-- `TOUCH_INVALID_FACE`
-
-Returned by llDetectedTouchFace when the touch position is not valid.
-Specifically when...
-* The avatar's viewer does not support face touch detection.
-* The touch has moved off the surface of the prim.
-* The triggering event is not a touch event.
+- `integer TOUCH_INVALID_FACE = -1`
 
 ### TOUCH_INVALID_TEXCOORD
 
-- `TOUCH_INVALID_TEXCOORD`
-
-Returned by llDetectedTouchUV and llDetectedTouchST when the touch position is not valid.
+- `vector TOUCH_INVALID_TEXCOORD = new vector(-1.0, -1.0, 0.0)`
 
 ### TOUCH_INVALID_VECTOR
 
-- `TOUCH_INVALID_VECTOR`
-
-Returned by llDetectedTouchPos, llDetectedTouchNormal, and llDetectedTouchBinormal when the touch position is not valid.
-
-### TRAVERSAL_TYPE
-
-- `integer TRAVERSAL_TYPE = 7`
-
-Used in combination with one of the traversal type flags. The default is TRAVERSAL_TYPE_SLOW, other options are TRAVERSAL_TYPE_FAST and TRAVERSAL_TYPE_NONE.
+- `vector TOUCH_INVALID_VECTOR = ZERO_VECTOR`
 
 ### TRUE
 
 - `integer TRUE = 1`
 
-Constant used to define the TRUE value in conditional structures or variables/constants in general. Usually it's used because it is more readable, indicating a boolean value instead a integer value (1). However, this is an arbitrary distinction in LSL which uses integers to represent Boolean values anyway. It is probably better to consider TRUE and FALSE as mnemonic constants for the integer values 1 and 0.
-
 ### TWO_PI
 
-- `float TWO_PI = 6.283185307179586476925286766559f`
-
-Two times PI. The number of radians in a full circle.
+- `float TWO_PI = 6.28318548f`
 
 ### TYPE_FLOAT
 
 - `integer TYPE_FLOAT = 2`
 
-|pa
-
 ### TYPE_INTEGER
 
 - `integer TYPE_INTEGER = 1`
-
-|pa
 
 ### TYPE_INVALID
 
 - `integer TYPE_INVALID = 0`
 
-|pa
-
 ### TYPE_KEY
 
 - `integer TYPE_KEY = 4`
-
-|pa
 
 ### TYPE_ROTATION
 
 - `integer TYPE_ROTATION = 6`
 
-|pa
-
 ### TYPE_STRING
 
 - `integer TYPE_STRING = 3`
-
-|pa
 
 ### TYPE_VECTOR
 
 - `integer TYPE_VECTOR = 5`
 
-|pa
-
 ### URL_REQUEST_DENIED
 
-- `URL_REQUEST_DENIED`
+- `string URL_REQUEST_DENIED = "URL_REQUEST_DENIED"`
 
 ### URL_REQUEST_GRANTED
 
-- `URL_REQUEST_GRANTED`
+- `string URL_REQUEST_GRANTED = "URL_REQUEST_GRANTED"`
 
 ### VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY
 
 - `integer VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY = 32`
 
-slider between 0 (no deflection) and 1 (maximum strength)
--->
-
 ### VEHICLE_ANGULAR_DEFLECTION_TIMESCALE
 
 - `integer VEHICLE_ANGULAR_DEFLECTION_TIMESCALE = 33`
-
-exponential timescale for the vehicle to achieve full angular deflection
--->
 
 ### VEHICLE_ANGULAR_FRICTION_TIMESCALE
 
 - `integer VEHICLE_ANGULAR_FRICTION_TIMESCALE = 17`
 
-vector of timescales for exponential decay of angular velocity about the three vehicle axes
--->
-
 ### VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE
 
 - `integer VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE = 35`
-
-exponential timescale (in seconds) for the angular motor's effectiveness to decay toward zero
--->
 
 ### VEHICLE_ANGULAR_MOTOR_DIRECTION
 
 - `integer VEHICLE_ANGULAR_MOTOR_DIRECTION = 19`
 
-vector of angular velocity (in radian/second) that the vehicle will try to achieve
--->
-
 ### VEHICLE_ANGULAR_MOTOR_TIMESCALE
 
 - `integer VEHICLE_ANGULAR_MOTOR_TIMESCALE = 34`
-
-exponential timescale for the angular motor to achieve full power
--->
 
 ### VEHICLE_BANKING_EFFICIENCY
 
 - `integer VEHICLE_BANKING_EFFICIENCY = 38`
 
-slider between -1.00 (leans out of turns), 0 (no banking) and +1.00 (leans into turns). This parameter makes banking affect steering, not the other way around. Use vehicle angular motors to bank the vehicle.
--->
-
 ### VEHICLE_BANKING_MIX
 
 - `integer VEHICLE_BANKING_MIX = 39`
-
-slider between 0 (static banking) and 1 (dynamic banking)
--->
 
 ### VEHICLE_BANKING_TIMESCALE
 
 - `integer VEHICLE_BANKING_TIMESCALE = 40`
 
-exponential timescale for the banking behaviour to take full effect
--->
-
 ### VEHICLE_BUOYANCY
 
 - `integer VEHICLE_BUOYANCY = 27`
 
-slider between -1 (double gravity) and 1 (full anti-gravity)
--->
-
-### VEHICLE_FLAG_BLOCK_INTERFERENCE
-
-- `integer VEHICLE_FLAG_BLOCK_INTERFERENCE = 0x400`
-
-When set, this flag prevents the vehicle you're sitting on from being pushed by an attachment you're wearing.
-
 ### VEHICLE_FLAG_CAMERA_DECOUPLED
 
-- `integer VEHICLE_FLAG_CAMERA_DECOUPLED = 0x200`
-
-This flag only has an effect when steering a vehicle with mouselook. In other words, only when either VEHICLE_FLAG_MOUSELOOK_STEER or VEHICLE_FLAG_MOUSELOOK_BANK are also set. When it is in effect it has zero server-side consequences, except that a bit is set in the flags field in the vehicle's ObjectUpdate message sent from server to client. The client uses the flag as a hint for how to compute its mouselook camera orientation as vehicle moves under the seated avatar.
-When the flag is NOT set the avatar's mouselook camera will move in the world-frame as the vehicle changes its own world-frame orientation. The avatar's mouselook camera is effectively at an offset relative to the vehicle's local-frame.
-When the flag IS set the avatar's mouselook camera will be unaffected by the motion of the vehicle itself: it moves only in the world-frame according to user input.
+- `integer VEHICLE_FLAG_CAMERA_DECOUPLED = 512`
 
 ### VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT
 
-- `integer VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT = 0x010`
-
-Hover at global height instead of height above ground or water. 
-If you wanted to make a boat you should set the VEHICLE_FLAG_HOVER_WATER_ONLY flag, or if you wanted to drive a hover tank under water you would use the VEHICLE_FLAG_HOVER_TERRAIN_ONLY flag instead. Finally, if you wanted to make a submarine or a balloon you would use the VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT. 
-The vehicle flags are independent of each other and that setting two contradictory flags will have undefined behavior. The flags are set using the script call llSetVehicleFlags.
+- `integer VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT = 16`
 
 ### VEHICLE_FLAG_HOVER_TERRAIN_ONLY
 
-- `integer VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 0x008`
-
-Makes the vehicle float over land.
-If you wanted to make a boat you should set the VEHICLE_FLAG_HOVER_WATER_ONLY flag, or if you wanted to drive a hover tank under water you would use the VEHICLE_FLAG_HOVER_TERRAIN_ONLY flag instead. Finally, if you wanted to make a submarine or a balloon you would use the VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT. 
-The vehicle flags are independent of each other and that setting two contradictory flags will have undefined behavior. The flags are set using the script call llSetVehicleFlags.
+- `integer VEHICLE_FLAG_HOVER_TERRAIN_ONLY = 8`
 
 ### VEHICLE_FLAG_HOVER_UP_ONLY
 
-- `integer VEHICLE_FLAG_HOVER_UP_ONLY = 0x020`
+- `integer VEHICLE_FLAG_HOVER_UP_ONLY = 32`
 
 ### VEHICLE_FLAG_HOVER_WATER_ONLY
 
-- `integer VEHICLE_FLAG_HOVER_WATER_ONLY = 0x004`
-
-Makes the vehicle over water.
-If you wanted to make a boat you should set the VEHICLE_FLAG_HOVER_WATER_ONLY flag, or if you wanted to drive a hover tank under water you would use the VEHICLE_FLAG_HOVER_TERRAIN_ONLY flag instead. Finally, if you wanted to make a submarine or a balloon you would use the VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT. 
-The vehicle flags are independent of each other and that setting two contradictory flags will have undefined behavior. The flags are set using the script call llSetVehicleFlags.
+- `integer VEHICLE_FLAG_HOVER_WATER_ONLY = 4`
 
 ### VEHICLE_FLAG_LIMIT_MOTOR_UP
 
-- `integer VEHICLE_FLAG_LIMIT_MOTOR_UP = 0x040`
+- `integer VEHICLE_FLAG_LIMIT_MOTOR_UP = 64`
 
 ### VEHICLE_FLAG_LIMIT_ROLL_ONLY
 
-- `integer VEHICLE_FLAG_LIMIT_ROLL_ONLY = 0x002`
+- `integer VEHICLE_FLAG_LIMIT_ROLL_ONLY = 2`
+
+### VEHICLE_FLAG_LOCK_HOVER_HEIGHT
+
+- `integer VEHICLE_FLAG_LOCK_HOVER_HEIGHT = 8192`
+
+### VEHICLE_FLAG_LOCK_ROTATION
+
+- `integer VEHICLE_FLAG_LOCK_ROTATION = 32784`
 
 ### VEHICLE_FLAG_MOUSELOOK_BANK
 
-- `integer VEHICLE_FLAG_MOUSELOOK_BANK = 0x100`
+- `integer VEHICLE_FLAG_MOUSELOOK_BANK = 256`
 
 ### VEHICLE_FLAG_MOUSELOOK_STEER
 
-- `integer VEHICLE_FLAG_MOUSELOOK_STEER = 0x080`
+- `integer VEHICLE_FLAG_MOUSELOOK_STEER = 128`
+
+### VEHICLE_FLAG_NO_DEFLECTION
+
+- `integer VEHICLE_FLAG_NO_DEFLECTION = 16392`
 
 ### VEHICLE_FLAG_NO_DEFLECTION_UP
 
-- `integer VEHICLE_FLAG_NO_DEFLECTION_UP = 0x001`
+- `integer VEHICLE_FLAG_NO_DEFLECTION_UP = 1`
+
+### VEHICLE_FLAG_NO_FLY_UP
+
+- `integer VEHICLE_FLAG_NO_FLY_UP = 1`
+
+### VEHICLE_FLAG_NO_X
+
+- `integer VEHICLE_FLAG_NO_X = 1024`
+
+### VEHICLE_FLAG_NO_Y
+
+- `integer VEHICLE_FLAG_NO_Y = 2048`
+
+### VEHICLE_FLAG_NO_Z
+
+- `integer VEHICLE_FLAG_NO_Z = 4096`
 
 ### VEHICLE_HOVER_EFFICIENCY
 
 - `integer VEHICLE_HOVER_EFFICIENCY = 25`
 
-slider between 0 (bouncy) and 1 (critically damped) hover behaviour
--->
-
 ### VEHICLE_HOVER_HEIGHT
 
 - `integer VEHICLE_HOVER_HEIGHT = 24`
-
-height the vehicle will try to hover above ground. Set to zero to disable hover.
--->
 
 ### VEHICLE_HOVER_TIMESCALE
 
 - `integer VEHICLE_HOVER_TIMESCALE = 26`
 
-Period of time (in seconds) for the vehicle to achieve its hover height
-
 ### VEHICLE_LINEAR_DEFLECTION_EFFICIENCY
 
 - `integer VEHICLE_LINEAR_DEFLECTION_EFFICIENCY = 28`
 
-slider between 0 (no deflection) and 1 (maximum strength)
--->
-
 ### VEHICLE_LINEAR_DEFLECTION_TIMESCALE
 
-- `integer VEHICLE_LINEAR_DEFLECTION_TIMESCALE = 31`
-
-exponential timescale for the vehicle to redirect its velocity to its x-axis
--->
+- `integer VEHICLE_LINEAR_DEFLECTION_TIMESCALE = 29`
 
 ### VEHICLE_LINEAR_FRICTION_TIMESCALE
 
 - `integer VEHICLE_LINEAR_FRICTION_TIMESCALE = 16`
 
-vector of timescales for exponential decay of linear velocity about the three vehicle axes
-
 ### VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE
 
 - `integer VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE = 31`
-
-exponential timescale (in seconds) for the linear motor's effectiveness to decay toward zero
--->
 
 ### VEHICLE_LINEAR_MOTOR_DIRECTION
 
 - `integer VEHICLE_LINEAR_MOTOR_DIRECTION = 18`
 
-Vector of linear velocity (in meters/second) that the vehicle will try to achieve.
-May conflict with any active llTargetOmega set in the root prim and prevent vehicle turns. Call llTargetOmega with a gain of 0 to disable it.
-
 ### VEHICLE_LINEAR_MOTOR_OFFSET
 
 - `integer VEHICLE_LINEAR_MOTOR_OFFSET = 20`
-
-Used with llSetVehicleVectorParam to set the offset for where the linear motor is to be applied from the vehicle's center of mass.
-If the vehicle does not set the VEHICLE_LINEAR_MOTOR_OFFSET, then it defaults to .
 
 ### VEHICLE_LINEAR_MOTOR_TIMESCALE
 
 - `integer VEHICLE_LINEAR_MOTOR_TIMESCALE = 30`
 
-exponential timescale for the vehicle to achieve its full linear motor velocity
--->
+### VEHICLE_RANGE_BLOCK
+
+- `integer VEHICLE_RANGE_BLOCK = 45`
 
 ### VEHICLE_REFERENCE_FRAME
 
 - `integer VEHICLE_REFERENCE_FRAME = 44`
 
-Used to set the rotation of vehicle axes relative to local frame.
+### VEHICLE_ROLL_FRAME
+
+- `integer VEHICLE_ROLL_FRAME = 46`
+
+### VEHICLE_TYPE_AIRPLANE
+
+- `integer VEHICLE_TYPE_AIRPLANE = 4`
+
+### VEHICLE_TYPE_BALLOON
+
+- `integer VEHICLE_TYPE_BALLOON = 5`
+
+### VEHICLE_TYPE_BOAT
+
+- `integer VEHICLE_TYPE_BOAT = 3`
+
+### VEHICLE_TYPE_CAR
+
+- `integer VEHICLE_TYPE_CAR = 2`
 
 ### VEHICLE_TYPE_NONE
 
 - `integer VEHICLE_TYPE_NONE = 0`
 
-Turns off vehicle support 
--->
+### VEHICLE_TYPE_SLED
+
+- `integer VEHICLE_TYPE_SLED = 1`
 
 ### VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY
 
 - `integer VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY = 36`
 
-slider between 0 (bouncy) and 1 (critically damped) attraction of vehicle's z-axis to orient to the world's z axis (up)
--->
-
 ### VEHICLE_VERTICAL_ATTRACTION_TIMESCALE
 
 - `integer VEHICLE_VERTICAL_ATTRACTION_TIMESCALE = 37`
 
-exponential timescale (in seconds) for the vehicle to align its z-axis to the world z-axis
--->
+### WL_AMBIENT
 
-### VERTICAL
+- `integer WL_AMBIENT = 20`
 
-- `integer VERTICAL = 0`
+### WL_BIG_WAVE_DIRECTION
 
-Constant to indicate that the orientation of the capsule for a Pathfinding character is vertical.
+- `integer WL_BIG_WAVE_DIRECTION = 9`
+
+### WL_BLUE_DENSITY
+
+- `integer WL_BLUE_DENSITY = 14`
+
+### WL_BLUR_MULTIPLIER
+
+- `integer WL_BLUR_MULTIPLIER = 8`
+
+### WL_CLOUD_COLOR
+
+- `integer WL_CLOUD_COLOR = 26`
+
+### WL_CLOUD_COVERAGE
+
+- `integer WL_CLOUD_COVERAGE = 28`
+
+### WL_CLOUD_DETAIL_XY_DENSITY
+
+- `integer WL_CLOUD_DETAIL_XY_DENSITY = 30`
+
+### WL_CLOUD_SCALE
+
+- `integer WL_CLOUD_SCALE = 29`
+
+### WL_CLOUD_SCROLL_X
+
+- `integer WL_CLOUD_SCROLL_X = 31`
+
+### WL_CLOUD_SCROLL_X_LOCK
+
+- `integer WL_CLOUD_SCROLL_X_LOCK = 34`
+
+### WL_CLOUD_SCROLL_Y
+
+- `integer WL_CLOUD_SCROLL_Y = 32`
+
+### WL_CLOUD_SCROLL_Y_LOCK
+
+- `integer WL_CLOUD_SCROLL_Y_LOCK = 33`
+
+### WL_CLOUD_XY_DENSITY
+
+- `integer WL_CLOUD_XY_DENSITY = 27`
+
+### WL_DENSITY_MULTIPLIER
+
+- `integer WL_DENSITY_MULTIPLIER = 16`
+
+### WL_DISTANCE_MULTIPLIER
+
+- `integer WL_DISTANCE_MULTIPLIER = 17`
+
+### WL_DRAW_CLASSIC_CLOUDS
+
+- `integer WL_DRAW_CLASSIC_CLOUDS = 35`
+
+### WL_EAST_ANGLE
+
+- `integer WL_EAST_ANGLE = 21`
+
+### WL_FRESNEL_OFFSET
+
+- `integer WL_FRESNEL_OFFSET = 5`
+
+### WL_FRESNEL_SCALE
+
+- `integer WL_FRESNEL_SCALE = 4`
+
+### WL_HAZE_DENSITY
+
+- `integer WL_HAZE_DENSITY = 15`
+
+### WL_HAZE_HORIZON
+
+- `integer WL_HAZE_HORIZON = 13`
+
+### WL_HORIZON
+
+- `integer WL_HORIZON = 12`
+
+### WL_LITTLE_WAVE_DIRECTION
+
+- `integer WL_LITTLE_WAVE_DIRECTION = 10`
+
+### WL_MAX_ALTITUDE
+
+- `integer WL_MAX_ALTITUDE = 18`
+
+### WL_NORMAL_MAP_TEXTURE
+
+- `integer WL_NORMAL_MAP_TEXTURE = 11`
+
+### WL_REFLECTION_WAVELET_SCALE
+
+- `integer WL_REFLECTION_WAVELET_SCALE = 3`
+
+### WL_REFRACT_SCALE_ABOVE
+
+- `integer WL_REFRACT_SCALE_ABOVE = 6`
+
+### WL_REFRACT_SCALE_BELOW
+
+- `integer WL_REFRACT_SCALE_BELOW = 7`
+
+### WL_SCENE_GAMMA
+
+- `integer WL_SCENE_GAMMA = 24`
+
+### WL_STAR_BRIGHTNESS
+
+- `integer WL_STAR_BRIGHTNESS = 25`
+
+### WL_SUN_GLOW_FOCUS
+
+- `integer WL_SUN_GLOW_FOCUS = 22`
+
+### WL_SUN_GLOW_SIZE
+
+- `integer WL_SUN_GLOW_SIZE = 23`
+
+### WL_SUN_MOON_COLOR
+
+- `integer WL_SUN_MOON_COLOR = 19`
+
+### WL_SUN_MOON_POSITION
+
+- `integer WL_SUN_MOON_POSITION = 36`
+
+### WL_UNDERWATER_FOG_MODIFIER
+
+- `integer WL_UNDERWATER_FOG_MODIFIER = 2`
+
+### WL_WATER_COLOR
+
+- `integer WL_WATER_COLOR = 0`
+
+### WL_WATER_FOG_DENSITY_EXPONENT
+
+- `integer WL_WATER_FOG_DENSITY_EXPONENT = 1`
 
 ### ZERO_ROTATION
 
-- `ZERO_ROTATION`
-
-Represents a rotation that causes no change, that is, an identity rotation. The default value for a variable of rotation type.
+- `rotation ZERO_ROTATION = new rotation(0.0, 0.0, 0.0, 1.0)`
 
 ### ZERO_VECTOR
 
-- `ZERO_VECTOR`
-
-The default value for a variable of vector type.
-
-### {{#var:cname}}
-
-- `{{#var:type}} {{#var:cname}} = 0x0`
-
-Chat channel that broadcasts to all nearby users & objects. This channel is sometimes referred to as: open chat, local chat and public chat.
-If used with a llRegionSayTo, it goes to the specified user or prim. Unlike private channels, the user's attachments do not receive the message.
-
-### {{PAGENAMEE}}
-
-- `integer {{PAGENAMEE}} = 1`
-
-Simple vehicle that bumps along the ground, and likes to move along it’s local x-axis.
-===Effects===
-Setting the vehicle type to sled enables the vehicle system and additionally has the same effect of executing the following:
- // most friction for left-right, least for up-down
-llSetVehicleVectorParam( VEHICLE_LINEAR_FRICTION_TIMESCALE, );
-// no angular friction
-llSetVehicleVectorParam( VEHICLE_ANGULAR_FRICTION_TIMESCALE, );
-// no linear motor
-llSetVehicleVectorParam( VEHICLE_LINEAR_MOTOR_DIRECTION, );
-llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_TIMESCALE, 1000.0 );
-llSetVehicleFloatParam( VEHICLE_LINEAR_MOTOR_DECAY_TIMESCALE, 120.0 );
-// no agular motor
-llSetVehicleVectorParam( VEHICLE_ANGULAR_MOTOR_DIRECTION, );
-llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_TIMESCALE, 1000.0 );
-llSetVehicleFloatParam( VEHICLE_ANGULAR_MOTOR_DECAY_TIMESCALE, 120.0 );
-// no hover (but with timescale of 10 sec if enabled)
-llSetVehicleFloatParam( VEHICLE_HOVER_HEIGHT, 0.0 );
-llSetVehicleFloatParam( VEHICLE_HOVER_EFFICIENCY, 10.0 );
-llSetVehicleFloatParam( VEHICLE_HOVER_TIMESCALE, 10.0 );
-llSetVehicleFloatParam( VEHICLE_BUOYANCY, 0.0 );
-// maximum linear deflection with timescale of 1 second
-llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_EFFICIENCY, 1.0 );
-llSetVehicleFloatParam( VEHICLE_LINEAR_DEFLECTION_TIMESCALE, 1.0 );
-// no angular deflection
-llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_EFFICIENCY, 0.0 );
-llSetVehicleFloatParam( VEHICLE_ANGULAR_DEFLECTION_TIMESCALE, 10.0 );
-// no vertical attractor (doesn’t mind flipping over)
-llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_EFFICIENCY, 1.0 );
-llSetVehicleFloatParam( VEHICLE_VERTICAL_ATTRACTION_TIMESCALE, 1000.0 );
-// no banking
-llSetVehicleFloatParam( VEHICLE_BANKING_EFFICIENCY, 0.0 );
-llSetVehicleFloatParam( VEHICLE_BANKING_MIX, 1.0 );
-llSetVehicleFloatParam( VEHICLE_BANKING_TIMESCALE, 10.0 );
-// default rotation of local frame
-llSetVehicleRotationParam( VEHICLE_REFERENCE_FRAME, );
-// remove these flags
-llRemoveVehicleFlags( VEHICLE_FLAG_HOVER_WATER_ONLY
- | VEHICLE_FLAG_HOVER_TERRAIN_ONLY
- | VEHICLE_FLAG_HOVER_GLOBAL_HEIGHT
- | VEHICLE_FLAG_HOVER_UP_ONLY );
-// until banking is enabled, if ever)
-llSetVehicleFlags( VEHICLE_FLAG_NO_DEFLECTION_UP
- | VEHICLE_FLAG_LIMIT_ROLL_ONLY
- | VEHICLE_FLAG_LIMIT_MOTOR_UP );
+- `vector ZERO_VECTOR = new vector(0.0, 0.0, 0.0)`
 

@@ -7,16 +7,15 @@ Usage:
     ./dev/update_grammar.py
 
 Reads:
-    doc/LSL_Functions.md   → lsl_function rule
-    doc/OSSL_Functions.md  → ossl_function rule
-    doc/LSL_Constants.md
-    doc/OSSL_Constants.md  → constant rule (merged)
-    doc/LSL_Events.md      → event_name rule
+    doc/LSL_Functions.md  → lsl_function rule
+    doc/OSSL_Functions.md → ossl_function rule
+    doc/LSL_Constants.md  → constant rule (includes OS_ constants)
+    doc/LSL_Events.md     → event_name rule
 
 Writes:
-    grammar/grammar.js     (in-place)
+    grammar/grammar.js    (in-place)
 
-Run generate_ref_docs.py first to refresh doc/ from the XML sources.
+Run generate_ref_docs.py first to regenerate doc/ from C# source.
 """
 
 import re
@@ -70,7 +69,6 @@ def main():
         doc_dir / "LSL_Functions.md",
         doc_dir / "OSSL_Functions.md",
         doc_dir / "LSL_Constants.md",
-        doc_dir / "OSSL_Constants.md",
         doc_dir / "LSL_Events.md",
         grammar_path,
     ] if not p.exists()]
@@ -84,21 +82,9 @@ def main():
     ossl_names = set(extract_names(doc_dir / "OSSL_Functions.md",
                                    sig_pattern=r"\b(os[A-Za-z]\w+)\s*\("))
 
-    # Merge supplemental files (manually curated, not overwritten by generate_ref_docs.py)
-    lsl_supp = doc_dir / "LSL_supplement.md"
-    ossl_supp = doc_dir / "OSSL_supplement.md"
-    if lsl_supp.exists():
-        lsl_names.update(extract_names(lsl_supp, sig_pattern=r"\b(ll[A-Za-z]\w+)\s*\("))
-    if ossl_supp.exists():
-        ossl_names.update(extract_names(ossl_supp, sig_pattern=r"\b(os[A-Za-z]\w+)\s*\("))
-
     lsl_funcs  = sorted(lsl_names,  key=str.lower)
     ossl_funcs = sorted(ossl_names, key=str.lower)
-    constants  = sorted(
-        set(extract_names(doc_dir / "LSL_Constants.md") +
-            extract_names(doc_dir / "OSSL_Constants.md")),
-        key=str.lower,
-    )
+    constants  = extract_names(doc_dir / "LSL_Constants.md")
     events     = extract_names(doc_dir / "LSL_Events.md")
 
     print(f"  lsl_function : {len(lsl_funcs)}")

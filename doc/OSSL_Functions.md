@@ -1,213 +1,187 @@
 # OSSL Functions
 
-Source: http://opensimulator.org/wiki/Main_Page
-Fetched: 2026-04-17T18:34:12Z
-
-### osAddAgentToGroup
-
-- `osAddAgentToGroup(key AgentID, string GroupName, string RequestedRole)`
-
-Prerequisites 
-* The Group must be created
-* You must have the Group UUID
-* Roles within the group must be defined (default has Everyone & Owners)
+Source: tmp/opensim-git/OpenSim/Region/ScriptEngine/Shared/Api/Interface/IOSSL_Api.cs
+Generated: 2026-04-18T20:33:12Z
 
 ### osAdjustSoundVolume
 
-- `osAdjustSoundVolume(integer linknum, float volume)`
+- `void osAdjustSoundVolume(integer linknum, float volume)`
 
-Adjust the volume of attached sound for a prim in a linkset.
+Sets the sound volume of a given link.
+
+### osAESDecrypt
+
+- `string osAESDecrypt(string secret, string encryptedText)`
+
+Decrypt an encrypted text using osAESEncrypt() and the same Key (secret) used in the encryption. Returns the decrypted text.
+
+### osAESDecryptFrom
+
+- `string osAESDecryptFrom(string secret, string encryptedText, string ivString)`
+
+Decrypt an encrypted text using osAESEncryptTo() and the same Key (secret) and Initialization Vector (ivString) used in the encryption. Returns the decrypted text.
 
 ### osAESEncrypt
 
-- `list osAESEncrypt(string Secret, string plainText)`
+- `string osAESEncrypt(string secret, string plainText)`
+
+Encrypt a plain text using AES-256-CBC Symmetric Algorithm Key (secret) and a random Initialization Vector (IV). Returns the Hex string of the IV bytes and the Hex string of the encrypted text bytes separated with (:).
 
 ### osAESEncryptTo
 
-- `list osAESEncryptTo(string Secret, string plainText, string ivString)`
+- `string osAESEncryptTo(string secret, string plainText, string ivString)`
+
+Encrypt a plain text using AES-256-CBC Symmetric Algorithm Key (secret) and a custom Initialization Vector (ivString). Returns the Hex string of the IV bytes and the Hex string of the encrypted text bytes separated with (:).
 
 ### osAgentSaveAppearance
 
 - `key osAgentSaveAppearance(key agentId, string notecard)`
 - `key osAgentSaveAppearance(key agentId, string notecard, integer includeHuds)`
 
-Save an arbitrary avatar's appearance to a notecard in the prim's inventory. 
-This includes body part data, clothing items and attachments. If a notecard with the same name already exists then it is replaced. 
-The avatar must be present in the region when this function is invoked. 
-The baked textures for the avatar (necessary to recreate appearance on the NPC) are saved permanently. 
-The first variant will include HUDs, the second variant allows control that. incluceHuds 1 (TRUE) will include 0(FALSE) will not
+Save appearance of an avatar to a notecard in the primitive inventory.
 
 ### osAngleBetween
 
 - `float osAngleBetween(vector a, vector b)`
 
-returns a angle between 0 and PI
+Returns the angle between two vectors.
 
 ### osApproxEquals
 
-- `integer osApproxEquals(float fa, float fb)`
+- `integer osApproxEquals(float a, float b)`
+- `integer osApproxEquals(float a, float b, float margin)`
 - `integer osApproxEquals(vector va, vector vb)`
-- `integer osApproxEquals(rotation ra, rotation rb)`
-- `integer osApproxEquals(float fa, float fb, float margin)`
 - `integer osApproxEquals(vector va, vector vb, float margin)`
+- `integer osApproxEquals(rotation ra, rotation rb)`
 - `integer osApproxEquals(rotation ra, rotation rb, float margin)`
 
-Returns 1 (true) if the quantities or all their components do not differ by the margin value, or 1e-6 (0.000001), if margin is not provided. Returns 0 (false) otherwise.
+Returns an integer whether two float values are within floating point precision equal.
 
 ### osAvatarName2Key
 
-- `key osAvatarName2Key(string FirstName, string LastName)`
+- `string osAvatarName2Key(string firstname, string lastname)`
 
-Returns an avatar's key, based on his/her first and last name.
+Returns the avatar key, based on their first and last name.
 
 ### osAvatarPlayAnimation
 
-- `osAvatarPlayAnimation(key avatar, string animation)`
+- `void osAvatarPlayAnimation(key avatarId, string animation)`
 
-This function causes an animation to be played on the specified avatar. 
-The variable animation must be the name of an animation within the task inventory. For security reasons, UUIDs are not allowed here.
-Instead of the name of an animation in the prim's inventory, you can also use the names of the viewer's [http://wiki.secondlife.com/wiki/Internal_Animations built-in animations].
-osAvatarPlayAnimation does not perform any security checks or request animation permissions from the targeted avatar.
+Forcefully plays a given animation for a given avatar bypassing animation permissions.
 
 ### osAvatarStopAnimation
 
-- `osAvatarStopAnimation(key avatar, string animation)`
+- `void osAvatarStopAnimation(key avatarId, string animation)`
 
-This function stops the specified animation if it is playing on the avatar given.
-The value avatar is a UUID, and the animation value is either the name of an animation in the task inventory or the UUID of an animation. 
-If the specified avatar is not logged in or on the same sim as the script, then osAvatarStopAnimation silently fails.
+Forcefully stops a given animation for a given avatar bypassing animation permissions.
 
 ### osAvatarType
 
-- `integer osAvatarType(key avatarKey)`
-- `integer osAvatarType(string avatarFirstName, string avatarLastName)`
+- `integer osAvatarType(key avkey)`
+- `integer osAvatarType(string sFirstName, string sLastName)`
 
-Returns the type of a avatar in region:
-* < 0 in case of error
-* 0 if avatar not found in region
-* 1 if it is a normal avatar
-* 2 if it is a NPC
+Returns the type of a given avatar (key).
 
 ### osCauseDamage
 
-- `osCauseDamage(key avatar, float damage)`
+- `void osCauseDamage(key avatar, float damage)`
 
-Implemented December 30,2009 by Revolution in GIT# 87959464c9db8948bed89909913400bc2eb7524d - Rev 11850
-This is an updated version of Mantis 0003777. It allows for damage on collision, touch, etc.
+Subtracts health from a given avatar by a given amount.
 
 ### osCauseHealing
 
-- `osCauseHealing(key avatar, float healing)`
+- `void osCauseHealing(key agentId, float healing)`
 
-This does the opposite of osCauseDamage. It gives health to the avatar.
+Heals a given avatar by a given amount.
 
 ### osCheckODE
 
 - `integer osCheckODE()`
 
-That it checks if physics engine is legacy ODE and returns 1 ( TRUE ) it is, or 0 ( FALSE ) if not.
-
 ### osClearInertia
 
-- `osClearInertia()`
+- `void osClearInertia()`
 
-clears the effect of osSetInertia* functions. Link set total mass, center of mass and inertia will be the values estimated by default from the link set parts.
-Caution ! Only supported by ubOde for now
+Unsets the inertia data of the object containing the script.
 
 ### osClearObjectAnimations
 
 - `integer osClearObjectAnimations()`
 
-Clears all animations on the prim, returning how many it had running.
+Removes the object animations and returns the count of removed animations.
 
 ### osCollisionSound
 
-- `osCollisionSound(string impact_sound, float impact_volume)`
+- `void osCollisionSound(string impact_sound, float impact_volume)`
 
-Sets collision sound to impact_sound with specified volume.
+Sets a given collision sound and volume to the object containing the script.
 
 ### osConsoleCommand
 
-- `integer osConsoleCommand(string command)`
+- `integer osConsoleCommand(string Command)`
 
-This function allows an LSL script to directly execute a command to opensim's console. Even if the function is available, only administrators/gods can successfully execute it.
-In addition, one can further restrict this function to only certain administrators/gods. See Threat level for more information on how to do this.
-If the script owner does have the necessary permissions to call this function, then they can do anything someone with direct access to the command console could do, such as changing the avatar passwords, deleting sims, changing the terrain, etc.
-This command represents the highest security threat of any OSSL function, giving it a threat level of Severe. 
-Do not use or allow this function unless you are absolutely sure of what you're doing!
+Execute a console command.
 
 ### osDetectedCountry
 
-- `string osDetectedCountry(integer index)`
+- `string osDetectedCountry(integer number)`
 
-Returns a string that indicates the country in which the avatar is located.
+Detected params return of triggered user event of their set country.
 
 ### osDie
 
-- `osDie(key objectID)`
+- `void osDie(key objectUUID)`
 
-Deletes an object depending on the target uuid.
+Similar to llDie, but works on a given object UUID.
 
 ### osDrawEllipse
 
 - `string osDrawEllipse(string drawList, integer width, integer height)`
 
-Appends an Ellipse drawing command to the string provided in drawList and returns the result.
-The ellipse is drawn with the current pen size and color, with the specified width and height (in pixels), centered on a point which is (width/2) pixels to the right of the pen's current X position, and (height/2) pixels below the pen's current Y position. After the ellipse is drawn, the width and height values are added to the pen's X and Y position, respectively.
+Appends an ellipse drawing command to the string provided in drawList and returns the result.\nThe ellipse is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
 
 ### osDrawFilledEllipse
 
 - `string osDrawFilledEllipse(string drawList, integer width, integer height)`
 
-Appends an FillEllipse drawing command to the string provided in drawList and returns the result.
-The filled ellipse is drawn with the current pen size and color, with the specified width and height (in pixels), centered on a point which is (width/2) pixels to the right of the pen's current X position, and (height/2) pixels below the pen's current Y position. After the filled ellipse is drawn, the width and height values are added to the pen's X and Y position, respectively.
+Appends a filled ellipse drawing command to the string provided in drawList and returns the result.\nThe ellipse is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
 
 ### osDrawFilledPolygon
 
-- `string osDrawFilledPolygon(string drawList, list xpoints, list ypoints)`
+- `string osDrawFilledPolygon(string drawList, list x, list y)`
 
-Appends a FillPolygon drawing command to the string provided in drawList and returns the result. This fills in the interior of the specified polygon.
-The polygon is drawn with the current pen size and filled with the current color. So (x[0],y[0]),(x[1],y[1]),(x[2],y[2]) would be an example of a polygon. T
+Appends a filled polygon drawing command to the string provided in drawList and returns the result.\nThe polygon is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
 
 ### osDrawFilledRectangle
 
 - `string osDrawFilledRectangle(string drawList, integer width, integer height)`
 
-Appends a FillRectangle drawing command to the string provided in drawList and returns the result.
-The filled rectangle is drawn with the current pen size and color, at the specified width and height (in pixels), with the upper left corner of the rectangle placed at the pen's current position. After the rectangle is drawn, the width and height values are added to the pen's X and Y position, respectively (that is, the pen is positioned at the lower right corner of the rectangle.
+Appends a filled rectangle drawing command to the string provided in drawList and returns the result.\nThe rectangle is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
 
 ### osDrawImage
 
-- `string osDrawImage(string drawList, integer width, integer height, string imageUrl)`
+- `string osDrawImage(string drawList, integer width, integer height, string image)`
 
-Appends an Image drawing command to the string provided in drawList and returns the result.
-Retrieves an image specified by the imageUrl parameter and draws it at the specified height and width, with the upper left corner of the image placed at the pen's current position. After the image is drawn, the width and height values are added to the pen's X and Y position, respectively (that is, the pen's current position is set to the lower right corner of the image). 
-If imageUrl points to an invalid location, an image type not supported by libgdi, or a non-image MIME type, nothing is drawn. If either or both of the width or height parameters are zero or negative, nothing is drawn, but the image is still retrieved.
+Draw a given image from URL or asset uuid with given width and height at the current draw position.
 
 ### osDrawLine
 
 - `string osDrawLine(string drawList, integer startX, integer startY, integer endX, integer endY)`
 - `string osDrawLine(string drawList, integer endX, integer endY)`
 
-Depending on the form, appends a LineTo drawing command, or MoveTo and LineTo commands, to the string provided in drawList and returns the result.
-In the longer form, draws a line using the current pen size and color from to the coordinates indicated by startX and startY to the coordinates indicated by endX and endY.
-In the shorter form, draws a line using the current pen size and color from the pen's current position to the coordinates indicated by endX and endY.
-After the line is drawn, the pen's X and Y coordinates are set to endX and endY, respectively.
+Draws a line from a starting coordinate (pixels x y) to a target position.
 
 ### osDrawPolygon
 
-- `string osDrawPolygon(string drawList, list xpoints, list ypoints)`
+- `string osDrawPolygon(string drawList, list x, list y)`
 
-*Appends a Polygon drawing command to the string provided in drawList and returns the result.
-*The polygon is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
-*It will be converted into the drawing command "Polygon x[0],y[0],x[1],y[1],x[2],y[2],...". See Drawing commands#Polygon to know what the command will actually do.
+Appends a polygon drawing command to the string provided in drawList and returns the result.\nThe polygon is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
 
 ### osDrawRectangle
 
 - `string osDrawRectangle(string drawList, integer width, integer height)`
 
-Appends a Rectangle drawing command to the string provided in drawList and returns the result.
-The outline of a rectangle is drawn with the current pen size and color, at the specified width and height (in pixels), with the upper left corner of the rectangle placed at the pen's current position. After the rectangle is drawn, the width and height values are added to the pen's X and Y position, respectively (that is, the pen is positioned at the lower right corner of the rectangle.
+Appends a rectangle drawing command to the string provided in drawList and returns the result.\nThe rectangle is drawn with the current pen size and color on the x,y point pairs that comes from LSL list.
 
 ### osDrawResetTransform
 
@@ -219,1437 +193,1158 @@ Reset all transforms.
 
 - `string osDrawRotationTransform(string drawList, float x)`
 
-...
+Appends a rotation transform drawing command to the string provided in drawList and returns the result.
 
 ### osDrawScaleTransform
 
 - `string osDrawScaleTransform(string drawList, float x, float y)`
 
-...
+Appends a scale transform drawing command to the string provided in drawList and returns the result.
 
 ### osDrawText
 
 - `string osDrawText(string drawList, string text)`
 
-Appends a Text drawing command to the string provided in drawList and returns the result.
-The specified text will be drawn with the current pen color, using the currently defined font, size and properties (which default to regular 14-point Arial).
-The text will be drawn with the upper left corner of the first glyph at the pen's current position (however, note that glyphs within the font may be defined to extend to the left of their origin point).
-If you need to include a semicolon in the text to be displayed, you will need to directly manipulate the draw list string using the drawing commands rather than the dynamic texture convenience functions, then specify an alternate data delimiter in the extraParams parameter to the osSetDynamicTexture* functions. The convenience functions (including osDrawImage) are hardcoded to terminate each command with a semicolon.
-The text may or may not be antialiased, depending on the system settings of the machine upon which the simulator is running. Furthermore, if the system is configured to use LCD subpixel antialiasing (e.g. ClearType), the text may have colored fringes on the smoothed pixels, which may result in a less than optimum image.
-Please note that the pen position is not updated after this call.
+Draws a given string as text at the current drawing position. Text extends right and downwards.
 
 ### osDrawTranslationTransform
 
 - `string osDrawTranslationTransform(string drawList, float x, float y)`
 
-...
+Appends a translation transform drawing command to the string provided in drawList and returns the result.
 
 ### osDropAttachment
 
-- `osDropAttachment()`
+- `void osDropAttachment()`
 
-Requires script to be granted PERMISSION_ATTACH, drops an attachment like a user-triggered attachment drop.
+Attempts to drop the attachment the script is in to the ground.
 
 ### osDropAttachmentAt
 
-- `osDropAttachmentAt(vector pos, rotation rot)`
+- `void osDropAttachmentAt(vector pos, rotation rot)`
 
-Requires script to be granted PERMISSION_ATTACH, drops an attachment at position pos with rotation rot
+Attempts to drop the attachment the script is in to a given position on the ground.
 
 ### osEjectFromGroup
 
-- `integer osEjectFromGroup(key user)`
+- `integer osEjectFromGroup(key agentId)`
 
-Eject the given user from the group the object is set to.
-The object owner must have the right to eject users from the group the object is set to.
-The group member who is ejected can be offline. The user gets an instant message, that he/she has been ejected from that group. 
-The result is TRUE, if the user could be ejected, otherwise FALSE.
+Removes a given avatar from the group the object belongs to.
 
 ### osForceAttachToAvatar
 
-- `osForceAttachToAvatar(integer attachmentPoint)`
+- `void osForceAttachToAvatar(integer attachment)`
 
-Works exactly like llAttachToAvatar() except that PERMISSION_ATTACH is not required.
+Forcefully attaches the object containing this script to the object owner bypassing attach permissions.
 
 ### osForceAttachToAvatarFromInventory
 
-- `osForceAttachToAvatarFromInventory(string itemName, integer attachmentPoint)`
+- `void osForceAttachToAvatarFromInventory(string itemName, integer attachment)`
 
-Attach an inventory item in the object containing this script to the script owner without asking for PERMISSION_ATTACH. 
-Nothing happens if the avatar is not in the region.
-* itemName - The name of the item. If this is not found then a warning is said to the owner.
-* attachmentPoint - The attachment point. For example, ATTACH_CHEST.
+Forcefully attaches an object from the inventory of the object containing this script to the object owner bypassing attach permissions.
 
 ### osForceAttachToOtherAvatarFromInventory
 
-- `osForceAttachToOtherAvatarFromInventory(string rawAvatarId, string itemName, integer attachmentPoint)`
+- `void osForceAttachToOtherAvatarFromInventory(string rawAvatarId, string itemName, integer attachmentPoint)`
 
-Attach an inventory item in the object containing this script to any avatar in the region without asking for PERMISSION_ATTACH. 
-Nothing happens if the avatar is not in the region.
-* rawAvatarId - The UUID of the avatar to which to attach. Nothing happens if this is not a UUID.
-* itemName - The name of the item. If this is not found then a warning is said to the owner.
-* attachmentPoint - The attachment point. For example, ATTACH_CHEST.
+Forcefully attaches an object from the inventory of the object containing this script to a given attachment point of a given avatar bypassing attach permissions.
 
 ### osForceBreakAllLinks
 
-- `osForceBreakAllLinks()`
+- `void osForceBreakAllLinks()`
 
-* Identical to llBreakAllLinks() except that it doesn't require the link permission to be granted. Present in 0.8 and later.
+Break all links of a linkset bypassing object owner permissions.
 
 ### osForceBreakLink
 
-- `osForceBreakLink(integer linknumber)`
+- `void osForceBreakLink(integer linknum)`
 
-* Identical to llBreakLink(integer linknumber) except that it doesn't require the link permission to be granted. Present in 0.8 and later.
+Break a link of a linkset bypassing object owner permissions.
 
 ### osForceCreateLink
 
-- `osForceCreateLink(key target, integer parent)`
+- `void osForceCreateLink(string target, integer parent)`
 
-* Idential to llCreateLink() except that it doesn't require the link permission to be granted. Present in 0.8 and later.
+Add a link to a linkset bypassing object owner permissions.
 
 ### osForceDetachFromAvatar
 
-- `osForceDetachFromAvatar()`
+- `void osForceDetachFromAvatar()`
 
-Works exactly like llDetachFromAvatar() except that PERMISSION_ATTACH is not required.
+Forcefully detach the object containing this script from the avatar it is attached to bypassing attach permissions.
 
 ### osForceDropAttachment
 
-- `osForceDropAttachment()`
+- `void osForceDropAttachment()`
 
-Drops an attachment like a user-triggered attachment drop without checking if PERMISSION_ATTACH has been granted.
+Attempts to drop the attachment the script is in to the ground bypassing script permissions.
 
 ### osForceDropAttachmentAt
 
-- `osForceDropAttachmentAt(vector pos, rotation rot)`
+- `void osForceDropAttachmentAt(vector pos, rotation rot)`
 
-Drops an attachment at position pos with rotation rot without checking if PERMISSION_ATTACH has been granted.
+Attempts to drop the attachment the script is in to a given position on the ground bypassing script permissions.
 
 ### osForceOtherSit
 
-- `osForceOtherSit(key avatar)`
-- `osForceOtherSit(key avatar, key target)`
+- `void osForceOtherSit(string avatar)`
+- `void osForceOtherSit(string avatar, string target)`
 
-Forces a sit of targeted avatar onto prim.
-* avatar - The key of the avatar to which to attach. Nothing happens if this is not a UUID.
-* target - The key of another prim to sit avatar on. Nothing happens if this is not a UUID of prim in region.
-In OpenSimulator 0.8.0.1.
+Forces a given avatar to sit bypassing permissions.
 
 ### osFormatString
 
-- `string osFormatString(string format,list params)`
+- `string osFormatString(string str, list strings)`
 
-Return the string with parameters substituted into it. These parameters need to be incrementing numbers, starting at zero, and surrounded by single accolades (also known as curly brackets).
+Fills a given strings placeholders {%d} with the entries of the given list.
 
 ### osGetAgentCountry
 
-- `string osGetAgentCountry(key avatarID)`
+- `string osGetAgentCountry(key agentId)`
 
-Returns a string that indicates the country in which an avatar is located.
+Returns the country of a user.
 
 ### osGetAgentIP
 
-- `string osGetAgentIP(key uuid);`
+- `string osGetAgentIP(string agent)`
 
-Requires: key uuid of agent to get IP address for.
-Returns: string representing the IP address returned. 
-Possible Exceptions thrown:
- System.Exception: OSSL Runtime Error: osGetAgentIP permission denied. Allowed threat level is VeryLow but function threat level is High.
-Notes:
-Unknown if this function requires a valid Detect event such as touch or collision. 
-Unknown what is returned for IPv6. 
-osGetAgentIP is always restricted to Administrators
+Returns the IP address of a given avatar.
 
 ### osGetAgents
 
 - `list osGetAgents()`
 
-Returns a list of all the agents names in the region.
+Returns a list of avatars in the current region.
 
 ### osGetApparentRegionTime
 
 - `float osGetApparentRegionTime()`
 
-Returns region time in seconds since midnight.
+Returns the virtual seconds since environment midnight.
 
 ### osGetApparentRegionTimeString
 
 - `string osGetApparentRegionTimeString(integer format24)`
 
-Returns a string with current region sun hour. Will use 12 or 24 hour format if format24 is 0 or 1, respectible.
+Returns the virtual second since environment midnight as timestamp.
 
 ### osGetApparentTime
 
 - `float osGetApparentTime()`
 
-Returns parcel time in seconds since midnight. If parcel does not have own enviroment, region time is returned
+Returns the virtual seconds since environment midnight.
 
 ### osGetApparentTimeString
 
 - `string osGetApparentTimeString(integer format24)`
 
-Returns a string with current parcel sun hour. 
-Will use 12 or 24 hour format if format24 is 0 or 1, respectible. 
-If parcel does not have own evironment, region hour is returned.
+Returns the virtual second since environment midnight as timestamp.
 
 ### osGetAvatarHomeURI
 
-- `string osGetAvatarHomeURI(key avatarId)`
+- `string osGetAvatarHomeURI(string uuid)`
 
-Returns an avatar's Home URI.
+Tries to determine the home grid URI of an avatar.
 
 ### osGetAvatarList
 
 - `list osGetAvatarList()`
 
-Returns a strided list of the UUID, position, and name of each avatar in the region except the owner.
-This function is similar to osGetAgents but returns enough info for a radar.
+Returns a strided list (key, position, name) of all the avatars in the region.
 
 ### osGetCurrentSunHour
 
 - `float osGetCurrentSunHour()`
 
-Returns a float value of the current region sun hour (24 hour clock).
+Returns the current region sun hour as float (24 hour clock).
 
 ### osGetDrawStringSize
 
 - `vector osGetDrawStringSize(string contentType, string text, string fontName, integer fontSize)`
 
 Returns a vector containing the horizontal and vertical dimensions in pixels of the specified text, if drawn in the specified font and at the specified point size. The horizontal extent is returned in the .x component of the vector, and the vertical extent is returned in .y. The .z component is not used.
-The contentType parameter should be "vector".
-If the osSetFontSize() function has not been used, and neither the FontName nor FontProp commands have been added to the draw list, specify "Arial" as the font name, and 14 as the font size.
 
 ### osGetGender
 
-- `string osGetGender(key id)`
+- `string osGetGender(key rawAvatarId)`
 
-Returns a string with one of the following values: "male", "female", or "unknown". 
-This value is determined by the value selected for the avatar shape in the appearance dialog in the user's viewer. 
-If that value cannot be found for any reason (avatar is not in the region, improperly formatted key, etc.), "unknown" is returned.
+Returns the gender of a given avatar as string.
 
 ### osGetGridCustom
 
 - `string osGetGridCustom(string key)`
 
-Returns the value of the GridInfo key as a string.
+Returns custom grid information based on input key.
 
 ### osGetGridGatekeeperURI
 
 - `string osGetGridGatekeeperURI()`
 
-Returns the current grid's Gatekeeper URI as a string. If HG is not configured, returns empty string.
+Returns the gatekeeper URI of the current grid.
 
 ### osGetGridHomeURI
 
 - `string osGetGridHomeURI()`
 
-Returns the current grid's home URI as a string. if HG is not configured, returns empty string
+Returns the home URI of the current grid.
 
 ### osGetGridLoginURI
 
 - `string osGetGridLoginURI()`
 
-Returns the current grid's login URI as a string.
+Returns the login URI of the current grid.
 
 ### osGetGridName
 
 - `string osGetGridName()`
-- `|`
-- `ossl_example =<source lang="lsl">`
-- `//`
-- `// Example of osGetGridName()`
-- `// returns the value of gridname = "Hippogrid" in OpenSim.ini under [GridInfo] section`
-- `//`
-- `default`
-- `{`
-- `state_entry()`
-- `{`
-- `llSay(0, "Grid Name = "+osGetGridName());`
-- `}`
-- `}`
-- `</source>`
 
-Returns the current grid's name as a string.
+Returns the grid name of the current grid.
 
 ### osGetGridNick
 
 - `string osGetGridNick()`
 
-Returns the current grid's nickname as a string.
+Returns the grid nick of the current grid.
 
 ### osGetHealRate
 
-- `float osGetHealRate(key avatar)`
+- `float osGetHealRate(key agentId)`
 
-Gets the current automatic healing rate in % per second.
-Default heal rate is now around 0.5% per second. 
-A value of zero can disable automatic heal, current maximum value is 100 % per second.
+Returns the rate of healing for a given avatar.
 
 ### osGetHealth
 
-- `float osGetHealth(key avatar)`
+- `float osGetHealth(key agentId)`
 
-Gets an avatars health by key and returns the value as a float.
+Returns the current health of a given avatar.
 
 ### osGetInertiaData
 
 - `list osGetInertiaData()`
 
-Caution ! Only supported by ubOde for now. 
-This fonction retrun a list of inertia data.
- [
- float mass, // the total mass of the linkset
- vector center, // the center of mass offset relative to root prim
- vector Idiag, // diagonal elements of inertia
- vector Ioffdiag // off diagonal elements of inertia
- ]
-Mass maybe -1 if inertia data is invalid or not avaiable
+Returns a list of the inertia data of the object containing the script.
 
 ### osGetInventoryDesc
 
-- `string osGetInventoryDesc(string itemName_or_itemId)`
+- `string osGetInventoryDesc(string itemNameOrId)`
 
-Returns a string that is the description of inventory item with id "itemName_or_itemId" if that parameter is a valid key or with that name if not.
+Returns the description of a given inventory item key or name in the object containing the script.
 
 ### osGetInventoryItemKey
 
 - `key osGetInventoryItemKey(string name)`
-- `key osGetLinkInventoryItemKey(integer linkNumber, string name)`
 
-Returns id(key) of a inventory item within a prim inventory. If name is not unique result maybe unpredictable. Note that unlike llGetInventoryKey, this function returns the item ID, not ID of its asset.. Returns NULL_KEY if the item is not found or Owner has no rights
+Returns the key of a given inventory item of the object containing the script. Not the asset UUID.
 
 ### osGetInventoryItemKeys
 
 - `list osGetInventoryItemKeys(integer type)`
-- `list osGetLinkInventoryItemKeys(integer linkNumber, integer type)`
 
-Return a list of the items UUIDs by type (or INVENTORY_ALL) located in the host or child prim prim inventory.
-List ordering is arbitrary. Successive calls may return different orders. 
-Note that unlike llGetInventoryKey, this function returns the item ID, not ID of its asset.
+Returns a list of inventory item keys filtered by type in the object containing the script.
 
 ### osGetInventoryLastOwner
 
-- `key osGetInventoryLastOwner(string itemName_or_itemId)`
+- `key osGetInventoryLastOwner(string itemNameOrId)`
 
-Returns the id(key) of the last owner of inventory item with id "itemName_or_itemId" if that parameter is a valid key or with that name if not.
+Returns the last owner (key) of a given inventory item (name or key) of the object containing the script.
 
 ### osGetInventoryName
 
 - `string osGetInventoryName(key itemId)`
 
-Returns a string that is the name of inventory item
+Returns the name of a given inventory item key in the object containing the script.
 
 ### osGetInventoryNames
 
 - `list osGetInventoryNames(integer type)`
 
-Return a list of items names by type (or INVENTORY_ALL) located in the prim inventory.
-List ordering is arbitrary. Successive calls may return different orders.
+Returns a list of inventory names filtered by type in the object containing the script.
 
 ### osGetLastChangedEventKey
 
 - `key osGetLastChangedEventKey()`
 
+Returns the key of the last event setting detected params.
+
+### osGetLinkColor
+
+- `vector osGetLinkColor(integer linknum, integer face)`
+
+Returns the color vector of a given link and face.
+
 ### osGetLinkInventoryDesc
 
 - `string osGetLinkInventoryDesc(integer linkNumber, string itemNameorid)`
 
-Return the description of an item located in a child prim inventory.
+Returns the description of a given inventory item key or name in a given link.
+
+### osGetLinkInventoryItemKey
+
+- `key osGetLinkInventoryItemKey(integer linkNumber, string name)`
+
+Returns the asset UUID of a given inventory item of a given link.
+
+### osGetLinkInventoryItemKeys
+
+- `list osGetLinkInventoryItemKeys(integer linkNumber, integer type)`
+
+Returns a list of inventory item keys filtered by type in a given link.
 
 ### osGetLinkInventoryKey
 
-- `key osGetLinkInventoryKey(integer linkNumber, string name)`
+- `key osGetLinkInventoryKey(integer linkNumber, string name, integer type)`
 
-Returns id(key) of a inventory item asset within a prim inventory. If name is not unique result maybe unpredictable. This function extends llGetInventoryKey( string name ) to links. Returns NULL_KEY if the item is not found or Owner has no rights
+Returns the asset UUID of a given inventory item filtered by type in a given link.
+
+### osGetLinkInventoryKeys
+
+- `list osGetLinkInventoryKeys(integer linkNumber, integer type)`
+
+Returns a list of asset UUIDs of inventory items filtered by type in a given link.
 
 ### osGetLinkInventoryName
 
 - `string osGetLinkInventoryName(integer linkNumber, key itemId)`
 
-Return the name of an item located in a child prim inventory.
+Returns the name of a given inventory item key in a given link.
 
 ### osGetLinkInventoryNames
 
 - `list osGetLinkInventoryNames(integer linkNumber, integer type)`
 
-Return a list of items names by type (or INVENTORY_ALL) located in a child prim inventory.
-List ordering is arbitrary. Successive calls may return different orders.
+Returns a list of inventory names filtered by type in a given link.
 
 ### osGetLinkNumber
 
 - `integer osGetLinkNumber(string name)`
 
-returns the link number of the prim or sitting avatar with name "name" on the link set or -1 if the name is not found.
-* if names are not unique, the one with lower link number should be return
-* names "Object" and "Primitive" are ignored
+Return the link number of a given primitive in the linkset by name.
 
 ### osGetLinkPrimitiveParams
 
 - `list osGetLinkPrimitiveParams(integer linknumber, list rules)`
 
-Returns the primitive parameters for the linkset prim or prims specified by linknumber. It is possible to use the linkset constants (e.g. LINK_SET, LINK_ALL_CHILDREN) in place of a specific link number, in which case the requested parameters of each relevant prim are concatenated to the end of the list. Otherwise, the usage is identical to llGetPrimitiveParams().
+Returns a list of the primitive parameters given its link number.
 
 ### osGetLinkSitActiveRange
 
 - `float osGetLinkSitActiveRange(integer linkNumber)`
 
-returns the sit active range of the selected prim, see osSetLinkSitActiveRange
-* linkNumber: the link number of the prim, LINK_THIS or LINK_ROOT
-* range > 0: if a avatar if far from the prim by more than that value, a sit request is silent ignored
-* range == 0: disables this limit. Region default is used. Current that is unlimited if a sit target is set or physics can sit the avatar, otherwise 10m
-* range < 0: sits are disabled. Requests are silently ignored
-if link number is invalid it returns -2147483648 (int min value)
+Returns the max distance for allowing avatars to sit on a given link.
 
 ### osGetLinkStandTarget
 
 - `vector osGetLinkStandTarget(integer linkNumber)`
 
-Returns the stand target set on the prim see osSetLinkStandTarget.
-* linkNumber: the link number of the prim, LINK_THIS or LINK_ROOT
-If return is vector the stand target is disabled. Default stand offset and login are used.
-It will also return if linkNumber is invalid.
+Returns the stand offset of a given link.
 
 ### osGetMapTexture
 
 - `key osGetMapTexture()`
 
-Returns the UUID of the map texture of the current region.
+Returns the asset UUID of the texture representing the region map tile of the current region.
 
 ### osGetNotecard
 
 - `string osGetNotecard(string name)`
 
-This function directly reads the entire contents of a notecard if it exists within the task inventory, and dumps it into a string. It skips the dataserver event, thereby reducing code complexity.
+Directly returns the entire contents of a given notecard as a string.
 
 ### osGetNotecardLine
 
 - `string osGetNotecardLine(string name, integer line)`
 
-This function directly reads a line of text from the specified notecard, if it exists within the task inventory, and returns the text as a string. It skips the dataserver event, thereby reducing code complexity.
+Directly returns a given line of a notecard in the primitive inventory.
 
 ### osGetNPCList
 
 - `list osGetNPCList()`
 
-Returns a strided list of the UUID, position, and name of each NPC in the region. Only available after 0.9 Commit # e53f43, July 26,2017 
-This function is similar to OsGetAvatarList.
+Returns a strided list (key, position, name) of all NPCs in the region.
 
 ### osGetNumberOfAttachments
 
-- `list osGetNumberOfAttachments(key avatar, list attachmentPoints);`
+- `list osGetNumberOfAttachments(key avatar, list attachmentPoints)`
 
-Returns a strided list of the specified attachment points and the number of attachments on those points.
+Returns the number of attachments attached to a list of attachment points of a given avatar.
 
 ### osGetNumberOfNotecardLines
 
 - `integer osGetNumberOfNotecardLines(string name)`
 
-This function directly reads how many lines a notecard has if the specified notecard exists within the task inventory, bypassing the dataserver event to reduce code complexity.
+Returns the number of lines of a given notecard.
 
 ### osGetParcelDetails
 
-- `osGetParcelDetails(key parcelID, list rules)`
+- `list osGetParcelDetails(key id, list details)`
 
-This function is like [http://wiki.secondlife.com/wiki/LlGetParcelDetails llGetParcelDetails], but using parcel global id (parcelID) instead of position in region.
+Returns a list with the requested parcel details.
 
 ### osGetParcelDwell
 
 - `integer osGetParcelDwell(vector pos)`
 
-This function allows you to get parcel dwell.
-Alternatively you can also use PARCEL_DETAILS_DWELL with the function llGetParcelDetails.
+Returns the number of visitors to the region since start.
 
 ### osGetParcelID
 
-- `osGetParcelID()`
+- `key osGetParcelID()`
 
-This function returns the parcel global id (parcelID) of the parcel where host prim is.
+Returns the parcel id of the current parcel.
 
 ### osGetParcelIDs
 
-- `osGetParcelIDs()`
+- `list osGetParcelIDs()`
 
-This function returns a list of the parcel global ids of all parcels in region.
+Returns a list of parcel ids of the current region.
 
 ### osGetPhysicsEngineName
 
 - `string osGetPhysicsEngineName()`
 
-This function returns a string containing the name and version number of the physics engine.
+Returns the name of the currently enabled physics engine.
 
 ### osGetPhysicsEngineType
 
 - `string osGetPhysicsEngineType()`
 
-This function returns a string containing the name of the Physics Engine.
+Returns the type of the currently enabled physics engine.
 
 ### osGetPrimCount
 
 - `integer osGetPrimCount()`
-- `integer osGetPrimCount(key objectID)`
+- `integer osGetPrimCount(key object_id)`
 
-returns the number of prims of the current linkset or of the linkset that includes a prim with UUID objectID.
-Unlike ll* versions, does not count sitting avatars and does work on attachments.
+Returns the number of links in the object containing the script.
 
 ### osGetPrimitiveParams
 
-- `list osGetPrimitiveParams(key primId, list rules)`
+- `list osGetPrimitiveParams(key prim, list rules)`
 
-* Gets the parameters for the prim specified by primId according to rules.
-* This function has the same behave as llGetPrimitiveParams except you can specify target prim anywhere in the scene.
-* For general information about rules, see [http://wiki.secondlife.com/wiki/LlGetPrimitiveParams llGetPrimitiveParams in SecondLife Wiki].
-* If there is prim with id primId in the scene, or the owner of the target prim is different from the owner of the scripted prim, it will fail without error.
+Returns a list of primitive params of a given primitive (object UUID).
 
 ### osGetPSTWallclock
 
 - `float osGetPSTWallclock()`
 
-returns the current PST or PDT time in seconds since midnight
+Returns the seconds since midnight of the PST time zone.
 
 ### osGetRegionMapTexture
 
 - `key osGetRegionMapTexture(string regionNameOrID)`
 
-This function retrieves the key of the texture used to represent a region on the world map. regionNameOrID can be the region UUID or its name. If empty string, will return the current region map texture key, but in that case you should use osGetMapTexture().
+Returns the asset UUID of the texture representing the region map tile of a given region name or UUID.
 
 ### osGetRegionSize
 
 - `vector osGetRegionSize()`
 
-Returns the size of the region in meters.
-Usually this function returns: 
-However, when called in a var/mega region it returns the size of the entire simulator.
+Returns the x and y size of the region as vector. z is unused.
 
 ### osGetRegionStats
 
 - `list osGetRegionStats()`
 
-Returns a list of float values representing a number of region statistics (many of the values shown in the "Stats Bar" of LL-based clients). Provides similar functionality to llGetRegionFPS() and llGetRegionTimeDilation(), but returns 21 statistics simultaneously.
-The elements in the list may be referred to by the following new LSL constants:
+Returns a list of statistics regarding the region and simulator from the stats reporter module.
 
 ### osGetRezzingObject
 
 - `key osGetRezzingObject()`
 
-Get the key of the object that rezzed this object.
-Will return NULL_KEY if rezzed by agent or otherwise unknown source.
-Should only be reliable inside the on_rez event.
+Returns the key of the object that rezzed the object the script is in.
 
 ### osGetScriptEngineName
 
 - `string osGetScriptEngineName()`
 
-Returns the name of the script engine which is currently enabled on the server.
+Returns the name of the active script engine.
 
 ### osGetSimulatorMemory
 
-- `integer osGetSimulatorMemory();`
+- `integer osGetSimulatorMemory()`
 
-Implemented December 12,2009 by Adam Frisby in GIT# 87e89efbf9727b294658f149c6494fd49608bc12 - Rev 11700
+Returns the current memory usage of the simulator in bytes.
 
 ### osGetSimulatorMemoryKB
 
-- `integer osGetSimulatorMemoryKB();`
+- `integer osGetSimulatorMemoryKB()`
+
+Returns the current memory usage of the simulator in kilobytes.
 
 ### osGetSimulatorVersion
 
 - `string osGetSimulatorVersion()`
 
-This function returns a string containing the current simulator version.
+Returns the version information of the current simulator.
 
 ### osGetSitActiveRange
 
 - `float osGetSitActiveRange()`
 
-returns the sit active range of the prim see osSetSitActiveRange 
-* range > 0: if a avatar if far from the prim by more than that value, a sit request is silent ignored
-* range == 0: disables this limit. Region default is used. Current that is unlimited if a sit target is set or physics can sit the avatar, otherwise 10m
-* range < 0: sits are disabled. Requests are silently ignored
+Returns the max distance for allowing avatars to sit on the object containing the script.
 
 ### osGetSitTargetPos
 
 - `vector osGetSitTargetPos()`
 
-Return the sit target location as set by llSitTarget.
+Returns the position of the sit target of the object containing the script.
 
 ### osGetSitTargetRot
 
 - `rotation osGetSitTargetRot()`
 
-Return the sit target rotation as set by llSitTarget.
+Returns the rotation of the sit target of the object containing the script.
 
 ### osGetSittingAvatarsCount
 
 - `integer osGetSittingAvatarsCount()`
-- `integer osGetSittingAvatarsCount(key objectID)`
+- `integer osGetSittingAvatarsCount(key object_id)`
 
-returns the number of sitting avatars on the current linkset or on the linkset that includes a prim with UUID objectID.
+Returns the number of avatars seated on the object containing the script.
 
 ### osGetStandTarget
 
 - `vector osGetStandTarget()`
 
-Returns the stand target set on the prim see osSetStandTarget.
-If return is vector the stand target is disabled. Default stand offset and login are used.
+Returns the stand offset of the object containing the script.
 
 ### osGetSunParam
 
 - `float osGetSunParam(string param)`
 
-NOTE : This function should not be used in 0.9.2.0. It did depend on Sun module, removed on 0.9.2. This function did replace the deprecated OsSunGetParam function. 
-Since version 0.9.2.0 parameter "day_length" will return the same as llGetDayLength(), ie, the day length on the prim location. Other parameters return fixed dummy values.
+Returns parameters about the skybox.
 
 ### osGetTerrainHeight
 
 - `float osGetTerrainHeight(integer x, integer y)`
 
-NOTE&nbsp;: This function replaces the deprecated OsTerrainGetHeight function.
+Returns the height of terrain at a given x and y coordinate (meters).
 
 ### osGetWindParam
 
 - `float osGetWindParam(string plugin, string param)`
 
-*Gets the value of param property for plugin module.
+Get a parameter from a given wind plugin.
 
 ### osGiveLinkInventory
 
-- `osGiveLinkInventory(integer linkNumber, key destination, string inventory)`
+- `void osGiveLinkInventory(integer linkNumber, key destination, string inventory)`
 
-Give an item located in a child prim inventory.
+Send a given inventory item (name) from a given link to a destination object or avatar (key).
 
 ### osGiveLinkInventoryList
 
-- `osGiveLinkInventoryList(integer linkNumber, key destination, string category, list inventory)`
+- `void osGiveLinkInventoryList(integer linkNumber, key destination, string folderName, list inventory)`
 
-Give a group of items located in a child prim inventory.
-
-### osGrantScriptPermissions
-
-- `osGrantScriptPermissions(key allowed_key, string function)`
-
-Dynamically allow ossl execution to owner/creator/group by function name.
+Send a list of inventory items (key) in a given link to a given destination avatar (key) creating a new named folder.
 
 ### osInviteToGroup
 
-- `integer osInviteToGroup(key user)`
+- `integer osInviteToGroup(key agentId)`
 
-Invite the given user to the group the object is set to. 
-The object must have a group set and can not be group owned. 
-The object owner must have the right to invite new users to the group the object is set to. 
-The user with the given key has to be online in that region. 
-The user gets a normal group invitation, showing the owner of the object as sender. The invitation can be accepted or rejected and the user can open the corresponding group window. 
-Returns TRUE (1), if the invitation could be sent, otherwise FALSE (0). 
-Since version 0.9.2, it will return 2 if user is already member of the group.
+Sends a group invite to a given avatar for the group the object belongs to.
 
 ### osIsNotValidNumber
 
-- `integer osIsNotValidNumber(float d)`
+- `integer osIsNotValidNumber(float v)`
 
-Returns 0 (false) if d is a valid float, else returns: 
-1 - if it is a NaN 
-2 - if it is a Negative Infinity 
-3 - if it is a Positive Infinity
+Returns an integer whether a given number is out of bounds or NaN.
 
 ### osIsNpc
 
 - `integer osIsNpc(key npc)`
 
-Returns NPC status on the provided key
-* Returns TRUE (1) / FALSE (0) if key provided is an NPC
-* Returns FALSE (0) if the key provided doesn't exist in the scene.
+Returns an integer whether a given key is an NPC or avatar.
 
 ### osIsUUID
 
 - `integer osIsUUID(string thing)`
 
-Returns 1 if the supplied string can be converted to key (uuid), returns 0 otherwise.
+Returns an integer whether a given string is a UUID or not.
 
 ### osKey2Name
 
-- `string osKey2Name(key id)`
+- `string osKey2Name(string id)`
 
-Returns the avatar's name, based on their UUID.
+Returns the avatar name given their key.
 
 ### osKickAvatar
 
-- `void osKickAvatar(string FirstName,string SurName, string alert)`
+- `void osKickAvatar(string FirstName, string SurName, string alert)`
 - `void osKickAvatar(key agentId, string alert)`
 
-Kicks the selected avatar, closing its connection.
-Agent key argument version added February 20, 2019
+Disconnects an avatar from the simulator by first and last name or avatar key.
 
 ### osLinkParticleSystem
 
-- `osLinkParticleSystem(LSL_Integer linknumber, LSL_List rules)`
+- `void osLinkParticleSystem(integer linknumber, list rules)`
 
-### osList2Double
+Sets the particle system rules of a given link.
 
-- `float osList2Double(list src, integer index)`
+### osListAsFloat
 
-Caution! This function no not exist in OpenSimulator source code ...
+- `float osListAsFloat(list src, integer index)`
+
+Returns a float that is at index(>=0) in src or 0 if that is not a float
 
 ### osListAsInteger
 
 - `integer osListAsInteger(list src, integer index)`
-- `float osListAsFloat(list src, integer index)`
-- `string osListAsString(list src, integer index)`
-- `vector osListAsVector(list src, integer index)`
+
+Returns a integer that is at index(>=0) in src or 0 if that is not a integer
+
+### osListAsRotation
+
 - `rotation osListAsRotation(list src, integer index)`
 
-Return the element at index as integer, float, string, vector or rotation. Index must me >= 0 and the element on at that position must be of the requested type. Because of this restrictions, This should be a bit faster than the llList2* functions
+Returns a rotation that is at index(>=0) in src or zero rotation if that is not a vector
+
+### osListAsString
+
+- `string osListAsString(list src, integer index)`
+
+Returns a string that is at index(>=0) in src or empty string if that is not a string
+
+### osListAsVector
+
+- `vector osListAsVector(list src, integer index)`
+
+Returns a vector that is at index(>=0) in src or Zero vector if that is not a vector
 
 ### osListenRegex
 
-- `integer osListenRegex(integer channelID, string name, key ID, string msg, integer regexBitfield)`
+- `integer osListenRegex(integer channelID, string name, string ID, string msg, integer regexBitfield)`
 
-Allows the server to filter listen events by regular expressions. name or message parameters can be regular expressions, these are behaviours are controlled via the regexBitField parameter using the constants OS_LISTEN_REGEX_NAME and OS_LISTEN_REGEX_MESSAGE.
-If the regex strings are invalid, an error will be shouted on the debug channel.
+Creates a listener that parses matches for name and message through regex.
+
+### osListFindListNext
+
+- `integer osListFindListNext(list src, list test, integer start, integer end, integer instance)`
+
+Returns the nth index of the sublist constrained with start and end count.
 
 ### osListSortInPlace
 
-- `osListSortInPlace(list src, integer stride, integer ascending)`
+- `void osListSortInPlace(list src, integer stride, integer ascending)`
 
-Identical to llListSort but does the sort on the original list, so using less memory. 
-* src: the list to sort
-* stride: the list stride.
-* ascending: it it is 1 or TRUE, sort in ascending order. If it is any other value, sort in descendent order. 
-- Does nothing if the list length is not a multiple of stride. 
-- The sort considers the elements that are at indexes that are multiple of stride. The other elements between those multiples are just copied around. 
-i.e. if the element at [n * stride] is moved to [m * stride], elements [n * stride + i] are moved to [m * stride + i] for i = 1 to stride -1 (n, m and i integers). 
-- if there are different object types (ie some are integer, others string, etc) at the consider indexes [n * stride], each type is considered as a sub list and each sub list is sorted. 
-[1,"D",-4,"A","B"] will be [-4,"A",1,"B","D"], in ascending sort and stride 1. 
-- Lists with stride 1 and elements all of same type are a lot faster to sort than others, because in that case faster algorithms can be used.
+Sorts a given list in place.
 
 ### osListSortInPlaceStrided
 
-- `osListSortInPlaceStrided(list src, integer stride, integer stride_index, integer ascending)`
+- `void osListSortInPlaceStrided(list src, integer stride, integer stride_index, integer ascending)`
 
-Identical to llListSortStrided but does the sort on the original list, so using less memory. 
-* src: the list to sort
-* stride: the list stride.
-* stride_index: index of the element to sort by in stride
-* ascending: it it is 1 or TRUE, sort in ascending order. If it is any other value, sort in descendent order.
+Sorts a given strided list in place.
 
 ### osLoadedCreationDate
 
 - `string osLoadedCreationDate()`
 
-*This function returns a string containing the date that a sim was first created. An example of the string returned is "Monday, December 07, 2009".
-* It will return empty string if the region hasn't been created by oar import, or the region uses SQLite for region database.
+Returns the creation date of the loaded region scene data.
 
 ### osLoadedCreationID
 
 - `string osLoadedCreationID()`
 
-* This function returns a string containing the UUID that a sim was originally created with.
-* It will return empty string if the region hasn't been created by oar import, or the region uses SQLite as region database.
+Returns the original region UUID of the loaded region scene data.
 
 ### osLoadedCreationTime
 
 - `string osLoadedCreationTime()`
 
-*This function returns a string containing the time that a sim was first created. An example of the string returned is "2:06:48 AM". 
-* It will return empty string if the region hasn't been created by oar import, or the region uses SQLite for region database.
+Returns the creation time of the loaded region scene data.
 
 ### osLocalTeleportAgent
 
-- `osLocalTeleportAgent(key agentID, vector newPosition, vector newVelocity, vector newLookat, integer optionFlags)`
+- `void osLocalTeleportAgent(key agent, vector position, vector velocity, vector lookat, integer flags)`
 
-Teleports an avatar with uuid agentID to the specified newPosition within same region. 
-It ignores region teleport settings like Telehub or landpoint 
-The avatar must have rights to enter the target position. 
-The avatar must had granted PERMISSION_TELEPORT to the script or the owner of the prim containing the script is also be owner of the parcel where the avatar is currently on. 
-The function will fail silently if conditions are not meet. 
-- If newPosition is outside the region the target will be at nearest region border. 
-- newVelocity, if selected with optionFlags bit 0 set, should set a avatar velocity, but may only work with ubOde Physics engine, even so results may be a bit unpredictable. 
-It will stop if the avatar collides with anything at destination or if the user presses a movement key. 
-It also has a fast decay. This behavior will need future changes. If bit 0 is not set, current velocity is kept 
-- newLookAt, if selected with optionFlags bit 1 set, changes the avatar look at direction. 
-Bit 2 can alternatively be used to align the look at to the velocity, if that is not zero vector. 
-Camera direction will depend on viewer camera state at teleport time (like camera attached to avatar or free). 
-Look at is the direction the avatar head will face. Body will face close to that, depending on viewers. Look At Z component is zero. 
-If both bits are not set, the look at direction will be the current camera direction 
-- OptionFlags is a bit field: 
-bit 0 (OS_LTPAG_USEVEL): use newVelocity 
-bit 1 (OS_LTPAG_USELOOKAT): use newLookAt 
-bit 2 (OS_LTPAG_ALGNLV): align lookat to velocity if it is not zero vector 
-bit 3 (OS_LTPAG_FORCEFLY): force fly. 
-bit 4 (OS_LTPAG_FORCENOFLY): force no fly. Will not work if viewer has fly after teleport option set 
-if both bits 1 and 2 are set bit 2 is ignored 
-if both bits 3 and 4 are set bit 4 is ignored
+Teleport a given avatar (key) to a given position and rotation as look at vector with a velocity vector and teleport flags.
 
 ### osLoopSound
 
-- `osLoopSound(integer linknum, string sound, float volume)`
+- `void osLoopSound(integer linknum, string sound, float volume)`
 
-Play the specified sound at the specified volume and loop it indefinitely.
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim.
+Sets a looping sound and volume of a given link.
 
 ### osLoopSoundMaster
 
-- `osLoopSoundMaster(integer linknum, string sound, float volume)`
+- `void osLoopSoundMaster(integer linknum, string sound, float volume)`
 
-Play the specified sound at the specified volume and loop it indefinitely.
-This sound will be set as a master sound. The playing of the sound in other prims using osLoopSoundSlave will be synchronized to this sound.
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim.
+Sets a looping sound and volume of a given link as master.
 
 ### osLoopSoundSlave
 
-- `osLoopSoundSlave(integer linknum, string sound, float volume)`
+- `void osLoopSoundSlave(integer linknum, string sound, float volume)`
 
-Play the specified sound at the specified volume and loop it indefinitely.
-This sound will be set as a slave sound. The playing of a slave sound will be synchronized to the playing of the same sound declared in another prim as the master sound. 
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim.
+Sets a looping sound and volume of a given link as slave.
 
 ### osMakeNotecard
 
-- `osMakeNotecard(string notecardName, list contents)`
-- `osMakeNotecard(string notecardName, string contents)`
+- `void osMakeNotecard(string notecardName, string contents)`
+- `void osMakeNotecard(string notecardName, list contents)`
 
-Creates a notecard with text in the prim that contains the script. Contents can be either a list or a string.
+Creates a new notecard in the primitive inventory with given contents.
 
 ### osMatchString
 
 - `list osMatchString(string src, string pattern, integer start)`
 
-This function returns a list containing the matches from the given string.
+Returns a list of matches from a given string from a given start.
 
 ### osMax
 
 - `float osMax(float a, float b)`
 
-Returns the larger of two numbers. Wraps to system Math.Max()
+Returns the larger of two given numbers.
 
 ### osMessageAttachments
 
-- `osMessageAttachments(key avatar, string message, list attachmentPoints, integer options);`
+- `void osMessageAttachments(key avatar, string message, list attachmentPoints, integer flags)`
 
-Sends a specified message to the specified avatar's attachments on the specified attachment points.
-Behaves as osMessageObject, without the sending script needing to know the attachment keys in advance.
-This is incompatible with the normal use of dataserver event on scripts the receiving prim.
-Options:
-* OS_ATTACH_MSG_INVERT_POINTS invert how the attachment points list should be treated. Will send to all but the listed ones
-* OS_ATTACH_MSG_OBJECT_CREATOR send only to those attachments that have the same CreatorID as the script host prim
-* OS_ATTACH_MSG_SCRIPT_CREATOR send only to those attachments that have the same CreatorID as the script itself.
-This options can be combined with binary or | 
-Calling with OS_ATTACH_MSG_ALL in list attachmentPoints will sends the message to attachments on every point. If OS_ATTACH_MSG_INVERT_POINTS is also provide, the message is ignored
+Sends a message as dataserver event to a given attachment based on the avatar key and attachment point. Can be constrained further with options.
 
 ### osMessageObject
 
-- `osMessageObject(key primID, string message)`
+- `void osMessageObject(key objectUUID, string message)`
 
-primID = the UUID of the prim you are messaging. 
-message = The string you want to send. 
-Sends a message to a prim identified by the given UUID, a script in the prim must implement the dataserver event handler. the dataserver event is passed the UUID of the calling prim and a string message. 
-This is incompatible with the normal use of dataserver event on scripts on the receiving prim. 
-The dataserver query_id argument should be a unique id of a request. This function just uses it as a sender id. All scripts with dataserver event will receive it with no easy to validate. A normal request may also trigger the event on several scripts of the prim. The target one can compare the query_id and validate it, other scripts can not tell if it is a normal request for other script, or a message. 
-this unless the prims can know senders UUIDs and filter based on them
+Directly send a message as dataserver event to a given object by its key.
 
 ### osMin
 
 - `float osMin(float a, float b)`
 
-Returns the smaller of two numbers. Wraps to the system Math.Min() function.
+Returns the smaller of two given numbers.
 
 ### osMovePen
 
 - `string osMovePen(string drawList, integer x, integer y)`
 
-Appends a MoveTo drawing command to the string provided in drawList and returns the result.
-This moves the pen's location to the coordinates specified by the x and y parameters, without drawing anything.
+Move the drawing position to a given coordinate (pixels x y).
 
 ### osNpcCreate
 
-- `key osNpcCreate(string firstname, string lastname, vector position, string cloneFrom)`
-- `key osNpcCreate(string firstname, string lastname, vector position, string cloneFrom, integer options)`
+- `key osNpcCreate(string user, string name, vector position, string notecard)`
+- `key osNpcCreate(string user, string name, vector position, string notecard, integer options)`
 
-*Creates an NPC named firstname lastname at position from avatar appearance resource cloneFrom
+Creates a new NPC with a given name at a given position using a supplied notecard for appearance.
 
 ### osNpcGetOwner
 
 - `key osNpcGetOwner(key npc)`
 
-Gets the NPC's owner's UUID
+Returns the owner key of a given NPC. NULL_KEY if the NPC is unowned.
 
 ### osNpcGetPos
 
 - `vector osNpcGetPos(key npc)`
 
-Return the current position of the NPC.
+Returns the position of a given NPC (key).
 
 ### osNpcGetRot
 
 - `rotation osNpcGetRot(key npc)`
 
-Gets the rotation of the avatar. Only the rotation around the Z plane in Euler rotation (horizontal rotation) has any meaning.
+Returns the current rotation of a given NPC (key).
 
 ### osNpcLoadAppearance
 
-- `osNpcLoadAppearance(key npc, string notecard)`
+- `void osNpcLoadAppearance(key npc, string notecard)`
 
-Load appearance from a notecard. This notecard must contain appearance data created with one of the save appearance functions.
+Loads a given appearance notecard to a given NPC (key).
 
 ### osNpcLookAt
 
-- `integer osNpcLookAt(key npckey, integer type, key targetkey, vector offset)`
+- `integer osNpcLookAt(key npckey, integer type, key objkey, vector offset)`
 
-Caution ! still experimental, subject to changes
-* npckey : The key of the npc.
-* type : the type of the lookat
-* targetkey : a object or avatar target
-* offset : a offset relative to that target in that target local coordinates, or if target is nullkey a GLOBAL position.
-This sends a viewer lookat effect relative to that npc to all avatars in region. 
-This will make those viewers turn the npc head and eyes to the target position plus offset, if the current head animation priority is lower than the viewers defined head movement priority, usually 1.
-type defines what kind of event or attention. They have viewer defined priorities relative to each other
-Only the one with higher priority will play.
-type constants:
-* NPCLOOKAT_NONE = 0; nothing
-* NPCLOOKAT_IDLE = 1; mouse movements
-* NPCLOOKAT_LISTEN = 2; listing to nearby chat
-* NPCLOOKAT_FREELOOK = 3;
-* NPCLOOKAT_RESPOND = 4; begin of typing
-* NPCLOOKAT_HOVER = 5; mouse hovering on a object
-* NPCLOOKAT_CONVERSATION = 6;
-* NPCLOOKAT_SELECT = 7; object grabbed
-* NPCLOOKAT_FOCUS = 8; focused on a object or point
-* NPCLOOKAT_MOUSELOOK = 9; mouse look
-* NPCLOOKAT_CLEAR = 10; should clear current one ?
-What does happen to the npc is viewer dependent and also may also depend on the npc gender.
-For example to set normal look forward like idle mouse 
- osNpcLookAt(npckey, NPCLOOKAT_IDLE, npckey, ); // (looks to npc position plus 2.5m on x that is its front direction)
-function will return a integer < 0 on error
- -1 invalid type
- -2 could not parse npckey
- -3 npc not found on region
- -4 could not parse targetkey
- -5 target key is not null key, or there is no agent or object with that key in region
+Sets the look at direction of a NPC to a given object (key) and offset.
 
 ### osNpcMoveTo
 
-- `osNpcMoveTo(key npc, vector position)`
+- `void osNpcMoveTo(key npc, vector position)`
 
-* Moves npc to the position.
+Moves a given NPC (key) to a position.
 
 ### osNpcMoveToTarget
 
-- `osNpcMoveToTarget(key npc, vector target, integer options)`
+- `void osNpcMoveToTarget(key npc, vector target, integer options)`
 
-Move the NPC to a given target over time. How the NPC will get there depends on the following options.
-OS_NPC_FLY - Fly the NPC to the given position. The avatar will not land unless the OS_NPC_LAND_AT_TARGET option is also given.
-OS_NPC_NO_FLY - Do not fly to the target. The NPC will attempt to walk to the location. If it's up in the air then the NPC will keep bouncing hopeless until another move target is given or the move is stopped.
-OS_NPC_LAND_AT_TARGET - If given and the NPC is flying, then it will land when it reaches the target. If OS_NPC_NO_FLY is given then this option has no effect.
-OS_NPC_FLY and OS_NPC_NO_FLY are options that cannot be combined - the NPC will end up doing one or the other. If you want the NPC to fly and land at the target, then OS_NPC_LAND_AT_TARGET must be combined with OS_NPC_FLY.
-OS_NPC_RUNNING - make the NPC run to the given position.
+Sets a target for a given NPC (key) to move towards.
 
 ### osNpcPlayAnimation
 
-- `osNpcPlayAnimation(key npc, string animation)`
+- `void osNpcPlayAnimation(key npc, string animation)`
 
-Plays animation on the NPC identified by their key.
+Instructs a given NPC (key) to play a given animation (name) from the inventory of the object containing the script.
 
 ### osNpcRemove
 
-- `osNpcRemove(key npc)`
+- `void osNpcRemove(key npc)`
 
-*Removes the NPC specified by key npc.
+Removes a given NPC (key).
 
 ### osNpcSaveAppearance
 
 - `key osNpcSaveAppearance(key npc, string notecard)`
 - `key osNpcSaveAppearance(key npc, string notecard, integer includeHuds)`
 
-Save the NPC's current appearance to a notecard in the prim's inventory. This includes body part data, clothing items and attachments. If a notecard with the same name already exists then it is replaced. The avatar must be present in the region when this function is invoked. The baked textures for the avatar (necessary to recreate appearance) are saved permanently. 
-first variant will include huds on the save appearence. Second variant alloes control of that. incluceHuds 1 (TRUE) will include 0(FALSE) will not
+Creates a new notecard with a given name from a given NPC (key).
 
 ### osNpcSay
 
-- `osNpcSay(key npc, integer channel, string message)`
-- `osNpcSay(key npc, string message)`
+- `void osNpcSay(key npc, string message)`
+- `void osNpcSay(key npc, integer channel, string message)`
 
-npc says message on the given channel (channel is 0 in the second form)
+Instructs a given NPC (key) to say a given message.
 
 ### osNpcSayTo
 
-- `osNpcSayTo(key npc, key target, integer channel, string message)`
+- `void osNpcSayTo(key npc, key target, integer channel, string msg)`
 
-npc says message on the given channel to the specified target
+Instructs a given NPC (key) to say to a given avatar (key) a given message on a given channel.
 
 ### osNpcSetProfileAbout
 
-- `osNpcSetProfileAbout(key npc, string about)`
+- `void osNpcSetProfileAbout(key npc, string about)`
 
-Set about in created NPC's profile.
+Sets a given NPC (key) profile about text to a given string.
 
 ### osNpcSetProfileImage
 
-- `osNpcSetProfileImage(key npc, string image)`
+- `void osNpcSetProfileImage(key npc, string image)`
 
-Set image in created NPC's profile.
-One can use UUID of the texture or name of texture included in prim's inventory.
+Sets a given NPC (key) profile image to a given image (asset UUID).
 
 ### osNpcSetRot
 
-- `osNpcSetRot(key npc, rotation rot)`
+- `void osNpcSetRot(key npc, rotation rot)`
 
-Set the rotation of the avatar. Only setting the rotation in the Z plane in Euler rotation will have any meaningful effect (turning the avatar to point in one direction or another). Setting X or Y Euler values will result in the avatar rotating in an undefined manner.
+Sets the rotation of a given NPC (key).
 
 ### osNpcShout
 
-- `osNpcShout(key npc, integer channel, string message)`
+- `void osNpcShout(key npc, integer channel, string message)`
 
-npc shouts message on the given channel.
+Instructs a given NPC (key) to shout a given message on a given channel.
 
 ### osNpcSit
 
-- `osNpcSit(key npc, key target, integer options)`
+- `void osNpcSit(key npc, key target, integer options)`
 
-*Makes an NPC sit on an object. 
-*Options - OS_NPC_SIT_NOW. Makes the npc instantly sit on the prim if possible. This is the only option available and is currently always on no matter what is actually specified in the options field.
-** If the prim has a sit target then sit always succeeds no matter the distance between the NPC and the prim.
-** If the prim has no sit target then
-*** If the prim is within 10 meters of the NPC then the sit will always succeed.
-*** At OpenSimulator 0.7.5 and later, if the prim is further than 10 meters away then nothing will happen.
-*** Before OpenSimulator 0.7.5, if the prim is further than 10 meters away then the avatar will attempt to walk over to the prim but will not sit when it reaches it.
+Instructs a given NPC (key) to sit on a given object (UUID).
 
 ### osNpcStand
 
-- `osNpcStand(key npc)`
+- `void osNpcStand(key npc)`
 
-*Makes a sitting NPC stand up.
+Instructs a given NPC (key) to stand up.
 
 ### osNpcStopAnimation
 
-- `osNpcStopAnimation(key npc, string animation)`
+- `void osNpcStopAnimation(key npc, string animation)`
 
-Stops an animation that is being played by the NPC identified by their key.
+Instructs a given NPC (key) to stop playing a given animation (name).
 
 ### osNpcStopMoveToTarget
 
-- `osNpcStopMoveToTarget(key npc)`
+- `void osNpcStopMoveToTarget(key npc)`
 
-Stop a current move to a target.
+Removes the target a given NPC (key) is moving towards.
 
 ### osNpcTouch
 
-- `osNpcTouch(key npcKey, key objectKey, integer linkNum)`
+- `void osNpcTouch(key npcLSL_Key, key object_key, integer link_num)`
 
-Only LINK_THIS and LINK_ROOT are valid for this function. Any other of the LINK_* constants will be ignored and no touch takes place.
-1. If linkNum is LINK_THIS then the prim with the key objectKey will be touched.
-2. If linkNum is LINK_ROOT or 0 then the root prim of the link set will be touched, even if the root prim key is not objectKey
-3. For any other value of linkNum a search will be made through the linkset for a prim with that link number. If found that prim will be touched. If no prim is found for that link number the function fails silently and no touch takes place.
-The touch is fired as if it came from an old client that does not support face touch detection or (probably) one of the text clients like Metabolt. Since there is no mouse the llDetectedTouch* functions will return the defaults (See the LSL Wiki for full details)
-llDetectedTouchBinormal TOUCH_INVALID_VECTOR 
-llDetectedTouchFace TOUCH_INVALID_FACE 
-llDetectedTouchNormal TOUCH_INVALID_VECTOR 
-llDetectedTouchPos TOUCH_INVALID_VECTOR 
-llDetectedTouchST TOUCH_INVALID_TEXCOORD 
-llDetectedTouchUV TOUCH_INVALID_TEXCOORD 
-If the prim is not found or would not allow a normal client to touch it then this function fails silently.
+Instructs a given NPC (key) to touch a given object (UUID) and link.
 
 ### osNpcWhisper
 
-- `osNpcWhisper(key npc, int channel, string message)`
+- `void osNpcWhisper(key npc, integer channel, string message)`
 
-npc whispers message on the given channel.
+Instructs a given NPC (key) to whisper a given message on a given channel.
+
+### osOldList2ListStrided
+
+- `list osOldList2ListStrided(list src, integer start, integer end, integer stride)`
+
+Returns a strided list of a given list.
 
 ### osOwnerSaveAppearance
 
 - `key osOwnerSaveAppearance(string notecard)`
 - `key osOwnerSaveAppearance(string notecard, integer includeHuds)`
 
-Save the owner's current appearance to a notecard in the prim's inventory. 
-This includes body part data, clothing items and attachments. 
-If a notecard with the same name already exists then it is replaced. 
-The owner must be present in the region when this function is invoked. 
-The baked textures for the owner (necessary to recreate appearance on the NPC) are saved permanently. 
-The first variant will include HUDs, the second variant allows control that. incluceHuds 1 (TRUE) will include 0(FALSE) will not
+Save appearance of object owner to a notecard in the primitive inventory.
 
 ### osParcelJoin
 
-- `osParcelJoin(vector pos1, vector pos2)`
+- `void osParcelJoin(vector pos1, vector pos2)`
 
-Joins two adjacent parcels within the same region.
+Joins a parcel with another based on positions within both parcels as vectors.
+
+### osParcelSetDetails
+
+- `void osParcelSetDetails(vector pos, list rules)`
+
+DEPRECATED. Use osSetParcelDetails instead.
 
 ### osParcelSubdivide
 
-- `osParcelSubdivide(vector pos1, vector pos2)`
+- `void osParcelSubdivide(vector pos1, vector pos2)`
 
-Subdivides a parcel into two adjacent parcels within the same region.
+Subdivides a parcel as rectangle given a start and end position as vector.
 
 ### osParticleSystem
 
-- `osParticleSystem(list rules)`
+- `void osParticleSystem(list rules)`
+
+Sets the particle system rules of the object containing the script.
 
 ### osPlaySound
 
-- `osPlaySound(integer linknum, string sound, float volume)`
+- `void osPlaySound(integer linknum, string sound, float volume)`
 
-Play the specified sound once at the specified volume.
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the prim containing the script calling this function.
+Sets a sound and volume of a given link.
 
 ### osPlaySoundSlave
 
-- `osPlaySoundSlave(integer linknum, string sound, float volume)`
+- `void osPlaySoundSlave(integer linknum, string sound, float volume)`
 
-Play the specified sound at the specified volume.
-This sound will be set as a slave sound. The playing of a slave sound will be synchronized to the playing of the same sound declared in another prim as the master sound. 
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim.
+Sets a sound and volume of a given link as slave.
 
 ### osPreloadSound
 
-- `osPreloadSound(integer linknum, string sound)`
+- `void osPreloadSound(integer linknum, string sound)`
 
-Preload the specified sound in viewers of nearby avatars.
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim.
+Sets a sound to preload for a given link.
 
 ### osRegexIsMatch
 
 - `integer osRegexIsMatch(string input, string pattern)`
 
-Returns 1 if the input string matches the regular expression pattern. Wraps to Regex.IsMatch()
+Returns an integer whether the input string matches a regex pattern.
 
 ### osRegionNotice
 
-- `osRegionNotice(string message)`
-- `osRegionNotice(key agentID, string message)`
+- `void osRegionNotice(string msg)`
+- `void osRegionNotice(key agentID, string msg)`
 
-Sends a region notice to the entire current region.
+Send a notice message to all avatars in the region.
 
 ### osRegionRestart
 
 - `integer osRegionRestart(float seconds)`
-- `integer osRegionRestart(float seconds, string message)`
+- `integer osRegionRestart(float seconds, string msg)`
 
-Restarts a region after a specified timeout. Only estate managers and administrators can successfully execute this function.
-The string in the second version of this function will be used in the warning messages sent to all users in-the region about the region restart instead of the default warning message.
+Schedule a region restart seconds in the future.
 
 ### osRemoveLinkInventory
 
-- `osRemoveLinkInventory(integer linkNumber, string name)`
+- `void osRemoveLinkInventory(integer linkNumber, string name)`
 
-Remove an item from a child prim inventory.
+Removes a inventory item by name in a given link.
 
 ### osReplaceAgentEnvironment
 
-- `integer osReplaceAgentEnvironment(key agentKey, integer transition, string daycycle)`
+- `integer osReplaceAgentEnvironment(key agentkey, integer transition, string daycycle)`
 
-Forces a dayclycle on a agent. Will do nothing if the agent is using a viewer local environment 
-* If parameter daycycle is NULL_KEY or "", agent will see normal environment for parcel or region,
-* daycycle can be a name of a daycycle asset on prim contents. If it is a UUID it can also be grid asset. 
-* if return value is negative, it failed.
-* transition should be the viewer transition time to the new one. May not work on most viewers.
- The errors returned are: 
- return 0 : Never 0 for now
- return 1 : if daycycle applied with success
- return -1 : Never -1
- return -2 : if no ossl rights
- return -3 : if daycycle asset not found
- return -4 : if agent not found
- return -5 : if fail to decode daycycle asset
+Sets the environment of a given avatar (key) to a given settings item (asset UUID) with transition time.
 
 ### osReplaceParcelEnvironment
 
 - `integer osReplaceParcelEnvironment(integer transition, string daycycle)`
 
-Replaces parcel daycycle. 
-* If parameter daycycle is NULL_KEY or "", parcel environment is removed,
-* daycycle can be a name of a daycycle asset on prim contents. If it is a UUID it can also be grid asset. 
-* if return value is negative, it failed.
-* transition should be the viewer transition time to the new one. May not work on most viewers.
- The errors returned are: 
- return 0 : Never 0 for now
- return 1 : if daycycle applied with success
- return -1 : if "Parcel Owners May Override Environment" isn't checked
- (See menu "World/Region Details" on tab "Environment")
- return -2 : if parcel not found (This is a bad thingy)
- return -3 : if no rights to edit parcel
- return -4 : if daycycle asset not found
- return -5 : if fail to decode daycycle asset
+Sets the environment of the current parcel to a given settings item (asset UUID) with transition time.
 
 ### osReplaceRegionEnvironment
 
-- `integer osReplaceRegionEnvironment(integer transition, string daycycle, float daylenght, float dayoffset, float altitude1, float altitude2, float altitude3)`
+- `integer osReplaceRegionEnvironment(integer transition, string daycycle, float daylen, float dayoffset, float altitude1, float altitude2, float altitude3)`
 
-Replaces region dayclycle. 
-* If parameter daycycle is NULL_KEY or "", current environment is used as base,
-* daycycle can be a name of a daycycle asset on prim contents. If it is a UUID it can also be grid asset. 
-* daylenght in hours - if zero, current is used. Range 4 to 168
-* dayoffset in hours - offset from UTC. Range -11.5 to 11.5. if outside range current is used
-* altitudes in meters - defines environment transition altitudes 1 to 3 levels. Range 1 to 4000. If 0, current is used. Please keep them sorted ( 1 < 2 < 3)
-* if return value is negative, it failed.
-* transition should be the viewer transition time to the new one. May not work on most viewers.
- The errors returned are: 
- return 0 : Never 0 for now
- return 1 : if daycycle applied with success
- return -1 : never -1, it is on parcel only
- return -2 : never -2, it is on parcel only
- return -3 : if no estate rights
- return -4 : if daycycle asset not found
- return -5 : if fail to decode daycycle asset
+Alters the region environment base parameters of a given settings item (asset UUID) with transition time.
 
 ### osReplaceString
 
 - `string osReplaceString(string src, string pattern, string replace, integer count, integer start)`
 
-This function is for regular expression-based string replacement. The count parameter specifies the total number of replacements to make where -1 makes all possible replacements.
+Returns a string with replaced substrings given a match pattern from a given start for a given number of matches.
 
 ### osRequestSecureURL
 
 - `key osRequestSecureURL(list options)`
 
-Requests one HTTPS:// url (opensim version 0.9 or over)
-Option supported : "allowXss" - Add 'Access-Control-Allow-Origin: *' to response header
+Request a new secure URL and directly return the assigned key.
 
 ### osRequestURL
 
 - `key osRequestURL(list options)`
 
-Requests one HTTP:// url (opensim version 0.9 or over)
-Option supported : "allowXss" - Add 'Access-Control-Allow-Origin: *' to response header
+Request a new URL and directly return the assigned key.
 
 ### osResetAllScripts
 
-- `osResetAllScripts(integer AllLinkSet)`
+- `void osResetAllScripts(integer AllLinkset)`
 
-Resets all the scripts on the same prim if AllLinkSet is FALSE( or 0) or on same linkset if AllLinkSet is TRUE ( or 1 )
-This function can be heavy, and can have negative side effects due to the asynchronous nature of script engines.
+Resets all scripts in the inventory of a link, the entire linkset or itself.
 
 ### osResetEnvironment
 
-- `integer osResetEnvironment(integer ParcelOrRegion, integer transition)`
+- `integer osResetEnvironment(integer parcelOrRegion, integer transition)`
 
-Resets parcel or region environment. 
-* if ParcelOrRegion == 1 parcel environment is removed, region will be used, else region environment is set to the default.
-* transition should be the viewer transition time to the new one. May not work on most viewers.
-* if return is negative the operation failed.
- The errors returned on region are: 
- return 0 : never 0 for now
- return 1 : if daycycle applied with success
- return -1 : never -1, it is on parcel only
- return -2 : never -2, it is on parcel only
- return -3 : if no rights to edit region
- The errors returned on parcel are: 
- return 0 : Never 0 for now
- return 1 : if daycycle applied with success
- return -1 : if "Parcel Owners May Override Environment" isn't checked
- (See menu "World/Region Details" on tab "Environment")
- return -2 : if parcel not found (This is a bad thingy)
- return -3 : if no rights to edit parcel
-
-### osRevokeScriptPermissions
-
-- `osRevokeScriptPermissions(key revoked_key, string function)`
-
-Dynamically allow/disallow ossl execution to owner/creator/group by function name.
+Resets either the parcel or region environment to their default values.
 
 ### osRound
 
-- `float osRound(float value, integer ndigits)`
+- `float osRound(float value, integer digits)`
 
-returns the value rounded to the number with a number if decimal places set by ndigits. ndigits = 0 is same as llRound(), max value is 15.
+Rounds a given value to a specified amount of digits.
 
 ### osSetContentType
 
-- `osSetContentType(key id, string type)`
+- `void osSetContentType(key id, string type)`
 
-Sets an arbitrary content return type for an [http://wiki.secondlife.com/wiki/LlRequestURL llRequestUrl()].
-The threat level was upgraded to Severe as of commit #2c2b887c8a on December 11, 2018.
+Sets the response type of a HTTP request or response
 
 ### osSetDynamicTextureData
 
-- `key osSetDynamicTextureData(string dynamicID, string contentType, string data, string extraParams, integer timer)`
+- `string osSetDynamicTextureData(string dynamicID, string contentType, string data, string extraParams, integer timer)`
 
-*Renders a dynamically created texture on the prim containing the script and returns the UUID of the newly created texture.
-*If you use this feature, you have to turn on any cache. If not, you'll see complete white texture.
+Generate a dynamic texture from a given draw string, returns the texture UUID, applies to all faces.
 
 ### osSetDynamicTextureDataBlend
 
-- `key osSetDynamicTextureDataBlend(string dynamicID, string contentType, string data, string extraParams, integer timer, integer alpha)`
+- `string osSetDynamicTextureDataBlend(string dynamicID, string contentType, string data, string extraParams, integer timer, integer alpha)`
 
-Renders a dynamically created texture on the faces of a prim containing the script, possibly blending it with the texture that is already set. Only use if all faces have same texture! 
-. Returns UUID of the generated texture.
+Generate a dynamic texture alpha blended from a given draw string, returns the texture UUID, applies to all faces.
 
 ### osSetDynamicTextureDataBlendFace
 
-- `key osSetDynamicTextureDataBlendFace(string dynamicID, string contentType, string data, string extraParams, integer blend, integer disp, integer timer, integer alpha, integer face)`
+- `string osSetDynamicTextureDataBlendFace(string dynamicID, string contentType, string data, string extraParams, integer blend, integer disp, integer timer, integer alpha, integer face)`
 
-Renders a dynamically created texture on the face of a prim containing the script, possibly blending it with the texture that is already set for the face. Returns UUID of the generated texture.
+Generate a dynamic texture alpha blended from a given draw string, returns the texture UUID, applies to a given face.
 
 ### osSetDynamicTextureDataFace
 
-- `key osSetDynamicTextureDataFace(string dynamicID, string contentType, string data, string extraParams, integer timer, integer face);`
+- `string osSetDynamicTextureDataFace(string dynamicID, string contentType, string data, string extraParams, integer timer, integer face)`
 
-...
+Generate a dynamic texture from a given draw string, returns the texture UUID, applies to a given face.
 
 ### osSetDynamicTextureURL
 
 - `string osSetDynamicTextureURL(string dynamicID, string contentType, string url, string extraParams, integer timer)`
 
-*Renders a web texture on the prim containing the script and returns the UUID of the newly created texture. 
-*If you use this feature, you have to turn on any cache. If not, you'll see complete white texture. Flotsam cache performs better than cenome cache(default).
+Generate a dynamic texture from a given URL, returns the texture UUID, applies to all faces.
 
 ### osSetDynamicTextureURLBlend
 
 - `string osSetDynamicTextureURLBlend(string dynamicID, string contentType, string url, string extraParams, integer timer, integer alpha)`
 
+Generate a dynamic texture alpha blended from a given URL, returns the texture UUID, applies to all faces.
+
 ### osSetDynamicTextureURLBlendFace
 
 - `string osSetDynamicTextureURLBlendFace(string dynamicID, string contentType, string url, string extraParams, integer blend, integer disp, integer timer, integer alpha, integer face)`
 
+Generate a dynamic texture alpha blended from a given URL, returns the texture UUID, applies to a given face.
+
 ### osSetEstateSunSettings
 
-- `osSetEstateSunSettings(integer sunFixed, float sunHour)`
+- `void osSetEstateSunSettings(integer sunFixed, float sunHour)`
 
-This function does nothing on 0.9.2. This function allowed for an estate owner or manager to change the sun settings for the entire estate.
+Set sun type (fixed, daycycle) and time offset for the estate sun.
 
 ### osSetFontName
 
 - `string osSetFontName(string drawList, string fontName)`
 
-Set the name of the font that will be used by osDrawText.
+Set the name of the font that will be used by osDrawText.\n- Threat Level: Not Checked.
 
 ### osSetFontSize
 
 - `string osSetFontSize(string drawList, integer fontSize)`
 
-Appends a FontSize drawing command to the string provided in drawList and returns the result.
-Sets the size of the font used by subsequent osDrawTextText() calls. The fontSize parameter represents the font height in points. 
-Please note that the font height is given in points, not in pixels. The resulting size of the font in pixels may vary depending on the system settings, specifically the display system's "dots per inch" metric. A system set to 96dpi will produce differently sized text than a system set to 120dpi. If precise text size is required, consider using the osGetDrawStringSize() function to help calculate the proper fontSize value to use.
-If a negative fontSize parameter is specified, any text subsequently added will be displayed upside down and to the right of the point of origin.
-Please note that the pen position is not updated after this call.
+Sets the size of the font used by subsequent osDrawTextText() calls. The fontSize parameter represents the font height in points.
 
 ### osSetHealRate
 
-- `float osSetHealRate(key avatar, float healrate)`
+- `void osSetHealRate(key agentId, float health)`
 
-Sets the automatic healing rate in % per second.
-Default heal rate is now around 0.5% per second. 
-A value of zero can disable automatic heal, current maximum value is 100 % per second.
+Sets the rate of healing for a given avatar to a given amount.
 
 ### osSetHealth
 
-- `osSetHealth(key avatar, float health)`
+- `void osSetHealth(key agentId, float health)`
 
-Sets an avatars health by key to the specified float value.
+Sets the health of a given avatar to a given amount.
 
 ### osSetInertia
 
-- `osSetInertia(float mass, vector centerOfMass, vector principalInertiaScaled, rotation InertiaRot)`
+- `void osSetInertia(float mass, vector centerOfMass, vector principalInertiaScaled, rotation rot)`
 
-Allows creators to set the major physics dynamic proprieties, replacing the values estimated from the linkset parts. Call osClearInertia to undo
-Caution ! Only supported by ubOde for now
-===== Arguments: =====
-* Mass total mass of link set
-* centerOfMass location of center of mass relative to root prim in local frame
-* principalInertiaScaled moment of inertia relative to principal axis and center of mass,Ixx, Iyy, Izz divided by mass so it can be changed independently
-* InertiaRot rotation of the inertia, relative to local axis
+Sets the inertia data for the object containing the script.
 
 ### osSetInertiaAsBox
 
-- `osSetInertiaAsBox(float mass, vector boxSize, vector centerOfMass, rotation rot)`
+- `void osSetInertiaAsBox(float mass, vector boxSize, vector centerOfMass, rotation rot)`
 
-Allows creators to set the link set total mass, center of mass and moment of inertia. Moment of inertia will be the one of a box of size boxSize, placed at the center of mass and rotated by rot in the root prim local frame. Call osClearInertia to undo.
-Caution ! Only supported by ubOde for now
-===== Arguments: =====
-* Mass new total mass of link set
-* centerOfMass new location of center of mass relative to root prim in local frame
-* boxSize size of the box used to calculate the new inertia
-* rot the rotation of that box in local frame
+Sets the inertia data for the object containing the script based on a box shape bounding box calculation.
 
 ### osSetInertiaAsCylinder
 
-- `osSetInertiaAsCylinder(float mass,  float radius, float length, vector centerOfMass, rotation rot)`
+- `void osSetInertiaAsCylinder(float mass, float radius, float length, vector centerOfMass, rotation lslrot)`
 
-Allows creators to set the link set total mass, center of mass and moment of inertia. Moment of inertia will be the one of a cylinder of radius and length, placed at the center of mass and rotated by rot in the root prim local frame. Call osClearInertia to undo.
-Caution ! Only supported by ubOde for now
-===== Arguments: =====
-* Mass new total mass of link set
-* centerOfMass new location of center of mass relative to root prim in local frame
-* radius radius of a cylinder used to calculate the new inertia
-* length length of a cylinder used to calculate the new inertia
-* rot rotation of the cylinder in the root prim local frame.
+Sets the inertia data for the object containing the script based on a cylindrical bounding box calculation.
 
 ### osSetInertiaAsSphere
 
-- `osSetInertiaAsSphere(float mass,  float radius, vector centerOfMass)`
+- `void osSetInertiaAsSphere(float mass, float radius, vector centerOfMass)`
 
-Allows creators to set the link set total mass, center of mass and moment of inertia. Moment of inertia will be the one of a sphere of radius radius, placed at the center of mass. Call osClearInertia to undo. 
-Caution ! Only supported by ubOde for now
-===== Arguments: =====
-* Mass new total mass of link set
-* centerOfMass new location of center of mass relative to root prim in local frame
-* radius radius of a sphere used to calculate the new inertia
+Sets the inertia data for the object containing the script based on a spherical bounding box calculation.
 
 ### osSetLinkSitActiveRange
 
-- `osSetLinkSitActiveRange(integer linkNumber, float range)`
+- `void osSetLinkSitActiveRange(integer linkNumber, float v)`
 
-sets a limit on how far a avatar can be to have a sit request accepted, or disable sits
-* linkNumber is link number of the prim to change or one of LINK_SET,LINK_ROOT, LINK_ALL_OTHERS,LINK_ALL_CHILDREN or LINK_THIS
-* range > 0: if a avatar if far from the prim by more than that value, a sit request is silent ignored
-* range == 0: disables this limit. Region default is used. Current that is unlimited if a sit target is set or physics can sit the avatar, otherwise 10m
-* range < 0: sits are disabled. Requests are silently ignored
-this value is stored on the prim, even if the script is removed
+Sets the max distance for allowing avatars to sit on a given link..
 
 ### osSetLinkStandTarget
 
-- `osSetLinkStandTarget(integer linkNumber, vector feetTarget)`
+- `void osSetLinkStandTarget(integer linkNumber, vector v)`
 
-Sets a position, relative to prim local frame, where to place the feet of a standing avatar. The final position may not be exactly that.
-Setting it to disables it, default stand offset and login are used.
-This vector is stored on the prim, even if the script is removed
-* linkNumber: the link number of the prim, LINK_THIS or LINK_ROOT
-if link number is invalid it will silent fail
+Sets the stand offset from the position of a given link.
 
 ### osSetOwnerSpeed
 
-- `osSetOwnerSpeed(float SpeedModifier)`
+- `void osSetOwnerSpeed(float SpeedModifier)`
 
-Implemented september 28, 2018 by Bill Blight in GIT# [http://opensimulator.org/viewgit/?a=commit&p=opensim&h=6d9de17d77d20e078b0e7c7546ac3ec047d334e8 6d9de1] & [http://opensimulator.org/viewgit/?a=commit&p=opensim&h=8812684355de043d7630e327e6180fda4e5271b9 881268] and MANTIS# [http://opensimulator.org/mantis/view.php?id=8383 8383]
-This allows for users to speed themselves up. It multiplies the running, walking, rotating and flying of the avatar.
-The default value for SpeedModifier is 1.0 and the maximum value is 4.0.
-To be precise, it affects physical velocity. If you specify too large or too small number for SpeedModifier, the target will be unmovable, showing the following message in the region console:
-:[PHYSICS]: Got a NaN velocity from Scene in a Character
+Sets a modifier for the movement speed of the object owner.
 
 ### osSetParcelDetails
 
-- `osSetParcelDetails(vector pos, list rules)`
+- `void osSetParcelDetails(vector pos, list rules)`
 
-This function is the counterpart to [http://wiki.secondlife.com/wiki/LlGetParcelDetails llGetParcelDetails]. Currently PARCEL_DETAILS_NAME, PARCEL_DETAILS_DESC, PARCEL_DETAILS_OWNER, PARCEL_DETAILS_GROUP, PARCEL_DETAILS_CLAIMDATE are implemented. Note that the threat levels for PARCEL_DETAILS_NAME and PARCEL_DETAILS_DESC are "High", and those for PARCEL_DETAILS_OWNER, PARCEL_DETAILS_GROUP and PARCEL_DETAILS_CLAIMDATE are "VeryHigh".
+Sets PARCEl_FLAGS for a parcel given a vector inside the parcel.
 
 ### osSetParcelMediaURL
 
-- `osSetParcelMediaURL(string url)`
+- `void osSetParcelMediaURL(string url)`
 
-Sets the Media URL for the parcel the scripted object is in.
+Sets the current parcel media URL.
 
 ### osSetParcelMusicURL
 
-- `osSetParcelMusicURL(string url)`
+- `void osSetParcelMusicURL(string url)`
 
-Sets the Music URL for the parcel the scripted object is in.
+Sets the current parcel music URL.
 
 ### osSetParcelSIPAddress
 
-- `osSetParcelSIPAddress(string SIPAddress)`
+- `void osSetParcelSIPAddress(string SIPAddress)`
+
+Sets the voice module SIP address to a given address.
 
 ### osSetPenCap
 
 - `string osSetPenCap(string drawList, string direction, string type)`
 
-*** This method works only on Windows for now. libgdi+ has a fake implementation and will not draw it. ***
-Appends a PenCap drawing command to the string provided in drawList and returns the result.
-This sets the pen's start or/and end cap to either "diamond", "arrow", "round", or default "flat" shape. It can set them in the "end" or "start" of the line, or "both". Possible values are (case insensitive):
-Type:
-*"arrow"
-*"diamond"
-*"round"
-*"flat"
-Direction:
-*"start"
-*"end"
-*"both"
+Sets the start, end or both caps to either "diamond", "arrow", "round", or default "flat" shape.
 
 ### osSetPenColor
 
@@ -1657,325 +1352,277 @@ Direction:
 - `string osSetPenColor(string drawList, vector color)`
 - `string osSetPenColor(string drawList, vector color, float alpha)`
 
-* osSetPenColor(string drawList, string color) Appends a PenColor drawing command to the string provided in drawList and returns the result. 
-This sets the pen's drawing color to either the specified [http://msdn.microsoft.com/en-us/library/aa358802.aspx named .NET color] [https://docs.microsoft.com/en-us/dotnet/api/system.windows.media.colors?view=windowsdesktop-6.0 named colors] or to a 32-bit color value (formatted as eight hexadecimal digits in the format aarrggbb, representing the eight-bit alpha, red, green and blue channels). 
-For full opacity, use an alpha value of FF (e.g. FFFF0000 for red); for varying degrees of transparency, reduce the alpha value (e.g. 800000FF for semi-transparent blue). 
-The color names and hexadecimal color representations are not case-sensitive. 
-* osSetPenColor(string drawList, vector color) converts vector color to the hexadecimal color with a alpha of 1.0 (FF) and appends the drawing command.
-* osSetPenColor(string drawList, vector color, float alpha) converts vector color and alpha to the hexadecimal color and appends the drawing command.
-NOTE : This function replaces the deprecated OsSetPenColour function.
+This sets the drawing color to either a named .NET color, a 32-bit color value (formatted as eight hexadecimal digits in the format aarrggbb, representing the eight-bit alpha, red, green and blue channels) or a LSL vector color and alpha float value.
+
+### osSetPenColour
+
+- `string osSetPenColour(string drawList, string colour)`
+
+DEPRECATED. Use osSetPenColor instead.
 
 ### osSetPenSize
 
 - `string osSetPenSize(string drawList, integer penSize)`
 
-Appends a PenSize drawing command to the string provided in drawList and returns the result.
-This sets the pen size to a square of penSize pixels by penSize pixels. If penSize is an odd number, the pen will be exactly centered on the coordinates provided in the various drawing commands; if it is an even number, it will be centered slightly higher and to the left of the actual coordinates.
+Sets the pen size to a square of penSize pixels by penSize pixels. If penSize is an odd number, the pen will be exactly centered on the coordinates provided in the various drawing commands.
 
 ### osSetPrimFloatOnWater
 
-- `osSetPrimFloatOnWater(integer float)`
+- `void osSetPrimFloatOnWater(integer floatYN)`
 
-This function does nothing useful
+Sets whether the object should float on water.
 
 ### osSetPrimitiveParams
 
-- `osSetPrimitiveParams(key prim, list rules)`
+- `void osSetPrimitiveParams(key prim, list rules)`
 
-* Sets the parameters for the prim specified by prim_uuid according to rules.
-* This function has the same behave as llSetPrimitiveParams except you can specify target prim anywhere in the scene.
-* For general information about rules, see [http://wiki.secondlife.com/wiki/LlSetPrimitiveParams llSetPrimitiveParams in SecondLife Wiki].
-* If there is no prim with id prim_uuid in the scene, or the owner of the target prim is different from the owner of the scripted prim, it will fail without error.
+Sets primitive params of a given primitive (object UUID).
 
 ### osSetProjectionParams
 
-- `osSetProjectionParams(integer projection, key texture, float fov, float focus, float ambiance)`
-- `osSetProjectionParams(integer linknumber, integer projection, key texture, float fov, float focus, float ambiance)`
-- `osSetProjectionParams(key prim, integer projection, key texture, float fov, float focus, float ambiance)`
+- `void osSetProjectionParams(integer projection, key texture, float fov, float focus, float amb)`
+- `void osSetProjectionParams(key prim, integer projection, key texture, float fov, float focus, float amb)`
+- `void osSetProjectionParams(integer linknumber, integer projection, key texture, float fov, float focus, float amb)`
 
-Sets a prim projector parameters, argument projection is TRUE(1) or FALSE(0). The prim can be the host prim on first variant, a prim on the linkset or a prim with giving UUID. 
-In last case Threat level is high and controlled by Allow_osSetProjectionParams. The other cases have no threat level check. Note that you may need to set the prim light also.
+Sets the light projection parameters of the object containing the script.
 
 ### osSetRegionSunSettings
 
-- `osSetRegionSunSettings(integer useEstateSun, integer sunFixed, float sunHour)`
+- `void osSetRegionSunSettings(integer useEstateSun, integer sunFixed, float sunHour)`
 
-This does nothing on 0.9.2. 
-Sets the Sun parameters for the Region. 
-The useEstateSun flag enables/disables synchronization with the Sun settings for the Estate.
-sunFixed determines whether the Sun will remain fixed in place or proceed through its cycle.
-sunHour determines the time of day the Sun will be set to.
+Set whether to use estate sun, sun type (fixed, daycycle) and time offset for the region.
 
 ### osSetRegionWaterHeight
 
-- `osSetRegionWaterHeight(float height)`
+- `void osSetRegionWaterHeight(float height)`
 
-Sets the water height for the current region.
+Set the water height of the region.
+
+### osSetRot
+
+- `void osSetRot(UUID target, Quaternion rotation)`
 
 ### osSetSitActiveRange
 
-- `osSetSitActiveRange(float range)`
+- `void osSetSitActiveRange(float v)`
 
-sets a limit on how far a avatar can be to have a sit request accepted, or disable sits.
-* range > 0: sit request is silently ignored if a avatar is further than range from the prim. 
-* range == 0: disables this limit. Region default is used. Currently range is unlimited if a sit target is set or physics can sit the avatar, otherwise 10m.
-* range < 0: sits are disabled. Requests are silently ignored.
-The range value is stored in the prim, even if the script is removed
+Sets the max distance for allowing avatars to sit on the object containing the script.
 
 ### osSetSoundRadius
 
 - `void osSetSoundRadius(integer linknum, float radius)`
 
-Establishes a hard cut-off radius for audibility of scripted sounds (both attached and triggered) in the specified prim of a linkset.
+Sets the sound radius for a given link.
 
 ### osSetSpeed
 
-- `osSetSpeed(key ID, float SpeedModifier)`
+- `void osSetSpeed(string UUID, float SpeedModifier)`
 
-Implemented December 30, 2009 by Revolution in GIT# 87959464c9db8948bed89909913400bc2eb7524d - Rev 11850
-This allows for users to speed themselves up. It multiplies the running, walking, rotating and flying of the avatar.
-The default value for SpeedModifier is 1.0.
-To be precise, it affects physical velocity. If you specify too large or too small number for SpeedModifier, the target will be unmovable, showing the following message in the region console:
-:[PHYSICS]: Got a NaN velocity from Scene in a Character
+Sets a modifier for the movement speed of a given avatar.
 
 ### osSetStandTarget
 
-- `osSetStandTarget(vector feetTarget)`
+- `void osSetStandTarget(vector v)`
 
-Sets a position, relative to prim local frame, where to place the feet of a avatar on stand. The final position may not be exactly that.
-Setting it to disables it, default stand offset and login are used.
-This vector is stored on the prim, even if the script is removed
+Sets the stand offset from the position of the object containing the script.
 
 ### osSetSunParam
 
-- `osSetSunParam(string param, float value)`
+- `void osSetSunParam(string param, float value)`
 
-NOTE&nbsp;: This function does nothing on 0.9.2. It did depend on removed Sun module, This function replaced the deprecated osSunSetParam function.
+Not implemented.
 
 ### osSetTerrainHeight
 
 - `integer osSetTerrainHeight(integer x, integer y, float val)`
 
-NOTE' : This function replaces the deprecated OsTerrainSetHeight function.
-Sets terrain height X & Y Values. Returns TRUE(1) if success, FALSE(0) if failed
-osTerrainFlush should be called after all the terrain-changes have been done to update Terrain Data.
+Set the terrain height at a given x and y coordinate (meters).
 
 ### osSetTerrainTexture
 
-- `osSetTerrainTexture(integer level, key texture)`
+- `void osSetTerrainTexture(integer level, key texture)`
 
-Obsolete use osSetTerrainTextures 
-Set the terrain texture of the estate to the texture given as key for legacy viewers and map. The level can be 0, 1, 2 or 3. 
-This will not set the textures seen by recent viewers, use instead osSetTerrainTextures
+Sets the terrain texture for a given level.
 
 ### osSetTerrainTextureHeight
 
-- `osSetTerrainTextureHeight(integer corner, float low, float high)`
+- `void osSetTerrainTextureHeight(integer corner, float low, float high)`
 
-Set the terrain texture height for the estate. The corner values are: 0 (Southwest), 1 (Southeast), 2 (Northwest), 3 (Northeast). The values low and high are float values for the altitude measured in meters.
+Sets the texture low and high values for a given region corner.
 
 ### osSetTerrainTextures
 
-- `osSetTerrainTextures(list textureKeys, integer types)`
+- `void osSetTerrainTextures(list textures, integer types)`
 
-Opensimulator regions store two sets of texture or material keys:
-* a set of texture keys for legacy viewers and map
-* a set of texture or pbr material keys for new viewers. 
-so this function allows to change those keys depending on the value of types :
-* 0 applies keys for legacy viewers and map, keys must represent textures
-* 1 applies keys for new viewers, keys represent either textures or PBR materials
-* 2 applies keys to to both, Keys must represent textures
-The list textureKeys must contain keys or names of 4 textures or 4 pbr materials. They must be of the same type due to viewers restrictions. 
-This defines the textures or materials the viewer will use to draw the terrain texture 
-They are ordered from low to high terrain height level, as on viewers World -> Region Details -> Terrain menu tab. 
-If an entry is a name, then the material or texture must be present on the prim inventory. 
-If an entry is an empty string, then that level is unchanged. 
-Uses same threat level as osSetTerrainTexture in ossl_enable.ini
+Sets terrain textures for legacy viewers it types == 0 or 2, textures for new viewers it types == 1 or 2 or PBR materials if types == 1
 
 ### osSetWindParam
 
-- `osSetWindParam(string plugin, string param, float value)`
+- `void osSetWindParam(string plugin, string param, float value)`
 
-Sets value of param property for plugin module.
-Available parameters:
-{border="1" cellspacing="0" width="100%"
-!pluginparamdescriptiondefaultOpenSim.inisetting
--
-SimpleRandomWindstrengthwind strength1.0fstrength
--
-rowspan="5"ConfigurableWindavgStrengthaverage wind strength in m/s5.0favg_strength
--
-avgDirectionaverage wind direction in degrees0.0favg_direction
--
-varStrengthallowable variance in wind strength in m/s5.0fvar_strength
--
-varDirectionallowable variance in wind direction in +/- degrees30.0fvar_direction
--
-rateChangerate of change in seconds1.0frate_change
-}
+Set a parameter in a given wind plugin.
 
 ### osSHA256
 
 - `string osSHA256(string input)`
 
-Generate a hash value (string input). Returns a string containing the calculated string input as lowercase.
+Returns the SHA256 representation of the input string.
 
 ### osSlerp
 
-- `rotation osSlerp(rotation a, rotation b, float ratio);`
+- `rotation osSlerp(rotation a, rotation b, float amount)`
+- `vector osSlerp(vector a, vector b, float amount)`
 
-Slerp is shorthand for spherical linear interpolation, introduced by Ken Shoemake in the context of quaternion interpolation for the purpose of animating 3D rotation.
-It refers to constant-speed motion along a unit-radius great circle arc, given the ends and an interpolation parameter between 0 and 1.
-osSlerp Returns a rotation that is the spherical interpolation of a and b, according to ratio that can be from 0.0 (result is a) to 1.0 (result is b)
+Returns a spherical interpolation of two rotations shifted by amount.
 
 ### osStopSound
 
-- `osStopSound(integer linknum)`
+- `void osStopSound(integer linknum)`
 
-Stop the sound playing in the specified prim or prims of a linkset
+Stops the sound for a given link.
 
 ### osStringEndsWith
 
-- `integer osStringEndsWith(string src, string start, integer ignore_case)`
+- `integer osStringEndsWith(string src, string value, integer ignorecase)`
 
-Returns 1 if the string in src ends with the characters in start. Case is ignored if ignore_case is 1 otherwise the case of the characters matters.
+Returns an integer whether a string ends with another string.
 
 ### osStringIndexOf
 
-- `integer osStringIndexOf(string src, string value, integer ignoreCase)`
+- `integer osStringIndexOf(string src, string value, integer ignorecase)`
+- `integer osStringIndexOf(string src, string value, integer start, integer count, integer ignorecase)`
 
-Reports the zero-based index of the first occurrence of string value withing string scr. returns -1 if not found. It can compare ignoring case with ignoreCase TRUE(1) or considering case if FALSE(0);
+Returns the index of a substring of a given string.
 
 ### osStringLastIndexOf
 
-- `integer osStringLastIndexOf(string src, string value, integer ignoreCase)`
+- `integer osStringLastIndexOf(string src, string value, integer ignorecase)`
+- `integer osStringLastIndexOf(string src, string value, integer start, integer count, integer ignorecase)`
 
-Reports the zero-based index of the last occurrence of string value withing string scr. returns -1 if not found. It can compare ignoring case with ignoreCase TRUE(1) or considering case if FALSE(0);
+Returns the index of the last substring of a given string.
 
 ### osStringRemove
 
-- `string osStringRemove(string src, integer offset, integer count)`
+- `string osStringRemove(string src, integer start, integer count)`
 
-...
+Returns the remainder of a given string with characters from start index and count removed.
 
 ### osStringReplace
 
 - `string osStringReplace(string src, string oldvalue, string newvalue)`
 
-Returns a string in which all occurrences of the string oldvalue in string src are replaced by string newvalue
+Returns a string with a substring replaced with another string.
 
 ### osStringStartsWith
 
-- `integer osStringStartsWith(string src, string start, integer ignore_case)`
+- `integer osStringStartsWith(string src, string value, integer ignorecase)`
 
-Returns 1 if the string in src starts with the characters in start. Case is ignored if ignore_case is 1 otherwise the case of the characters matters.
+Returns an integer whether a string starts with another string.
 
 ### osStringSubString
 
-- `string osStringSubString(string src, integer offset)`
-- `string osStringSubString(string src, integer offset, integer length)`
+- `string osStringSubString(string src, integer start)`
+- `string osStringSubString(string src, integer start, integer length)`
 
-...
+Returns the remainder of a string from start index.
+
+### osSunGetParam
+
+- `float osSunGetParam(string param)`
+
+DEPRECATED. Use osGetSunParam instead.
+
+### osSunSetParam
+
+- `void osSunSetParam(string param, float value)`
+
+DEPRECATED. Use osSetSunParam instead.
 
 ### osTeleportAgent
 
-- `osTeleportAgent(key agent, string regionName, vector position, vector lookat)`
-- `osTeleportAgent(key agent, integer regionX, integer regionY, vector position, vector lookat)`
-- `osTeleportAgent(key agent, vector position, vector lookat)`
+- `void osTeleportAgent(string agent, string regionName, vector position, vector lookat)`
+- `void osTeleportAgent(string agent, integer regionX, integer regionY, vector position, vector lookat)`
+- `void osTeleportAgent(string agent, vector position, vector lookat)`
 
-Teleports an agent to the specified location 
-* position is the location relative to destination region reference corner 
-* lookAt is the direction the avatar should look. Z value is ignored. For example to face north use 
-The first variant is able to teleport to any addressable region, including hypergrid destinations. 
-The second variant teleports to a region in the local grid; the region coordinates are specified as region cells (not as global coordinates based on meters). 
-The third variant teleports within the current region. Since version 0.9.2.0 it can also teleport to a nearby region if position does point to one
-For osTeleportAgent() to work, the owner of the prim containing the script must be the same as the parcel that the avatar is currently on. 
-If this isn't the case then the function fails silently.
-See also osTeleportOwner, and if you receive an error see how to enable OS functions.
+Teleport a given avatar (key) to a given region by name and local position and rotatation as look at vector.
 
 ### osTeleportObject
 
-- `integer osTeleportObject(key objectID, vector targetPos, rotation rot, integer flags)`
+- `integer osTeleportObject(key objectUUID, vector targetPos, rotation targetrotation, integer flags)`
 
-...
-===== Arguments: =====
-* objectID the id of the linkset to teleport
-* targetPos target position in region local coords
-* rot a rotation.
-* flags
-===== Flags: =====
-* OSTPOBJ_NONE it is just 0
-* OSTPOBJ_STOPATTARGET object is stopped at destination
-* OSTPOBJ_STOPONFAIL stops at start point if tp fails (still does nothing)
-* OSTPOBJ_SETROT the rotation is the final object rotation, otherwise is a added rotation
+Teleport a given primitive (object UUID) to a given position and rotation.
 
 ### osTeleportOwner
 
-- `osTeleportOwner(string regionName, vector position, vector lookat)`
-- `osTeleportOwner(integer regionX, integer regionY, vector position, vector lookat)`
-- `osTeleportOwner(vector position, vector lookat)`
+- `void osTeleportOwner(string regionName, vector position, vector lookat)`
+- `void osTeleportOwner(integer regionX, integer regionY, vector position, vector lookat)`
+- `void osTeleportOwner(vector position, vector lookat)`
 
-Teleports the owner of the object containing the script to the specified location. 
-The first variant is able to teleport to any addressable region, including hypergrid destinations. 
-The second variant teleports to a region in the local grid; the region coordinates are specified as region cells (not as global coordinates based on meters). 
-The third variant teleports within the current region.
-These functions have been added to OpenSimulator with commit r/14355 on November 16, 2010.
-See also osTeleportAgent.
+Teleport the object owner to a given region by name and local position and rotation as look at vector.
+
+### osTemperature2sRGB
+
+- `vector osTemperature2sRGB(float dtemp)`
+
+Returns the color vector of a given color temperature.
 
 ### osTerrainFlush
 
-- `osTerrainFlush();`
+- `void osTerrainFlush()`
 
-Function updates terrain changes to OpenSimulator database. This should be called after all the terrain-changes have been done to update Terrain Data. 
-Used in conjunction with OsSetTerrainHeight
+Send terrain to all agents
+
+### osTerrainGetHeight
+
+- `float osTerrainGetHeight(integer x, integer y)`
+
+DEPRECATED. Use osGetTerrainHeight instead.
+
+### osTerrainSetHeight
+
+- `integer osTerrainSetHeight(integer x, integer y, float val)`
+
+DEPRECATED. Use osSetTerrainHeight instead.
 
 ### osTriggerSound
 
-- `osTriggerSound(integer linknum, string sound, float volume)`
+- `void osTriggerSound(integer linknum, string sound, float volume)`
 
-Start playing the specified sound in the viewers of nearby avatars once at the specified volume.
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim.
+Trigger a given preloaded sound with volume for a given link.
 
 ### osTriggerSoundLimited
 
-- `osTriggerSoundLimited(integer linknum, string sound, float volume, vector north_east_corner, vector south_west_corner)`
+- `void osTriggerSoundLimited(integer linknum, string sound, float volume, vector top_north_east, vector bottom_south_west)`
 
-Start a one time play of the specified sound once at the specified volume in the viewers of avatars located within the box defined by the two vectors.
-The sound parameter can be the UUID of a sound or the name of a sound that is in the inventory of the target prim. 
-The two vectors are locations in region coordinates.
+Trigger a given preloaded sound with volume and axis-aligned bounding box for a given link.
 
 ### osUnixTimeToTimestamp
 
-- `string osUnixTimeToTimestamp(integer epoch);`
+- `string osUnixTimeToTimestamp(integer time)`
 
-This function allows an input Unix time to be converted to an llGetTimeStamp() format. 
-Please note that there will be no second fractions. 
-This is because the implementation works with seconds only.
+Returns the timestamp string for a given unix epoch (seconds).
 
 ### osVecDistSquare
 
 - `float osVecDistSquare(vector a, vector b)`
 
-returns the square of norm of vector, or distance vector, (a - b), when expensive square root math operation is not needed. 
-for example to check if distance is larger than 10, check if the square is larger than 100
+Returns the difference of two squared vectors.
 
 ### osVecMagSquare
 
 - `float osVecMagSquare(vector a)`
 
-returns the square of the magnitude of vector a. 
-This saves a square root math operation that is relative slow, when is not needed. 
-for example to check if magnitude is larger than 10, check if the square is larger than 100
+Returns the squared values of a vector multiplied with each other.
 
 ### osVolumeDetect
 
-- `osVolumeDetect(integer detect)`
+- `void osVolumeDetect(integer detect)`
 
-If script is on root prim, it is like llVolumeDetect(). On child prims, it will turn just that prim a detector.
+Sets or unsets volume detection for the object containing the script.
 
 ### osWindActiveModelPluginName
 
 - `string osWindActiveModelPluginName()`
 
-Gets active wind plugin name, specified by "wind_plugin" in OpenSim.ini ("SimpleRandomWind" or "ConfigurableWind").
+Returns the name of the currently enabled wind plugin.
 
