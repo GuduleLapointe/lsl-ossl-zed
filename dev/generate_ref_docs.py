@@ -412,16 +412,11 @@ def _batch():
 
 
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        if Path("tmp").exists():
-            _batch()
-        else:
-            print(__doc__)
-    elif len(sys.argv) == 3:
+    if len(sys.argv) == 3:
         if not _run(Path(sys.argv[1]), Path(sys.argv[2])):
             sys.exit(1)
     else:
-        print("Usage: generate_ref_docs.py <source_xml> <destination_md>")
-        sys.exit(1)
+        print(__doc__)
+        sys.exit(0 if len(sys.argv) == 1 else 1)
 
 
