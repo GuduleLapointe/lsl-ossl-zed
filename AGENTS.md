@@ -114,4 +114,4 @@ Edit `src/lib.rs` — Zed will recompile on next "Rebuild Extension".
 - [LSL Wiki](https://wiki.secondlife.com/wiki/LSL)
   - [LSL Functions](https://wiki.secondlife.com/wiki/Category:LSL_Functions)
 - [OpenSimulator OSSL](https://opensimulator.org/wiki/Category:OSSL)
-  - [OSSL Functions](http://opensimulator.org/wiki/Category:OSSL_Functions)
+  - [OSSL Functions](https://opensimulator.org/wiki/Category:OSSL_Functions)
