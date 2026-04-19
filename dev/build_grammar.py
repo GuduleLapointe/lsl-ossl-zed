@@ -69,10 +69,63 @@ def replace_placeholder(js, rule_name, names):
     return result
 
 
+def parse_doc_sections(md_path):
+    """Parse a doc .md file into a list of {name, signatures, desc} dicts."""
+    text = md_path.read_text(encoding="utf-8")
+    entries = []
+    parts = re.split(r"^### (\w+)\n", text, flags=re.MULTILINE)
+    for i in range(1, len(parts), 2):
+        name = parts[i]
+        body = parts[i + 1] if i + 1 < len(parts) else ""
+        sigs = re.findall(r"^- `([^`]+)`", body, re.MULTILINE)
+        desc = ""
+        past_sigs = False
+        for line in body.splitlines():
+            s = line.strip()
+            if s.startswith("- `"):
+                past_sigs = True
+            elif past_sigs and s and not s.startswith("-") \
+                    and not s.startswith("Source:") and not s.startswith("Generated:"):
+                desc = s
+                break
+        entries.append({"name": name, "signatures": sigs, "desc": desc})
+    return entries
+
+
+def generate_completions(doc_dir, output_path):
+    """Generate lsp/completions.json from doc/*.md for LSP completion support."""
+    lsl_entries  = parse_doc_sections(doc_dir / "LSL_Functions.md")
+    ossl_entries = parse_doc_sections(doc_dir / "OSSL_Functions.md")
+    const_entries = parse_doc_sections(doc_dir / "LSL_Constants.md")
+
+    functions = (
+        [{"name": e["name"], "kind": "lsl",  "signatures": e["signatures"], "desc": e["desc"]} for e in lsl_entries] +
+        [{"name": e["name"], "kind": "ossl", "signatures": e["signatures"], "desc": e["desc"]} for e in ossl_entries]
+    )
+
+    constants = []
+    for e in const_entries:
+        if not e["signatures"]:
+            continue
+        sig = e["signatures"][0]  # e.g. "integer TRUE = 1"
+        m = re.match(r"(\w+)\s+\w+(?:\s*=\s*(.+))?", sig)
+        constants.append({
+            "name":  e["name"],
+            "type":  m.group(1) if m else "",
+            "value": (m.group(2) or "").strip() if m else "",
+        })
+
+    data = {"functions": functions, "constants": constants}
+    output_path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    print(f"✅ {len(functions):4d}  functions  → {output_path}")
+    print(f"✅ {len(constants):4d}  constants  → {output_path}")
+
+
 def main():
     doc_dir = Path("doc")
     template_path = Path("grammar/src/grammar-template.js")
     grammar_path = Path("grammar/grammar.js")
+    completions_path = Path("lsp/completions.json")
     stats_path = Path("logs/build_grammar.stats.json")
     stats_path.parent.mkdir(exist_ok=True)
 
@@ -110,6 +163,9 @@ def main():
     print(f"✅ {len(ossl_funcs):4d}  OSSL functions  → grammar/grammar.js")
     print(f"✅ {len(constants):4d}  constants       → grammar/grammar.js")
     print(f"✅ {len(events):4d}  events          → grammar/grammar.js")
+
+    # Generate completions data for LSP
+    generate_completions(doc_dir, completions_path)
 
     # Compile parser
     print("==> Running npm run build in grammar/…")

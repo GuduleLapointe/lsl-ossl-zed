@@ -2,6 +2,8 @@ use std::io::{self, BufRead, Write};
 use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
+const COMPLETIONS_JSON: &str = include_str!("../completions.json");
+
 // ─── tree-sitter language binding ────────────────────────────────────────────
 
 extern "C" {
@@ -717,6 +719,117 @@ pub fn format_lsl_with_parser(parser: &mut tree_sitter::Parser, source: &str) ->
     result
 }
 
+// ─── Completions ─────────────────────────────────────────────────────────────
+
+/// Convert a C#-style signature to a VS Code snippet insert string.
+/// `void llSay(integer channel, string msg)` → `llSay(${1:channel}, ${2:msg})`
+fn sig_to_snippet(sig: &str) -> String {
+    let Some(paren) = sig.find('(') else { return sig.to_string() };
+    let Some(end_paren) = sig.rfind(')') else { return sig.to_string() };
+    let name = match sig[..paren].split_whitespace().last() {
+        Some(n) => n,
+        None => return sig.to_string(),
+    };
+    let params_str = sig[paren + 1..end_paren].trim();
+    if params_str.is_empty() {
+        return format!("{name}()");
+    }
+    let placeholders: Vec<String> = params_str
+        .split(',')
+        .enumerate()
+        .map(|(i, p)| {
+            let pname = p.trim().split_whitespace().last().unwrap_or(p.trim());
+            format!("${{{n}:{pname}}}", n = i + 1)
+        })
+        .collect();
+    format!("{name}({})", placeholders.join(", "))
+}
+
+fn build_completion_items(data: &Value) -> Vec<Value> {
+    let mut items: Vec<Value> = Vec::new();
+
+    // LSL + OSSL functions
+    if let Some(funcs) = data["functions"].as_array() {
+        for f in funcs {
+            let name = f["name"].as_str().unwrap_or("");
+            let sigs: Vec<&str> = f["signatures"]
+                .as_array()
+                .map(|a| a.iter().filter_map(|s| s.as_str()).collect())
+                .unwrap_or_default();
+            let desc = f["desc"].as_str().unwrap_or("");
+
+            let detail = sigs.first().copied().unwrap_or("").to_string();
+            let insert = sigs
+                .first()
+                .map(|s| sig_to_snippet(s))
+                .unwrap_or_else(|| format!("{name}()"));
+
+            // Documentation: all overload signatures + description
+            let doc_md = {
+                let sig_block = if sigs.len() > 1 {
+                    sigs.iter()
+                        .map(|s| format!("```\n{s}\n```"))
+                        .collect::<Vec<_>>()
+                        .join("\n\n")
+                } else {
+                    String::new()
+                };
+                match (sig_block.is_empty(), desc.is_empty()) {
+                    (true, true) => String::new(),
+                    (true, false) => desc.to_string(),
+                    (false, true) => sig_block,
+                    (false, false) => format!("{sig_block}\n\n{desc}"),
+                }
+            };
+
+            let mut item = json!({
+                "label": name,
+                "kind": 3u64,       // Function
+                "detail": detail,
+                "insertText": insert,
+                "insertTextFormat": 2u64,  // Snippet
+            });
+            if !doc_md.is_empty() {
+                item["documentation"] = json!({ "kind": "markdown", "value": doc_md });
+            }
+            items.push(item);
+        }
+    }
+
+    // Constants
+    if let Some(consts) = data["constants"].as_array() {
+        for c in consts {
+            let name = c["name"].as_str().unwrap_or("");
+            let ctype = c["type"].as_str().unwrap_or("");
+            let value = c["value"].as_str().unwrap_or("");
+            let detail = if value.is_empty() {
+                ctype.to_string()
+            } else {
+                format!("{ctype} = {value}")
+            };
+            items.push(json!({
+                "label": name,
+                "kind": 21u64,      // Constant
+                "detail": detail,
+                "insertText": name,
+                "insertTextFormat": 1u64,  // PlainText
+            }));
+        }
+    }
+
+    // LSL types
+    for t in &["integer", "float", "string", "key", "vector", "rotation", "list"] {
+        items.push(json!({
+            "label": t,
+            "kind": 14u64,  // Keyword
+            "insertText": t,
+            "insertTextFormat": 1u64,
+        }));
+    }
+
+    items
+}
+
 // ─── LSP server ──────────────────────────────────────────────────────────────
 
 use std::collections::HashMap;
@@ -725,15 +838,20 @@ struct Server {
     /// Full text of each open document, keyed by URI.
     documents: HashMap<String, String>,
     parser: tree_sitter::Parser,
+    completion_items: Vec<Value>,
 }
 
 impl Server {
     fn new() -> Self {
         let mut parser = tree_sitter::Parser::new();
         parser.set_language(&lsl_language()).expect("Failed to load LSL language");
+        let completions_data: Value =
+            serde_json::from_str(COMPLETIONS_JSON).expect("Invalid completions.json");
+        let completion_items = build_completion_items(&completions_data);
         Self {
             documents: HashMap::new(),
             parser,
+            completion_items,
         }
     }
 
@@ -757,7 +875,8 @@ impl Server {
                                     "openClose": true,
                                     "change": 1  // Full sync
                                 },
-                                "documentFormattingProvider": true
+                                "documentFormattingProvider": true,
+                                "completionProvider": {}
                             },
                             "serverInfo": { "name": "lsl-lsp", "version": "0.1.0" }
                         }),
@@ -816,6 +935,17 @@ impl Server {
                     } else {
                         send_response(&mut writer, id, json!([]));
                     }
+                }
+                "textDocument/completion" => {
+                    let id = msg.id.unwrap_or(Value::Null);
+                    send_response(
+                        &mut writer,
+                        id,
+                        json!({
+                            "isIncomplete": false,
+                            "items": self.completion_items,
+                        }),
+                    );
                 }
                 "shutdown" => {
                     let id = msg.id.unwrap_or(Value::Null);
