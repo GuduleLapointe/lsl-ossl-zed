@@ -50,7 +50,7 @@ Review `grammar/grammar.js` and confirm there are no build errors before deployi
 **3. Deploy** — commits and pushes the grammar submodule, updates the extension hash, bumps the patch version, commits, tags, and pushes the main repo:
 
 ```bash
-./deploy-grammar.sh
+./dev/deploy-grammar.sh
 ```
 
 This step reads `dev/build_grammar.stats.json` to compose the grammar commit message automatically.
