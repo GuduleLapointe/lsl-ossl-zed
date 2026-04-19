@@ -1,14 +1,14 @@
 id = "lsl-ossl"
 name = "LSL/OSSL Language"
-version = "0.1.0"
+version = "0.2.1"
 schema_version = 1
-authors = ["Gudule Lapoite <gudule@speculoos.world>"]
+authors = ["Gudule Lapointe <gudule@speculoos.world>"]
 description = "LSL/OSSL Language for Zed IDE"
 repository = "https://github.com/GuduleLapointe/lsl-ossl-zed"
 
 [grammars.lsl]
 repository = "https://github.com/GuduleLapointe/tree-sitter-lsl-ossl"
-commit = "2eb45aac8636f37e2f9ee92619f1397e0ede64ff"
+commit = "c54a98d05b4c4769251dc32c747d005d50225080"
 
 [language_servers.lsl-lsp]
 name = "LSL Language Server"

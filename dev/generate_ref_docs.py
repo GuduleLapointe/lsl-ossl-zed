@@ -25,7 +25,6 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
-
 OPENSIM_REPO = "git://opensimulator.org/git/opensim"
 OPENSIM_BRANCH = "0.9.3.0"
 OPENSIM_DIR = Path("tmp/opensim-git")
@@ -34,12 +33,12 @@ _API = OPENSIM_DIR / "OpenSim/Region/ScriptEngine/Shared/Api"
 _YENGINE = OPENSIM_DIR / "OpenSim/Region/ScriptEngine/YEngine"
 
 SOURCES = {
-    "lsl_funcs_iface":   _API / "Interface/ILSL_Api.cs",
-    "lsl_funcs_impl":    _API / "Implementation/LSL_Api.cs",
-    "ossl_funcs_iface":  _API / "Interface/IOSSL_Api.cs",
-    "ossl_funcs_impl":   _API / "Implementation/OSSL_Api.cs",
-    "constants":         _API / "Runtime/LSL_Constants.cs",
-    "events":            _YENGINE / "MMRIEventHandlers.cs",
+    "lsl_funcs_iface": _API / "Interface/ILSL_Api.cs",
+    "lsl_funcs_impl": _API / "Implementation/LSL_Api.cs",
+    "ossl_funcs_iface": _API / "Interface/IOSSL_Api.cs",
+    "ossl_funcs_impl": _API / "Implementation/OSSL_Api.cs",
+    "constants": _API / "Runtime/LSL_Constants.cs",
+    "events": _YENGINE / "MMRIEventHandlers.cs",
 }
 
 DOC_DIR = Path("doc")
@@ -288,9 +287,12 @@ def ensure_repo():
         OPENSIM_DIR.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
             [
-                "git", "clone",
-                "--branch", OPENSIM_BRANCH,
-                "--depth", "1",
+                "git",
+                "clone",
+                "--branch",
+                OPENSIM_BRANCH,
+                "--depth",
+                "1",
                 OPENSIM_REPO,
                 str(OPENSIM_DIR),
             ],
@@ -299,9 +301,9 @@ def ensure_repo():
 
 
 def _mtime(path):
-    return datetime.fromtimestamp(
-        os.path.getmtime(path), tz=timezone.utc
-    ).strftime("%Y-%m-%dT%H:%M:%SZ")
+    return datetime.fromtimestamp(os.path.getmtime(path), tz=timezone.utc).strftime(
+        "%Y-%m-%dT%H:%M:%SZ"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -324,37 +326,55 @@ def generate_all():
     added_lsl = {k: v for k, v in lsl_extra.items() if k not in lsl}
     lsl.update(added_lsl)
     write_functions_md(
-        DOC_DIR / "LSL_Functions.md", "LSL Functions", lsl,
-        source_path=str(SOURCES["lsl_funcs_iface"]), mtime=_mtime(SOURCES["lsl_funcs_iface"]),
+        DOC_DIR / "LSL_Functions.md",
+        "LSL Functions",
+        lsl,
+        source_path=str(SOURCES["lsl_funcs_iface"]),
+        mtime=_mtime(SOURCES["lsl_funcs_iface"]),
     )
-    print(f"✅ {len(lsl):4d}  LSL Functions   → doc/LSL_Functions.md"
-          + (f"  (+{len(added_lsl)} from impl)" if added_lsl else ""))
+    print(
+        f"✅ {len(lsl):4d}  LSL Functions   → doc/LSL_Functions.md"
+        + (f"  (+{len(added_lsl)} from impl)" if added_lsl else "")
+    )
 
     # OSSL functions: interface (primary) + implementation (extras)
     ossl = parse_cs_functions(SOURCES["ossl_funcs_iface"], "os")
-    ossl_extra = parse_cs_functions(SOURCES["ossl_funcs_impl"], "os", require_public=True)
+    ossl_extra = parse_cs_functions(
+        SOURCES["ossl_funcs_impl"], "os", require_public=True
+    )
     added_ossl = {k: v for k, v in ossl_extra.items() if k not in ossl}
     ossl.update(added_ossl)
     write_functions_md(
-        DOC_DIR / "OSSL_Functions.md", "OSSL Functions", ossl,
-        source_path=str(SOURCES["ossl_funcs_iface"]), mtime=_mtime(SOURCES["ossl_funcs_iface"]),
+        DOC_DIR / "OSSL_Functions.md",
+        "OSSL Functions",
+        ossl,
+        source_path=str(SOURCES["ossl_funcs_iface"]),
+        mtime=_mtime(SOURCES["ossl_funcs_iface"]),
     )
-    print(f"✅ {len(ossl):4d}  OSSL Functions  → doc/OSSL_Functions.md"
-          + (f"  (+{len(added_ossl)} from impl)" if added_ossl else ""))
+    print(
+        f"✅ {len(ossl):4d}  OSSL Functions  → doc/OSSL_Functions.md"
+        + (f"  (+{len(added_ossl)} from impl)" if added_ossl else "")
+    )
 
     # Constants (LSL_Constants.cs covers both LL_ and OS_ prefixed)
     constants = parse_cs_constants(SOURCES["constants"])
     write_constants_md(
-        DOC_DIR / "LSL_Constants.md", "LSL Constants", constants,
-        source_path=str(SOURCES["constants"]), mtime=_mtime(SOURCES["constants"]),
+        DOC_DIR / "LSL_Constants.md",
+        "LSL Constants",
+        constants,
+        source_path=str(SOURCES["constants"]),
+        mtime=_mtime(SOURCES["constants"]),
     )
     print(f"✅ {len(constants):4d}  Constants       → doc/LSL_Constants.md")
 
     # Events
     events = parse_cs_events(SOURCES["events"])
     write_events_md(
-        DOC_DIR / "LSL_Events.md", "LSL Events", events,
-        source_path=str(SOURCES["events"]), mtime=_mtime(SOURCES["events"]),
+        DOC_DIR / "LSL_Events.md",
+        "LSL Events",
+        events,
+        source_path=str(SOURCES["events"]),
+        mtime=_mtime(SOURCES["events"]),
     )
     print(f"✅ {len(events):4d}  LSL Events      → doc/LSL_Events.md")
 
