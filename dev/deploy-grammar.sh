@@ -66,7 +66,7 @@ git commit -m "$EXT_MSG"
 
 TAG="v${NEW_VER}"
 echo "==> Tagging: $TAG"
-git tag "$TAG"
+git tag -a "$TAG" -m "Version ${NEW_VER}: ${GRAMMAR_MSG}"
 
 # Push main repo
 echo "==> Pushing main repo…"
