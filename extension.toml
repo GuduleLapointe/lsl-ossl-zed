@@ -1,6 +1,6 @@
 id = "lsl-ossl"
 name = "LSL/OSSL Language"
-version = "0.2.2"
+version = "0.2.3"
 schema_version = 1
 authors = ["Gudule Lapointe <gudule@speculoos.world>"]
 description = "LSL/OSSL Language for Zed IDE"
