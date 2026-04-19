@@ -25,21 +25,54 @@ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 The tree-sitter grammar lives in a separate repo ([tree-sitter-lsl-ossl](https://github.com/GuduleLapointe/tree-sitter-lsl-ossl)), included here as a git submodule at `grammar/`.
 
-When the grammar changes:
+The grammar is fully generated from the OpenSimulator C# source. **Never edit `grammar/grammar.js` by hand** — edit the template instead (`grammar/src/grammar-template.js`).
 
-1. Edit `grammar/grammar.js`
-2. Run `./deploy-grammar.sh ["message"]` — handles generate, commit, push, and hash update in one step
+### Three separate steps
 
-The script skips steps that are already up to date. Default commit message is derived from the last grammar commit. The commit hash in `extension.toml` must always match the deployed grammar commit — `deploy-grammar.sh` handles this automatically.
+**1. Generate reference docs** — pulls the OpenSim source and extracts function, constant, and event lists:
 
-To clone this repo with its submodule:
+```bash
+./dev/generate_ref_docs.py
+```
+
+Writes `doc/*.md` (human-readable reference) and `dev/generate_ref_docs.stats.json` (counts report).
+Review the generated Markdown files to verify the content before proceeding.
+
+**2. Build grammar** — generates `grammar/grammar.js` from the template and the doc files, then compiles the parser:
+
+```bash
+./dev/build_grammar.py
+```
+
+Writes `grammar/grammar.js` (generated), compiles `grammar/src/parser.c` via `npm run build`, and writes `dev/build_grammar.stats.json`.
+Review `grammar/grammar.js` and confirm there are no build errors before deploying.
+
+**3. Deploy** — commits and pushes the grammar submodule, updates the extension hash, bumps the patch version, commits, tags, and pushes the main repo:
+
+```bash
+./deploy-grammar.sh
+```
+
+This step reads `dev/build_grammar.stats.json` to compose the grammar commit message automatically.
+
+### Files
+
+| File | Role |
+|---|---|
+| `grammar/src/grammar-template.js` | Human-editable template — edit this to change grammar structure |
+| `grammar/grammar.js` | Generated — do not edit by hand |
+| `dev/generate_ref_docs.stats.json` | Counts report from step 1 |
+| `dev/build_grammar.stats.json` | Counts report from step 2, consumed by deploy |
+
+### Cloning with the submodule
+
 ```bash
 git clone --recurse-submodules https://github.com/GuduleLapointe/lsl-ossl-zed.git
 # or, if already cloned:
 git submodule update --init
 ```
 
-Note: avoid `git submodule sync` as it might overwrites any local URL override (e.g. git ssh URL).
+Note: avoid `git submodule sync` as it may overwrite local URL overrides (e.g. a git+ssh URL).
 
 ## Grammar Details
 

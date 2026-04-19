@@ -18,6 +18,7 @@ C# files used:
     YEngine/MMRIEventHandlers.cs  → LSL event signatures
 """
 
+import json
 import os
 import re
 import subprocess
@@ -332,10 +333,7 @@ def generate_all():
         source_path=str(SOURCES["lsl_funcs_iface"]),
         mtime=_mtime(SOURCES["lsl_funcs_iface"]),
     )
-    print(
-        f"✅ {len(lsl):4d}  LSL Functions   → doc/LSL_Functions.md"
-        + (f"  (+{len(added_lsl)} from impl)" if added_lsl else "")
-    )
+    print(f"✅ {len(lsl):4d}  LSL Functions   → doc/LSL_Functions.md")
 
     # OSSL functions: interface (primary) + implementation (extras)
     ossl = parse_cs_functions(SOURCES["ossl_funcs_iface"], "os")
@@ -351,10 +349,7 @@ def generate_all():
         source_path=str(SOURCES["ossl_funcs_iface"]),
         mtime=_mtime(SOURCES["ossl_funcs_iface"]),
     )
-    print(
-        f"✅ {len(ossl):4d}  OSSL Functions  → doc/OSSL_Functions.md"
-        + (f"  (+{len(added_ossl)} from impl)" if added_ossl else "")
-    )
+    print(f"✅ {len(ossl):4d}  OSSL Functions  → doc/OSSL_Functions.md")
 
     # Constants (LSL_Constants.cs covers both LL_ and OS_ prefixed)
     constants = parse_cs_constants(SOURCES["constants"])
@@ -377,6 +372,18 @@ def generate_all():
         mtime=_mtime(SOURCES["events"]),
     )
     print(f"✅ {len(events):4d}  LSL Events      → doc/LSL_Events.md")
+
+    # Stats report
+    stats = {
+        "lsl_functions": len(lsl),
+        "ossl_functions": len(ossl),
+        "constants": len(constants),
+        "events": len(events),
+        "generated": datetime.now(tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+    }
+    stats_path = Path("dev/generate_ref_docs.stats.json")
+    stats_path.write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8")
+    print(f"✅       Stats           → {stats_path}")
 
 
 if __name__ == "__main__":
