@@ -14,6 +14,25 @@ Install rust with rustup:
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
 
+## LSP build
+
+The LSP server is a Rust binary distributed as prebuilt binaries for each platform in `lsp/prebuilt/`.
+
+| Binary | Covers |
+|---|---|
+| `lsl-lsp-macos` | macOS universal fat binary (Intel + Apple Silicon) |
+| `lsl-lsp-linux-x86_64` | Linux x86_64 |
+| `lsl-lsp-linux-aarch64` | Linux ARM64 |
+| `lsl-lsp-windows-x86_64.exe` | Windows x86_64 (+ ARM64 via emulation) |
+
+Build all targets from your development machine:
+
+```bash
+./dev/build_lsp.sh
+```
+
+Prerequisites: `cargo install cargo-zigbuild` and `zig` in PATH (`brew install zig` / `apt install zig` / `scoop install zig`). macOS targets require macOS and are skipped automatically on other platforms.
+
 ## TODO
 
 - **Complete function/event lists**: add all documented LSL functions and OSSL functions to `highlights.scm`, and all LSL events to `grammar/grammar.js`

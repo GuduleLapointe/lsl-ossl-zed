@@ -13,18 +13,19 @@ impl zed::Extension for LslOsslExtension {
         _worktree: &zed::Worktree,
     ) -> Result<zed::Command> {
         let (os, arch) = zed::current_platform();
-        let os_str = match os {
-            Os::Mac => "macos",
-            Os::Linux => "linux",
-            Os::Windows => "windows",
-        };
-        let arch_str = match arch {
-            Architecture::Aarch64 => "aarch64",
-            Architecture::X8664 => "x86_64",
-            Architecture::X86 => "x86",
-        };
         let ext = if matches!(os, Os::Windows) { ".exe" } else { "" };
-        let binary = format!("lsp/prebuilt/lsl-lsp-{os_str}-{arch_str}{ext}");
+        let binary = match os {
+            // Universal fat binary covers both Intel and Apple Silicon
+            Os::Mac => "lsp/prebuilt/lsl-lsp-macos".to_string(),
+            Os::Linux => {
+                let arch_str = match arch {
+                    Architecture::Aarch64 => "aarch64",
+                    Architecture::X8664 | Architecture::X86 => "x86_64",
+                };
+                format!("lsp/prebuilt/lsl-lsp-linux-{arch_str}")
+            }
+            Os::Windows => format!("lsp/prebuilt/lsl-lsp-windows-x86_64{ext}"),
+        };
 
         Ok(zed::Command {
             command: binary,
