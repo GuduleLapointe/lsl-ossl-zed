@@ -92,6 +92,37 @@ def parse_doc_sections(md_path):
     return entries
 
 
+def update_event_snippets(doc_dir, snippets_path):
+    """Add any missing event handler snippets to snippets/lsl-ossl.json.
+
+    Existing entries (with hand-written descriptions) are never modified.
+    New events found in the doc get a generic auto-generated entry.
+    """
+    events = parse_doc_sections(doc_dir / "LSL_Events.md")
+    snippets = json.loads(snippets_path.read_text(encoding="utf-8"))
+
+    added = []
+    for event in events:
+        name = event["name"]
+        if name in snippets:
+            continue
+        sig = event["signatures"][0] if event["signatures"] else f"{name}()"
+        snippets[name] = {
+            "prefix": name,
+            "body": [sig, "{", "\t$0", "}"],
+            "description": f"LSL {name} event handler",
+        }
+        added.append(name)
+
+    if added:
+        snippets_path.write_text(
+            json.dumps(snippets, indent="\t") + "\n", encoding="utf-8"
+        )
+        print(f"✅ {len(added):4d}  event snippets added   → {snippets_path}: {', '.join(added)}")
+    else:
+        print(f"✅       Event snippets up to date → {snippets_path}")
+
+
 def generate_completions(doc_dir, output_path):
     """Generate lsp/completions.json from doc/*.md for LSP completion support."""
     lsl_entries  = parse_doc_sections(doc_dir / "LSL_Functions.md")
@@ -163,6 +194,9 @@ def main():
     print(f"✅ {len(ossl_funcs):4d}  OSSL functions  → grammar/grammar.js")
     print(f"✅ {len(constants):4d}  constants       → grammar/grammar.js")
     print(f"✅ {len(events):4d}  events          → grammar/grammar.js")
+
+    # Add any missing event snippets
+    update_event_snippets(doc_dir, Path("snippets/lsl-ossl.json"))
 
     # Generate completions data for LSP
     generate_completions(doc_dir, completions_path)
