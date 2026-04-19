@@ -12,7 +12,7 @@ cd "$(dirname "$0")/.."
 
 # --- Read build stats ---
 
-STATS_FILE="dev/build_grammar.stats.json"
+STATS_FILE="logs/build_grammar.stats.json"
 if [ ! -f "$STATS_FILE" ]; then
     echo "❌ $STATS_FILE not found — run dev/build_grammar.py first"
     exit 1

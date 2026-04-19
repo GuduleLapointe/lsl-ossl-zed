@@ -73,7 +73,8 @@ def main():
     doc_dir = Path("doc")
     template_path = Path("grammar/src/grammar-template.js")
     grammar_path = Path("grammar/grammar.js")
-    stats_path = Path("dev/build_grammar.stats.json")
+    stats_path = Path("logs/build_grammar.stats.json")
+    stats_path.parent.mkdir(exist_ok=True)
 
     missing = [p for p in [
         doc_dir / "LSL_Functions.md",

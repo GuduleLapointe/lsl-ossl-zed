@@ -381,7 +381,8 @@ def generate_all():
         "events": len(events),
         "generated": datetime.now(tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
-    stats_path = Path("dev/generate_ref_docs.stats.json")
+    stats_path = Path("logs/generate_ref_docs.stats.json")
+    stats_path.parent.mkdir(exist_ok=True)
     stats_path.write_text(json.dumps(stats, indent=2) + "\n", encoding="utf-8")
     print(f"✅       Stats           → {stats_path}")
 

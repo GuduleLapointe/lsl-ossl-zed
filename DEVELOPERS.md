@@ -35,7 +35,7 @@ The grammar is fully generated from the OpenSimulator C# source. **Never edit `g
 ./dev/generate_ref_docs.py
 ```
 
-Writes `doc/*.md` (human-readable reference) and `dev/generate_ref_docs.stats.json` (counts report).
+Writes `doc/*.md` (human-readable reference) and `logs/generate_ref_docs.stats.json` (counts report, not committed).
 Review the generated Markdown files to verify the content before proceeding.
 
 **2. Build grammar** — generates `grammar/grammar.js` from the template and the doc files, then compiles the parser:
@@ -44,7 +44,7 @@ Review the generated Markdown files to verify the content before proceeding.
 ./dev/build_grammar.py
 ```
 
-Writes `grammar/grammar.js` (generated), compiles `grammar/src/parser.c` via `npm run build`, and writes `dev/build_grammar.stats.json`.
+Writes `grammar/grammar.js` (generated), compiles `grammar/src/parser.c` via `npm run build`, and writes `logs/build_grammar.stats.json` (not committed).
 Review `grammar/grammar.js` and confirm there are no build errors before deploying.
 
 **3. Deploy** — commits and pushes the grammar submodule, updates the extension hash, bumps the patch version, commits, tags, and pushes the main repo:
@@ -61,8 +61,8 @@ This step reads `dev/build_grammar.stats.json` to compose the grammar commit mes
 |---|---|
 | `grammar/src/grammar-template.js` | Human-editable template — edit this to change grammar structure |
 | `grammar/grammar.js` | Generated — do not edit by hand |
-| `dev/generate_ref_docs.stats.json` | Counts report from step 1 |
-| `dev/build_grammar.stats.json` | Counts report from step 2, consumed by deploy |
+| `logs/generate_ref_docs.stats.json` | Counts report from step 1 (gitignored) |
+| `logs/build_grammar.stats.json` | Counts report from step 2, consumed by deploy (gitignored) |
 
 ### Cloning with the submodule
 

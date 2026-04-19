@@ -11,4 +11,5 @@ extension.wasm
 grammars/
 .claude/
 tmp/
+logs/
 dev/__pycache__/
