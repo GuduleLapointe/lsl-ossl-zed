@@ -22,7 +22,11 @@ LSL=$(python3 -c "import json; d=json.load(open('$STATS_FILE')); print(d['lsl_fu
 OSSL=$(python3 -c "import json; d=json.load(open('$STATS_FILE')); print(d['ossl_functions'])")
 CONSTANTS=$(python3 -c "import json; d=json.load(open('$STATS_FILE')); print(d['constants'])")
 EVENTS=$(python3 -c "import json; d=json.load(open('$STATS_FILE')); print(d['events'])")
-GRAMMAR_MSG="update grammar, ${LSL} LSL functions, ${OSSL} OSSL functions, ${CONSTANTS} constants, ${EVENTS} events"
+GRAMMAR_MSG="update grammar
+- ${LSL} LSL functions
+- ${OSSL} OSSL functions
+- ${CONSTANTS} constants
+- ${EVENTS} event handlers"
 
 # --- Grammar repo ---
 
@@ -66,7 +70,7 @@ git commit -m "$EXT_MSG"
 
 TAG="v${NEW_VER}"
 echo "==> Tagging: $TAG"
-git tag -a "$TAG" -m "Version ${NEW_VER}: ${GRAMMAR_MSG}"
+git tag -a "$TAG" -m "${GRAMMAR_MSG}"
 
 # Push main repo
 echo "==> Pushing main repo…"
